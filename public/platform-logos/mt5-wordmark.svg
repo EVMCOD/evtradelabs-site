@@ -1,0 +1,6 @@
+<svg width="160" height="40" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="158" height="38" rx="19" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.08)"/>
+  <circle cx="24" cy="20" r="9" fill="#60A5FA" fill-opacity="0.18"/>
+  <path d="M20 24V16h2.8l1.8 4.1 1.8-4.1H29v8h-2v-4.8l-1.9 4.2h-1L22.2 19V24H20z" fill="white" fill-opacity="0.92"/>
+  <text x="44" y="24" fill="white" fill-opacity="0.88" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="2.4">METATRADER 5</text>
+</svg>
