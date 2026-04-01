@@ -3,7 +3,6 @@ services:
     name: evtradelabs-site
     runtime: node
     plan: starter
-    rootDir: evtradelabs-site
     buildCommand: npm ci && npm run build
     startCommand: npm run start -- --hostname 0.0.0.0 --port $PORT
     autoDeploy: true
