@@ -424,11 +424,11 @@ export function VideoHero({ onCtaClick }: VideoHeroProps) {
         }}
       />
 
-      {/* Bottom gradient overlay */}
+      {/* Bottom gradient overlay - seamless blend into next section */}
       <div 
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(to top, #070b14 0%, transparent 40%)',
+          background: 'linear-gradient(to top, #0d1120 0%, rgba(17,26,45,0.95) 15%, rgba(17,26,45,0.7) 30%, transparent 50%)',
         }}
       />
 
