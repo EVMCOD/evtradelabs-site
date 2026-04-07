@@ -1,4 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40">
-  <rect width="120" height="40" fill="#7B2D8E" rx="6"/>
-  <text x="60" y="27" text-anchor="middle" fill="white" font-family="Arial Black, sans-serif" font-size="14" font-weight="900">VT MARKETS</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
+  <defs>
+    <linearGradient id="vtGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9B59B6"/>
+      <stop offset="100%" stop-color="#7B2D8E"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="60" fill="#0a0f1a" rx="8"/>
+  <text x="100" y="38" text-anchor="middle" fill="url(#vtGrad)" font-family="Arial, sans-serif" font-size="24" font-weight="bold" letter-spacing="-0.5">VT MARKETS</text>
 </svg>
