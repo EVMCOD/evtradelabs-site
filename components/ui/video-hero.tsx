@@ -432,17 +432,6 @@ export function VideoHero({ onCtaClick }: VideoHeroProps) {
         }}
       />
 
-      {/* Grid lines with animation */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Vertical grid lines at 25%, 50%, 75% */}
-        <div className="absolute top-0 bottom-0 w-px" style={{ left: '25%', background: 'rgba(255,255,255,0.05)' }} />
-        <div className="absolute top-0 bottom-0 w-px" style={{ left: '50%', background: 'rgba(255,255,255,0.08)' }} />
-        <div className="absolute top-0 bottom-0 w-px" style={{ left: '75%', background: 'rgba(255,255,255,0.05)' }} />
-        {/* Horizontal grid lines */}
-        <div className="absolute left-0 right-0 h-px" style={{ top: '33%', background: 'rgba(255,255,255,0.03)' }} />
-        <div className="absolute left-0 right-0 h-px" style={{ top: '66%', background: 'rgba(255,255,255,0.03)' }} />
-      </div>
-
       {/* Central glow - mouse reactive */}
       <div 
         className="absolute pointer-events-none transition-transform duration-1000 ease-out"
