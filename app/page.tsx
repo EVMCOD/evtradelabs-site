@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "./_components/Navbar";
 import WaitlistForm from "./_components/WaitlistForm";
 import PlatformTicker from "./_components/PlatformTicker";
 import AffiliateCard from "./_components/AffiliateCard";
@@ -634,7 +633,6 @@ export default function Home() {
       <div className="site-blue-shell relative z-10">
         <div className="site-side-glow site-side-glow--left" aria-hidden="true" />
         <div className="site-side-glow site-side-glow--right" aria-hidden="true" />
-        <Navbar />
         <main>
           <VideoHero />
           <TrustBadgesRow />
