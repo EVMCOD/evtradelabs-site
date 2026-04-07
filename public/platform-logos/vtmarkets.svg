@@ -1,10 +1,2394 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
-  <defs>
-    <linearGradient id="vtGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#9B59B6"/>
-      <stop offset="100%" stop-color="#7B2D8E"/>
-    </linearGradient>
-  </defs>
-  <rect width="200" height="60" fill="#0a0f1a" rx="8"/>
-  <text x="100" y="38" text-anchor="middle" fill="url(#vtGrad)" font-family="Arial, sans-serif" font-size="24" font-weight="bold" letter-spacing="-0.5">VT MARKETS</text>
-</svg>
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+     <!-- 2024-03-01 -->
+    <!-- hreflang Start -->
+        <!-- hreflang End -->
+
+		
+	<!-- 2023-04-24 -->
+    <meta name="msvalidate.01" content="C86B05B45A39994D89AFE860DEC42011" />
+		<meta charset="UTF-8" />
+	<link rel="profile" href="http://gmpg.org/xfn/11" />
+			<link rel="preload" fetchpriority="high" as="image" href="https://d3a7kndgi8x4pg.cloudfront.net/vt/image/home_banner_video_img.webp" type="image/webp">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"/>    <meta property="og:image" content="https://www.vtmarkets.com/wp-content/themes/vt/images/logo_meta_20201127.jpg">
+    <!-- only main site have this -->
+            <meta name="facebook-domain-verification" content="tz09h4xi5qlxb15ro4hbbaho4bs07m" />
+        <meta name="facebook-domain-verification" content="hfsdditi4rx5mxt9roljmqrmxeytul" />
+        <meta name="google-site-verification" content="_aaqPE4v7VsPvdSGIRCNk-ap-oSArSb9Utga8IamJI8" />
+	<link rel="icon" href="/wp-content/themes/vt/favicon-new.ico" type="image/x-icon" />
+	<link rel="pingback" href="https://www.vtmarkets.com/xmlrpc.php" />
+	<link rel="alternate" type="application/rss+xml" title="VT Markets" href="https://www.vtmarkets.com/feed/" />
+	<link rel="alternate" type="application/atom+xml" title="VT Markets" href="https://www.vtmarkets.com/feed/atom/" />
+	    		<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	
+		<!-- All in One SEO Pro 4.9.5.2 - aioseo.com -->
+		<title></title>
+	<meta name="robots" content="noindex" />
+	<meta name="generator" content="All in One SEO Pro (AIOSEO) 4.9.5.2" />
+
+		<script type="text/javascript"> (function(c,l,a,r,i,t,y){ c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)}; t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i; y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y); })(window, document, "clarity", "script", "hvd42hy9tt"); </script>
+		<script type="application/ld+json" class="aioseo-schema">
+			{"@context":"https:\/\/schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https:\/\/www.vtmarkets.com\/static\/images\/vt-markets-logo.svg\/#breadcrumblist","itemListElement":[{"@type":"ListItem","@id":"https:\/\/www.vtmarkets.com#listItem","position":1,"name":"Home","item":"https:\/\/www.vtmarkets.com","nextItem":{"@type":"ListItem","@id":"#listItem","name":"404 - Page Not Found"}}]},{"@type":"Organization","@id":"https:\/\/www.vtmarkets.com\/#organization","name":"VT Markets","description":"Trading Made Easy. VT Markets is a reputable online broker making a strong offering for global traders interested in forex, CFDs, stocks, cryptocurrencies, and more, backed by solid regulatory oversight and comprehensive trading platforms. Its broad asset coverage and efficient trade execution, combined with educational and analytical resources, make it suitable for traders at different experience levels, particularly those looking for versatility and accessibility in global markets","url":"https:\/\/www.vtmarkets.com\/","telephone":"+27101412968","sameAs":["https:\/\/www.facebook.com\/vtmarketsglobal\/","https:\/\/x.com\/vtmarketsglobal","https:\/\/www.instagram.com\/vtmarkets\/","https:\/\/www.tiktok.com\/@vtmarketsglobal","https:\/\/youtube.com\/@vtmarkets","https:\/\/www.linkedin.com\/company\/vt-markets\/"]},{"@type":"WebPage","@id":"https:\/\/www.vtmarkets.com\/static\/images\/vt-markets-logo.svg\/#webpage","url":"https:\/\/www.vtmarkets.com\/static\/images\/vt-markets-logo.svg\/","inLanguage":"en-US","isPartOf":{"@id":"https:\/\/www.vtmarkets.com\/#website"},"breadcrumb":{"@id":"https:\/\/www.vtmarkets.com\/static\/images\/vt-markets-logo.svg\/#breadcrumblist"}},{"@type":"WebSite","@id":"https:\/\/www.vtmarkets.com\/#website","url":"https:\/\/www.vtmarkets.com\/","name":"VT Markets","inLanguage":"en-US","publisher":{"@id":"https:\/\/www.vtmarkets.com\/#organization"}}]}
+		</script>
+		<!-- All in One SEO Pro -->
+
+<link rel='dns-prefetch' href='//static.addtoany.com' />
+<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+<style id='wp-emoji-styles-inline-css' type='text/css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<link rel='stylesheet' id='aioseo/css/src/vue/standalone/blocks/table-of-contents/global.scss-css' href='https://www.vtmarkets.com/wp-content/plugins/all-in-one-seo-pack-pro/dist/Pro/assets/css/table-of-contents/global.e90f6d47.css?ver=4.9.5.2' type='text/css' media='all' />
+<link rel='stylesheet' id='aioseo/css/src/vue/standalone/blocks/pro/recipe/global.scss-css' href='https://www.vtmarkets.com/wp-content/plugins/all-in-one-seo-pack-pro/dist/Pro/assets/css/recipe/global.d86a4aa4.css?ver=4.9.5.2' type='text/css' media='all' />
+<link rel='stylesheet' id='aioseo/css/src/vue/standalone/blocks/pro/product/global.scss-css' href='https://www.vtmarkets.com/wp-content/plugins/all-in-one-seo-pack-pro/dist/Pro/assets/css/product/global.0f804f5f.css?ver=4.9.5.2' type='text/css' media='all' />
+<style id='global-styles-inline-css' type='text/css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='addtoany-css' href='https://www.vtmarkets.com/wp-content/plugins/add-to-any/addtoany.min.css?ver=1.16' type='text/css' media='all' />
+<script type="text/javascript" src="https://www.vtmarkets.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://www.vtmarkets.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<script type="text/javascript" id="addtoany-core-js-before">
+/* <![CDATA[ */
+window.a2a_config=window.a2a_config||{};a2a_config.callbacks=[];a2a_config.overlays=[];a2a_config.templates={};
+/* ]]> */
+</script>
+<script type="text/javascript" defer src="https://static.addtoany.com/menu/page.js" id="addtoany-core-js"></script>
+<script type="text/javascript" defer src="https://www.vtmarkets.com/wp-content/plugins/add-to-any/addtoany.min.js?ver=1.1" id="addtoany-jquery-js"></script>
+<link rel="https://api.w.org/" href="https://www.vtmarkets.com/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.vtmarkets.com/xmlrpc.php?rsd" />
+<link rel="alternate" href="https://www.vtmarkets.com/static/images/vt-markets-logo.svg/" hreflang="x-default" /> <style> .ppw-ppf-input-container { background-color: !important; padding: px!important; border-radius: px!important; } .ppw-ppf-input-container div.ppw-ppf-headline { font-size: px!important; font-weight: !important; color: !important; } .ppw-ppf-input-container div.ppw-ppf-desc { font-size: px!important; font-weight: !important; color: !important; } .ppw-ppf-input-container label.ppw-pwd-label { font-size: px!important; font-weight: !important; color: !important; } div.ppwp-wrong-pw-error { font-size: px!important; font-weight: !important; color: #dc3232!important; background: !important; } .ppw-ppf-input-container input[type='submit'] { color: !important; background: !important; } .ppw-ppf-input-container input[type='submit']:hover { color: !important; background: !important; } .ppw-ppf-desc-below { font-size: px!important; font-weight: !important; color: !important; } </style>  <style> .ppw-form { background-color: !important; padding: px!important; border-radius: px!important; } .ppw-headline.ppw-pcp-pf-headline { font-size: px!important; font-weight: !important; color: !important; } .ppw-description.ppw-pcp-pf-desc { font-size: px!important; font-weight: !important; color: !important; } .ppw-pcp-pf-desc-above-btn { display: block; } .ppw-pcp-pf-desc-below-form { font-size: px!important; font-weight: !important; color: !important; } .ppw-input label.ppw-pcp-password-label { font-size: px!important; font-weight: !important; color: !important; } .ppw-form input[type='submit'] { color: !important; background: !important; } .ppw-form input[type='submit']:hover { color: !important; background: !important; } div.ppw-error.ppw-pcp-pf-error-msg { font-size: px!important; font-weight: !important; color: #dc3232!important; background: !important; } </style> <script>
+	var htmlKey_v3='6LeIOyArAAAAADRu39xaJgFyo6a0qAyj9oiM86DU';
+	</script><script>
+	var htmlKey_v2='6LeFOyArAAAAAJvJHHflUwze3XfcyW9iou8X0Xjv';
+	</script><noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>     	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	    <!-- <link rel="stylesheet" type="text/css" media="all" href="/wp-content/themes/vt/reset.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" media="all" href="/wp-content/themes/vt/common_ui.css" /> -->
+	<link rel="stylesheet" type="text/css" media="all" href="/wp-content/themes/vt/header.css?v=1775580998" />
+    <link rel="stylesheet" type="text/css" media="all" href="/wp-content/themes/vt/animate.min.css" />
+    		<link rel="stylesheet" type="text/css" media="all" href="/wp-content/themes/vt/style.css?v=2025101002"/>
+	
+    <link rel="stylesheet" type="text/css" media="all" href="/wp-content/themes/vt/swiper.min.css" />
+	    <script src="/wp-content/themes/vt/js/wow.min.js"></script>
+    <script src="/wp-content/themes/vt/js/swiper.min.js?v=1775580998"></script>
+    <script src="/wp-content/themes/vt/js/utils.js?v=1773113656634"></script>
+    <script src="/wp-content/themes/vt/js/cookie.js?v=1775580998"></script>   
+    <script src="/wp-content/themes/vt/js/myscript.js?v=1775580998"></script>
+	<script defer src="//geoip-js.com/js/apis/geoip2/v2.1/geoip2.js" type="text/javascript"></script>
+    	<!-- 20240807 Tiktok Code -->
+	<!-- 20240807 Tiktok Code -->
+<script>
+!function (w, d, t) { w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for( var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script") ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)}; ttq.load('CQOTEJJC77UDRQ3GN47G'); ttq.page(); }(window, document, 'ttq'); 
+</script>
+<!-- End Tiktok Code -->
+	<!-- 20250313 Taboola Code -->
+	<!-- 20250313 Taboola Code -->
+<script type='text/javascript'>
+  window._tfa = window._tfa || [];
+  window._tfa.push({notify: 'event', name: 'page_view', id: 1803929});
+  !function (t, f, a, x) {
+         if (!document.getElementById(x)) {
+            t.async = 1;t.src = a;t.id=x;f.parentNode.insertBefore(t, f);
+         }
+  }(document.createElement('script'),document.getElementsByTagName('script')[0],'//cdn.taboola.com/libtrc/unip/1803929/tfa.js','tb_tfa_script');
+</script>
+<!-- End Taboola Code -->
+	<!-- 20250905 Meta th Code && TG app feedback chong 1764310695923 -->
+	<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1385574743202455');
+fbq('track', 'PageView');
+</script>
+<!-- End Meta Pixel Code -->
+	
+    <!-- GA4 20240506 -->
+   <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-N63P6VVS');</script>
+    <!-- End Google Tag Manager -->
+    <!-- 2024-11-22 CS -->
+    <script type="text/javascript">
+        (function() {
+        var didInit = false;
+        function initMunchkin() {
+            if(didInit === false) {
+            didInit = true;
+            Munchkin.init('178-HOM-935');
+            }
+        }
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = '//munchkin.marketo.net/munchkin.js';
+        s.onreadystatechange = function() {
+            if (this.readyState == 'complete' || this.readyState == 'loaded') {
+            initMunchkin();
+            }
+        };
+        s.onload = initMunchkin;
+        document.getElementsByTagName('head')[0].appendChild(s);
+        })();
+    </script>
+    <!-- End CS -->
+
+	<!-- 20250421 clevertap Code FIXED -->
+	<script type="text/javascript">
+		var clevertap = { event: [], profile: [], account: [], onUserLogin: [], notifications: [], privacy: [] };
+
+		clevertap.account.push({ id: "46R-958-447Z", region: "sg1" }); // Corrected region passing
+		clevertap.privacy.push({ optOut: false });
+
+		(function () {
+			var wzrk = document.createElement("script");
+			wzrk.type = "text/javascript";
+			wzrk.async = true;
+			wzrk.src = "https://d2r1yp2w7bby2u.cloudfront.net/js/clevertap.min.js";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(wzrk, s);
+		})();
+	</script>
+	<script type="text/javascript">
+		clevertap.onUserLogin.push({
+			"Site": {
+			"Name": "Edmund",
+			"Email": "edmund@test.com"
+			}
+		});
+
+		clevertap.event.push("Product Viewed", {
+			"Product name": "SEO Tool",
+			"Category": "SaaS"
+		});
+	</script>
+
+	<!-- monitor load speed-by david 2025-08-22 -->
+	 <!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-NML6LHZK');</script>
+	<!-- End Google Tag Manager -->
+
+	<!-- shence -->
+	<script charset='UTF-8' src="/wp-content/themes/vt/js/sensorsdata.min.js"></script>
+	<script src="/wp-content/themes/vt/js/sensorsdata-web.js"></script>
+    
+    <!-- Propeller Retargeting Sheet 2025-09-19 -->
+        <script src="https://my.rtmark.net/p.js?f=sync&lr=1&partner=16cb9b2180b39590d3c6f9b389565b32d42ffbde80487dd64b313459ce38d26d" defer></script>
+    
+	<!-- Google Tag Manager 2025-09-23-by david--->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-NML6LHZK');</script>
+	<!-- End Google Tag Manager -->
+</head>
+
+<body theme-mode="dark" class="error404 wp-theme-vt multiple-domain-www-vtmarkets-com">
+
+		<!-- Google Tag Manager (noscript) -->
+	<noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N63P6VVS" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+	<!-- Google Tag Manager (noscript) monitor load speed -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NML6LHZK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+	<!-- 20250905 Meta th Code -->
+	<noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1385574743202455&ev=PageView&noscript=1"/>
+</noscript>
+	<!-- 20250905 Meta th Code -->
+
+    <!-- Propeller Retargeting Sheet 2025-09-19 -->
+        <noscript><img src="https://my.rtmark.net/img.gif?f=sync&lr=1&partner=16cb9b2180b39590d3c6f9b389565b32d42ffbde80487dd64b313459ce38d26d" width="1" height="1" /></noscript>
+        <!-- End Propeller Retargeting Sheet 2025-09-19 -->
+
+	<!-- Google Tag Manager (noscript) 2025-09-23-by david--->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NML6LHZK"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
+	<div class="header">
+		<div class="header_content">
+			<div class="header_box">
+				<div class="inner flex">
+					<div class="header_left flex">
+						<div class="logo">
+							<a href="https://www.vtmarkets.com" title="VT Markets">               
+								<img width="163" height="30.5" src="/wp-content/themes/vt/images/header_logo_white.webp" alt="VT Markets"  data-no-lazy="1" class="logo_white" />              
+                        	</a>
+						</div>
+												<div class="header_menu">
+							<ul class="header_menu_nav flex">
+                                                                    <li>
+																						<h3 class="hover_link flex">Trading</h3>
+                                        		<div class="header_menu_content have_arrow">
+													<div class="header_menu_content_box">
+                                        		    	<div class="header_menu_item">
+                                        		    	    <div class="menu_box">
+                                        		    	                                                		    	            <div class="menu_section">
+                                                                        <a class="anchor-menu right_arrow overview_link " data-tier="Trading_Markets" href="/markets/">
+                                        		    	                    <div class="menu_item_content flex ">
+                                        		    	                        <div class="img_box">
+                                        		    	                            <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon1.svg?v=1" alt="">
+                                        		    	                        </div>
+                                        		    	                        <div class="text_box">
+                                        		    	                            <h4>Markets</h4>
+                                        		    	                            <p>A world of opportunity in every market</p>
+                                        		    	                        </div>
+                                        		    	                    </div>
+                                                                        </a>
+                                        		    	            </div>
+                                        		    	                                                		    	            <div class="menu_section">
+                                                                        <a class="anchor-menu right_arrow overview_link" data-tier="Trading_Platforms" href="/platforms/">
+                                        		    	                    <div class="menu_item_content flex ">
+                                        		    	                        <div class="img_box">
+                                        		    	                            <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon2.svg?v=1" alt="">
+                                        		    	                        </div>
+                                        		    	                        <div class="text_box">
+                                        		    	                            <h4>Platforms</h4>
+                                        		    	                            <p>Trade with cutting-edge technology</p>
+                                        		    	                        </div>
+                                        		    	                    </div>
+                                                                        </a>
+                                        		    	            </div>
+                                        		    	                                                		    	            <div class="menu_section">
+                                                                        <a class="anchor-menu right_arrow overview_link" data-tier="Trading_Accounts" href="/tradingaccounts">
+                                        		    	                    <div class="menu_item_content flex ">
+                                        		    	                        <div class="img_box">
+                                        		    	                            <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon3.svg?v=1" alt="">
+                                        		    	                        </div>
+                                        		    	                        <div class="text_box">
+                                        		    	                            <h4>Trading Accounts</h4>
+                                        		    	                            <p>Built for every level of expertise</p>
+                                        		    	                        </div>
+                                        		    	                    </div>
+                                                                        </a>
+                                        		    	            </div>
+                                        		    	                                                		    	            <div class="menu_section">
+                                                                        <a class="anchor-menu" data-tier="Trading_Socialtrading_CopyTrading" href="/copy-trading/">
+                                        		    	                    <div class="menu_item_content flex ">
+                                        		    	                        <div class="img_box">
+                                        		    	                            <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon4.svg?v=1" alt="">
+                                        		    	                        </div>
+                                        		    	                        <div class="text_box">
+                                        		    	                            <h4>Copy Trading</h4>
+                                        		    	                            <p>Trade smarter with top-performing traders</p>
+                                        		    	                        </div>
+                                        		    	                    </div>
+                                                                        </a>
+                                        		    	            </div>
+                                        		    	                                                		    	    </div>
+                                        		    	</div>  
+                                        			</div>
+                                        		</div>
+																			</li>
+                                                                    <li>
+										                                            <!-- There is a home page navigation, both the home page and the submenu are displayed -->
+											<h3 class="hover_link flex">Tools</h3>
+											<div class="header_menu_content">
+												<div class="header_menu_content_box"> 
+                                        	    	<div class="header_menu_item">
+                                        	    	    <div class="menu_box">
+                                        	    	        																																	<div class="menu_section">
+																		<a class="anchor-menu overview_link" data-tier="Academy_Tools" href="/tools/">
+																			<div class="menu_item_content flex ">
+                                        	    	                		    <div class="img_box">
+                                        	    	                		        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon5.svg?v=1" alt="">
+                                        	    	                		    </div>
+                                        	    	                		    <div class="text_box">
+                                        	    	                		        <h4>Overview</h4>
+																					<p>Our suite of powerful, intuitive trading tools</p>
+                                        	    	                		    </div>
+                                        	    	                		</div>	
+																		</a>
+                                        	    	            	</div>
+                                        																																							                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Academy_Tools_MarketBuzz" href="/market-buzz/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon6.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Market Buzz</h4>
+																							<p>Stay ahead of market trends using AI</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Academy_Tools_EconomicCalendar" href="/economic-calendar/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon7.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Economic Calendar</h4>
+																							<p>Chart the next economic event</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Academy_Tools_TradingSignals" href="/trading-glossary/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon9.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Trading Glossary</h4>
+																							<p>Find out what it all means</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Academy_Tools_ExpertAdvisor" href="/expert-advisor/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon10.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Expert Advisor</h4>
+																							<p>Let technology do the heavy lifting</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																	                                        	    	                                                	    	    </div>
+                                        	    	</div>  
+                                        		</div>
+                                        	</div>
+																			</li>
+                                                                    <li>
+										                                            <!-- There is a home page navigation, both the home page and the submenu are displayed -->
+											<h3 class="hover_link flex">Promotions</h3>
+											<div class="header_menu_content">
+												<div class="header_menu_content_box"> 
+                                        	    	<div class="header_menu_item">
+                                        	    	    <div class="menu_box">
+                                        	    	        																																	<div class="menu_section">
+																		<a class="anchor-menu overview_link" data-tier="Promotion_Promotion" href="/promotions/">
+																			<div class="menu_item_content flex ">
+                                        	    	                		    <div class="img_box">
+                                        	    	                		        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon11.svg?v=1" alt="">
+                                        	    	                		    </div>
+                                        	    	                		    <div class="text_box">
+                                        	    	                		        <h4>Overview</h4>
+																					<p>Make the most out of your trades</p>
+                                        	    	                		    </div>
+                                        	    	                		</div>	
+																		</a>
+                                        	    	            	</div>
+                                        																																							                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Promotion_Promotion_LoyaltyProgram" href="/loyalty-programs/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon12.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Loyalty Program</h4>
+																							<p>There's always something more with us</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Promotion_Promotion_ReferAFriend" href="/promotions/refer-a-friend/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon13.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Refer a Friend</h4>
+																							<p>Trading is always better with friends</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Promotion_Promotion_WelcomeBonus" href="/promotions/welcome-bonus/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon14.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Welcome Bonus</h4>
+																							<p>A welcome gift for you</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Promotion_Promotion_DepositBonus" href="/promotions/deposit-bonus/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon15.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Deposit Bonus</h4>
+																							<p>More on every deposit you make</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Promotion_Promotion_ActiveTraderProgram" href="/loyalty-programs/active-trader-program/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon16.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Active Trader Program</h4>
+																							<p>Bonuses for staying active</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Promotion_Promotion_VPSRefund" href="/loyalty-programs/vps-refund/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon17.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>VPS Refund</h4>
+																							<p>More reasons to stay connected</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Promotion_Promotion_TradeAndWin" href="/promotions/trade-and-win/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_trade_and_win_2026_icon.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Trade and Win 2026</h4>
+																							<p>Trade more, Win bigger</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Promotion_Promotion_Hariraya2026" href="/promotions/hariraya2026/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_hariraya2026_icon.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>BLESSINGS OF EID</h4>
+																							<p>Unlock Rewards</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																	                                        	    	                                                	    	    </div>
+                                        	    	</div>  
+                                        		</div>
+                                        	</div>
+																			</li>
+                                                                    <li>
+										                                            <!-- There is a home page navigation, both the home page and the submenu are displayed -->
+											<h3 class="hover_link flex">Company</h3>
+											<div class="header_menu_content">
+												<div class="header_menu_content_box"> 
+                                        	    	<div class="header_menu_item">
+                                        	    	    <div class="menu_box">
+                                        	    	        																																																	                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Company_About_AboutVTMarkets" href="/about-vt-markets/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon18.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>About Us</h4>
+																							<p>We make trading easy</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Company_About_OurPartners" href="/our-partners/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon19.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Our Partners</h4>
+																							<p>How we work together</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Company_About_OurAwards" href="/our-awards/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon20.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Our Awards</h4>
+																							<p>We do better, every time</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Trading_Support_TradingNotifications" href="/notifications/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon23.svg?v=1?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Trading Notifications</h4>
+																							<p>Updates on trading conditions</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Company_Legal_LegalDocument" href="/regulation/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon27.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Legal Hub</h4>
+																							<p>How we protect you</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="_blank" data-tier="Trading_Support_HelpCentre" href="https://get.vtmarkets.help/hc/en-us">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon26.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Help Centre </h4>
+																							<p>Questions? Find solutions here</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																	                                        	    	        																																																	                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="" href="/sponsorship/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon24.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Sponsorship</h4>
+																							<p>For those who share our passion</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																																																			                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Company_CorporateActivity_ESG" href="/esg/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon25.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>ESG</h4>
+																							<p>Putting our philosophy into action</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																	                                        	    	        																																																	                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Company_Newsroom_PressRelease" href="/press-releases/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon21.svg?v=1?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Press Release</h4>
+																							<p>Updates that matter</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Company_Newsroom_Events" href="/events/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon22.svg?v=1?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Events</h4>
+																							<p>This is where it all happens</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="Company_Newsroom_Webinars" href="/webinars/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon_webinars.svg?v=1?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Webinars</h4>
+																							<p>Ongoing free expert series</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																	                                        	    	                                                	    	    </div>
+                                        	    	</div>  
+                                        		</div>
+                                        	</div>
+																			</li>
+                                                                    <li>
+										                                            <!-- There is a home page navigation, both the home page and the submenu are displayed -->
+											<h3 class="hover_link flex">VT Partnership</h3>
+											<div class="header_menu_content">
+												<div class="header_menu_content_box"> 
+                                        	    	<div class="header_menu_item">
+                                        	    	    <div class="menu_box">
+                                        	    	        																																																	                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="PartnersWithVT_PartnersWithVT_IntroducingBroker" href="/introducing-brokers/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon28.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>Introducing Broker</h4>
+																							<p>Our award-winning IB program</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="_blank" data-tier="PartnersWithVT_PartnersWithVT_CPAAffiliates" href="https://www.vtaffiliates.com/affiliate-program/cpa-affiliates/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon29.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>CPA Affiliates</h4>
+																							<p>Your referrals are now your revenue</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="PartnersWithVT_PartnersWithVT_VTrade" href="/vtrade/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon_vtrade.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>VTrade</h4>
+																							<p>Maximise Your Edge with Vtrade</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="PartnersWithVT_PartnersWithVT_PAMMAccount" href="/pamm-account/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon30.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>PAMM</h4>
+																							<p>Better manage pooled capital</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																																		                                        	    	            			<div class="menu_section">
+																				<a class="anchor-menu" target="" data-tier="PartnersWithVT_PartnersWithVT_MAMAccount" href="/mam-account/">
+																					<div class="menu_item_content flex ">
+                                        	    	                				    <div class="img_box">
+                                        	    	                				        <img width="32" height="32" src="/wp-content/themes/vt/images/svg/header_desktop_icon31.svg?v=1" alt="">
+                                        	    	                				    </div>
+                                        	    	                				    <div class="text_box">
+                                        	    	                				        <h4>MAM</h4>
+																							<p>Oversee more than one account</p>
+                                        	    	                				    </div>
+                                        	    	                				</div>	
+																				</a>
+                                        	    	            			</div>
+																																	                                        	    	                                                	    	    </div>
+                                        	    	</div>  
+                                        		</div>
+                                        	</div>
+																			</li>
+                                                                    <li>
+										                                            <!-- No submenu, just a link -->
+											<h3 class="hover_link flex no_arrow">
+												<a class="anchor-menu" data-tier="Insights" target="" href="/Insights/">
+													Insights												</a>
+											</h3>
+																			</li>
+                                                            </ul>
+						</div>
+											</div>
+					<div class="header_right">
+						<ul class="header_right_nav flex">
+							<li class="nav_search">
+								<input type="text">
+								<img src="/wp-content/themes/vt/images/svg/header_search_icon.svg?v=1" alt="">
+							</li>
+							<li class="nav_live">
+								<a href="/trade-now/" class="blue_button header_trade_button">
+									
+									Trade now																	</a> 
+							</li>
+							<li class="nav_login">
+								<a href="https://myaccount.vtmarkets.com/login" target="_blank" class="header_login_button site_login_link">Login</a>
+							</li>
+							                        	    <li class="nav_country">
+                        	        <div class="nav_country_block flex">
+                        	            <img src="/wp-content/themes/vt/images/svg/header_globe_link_icon.svg" width="20" height="20" alt="" data-no-lazy="1" class="black_web" />
+                        	            <span>EN</span>
+                        	        </div>                     
+                        	    </li>  
+                        	  
+							<li class="mobile_menu_hamburger">
+								<img width="20" height="20" class="hidden_hamburger" src="/wp-content/themes/vt/images/svg/mobile_menu_hamburger_icon.svg" alt="">
+								<img width="21" height="20" class="display_hamburger" src="/wp-content/themes/vt/images/svg/mobile_menu_hamburger_active_icon.svg" alt="">
+							</li>                    
+						</ul>
+					</div>
+				</div>
+					<div class="header_top_bar"> 
+					
+						<!--Mobile menu start-->
+						<div class="mobile_menu">
+							<div class="mobile_menu_content">
+								<div class="mobile_menu_top">
+									<div class="mobile_menu_close">
+										<div class="menu_close_title">
+											<img src="/wp-content/themes/vt/images/svg/header_language_left_arrow_Icon.svg" alt="">
+										</div>
+									</div>
+									<div class="mobile_menu_search">
+										<input type="text">
+										<div class="mobile_menu_search_icon">
+											<img src="/wp-content/themes/vt/images/svg/mobile_menu_search_icon.svg" alt="">
+										</div>
+									</div>
+									
+<ul class="mobile_header_menu">
+                            <li class="menu-item-has-children">
+                    <div class="title flex">
+                        <div class="text_box flex">
+                            <img width="24" height="25" src="/wp-content/themes/vt/images/svg/header_mobile_icon1.svg" alt="">
+                            <h4>Trading</h4>
+                        </div>
+                        <div class="svg_box flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                              <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>    
+                    </div>
+                    <ul>   
+                                                                                        <li class="menu_list_children">
+                                        <h6>
+                                            Markets                                            <div class="children_svg_box flex">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                  <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>  
+                                        </h6>
+                                        <div class="sub_menu_mobile">
+                                            <div class="sub_menu_centent">
+                                                <!-- If there is a homepage, add a link to the homepage -->
+                                                                                                    <p><a class="anchor-menu right_arrow overview_link " data-tier="Trading_Markets" href="/markets/">
+                                                        Markets overview                                                    </a></p>   
+                                                
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Markets_Forex" href="/forex/">
+                                                        Forex                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Markets_Indices" href="/indices/">
+                                                        Indices                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Markets_Energies" href="/energies/">
+                                                        Energies                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Markets_PreciousMetals" href="/precious-metals/">
+                                                        Precious metals                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Markets_SoftCommodities" href="/soft-commodities/">
+                                                        Soft commodities                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Markets_ETFs" href="/etfs/">
+                                                        ETFs                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Markets_CFDShares" href="/cfd-shares/">
+                                                        CFD Shares                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Markets_CFDBonds" href="/cfd-bonds/">
+                                                        CFD Bonds                                                    </a></p>
+                                                                                            </div>
+                                        </div>
+                                    </li>
+                                                                                                                    <li class="menu_list_children">
+                                        <h6>
+                                            Platforms                                            <div class="children_svg_box flex">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                  <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>  
+                                        </h6>
+                                        <div class="sub_menu_mobile">
+                                            <div class="sub_menu_centent">
+                                                <!-- If there is a homepage, add a link to the homepage -->
+                                                                                                    <p><a class="anchor-menu right_arrow overview_link" data-tier="Trading_Platforms" href="/platforms/">
+                                                        Platforms overview                                                    </a></p>   
+                                                
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Markets_VTMarketsApp" href="/vt-markets-app/">
+                                                        VT Markets app                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Markets_MetaTrader5" href="/metatrader-5/">
+                                                        MetaTrader 5                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Markets_MetaTrader4" href="/metatrader-4/">
+                                                        MetaTrader 4                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Markets_Webtrader+" href="/tradingview/">
+                                                        TradingView                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Markets_Webtrader" href="https://webtrader.vtmarkets.com/">
+                                                        Webtrader                                                    </a></p>
+                                                                                            </div>
+                                        </div>
+                                    </li>
+                                                                                                                    <li class="menu_list_children">
+                                        <h6>
+                                            Trading Accounts                                            <div class="children_svg_box flex">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                  <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>  
+                                        </h6>
+                                        <div class="sub_menu_mobile">
+                                            <div class="sub_menu_centent">
+                                                <!-- If there is a homepage, add a link to the homepage -->
+                                                                                                    <p><a class="anchor-menu right_arrow overview_link" data-tier="Trading_Accounts" href="/tradingaccounts">
+                                                        Trading Accounts                                                    </a></p>   
+                                                
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Accounts_StandardSTP" href="/standard-stp/">
+                                                        Standard STP                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Accounts_RAWECN" href="/raw-ecn/">
+                                                        RAW ECN                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Accounts_SwapFree" href="/swap-free/">
+                                                        Swap free                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Accounts_Cent" href="/cent/">
+                                                        Cent Account                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Accounts_DemoAccount" href="/demo-account/">
+                                                        Demo Account                                                    </a></p>
+                                                                                            </div>
+                                        </div>
+                                    </li>
+                                                                                                                <!-- Directly display all pages under the current category -->
+                                <li class="menu_list_children">
+                                    <!-- If there is a homepage, add a link to the homepage -->
+                                                                            <a class="anchor-menu" data-tier="Trading_Socialtrading_CopyTrading" href="/copy-trading/">
+                                            <h6>Copy Trading</h6>
+                                        </a>
+                                                                        
+                                                                                    
+                                </li>     
+                                                                        </ul>
+		        </li>
+                                    <li class="menu-item-has-children">
+                    <div class="title flex">
+                        <div class="text_box flex">
+                            <img width="24" height="25" src="/wp-content/themes/vt/images/svg/header_mobile_icon2.svg" alt="">
+                            <h4>Tools</h4>
+                        </div>
+                        <div class="svg_box flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                              <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>    
+                    </div>
+                    <ul>   
+                                                                                    <!-- Directly display all pages under the current category -->
+                                <li class="menu_list_children">
+                                    <!-- If there is a homepage, add a link to the homepage -->
+                                                                            <a class="anchor-menu overview_link" data-tier="Academy_Tools" href="/tools/">
+                                            <h6>Overview</h6>
+                                        </a>
+                                                                        
+                                                                            <a class="anchor-menu" target="" data-tier="Academy_Tools_MarketBuzz" href="/market-buzz/">
+                                            <h6>Market Buzz</h6>
+                                        </a>
+                                                                            <a class="anchor-menu" target="" data-tier="Academy_Tools_EconomicCalendar" href="/economic-calendar/">
+                                            <h6>Economic Calendar</h6>
+                                        </a>
+                                                                            <a class="anchor-menu" target="" data-tier="Academy_Tools_TradingSignals" href="/trading-glossary/">
+                                            <h6>Trading Glossary</h6>
+                                        </a>
+                                                                            <a class="anchor-menu" target="" data-tier="Academy_Tools_ExpertAdvisor" href="/expert-advisor/">
+                                            <h6>Expert Advisor</h6>
+                                        </a>
+                                                                                    
+                                </li>     
+                                                                        </ul>
+		        </li>
+                                    <li class="menu-item-has-children">
+                    <div class="title flex">
+                        <div class="text_box flex">
+                            <img width="24" height="25" src="/wp-content/themes/vt/images/svg/header_mobile_icon3.svg" alt="">
+                            <h4>Promotions</h4>
+                        </div>
+                        <div class="svg_box flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                              <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>    
+                    </div>
+                    <ul>   
+                                                                                    <!-- Directly display all pages under the current category -->
+                                <li class="menu_list_children">
+                                    <!-- If there is a homepage, add a link to the homepage -->
+                                                                            <a class="anchor-menu overview_link" data-tier="Promotion_Promotion" href="/promotions/">
+                                            <h6>Overview</h6>
+                                        </a>
+                                                                        
+                                                                            <a class="anchor-menu" target="" data-tier="Promotion_Promotion_LoyaltyProgram" href="/loyalty-programs/">
+                                            <h6>Loyalty Program</h6>
+                                        </a>
+                                                                            <a class="anchor-menu" target="" data-tier="Promotion_Promotion_ReferAFriend" href="/promotions/refer-a-friend/">
+                                            <h6>Refer a Friend</h6>
+                                        </a>
+                                                                            <a class="anchor-menu" target="" data-tier="Promotion_Promotion_WelcomeBonus" href="/promotions/welcome-bonus/">
+                                            <h6>Welcome Bonus</h6>
+                                        </a>
+                                                                            <a class="anchor-menu" target="" data-tier="Promotion_Promotion_DepositBonus" href="/promotions/deposit-bonus/">
+                                            <h6>Deposit Bonus</h6>
+                                        </a>
+                                                                            <a class="anchor-menu" target="" data-tier="Promotion_Promotion_ActiveTraderProgram" href="/loyalty-programs/active-trader-program/">
+                                            <h6>Active Trader Program</h6>
+                                        </a>
+                                                                            <a class="anchor-menu" target="" data-tier="Promotion_Promotion_VPSRefund" href="/loyalty-programs/vps-refund/">
+                                            <h6>VPS Refund</h6>
+                                        </a>
+                                                                            <a class="anchor-menu" target="" data-tier="Promotion_Promotion_TradeAndWin" href="/promotions/trade-and-win/">
+                                            <h6>Trade and Win 2026</h6>
+                                        </a>
+                                                                            <a class="anchor-menu" target="" data-tier="Promotion_Promotion_Hariraya2026" href="/promotions/hariraya2026/">
+                                            <h6>BLESSINGS OF EID</h6>
+                                        </a>
+                                                                                    
+                                </li>     
+                                                                        </ul>
+		        </li>
+                                    <li class="menu-item-has-children">
+                    <div class="title flex">
+                        <div class="text_box flex">
+                            <img width="24" height="25" src="/wp-content/themes/vt/images/svg/header_mobile_icon4.svg" alt="">
+                            <h4>Company</h4>
+                        </div>
+                        <div class="svg_box flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                              <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>    
+                    </div>
+                    <ul>   
+                                                                                        <li class="menu_list_children">
+                                        <h6>
+                                            Why VT Markets                                             <div class="children_svg_box flex">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                  <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>  
+                                        </h6>
+                                        <div class="sub_menu_mobile">
+                                            <div class="sub_menu_centent">
+                                                <!-- If there is a homepage, add a link to the homepage -->
+                                                
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Company_About_AboutVTMarkets" href="/about-vt-markets/">
+                                                        About Us                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Company_About_OurPartners" href="/our-partners/">
+                                                        Our Partners                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Company_About_OurAwards" href="/our-awards/">
+                                                        Our Awards                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Trading_Support_TradingNotifications" href="/notifications/">
+                                                        Trading Notifications                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Company_Legal_LegalDocument" href="/regulation/">
+                                                        Legal Hub                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="_blank" data-tier="Trading_Support_HelpCentre" href="https://get.vtmarkets.help/hc/en-us">
+                                                        Help Centre                                                     </a></p>
+                                                                                            </div>
+                                        </div>
+                                    </li>
+                                                                                                                    <li class="menu_list_children">
+                                        <h6>
+                                            Corporate activity                                            <div class="children_svg_box flex">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                  <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>  
+                                        </h6>
+                                        <div class="sub_menu_mobile">
+                                            <div class="sub_menu_centent">
+                                                <!-- If there is a homepage, add a link to the homepage -->
+                                                
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="" href="/sponsorship/">
+                                                        Sponsorship                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu  desktop" target="" data-tier="" href="/sponsorship/newcastleunited/">
+                                                        New Castle United                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Company_CorporateActivity_ESG" href="/esg/">
+                                                        ESG                                                    </a></p>
+                                                                                            </div>
+                                        </div>
+                                    </li>
+                                                                                                                    <li class="menu_list_children">
+                                        <h6>
+                                            Newsroom                                            <div class="children_svg_box flex">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                  <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>  
+                                        </h6>
+                                        <div class="sub_menu_mobile">
+                                            <div class="sub_menu_centent">
+                                                <!-- If there is a homepage, add a link to the homepage -->
+                                                
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Company_Newsroom_PressRelease" href="/press-releases/">
+                                                        Press Release                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Company_Newsroom_Events" href="/events/">
+                                                        Events                                                    </a></p>
+                                                                                                    <p><a class="anchor-menu" target="" data-tier="Company_Newsroom_Webinars" href="/webinars/">
+                                                        Webinars                                                    </a></p>
+                                                                                            </div>
+                                        </div>
+                                    </li>
+                                                                        </ul>
+		        </li>
+                                    <li class="menu-item-has-children">
+                    <div class="title flex">
+                        <div class="text_box flex">
+                            <img width="24" height="25" src="/wp-content/themes/vt/images/svg/header_mobile_icon5.svg" alt="">
+                            <h4>VT Partnership</h4>
+                        </div>
+                        <div class="svg_box flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                              <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>    
+                    </div>
+                    <ul>   
+                                                                                    <!-- Directly display all pages under the current category -->
+                                <li class="menu_list_children">
+                                    <!-- If there is a homepage, add a link to the homepage -->
+                                                                        
+                                                                            <a class="anchor-menu" target="" data-tier="PartnersWithVT_PartnersWithVT_IntroducingBroker" href="/introducing-brokers/">
+                                            <h6>Introducing Broker</h6>
+                                        </a>
+                                                                            <a class="anchor-menu" target="_blank" data-tier="PartnersWithVT_PartnersWithVT_CPAAffiliates" href="https://www.vtaffiliates.com/affiliate-program/cpa-affiliates/">
+                                            <h6>CPA Affiliates</h6>
+                                        </a>
+                                                                            <a class="anchor-menu" target="" data-tier="PartnersWithVT_PartnersWithVT_VTrade" href="/vtrade/">
+                                            <h6>VTrade</h6>
+                                        </a>
+                                                                            <a class="anchor-menu" target="" data-tier="PartnersWithVT_PartnersWithVT_PAMMAccount" href="/pamm-account/">
+                                            <h6>PAMM</h6>
+                                        </a>
+                                                                            <a class="anchor-menu" target="" data-tier="PartnersWithVT_PartnersWithVT_MAMAccount" href="/mam-account/">
+                                            <h6>MAM</h6>
+                                        </a>
+                                                                                    
+                                </li>     
+                                                                        </ul>
+		        </li>
+                                <!-- No submenu, just a link -->
+            <li class="menu-item-has-children no_arrow">
+                <a class="no_arrow" data-tier="Insights" target="" href="/Insights/">                                           
+                    <div class="title flex"> 
+                        <div class="text_box flex">
+                            <img width="24" height="25" src="/wp-content/themes/vt/images/svg/header_mobile_icon1.svg" alt="">
+                            <h4>Insights</h4>
+                            <img width="17" height="17" src="" alt class="mobile_10_logo">
+                        </div>
+                    </div>
+                </a>
+		    </li>            
+            </ul>
+									<div class="mobile_menu_bottom">
+																					<div class="nav_country mobile_nav_country">
+												<div class="nav_country_block flex">
+													<img src="/wp-content/themes/vt/images/svg/header_globe_link_mobile_icon.svg" class="black_web" />
+													<span>EN</span>
+												</div>                     
+											</div>  
+										  
+									</div>
+									<div class="mobile_menu_button">
+										<a href="/trade-now/" class="blue_button header_trade_button">Sign Up</a>
+										<a href="https://myaccount.vtmarkets.com/login" target="_blank" class="blue_border_button site_login_link">Log in</a>
+									</div>
+								</div>
+							</div>
+						</div>
+		
+					</div> 
+                <div class="clear"></div> 
+			</div>
+			<div class="new_country_hide">
+                <div class="new_country_hide_box">
+                        
+                    						<div class="header_language_back flex">
+							<img src="/wp-content/themes/vt/images/svg/header_language_left_arrow_Icon.svg" alt="">
+							<p>Back</p>
+						</div>
+                        <ul class="header_language_box">
+                               
+                              
+                              
+							                              
+                             
+                                
+                                                               
+														  
+							  
+							 
+							 
+							  
+							 
+							                             
+							  
+							  
+																					                        </ul>
+                      
+                </div>
+            </div>
+			<div class="new_country_hide_mask_layer"></div> 
+		</div>
+	</div>
+	<div class="mobile_mask_layer"></div>
+    <script>
+    jQuery(document).ready(function($){
+        const header = $('.header');
+        const headerHeight = header.outerHeight();
+        let lastScrollTop = 0;
+		let timeoutId = null;
+		let isScrollingBlocked = false;
+
+		if (!isMobile()) {
+			$('.header .header_box').off('wheel').on('wheel', { passive: false }, function (event) {
+        		event.preventDefault();
+    		});
+		}
+		
+		// .nav_search 
+		// $('.nav_search img').on('click', function() {
+		// 	$('.nav_search').toggleClass('active');
+		// 	$('.header_menu_nav').toggleClass('active');
+		// });
+		function throttle(func, limit) {
+			let lastFunc;
+			let lastRan;
+			return function() {
+				const context = this;
+				const args = arguments;
+				if (!lastRan) {
+					func.apply(context, args);
+					lastRan = Date.now();
+				} else {
+					clearTimeout(lastFunc);
+					lastFunc = setTimeout(function() {
+						if ((Date.now() - lastRan) >= limit) {
+							func.apply(context, args);
+							lastRan = Date.now();
+						}
+					}, limit - (Date.now() - lastRan));
+				}
+			};
+		}
+        $(window).on('scroll', throttle(function() {
+            const currentScrollTop = $(this).scrollTop();
+			if(currentScrollTop < 0){
+				return ;
+			}
+			var mobileMenu = $('.header_top_bar').css('display');
+			if(!isMobile()){
+				if (mobileMenu === 'none') {
+					if (currentScrollTop > lastScrollTop) {
+						if (!$(".new_country_hide").hasClass("active_right")) {
+							header.addClass('hidden');
+							$('.nav_sub_menu').addClass('nav_sub_hidden');
+							if (header.hasClass('hidden')) {
+								closeHeader();
+								$(".new_country_hide").removeClass("active_right");
+								$(".header_top_bar").hide();
+								$(".header").removeClass("active");
+								$(".mobile_mask_layer").fadeOut("fast");
+								$(".new_country_hide_mask_layer").fadeOut("fast");
+							}
+						}
+					} else if (currentScrollTop <= headerHeight || lastScrollTop > currentScrollTop) {
+						header.removeClass('hidden');
+						$('.nav_sub_menu').removeClass('nav_sub_hidden');
+					}
+					if (currentScrollTop > headerHeight) {
+						header.addClass('header_fixed');
+					}else{
+						header.removeClass('header_fixed');
+					}
+
+					lastScrollTop = currentScrollTop;
+				}
+			}
+        },200));
+
+		let isShow = false;
+
+		function handleMenuEvents() {
+		    $(".header_menu_nav li").off('click mouseenter').on('click mouseenter', function () {
+				const $menuItem = $(this).find('.header_menu_content');
+				$(this).addClass('active').siblings().removeClass('active');
+        		$(this).siblings().find('.header_menu_content').removeClass('active').hide();
+		        $(this).find('.header_menu_content').addClass('active').fadeIn(); // 给当前元素的直接子元素 .header_menu_content 添加 active 类名
+				isShow = true;
+			});
+
+            $(".header_menu_content .menu_section").on('mouseenter', function () {
+                $(this).addClass('active').siblings().removeClass('active');
+            });
+		}
+
+		$('.header_content .header_box').mouseleave(function () {
+		        closeHeader();
+		});
+
+		function closeHeader() {
+			if (isShow) {
+				$('.header_menu_nav li').removeClass('active');
+				$('.header_menu .header_menu_content').removeClass('active').hide();
+                $('.header_menu_content .menu_section').closest('.header_menu_content').removeClass('sub_active');
+                $('.header_menu_content .menu_section').removeClass('active');
+                $('.header_menu_content .menu_section').find('.sub-menu').removeClass('active');
+
+				isShow = false;
+			}
+		}
+
+		// Calling a function
+		handleMenuEvents();
+
+
+		// judge whether country list is opened
+		var countryOpen = 0;
+		$(".nav_country .nav_country_block").click(function(e) {
+			if(countryOpen == 0){
+				$(".new_country_hide").addClass("active_right");
+				$(".new_country_hide_mask_layer").fadeIn("fast");
+				$(this).addClass("active");
+				countryOpen = 1;
+				// $(".mobile_header_menu li.menu-item-has-children > .title").parent().find("ul").slideUp("normal");
+				// $(".mobile_header_menu li.menu-item-has-children > .title").parent().parent().find(".title").removeClass("active");
+				
+				if (!$(this).closest(".nav_country").hasClass("mobile_nav_country")) {
+        		    $(".header_top_bar").hide();
+        		}
+
+				$(".header_menu_content").removeClass("active");
+				$(".mobile_mask_layer").fadeIn("fast");
+				mobileMenuOpen = 0;
+			}else{
+				$(".mobile_mask_layer").fadeOut("fast");
+				$(".new_country_hide").removeClass("active_right");
+				$(this).removeClass("active");
+				countryOpen = 0;
+			}
+
+			e.stopPropagation();
+		});
+		$(".new_country_hide").click(function(e) {
+			e.stopPropagation();
+		});
+		$(document.body).click(function() {
+			$(".new_country_hide").removeClass("active_right");
+    	    $(".new_country_hide_mask_layer").fadeOut("fast");
+			$(".new_country .nav_country_block").removeClass("active");
+			countryOpen = 0;		
+
+			$(".mobile_header_menu").children().show();
+			$(".mobile_header_menu").children().find(".title").show();
+			$(".mobile_header_menu").children().find(".title").removeClass("active");
+			$(".mobile_header_menu").children().find("ul").hide();
+			$(".mobile_header_menu").children().find("ul").find("h6").removeClass("active");
+			$(".mobile_header_menu").children().find("ul").find(".sub_menu_mobile").hide();
+			$(".mobile_menu_close").children().find('h5').remove();
+            $(".mobile_menu_close").children().find('img').hide();
+			$(".mobile_menu_button").show();
+            $(".mobile_menu_bottom").show();
+
+			$(".header_top_bar").hide();
+			$(".header").removeClass("active");
+			$(".heaheader_menu_contentder").removeClass("active");
+			$(".mobile_mask_layer").fadeOut("fast");
+			mobileMenuOpen = 0;
+		});
+
+		// Mobile js 
+		// judge whether moblie menu is opened
+		var mobileMenuOpen = 0;
+		$(".mobile_menu_hamburger").click(function(e){		
+			if(mobileMenuOpen == 0){
+				$(".header_top_bar").fadeIn("fast");
+				$(".header").addClass("active");
+				$(".mobile_mask_layer").fadeIn("fast");
+				// $(this).find('.hidden_hamburger').hide();
+				// $(this).find('.display_hamburger').show();
+				mobileMenuOpen = 1;
+			}else{
+				$(".header_top_bar").fadeOut("fast");
+				$(".header").removeClass("active");
+				$(".mobile_mask_layer").fadeOut("fast");
+				// $(this).find('.hidden_hamburger').hide();
+				// $(this).find('.display_hamburger').show();
+				mobileMenuOpen = 0;
+			}
+			$(".new_country_hide").removeClass("active_right");
+			$(".new_country_hide_mask_layer").fadeOut("fast");
+			$(".new_country .new_country_block").removeClass("active");
+
+			$(".mobile_header_menu").children().show();
+			$(".mobile_header_menu").children().find(".title").show();
+			$(".mobile_header_menu").children().find(".title").removeClass("active");
+			$(".mobile_header_menu").children().find("ul").hide();
+			$(".mobile_header_menu").children().find("ul").find("h6").removeClass("active");
+			$(".mobile_header_menu").children().find("ul").find(".sub_menu_mobile").hide();
+            $(".mobile_menu_close").children().find('h5').remove();
+            $(".mobile_menu_close").children().find('img').hide();
+			$(".mobile_menu_button").show();
+            $(".mobile_menu_bottom").show();
+
+			countryOpen = 0;
+			e.stopPropagation();
+		});
+		$(".header_top_bar").click(function(e){
+			e.stopPropagation();
+		});
+
+		$(window).resize(function() {
+		    if ($(window).width() > 1120) {
+		        $(".mobile_mask_layer").fadeOut("fast");
+		    }else if($(window).width() <= 1120 && mobileMenuOpen == 1){
+				$(".mobile_mask_layer").fadeIn("fast");
+			}
+		});
+
+		if ($(window).width() > 1120) {
+		    $(".mobile_mask_layer").fadeOut("fast");
+		}else if($(window).width() <= 1120 && mobileMenuOpen == 1){
+				$(".mobile_mask_layer").fadeIn("fast");
+			}
+
+		$(".mobile_header_menu li.menu-item-has-children > .title").click(function () {
+			if (!$(this).hasClass("active")) {
+				if(countryOpen == 1){
+					$(".new_country_hide").addClass("active_right");
+					$(".new_country_hide_mask_layer").fadeIn("fast");
+					$(".new_country .new_country_block").removeClass("active");
+					countryOpen = 0;
+				}
+				$(this).hide();
+				$(this).parent().siblings().hide();
+				$(this).parent().parent().find(".title").removeClass("active");
+				$(".mobile_menu_button").hide();
+				$(".mobile_menu_bottom").hide();
+
+				$(this).addClass("active");
+				$(this).parent().find("ul").eq(0).stop(true, true).slideDown("normal");
+				var h4Text = $(this).find('h4').text();
+				$(".mobile_menu_close").children().append('<h5>' + h4Text + '</h5>');
+                $(".mobile_menu_close").children().find('img').show();
+
+			} else {
+				$(this).parent().find("ul").eq(0).stop(true, true).slideUp("normal");
+				$(this).removeClass("active");
+			}
+			return false;
+		});
+
+        $(".mobile_header_menu li.menu-item-has-children h6").click(function () {
+            if (!$(this).hasClass("active")) {
+                $(this).parent().siblings().children("h6").removeClass("active");
+                $(this).parent().siblings().children(".sub_menu_mobile").stop(true, true).slideUp("normal");
+
+                $(this).addClass("active");
+                $(this).siblings().stop(true, true).slideDown("normal")
+			}else{
+                $(this).siblings().stop(true, true).slideUp("normal")
+                $(this).removeClass("active");
+            }
+            // return false;
+        });
+
+		$(".mobile_menu_close").click(function () {
+            $(this).children().find('h5').remove();
+            $(this).children().find('img').hide();
+			$(".mobile_header_menu").children().show();
+			$(".mobile_header_menu").children().find(".title").show();
+			$(".mobile_header_menu").children().find(".title").removeClass("active");
+			$(".mobile_header_menu").children().find("ul").hide();
+			$(".mobile_header_menu").children().find("ul").find("h6").removeClass("active");
+			$(".mobile_header_menu").children().find("ul").find(".sub_menu_mobile").hide();
+			$(".mobile_menu_button").show();
+            $(".mobile_menu_bottom").show();
+		});
+
+		$(".header_language_back").click(function(e){
+			$(".new_country_hide").removeClass("active_right");
+			countryOpen = 0;
+		})
+
+		// Mobile js ed
+    });
+</script>
+<script nowprocket>
+	</script>
+<style>
+    .header{position: fixed;}
+    
+    .error404_content{ text-align:center; padding:269px 0px 254px;background: #000;}
+    .error404_content .lottiePlayer{max-width: 600px; width: 100%; height: 241px;margin: 0 auto 103px;}
+    .error404_content .error404_img{margin-bottom: -61px;width: 100%;max-width: 754px;}
+    .error404_content .error404_text{max-width: 100%;width: 100%;margin: 0 auto;}
+    .error404_content .error404_text h5{margin-bottom: 16px;color: var(--text-text-primary);}
+    .error404_content .error404_text p{margin-bottom: 40px;color: var(--text-text-primary);}
+    .error404_content .error404_text p a{color: var(--text-text-blue-cyan);text-decoration-line: underline;}
+    .error404_content .error404_text .blue_button{display: flex;align-items: center;gap: 8px;padding: 12px 24px;margin: 0 auto;font-size: var(--font-size-titleMedium);line-height: var(--Title-Medium-S);}
+    .error404_content .error404_text .blue_button img{max-width: 16px;}
+    @media (max-width:1024px){
+        .error404_content{padding: 278px 0 200px;}
+    }
+    @media (max-height:730px){
+        .error404_content{padding: 100px 0;}
+        .error404_content .error404_img{max-width: 700px;}
+    }
+    @media (max-width:980px){
+        .error404_content{padding: 178px 0 100px;}
+        .error404_content .error404_img{max-width: 600px;}
+    }
+    @media (max-width:768px){
+        .error404_content{padding:158px 0px 80px;}
+        .error404_content .error404_img{max-width: 500px;}
+        .error404_content .error404_text p{margin-bottom: 16px;}
+    }
+    @media (max-width:500px){
+        .error404_content{padding:436px 0px 228px;background: url(/wp-content/themes/vt/images/404_mobile_bg.png) center no-repeat;background-size: cover;}
+        .error404_content .error404_img{display:none;}
+        .error404_content .error404_text h5{font-size: var(--font-size-titleMedium);line-height: var(--title-Medium-S);margin-bottom:8px;}
+        .error404_content .error404_text p{font-size: var(--font-size-bodyMedium);line-height: var(--Body-Medium-R);max-width: 309px;margin: 0 auto 16px;color: var(--text-text-secondary);}
+        .error404_content .error404_text .blue_button{padding:8px 24px;}
+    }
+    @media (max-width:375px){
+        .error404_content{padding:380px 0px 228px;}
+    }
+</style>
+<script src="/wp-content/themes/vt/js/lottie-player.js"></script>
+<div id="content" class="error404_content public_wrapper">
+    <div class="inner">
+        <img class="error404_img" src="/wp-content/themes/vt/images/404_img.webp" alt="">
+        <div class="error404_text">
+            <h5 class="aos-animate fadeInUp" data-wow-delay="0.2s">Sorry, this page took an unexpected turn.</h5>
+            <p class="aos-animate fadeInUp" data-wow-delay="0.4s"><a href="/">Click here</a> to go back to the VT Markets homepage, or <a href="/cdn-cgi/l/email-protection#076e6961684771736a66756c6273742964686a">send us an email</a> to let us know you’ve found a broken link.</p>
+            <div class="error404_bottom">
+                <a href="/" class="blue_button aos-animate fadeInUp" data-wow-delay="0.6s">
+                    Home                    <img src="/wp-content/themes/vt/images/svg/arrow_right_white.svg" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    #footer {background-color: var(--special-static-black);color: var(--text-text-primary);padding: 120px 0;}
+    #footer .inner{max-width: 1720px;}
+    .footer_menu {display: flex;justify-content: space-between;}
+    .footer_menu .page_cooperation_brand {max-width: 500px;width: 100%;max-height: 258px;display: flex;flex-direction: column;justify-content: space-between;}
+    html[lang='en-US'] .footer_menu .page_cooperation_brand{max-height: max-content;}
+    .footer_menu .footer_follow{padding: 25px 0;display: flex;align-items: center;justify-content: space-between;gap: 24px;}
+    .footer_menu .footer_follow h3 {margin-bottom: 0;font-size: var(--font-size-titleMedium);line-height: var(--Title-Medium-S);color: var(--text-text-primary);}
+    .footer_menu .footer_follow ul {display: flex;flex-wrap: wrap;align-items: center;justify-content: space-between;column-gap: 32px;}
+    html[lang='tr-TR'] .footer_menu .footer_follow ul{column-gap: 25px;}
+    html[lang='ko'] .footer_menu .footer_follow ul{column-gap: 18px;}
+    html[lang='th'] .footer_menu .footer_follow ul{column-gap: 25px;}
+    .footer_menu .footer_follow a{transition: transform .3s;margin: 0 ;overflow: hidden;width: 50px;height: 50px;background: var(--text-text-primary);display: flex;align-items: center;justify-content: center;border-radius: 50%;}
+    .footer_menu .footer_follow li.Instagram_box .hover-image{display: none;}
+    .footer_menu .footer_follow li:hover a{transform: scale(1.07);}
+    html[lang='ar'] #footer{direction: rtl;}
+
+    .footer_menu .footer_menu_right{max-width: 988px;width: 100%;}
+    .footer_menu .nav {display: flex;column-gap: 60px;}
+    .footer_menu .nav ul {max-width: 202px;width: 100%;display: flex;flex-direction: column;align-items: flex-start;row-gap: 15px;}
+    .footer_menu .nav ul li {margin: 0;}
+    .footer_menu .nav ul li p {margin-bottom: 15px;font-size: var(--font-size-titleLarge);line-height: var(--Title-Large-S);font-weight: 600;}
+    .footer_menu .nav ul li a {color: var(--text-text-primary);font-size: var(--font-size-bodyMedium);line-height: var(--Body-Medium-R);transition: all 0.3s;}
+    .footer_menu .nav ul li a:hover{color: var(--text-text-blue-cyan);}
+    .footer_menu .footer_middle_img_box {display: flex;column-gap: 36px;justify-content: flex-end;}
+    .footer_menu .footer_middle_img_box a:nth-of-type(2) {max-width: 117px;}
+    .footer_bottom {border-top: 1px solid var(--line-border);padding-top: 40px;margin-top: 40px;}
+    .footer_bottom h3 {margin-bottom: 16px;font-size: var(--font-size-titleLarge);line-height: var(--Title-Large-S);}
+    .footer_bottom p {font-size: var(--font-size-bodySmall);line-height: var(--Body-Small-R);margin: 0px 0px 16px;color: var(--text-text-secondary);}
+    .footer_bottom p:last-child{margin-bottom: 0;}
+
+    .page_official_partners{padding: 0 0 40px;}
+    .page_official_partners .official_partners_right{gap: 40px;}
+    .page_official_partners p{font-size: var(--font-size-titleMedium);line-height: var(--Title-Medium-S);color: var(--text-text-primary);margin: 0;font-family: "Roboto-Bold";}
+    .page_official_partners .footer_middle_img_box{display: none;}
+    .page_official_partners .official_partners_right .img_box{display: flex;align-items: center;gap: 40px;}
+    .footer_menu .official_partners_right{display: none;}
+    
+    #launcher, .cDcIUw, .cbAQYi, .bnZrAT, .cDcIUw{display: none;}
+    .global_bottom_icon{display: none;}
+    div[style*="visibility: visible;"] > div > iframe {right: 70px !important;bottom: 20px !important;z-index: 1001 !important;}
+    #launcher + iframe{right: 13px !important;bottom: 209px !important;z-index: 999 !important;}
+    .page_official_partners .official_partners_left a {display: inline-block;}
+
+    html[lang='ar'] div[style*="visibility: visible;"] > div > iframe{left: 70px !important;right:auto !important;}
+    html[lang='ar'] #launcher + iframe{left: 13px !important;right:auto !important;}
+
+    .secure_payment {padding-top: 40px;}
+    .secure_payment ul {max-width: max-content;width: 100%;display: flex;gap:34.67px;flex-wrap: wrap;}
+    .secure_payment ul li img {width: 100%;height: 100%;}
+
+    .customer_service{display:none;gap: 16px;}
+    html[lang='en-US'] .customer_service{display: flex;}
+    .customer_service h3{font-size: var(--font-size-titleMedium);line-height: var(--Title-Medium-S);color: var(--text-text-primary);margin-bottom: 0;}
+    .customer_service .customer_service_list{display: flex;flex-direction: column;gap: 5px;}
+    .customer_service .customer_service_list li{font-size: var(--font-size-bodyMedium);line-height: var(--Body-Medium-R);}
+    .customer_service .customer_service_list a{color: var(--text-text-blue-cyan);}
+    .customer_service .customer_service_list li p{margin:0;}
+
+    /* html[lang='ar'] .footer_bottom h3, html[lang='ar'] .footer_bottom p{direction:ltr;} */
+
+
+    @media(max-width:1670px){
+        #footer .inner{max-width: 1240px;}
+        .page_official_partners .official_partners_right{gap:24px;}
+        .footer_menu .page_cooperation_brand{max-width: 375px;justify-content: flex-start;gap:24px;}
+        html[lang='ko'] .footer_menu .page_cooperation_brand{max-width: 425px;}
+        .footer_menu .nav{gap: 24px;}
+        .footer_menu .nav ul{max-width: 140px;}
+        .footer_menu .footer_follow{padding: 30.5px 0;gap: 16px;}
+        .footer_menu .footer_follow ul{gap: 16px;}
+        html[lang='tr-TR'] .footer_menu .footer_follow ul{gap: 13px;}
+        html[lang='ko'] .footer_menu .footer_follow ul{gap: 13px;}
+        html[lang='th'] .footer_menu .footer_follow ul{gap: 13px;}
+        .footer_menu .footer_follow a{width: 40px;height: 40px;}
+        .footer_menu .footer_follow .linkein_box img{width: 18px;height: 18px;}
+        .footer_menu .footer_follow .youtube_box img{width: 22px;height: 15.5px;}
+        .footer_menu .footer_follow .twitter_box img{width: 20px;height: 18px;}
+        .footer_menu .footer_follow .facebook_box img{width: 20px;height: 20px;}
+    }
+    @media(max-width:1200px){
+        #footer {padding: 80px 0;}
+    }
+    @media(max-width:980px){
+        #footer {padding: 60px 0;}
+        .footer_menu .nav ul li p {font-size: 20px;}
+        .footer_menu .nav ul li a {font-size: 16px;}
+
+        .page_official_partners{align-items: flex-start;padding-bottom: 24px;}
+        .page_official_partners .footer_middle_img_box{display: flex;column-gap: 20px;}
+        .page_official_partners .footer_middle_img_box a{max-width: 90px;width: 100%;}
+        .page_official_partners .official_partners_right{display: none;}
+        .footer_menu .footer_middle_img_box{display: none;}
+        .footer_menu{flex-direction: column-reverse;gap: 24px;}
+        .footer_menu .footer_menu_right{max-width: 100%;}
+        .footer_menu .nav{justify-content: space-between;}
+        .footer_menu .page_cooperation_brand{max-width: 100%;justify-content: space-between;flex-direction: row;gap: 24px;}
+        html[lang='ko'] .footer_menu .page_cooperation_brand{max-width: 100%;}
+        .footer_menu .official_partners_right{display: flex;gap: 20px;}
+        .footer_menu .official_partners_right p{margin: 0;}
+        .footer_menu .page_cooperation_brand li a{width: 35px;height: 35px;}
+        .footer_menu .footer_follow{padding: 0;flex-direction: column;align-items: flex-start;justify-content: flex-start;}
+        .footer_menu .official_partners_right .img_box{display: flex;align-items: center;gap: 24px;}
+
+        html[lang='en-US'] .footer_menu .page_cooperation_brand{flex-wrap: wrap;}
+    }
+    @media(max-width:768px){
+        #footer {padding: 30px 0;}
+        .page_official_partners .official_partners_left {max-width: 165px;}
+        .footer_menu{gap: 0;margin-bottom: 24px;}
+        .footer_menu .nav {display: none;}
+        .footer_menu .page_cooperation_brand .we_accept {display: none;}
+        .footer_menu .footer_middle_img_box img{max-height: 80px;height: 100%;}
+        .footer_menu .footer_follow{margin: 0;}
+        .footer_menu .footer_follow h3{margin: 0;}
+        .footer_menu .footer_follow ul{gap: 10px;}
+        .footer_menu .footer_follow ul li img{max-width: 20px;width: 100%;}
+        .footer_menu .footer_follow li.Instagram_box img{max-width: initial;}
+        .footer_menu .official_partners_right{flex-direction: column;align-items: flex-start;gap: 8px;} 
+        .footer_bottom {border-top:none;margin-top: 0;padding-top: 0;}
+        .footer_bottom h3 {font-size: 16px;}
+
+        .page_official_partners .inner{flex-direction: column;gap: 40px;}
+        .page_official_partners .official_partners_right{gap: 24px;}
+        .page_official_partners .img_box{max-width: 230px;}
+
+        .customer_service_icon{width: 65px;height: 65px;}
+
+        .secure_payment {padding-top: 0px;margin-bottom: 24px;}
+    }
+    @media(max-width:540px){
+        .global_bottom_icon{display: block;}
+        .customer_service_icon{width: 52px;height: 52px;}
+        div[style*="visibility: visible;"] > div > iframe {bottom: 0 !important;}
+
+        html[lang='ar'] div[style*="visibility: visible;"] > div > iframe{left: 0px !important;}
+    }
+    @media(max-width:500px){
+        #footer{padding: 16px 0;}
+        #footer .inner{padding: 0 16px;}
+        .page_official_partners .footer_middle_img_box a img.footer_middle_mobile{display: block;}
+        .page_official_partners .footer_middle_img_box a {max-width: 45px;}
+        .footer_menu .footer_follow h3{font-size: var(--font-size-bodySmall);line-height: var(--Body-Small-R);font-family: "Roboto-Regular";}
+        .footer_menu .page_cooperation_brand{flex-wrap: wrap;}
+        .footer_menu .footer_follow ul{gap: 26px;}
+        html[lang='ko'] .footer_menu .footer_follow ul{gap: 26px;}
+        html[lang='th'] .footer_menu .footer_follow ul{gap: 26px;}
+        .footer_menu .page_cooperation_brand li a{width: 30px;height: 30px;}
+        .footer_menu .footer_follow ul li img{max-width: 16px;}
+        .footer_menu .official_partners_right p{font-size: var(--font-size-bodySmall);line-height: var(--Body-Small-R);}
+        .footer_bottom{color: var(--text-text-secondary);}
+        .footer_bottom h3{font-size: var(--font-size-bodySmall);line-height: var(--Body-Small-R);font-family: "Roboto-Regular";}
+        .footer_bottom p.footer_copyright{text-align: center;}
+
+        .page_official_partners{padding: 16px 0;margin-bottom: 24px;}
+        .page_official_partners .official_partners_left {max-width: 99px;}
+        .page_official_partners .official_partners_left a img {height: max-content;}
+        .page_official_partners .footer_middle_img_box{display: none;}
+        .footer_menu{margin-bottom: 38px;}
+        .footer_menu .footer_middle_img_box{display: flex;column-gap: 15px;}
+        .footer_menu .footer_middle_img_box a{max-width: 45px;}
+        .footer_menu .footer_middle_img_box a:nth-of-type(2){max-width: 45px;}
+        .footer_menu .official_partners_right{order: 1;}
+        .footer_menu .footer_middle_img_box{order: 2;align-items: flex-end;}
+        .footer_menu .footer_follow{order: 3;gap: 8px;}
+        .footer_menu .official_partners_right .img_box{gap: 13px;}
+        .footer_menu .official_partners_right .img_box .newcast{max-width: 48px;}
+        .footer_menu .official_partners_right .img_box .football{max-width: 71px;}
+
+        .secure_payment{margin-bottom: 33px;}
+        .secure_payment ul {gap: 16px;}
+        .secure_payment ul li {height: 20px;display: flex;align-items: center;}
+
+        .customer_service{order: 4;flex-direction: column;max-width: 100%;width: 100%;gap: 5px;}
+        .customer_service h3{font-size: var(--font-size-bodySmall);line-height: var(--Body-Small-R);font-family: "Roboto-Regular";}
+        .customer_service .customer_service_list li{font-size: var(--font-size-bodySmall);line-height: var(--Body-Small-R);}
+    }
+    @media(max-width:470px){
+        .secure_payment ul li{height: 15px;}
+    }
+    @media(max-width:350px){
+        .footer_menu .page_cooperation_brand{flex-direction: column;align-items: flex-start;}
+        .footer_menu .official_partners_right{order: 2;}
+        .footer_menu .footer_middle_img_box{order: 1;}
+    }
+</style>
+<div id="footer">
+    <div class="inner">
+        <div class="page_official_partners flex">
+            <div class="official_partners_left">
+                <a href="https://www.vtmarkets.com" title="VT Markets">
+                    <img width="330" height="34" src="/wp-content/themes/vt/images/footer_logo_white.webp?v=02050151" alt="">
+                </a>
+            </div>
+            <div class="footer_middle_img_box">
+                                    <a href="/financial-commission/">
+                        <span class="textindent">Click</span>
+                                                <img class="footer_middle_tablet" src="/wp-content/themes/vt/images/svg/footer_middle_img1.svg" alt="">
+                                                                    </a>
+                                    <a href="/lloyds-insurance/">
+                        <span class="textindent">Click</span>
+                                                <img class="footer_middle_tablet" src="/wp-content/themes/vt/images/svg/footer_middle_img2.svg?v=101" alt="">
+                                                                    </a>
+                            </div>
+            <div class="official_partners_right flex">
+                <div class="text_box">
+                    <p>Official partners:</p>
+                </div>
+                <div class="img_box">
+                    <a href="/sponsorship/newcastleunited/" class="newcast">
+                        <img width="80" height="80" src="/wp-content/themes/vt/images/svg/newcastle_row5_icon.svg" alt="newcast">
+                    </a>
+                    <!-- <a href="" class="football">
+                        <img width="120" height="121" src="" alt="football">
+                    </a> -->
+                </div>
+            </div>
+        </div>
+        <div class="footer_menu">
+            <div class="footer_menu_right">
+                <div class="nav">
+                                            <ul>
+                            <li><p>Markets</p></li>
+                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Markets_Forex" target="_blank" 
+                                    href="/forex/">Forex</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Markets_Indices" target="_blank" 
+                                    href="/indices/">Indices</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Markets_Energies" target="_blank" 
+                                    href="/energies/">Energies</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Markets_PreciousMetals" target="_blank" 
+                                    href="/precious-metals/">Precious Metals</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Markets_SoftCommodities" target="_blank" 
+                                    href="/soft-commodities/">Soft Commodities</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Markets_ETFs" target="_blank" 
+                                    href="/etfs/">ETFs</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Markets_CFDShares" target="_blank" 
+                                    href="/cfd-shares/">CFD Shares</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Markets_CFDBonds" target="_blank" 
+                                    href="/cfd-bonds/">CFD Bonds</a></li>  
+                                                                                    </ul>
+                                            <ul>
+                            <li><p>Platform</p></li>
+                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Markets_VTMarketsApp" target="_blank" 
+                                    href="/vt-markets-app/">VT Markets App</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Markets_MetaTrader5" target="_blank" 
+                                    href="/metatrader-5/">MetaTrader 5</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Markets_MetaTrader4" target="_blank" 
+                                    href="/metatrader-4/">MetaTrader 4</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Markets_Webtrader+" target="_blank" 
+                                    href="/tradingview/">TradingView</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Markets_Webtrader" target="_blank" 
+                                    href="https://webtrader.vtmarkets.com/">WebTrader</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Socialtrading_CopyTrading" target="_blank" 
+                                    href="/copy-trading/">Copy Trading</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Academy_Tools_EconomicCalendar" target="_blank" 
+                                    href="/economic-calendar/">Economic Calendar</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Academy_Tools_MarketBuzz" target="_blank" 
+                                    href="/market-buzz/">Market Buzz</a></li>  
+                                                                                    </ul>
+                                            <ul>
+                            <li><p>Accounts</p></li>
+                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Accounts_StandardSTP" target="_blank" 
+                                    href="/standard-stp/">Standard STP</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Accounts_RAWECN" target="_blank" 
+                                    href="/raw-ecn/">RAW ECN</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Accounts_PROECN" target="_blank" 
+                                    href="/pro-ecn/">PRO ECN</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Accounts_SwapFree" target="_blank" 
+                                    href="/swap-free/">Swap Free</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Accounts_Cent" target="_blank" 
+                                    href="/cent/">Cent Account</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Accounts_DemoAccount" target="_blank" 
+                                    href="/demo-account/">Demo Account</a></li>  
+                                                                                    </ul>
+                                            <ul>
+                            <li><p>Company</p></li>
+                                                              
+                                    <li><a class="anchor-menu" data-tier="Company_About_AboutVTMarkets" target="_blank" 
+                                    href="/about-vt-markets/">About Us</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Company_CorporateActivity_Sponsorship" target="_blank" 
+                                    href="/sponsorship/">Sponsorship</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Company_About_OurPartners" target="_blank" 
+                                    href="/our-partners/">Our Partners</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Company_About_OurAwards" target="_blank" 
+                                    href="/our-awards/">Our Awards</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Company_Newsroom_PressRelease" target="_blank" 
+                                    href="/press-releases/">Press Release</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Support_TradingNotifications" target="_blank" 
+                                    href="/notifications/">Trading Notifications</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Company_Legal_Regulation" target="_blank" 
+                                    href="/regulation/">Legal Hub</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Company_About_Careers" target="_blank" 
+                                    href="/careers/">Careers</a></li>  
+                                                                                              
+                                    <li><a class="anchor-menu" data-tier="Trading_Support_HelpCentre" target="_blank" 
+                                    href="https://get.vtmarkets.help/hc/en-us">Help Centre</a></li>  
+                                                                                    </ul>
+                                    </div>
+            </div>
+            <div class="page_cooperation_brand">
+                <div class="footer_middle_img_box">
+                                            <a href="/financial-commission/" alt="Financial Commission logo">
+                            <span class="textindent">Click</span>
+                            <img width="107" height="113" src="/wp-content/themes/vt/images/svg/footer_middle_img1.svg" alt="Financial Commission logo">
+                        </a>
+                                            <a href="/lloyds-insurance/" alt="Lloyds Insurance">
+                            <span class="textindent">Click</span>
+                            <img width="107" height="113" src="/wp-content/themes/vt/images/svg/footer_middle_img2.svg?v=101" alt="Lloyds Insurance">
+                        </a>
+                                    </div>
+                <div class="footer_follow">
+                    <h3>Follow us on:</h3>
+                    <ul>
+                                                    <li class="linkein_box">
+                                <a href="https://www.linkedin.com/company/vt-markets/" target="_blank" aria-label="LinkedIn">
+                                    <span class="textindent">Click</span>
+                                                                            <img src="/wp-content/themes/vt/images/svg/footer_component_icon11.svg" class="" alt="">
+                                                                    </a>
+                            </li>
+                                                    <li class="youtube_box">
+                                <a href="https://www.youtube.com/@vtmarkets" target="_blank" aria-label="YouTube">
+                                    <span class="textindent">Click</span>
+                                                                            <img src="/wp-content/themes/vt/images/svg/footer_component_icon7.svg" class="" alt="">
+                                                                    </a>
+                            </li>
+                                                    <li class="twitter_box">
+                                <a href="https://x.com/vtmarketsglobal" target="_blank" aria-label="X">
+                                    <span class="textindent">Click</span>
+                                                                            <img src="/wp-content/themes/vt/images/svg/footer_component_icon8.svg" class="" alt="">
+                                                                    </a>
+                            </li>
+                                                    <li class="facebook_box">
+                                <a href="https://www.facebook.com/vtmarketsglobal/" target="_blank" aria-label="Facebook">
+                                    <span class="textindent">Click</span>
+                                                                            <img src="/wp-content/themes/vt/images/svg/footer_component_icon12.svg" class="" alt="">
+                                                                    </a>
+                            </li>
+                                                    <li class="Instagram_box">
+                                <a href="https://www.instagram.com/vtmarkets/" target="_blank" aria-label="Instagram">
+                                    <span class="textindent">Click</span>
+                                                                            <img src="/wp-content/themes/vt/images/svg/footer_component_icon5.svg?v=1" class="normal-image" alt="">
+                                                                            <img src="/wp-content/themes/vt/images/svg/footer_component_icon10.svg" class="hover-image" alt="">
+                                                                    </a>
+                            </li>
+                                            </ul>
+                </div>
+                <div class="official_partners_right flex">
+                    <div class="text_box">
+                        <p>Official partners:</p>
+                    </div>
+                    <div class="img_box">
+                        <a href="/sponsorship/newcastleunited/" class="newcast">
+                            <img width="80" height="80" src="/wp-content/themes/vt/images/svg/newcastle_row5_icon.svg" alt="newcast">
+                        </a>
+                        <!-- <a href="" class="football">
+                            <img width="120" height="121" src="" alt="football">
+                        </a> -->
+                    </div>
+                </div>
+                <div class="customer_service">
+                    <h3>Customer Service:</h3>
+                    <ul class="customer_service_list">
+                        <li><a href="/cdn-cgi/l/email-protection#c6afa8a0a986b0b2aba7b4ada3b2b5e8a5a9ab"><span class="__cf_email__" data-cfemail="553c3b333a1523213834273e3021267b363a38">[email&#160;protected]</span></a></li>
+                        <!-- <li><p></p></li> -->
+                    </ul>
+                </div>
+            </div> 
+        </div>
+        <div class="secure_payment">
+            <ul>
+                <li>
+                    <img src="/wp-content/themes/vt/images/svg/payment_img1.svg" alt="MasterCard" width="64" height="32">
+                </li>
+                <li>
+                    <img src="/wp-content/themes/vt/images/svg/payment_img2.svg" alt="VISA" width="64" height="32">
+                </li>
+                <li>
+                    <img src="/wp-content/themes/vt/images/svg/payment_img3.svg" alt="BANK TRANSFER" width="64" height="32">
+                </li>
+                <li>
+                    <img src="/wp-content/themes/vt/images/svg/payment_img4.svg" alt="NETELLER" width="96" height="32">
+                </li>
+                <li>
+                    <img src="/wp-content/themes/vt/images/svg/payment_img5.svg" alt="Skrill" width="64" height="32">
+                </li>
+                <li>
+                    <img src="/wp-content/themes/vt/images/svg/payment_img6.svg" alt="UnionPay" width="64" height="32">
+                </li>
+                <li>
+                    <img src="/wp-content/themes/vt/images/svg/payment_img7.svg" alt="Tasapay" width="96" height="32">
+                </li>
+            </ul>
+        </div>
+        <div class="footer_bottom">
+            <h3>Risk Warning</h3>
+            <p>
+                Trading Contracts for Difference (CFDs) carries a high level of risk and may not be suitable for all investors. The use of leverage can significantly magnify gains and losses and may result in losses exceeding your initial investment. Prior to engaging in CFD trading, you should ensure that you fully understand the risks involved, carefully consider your investment objectives, financial situation, and level of experience, and seek independent advice where necessary. Past performance is not indicative of future results. Please refer to our legal documents for a comprehensive overview of the risks associated with CFD trading.            </p>
+            <p>
+                <strong>General Disclaimer</strong><br/>
+                The content on this website is provided for general informational purposes only and does not take into account your specific investment objectives, financial circumstances, or particular needs. Access to this website is made at your own initiative. VT Markets makes no warranties regarding the accuracy, timeliness, completeness, or relevance of any information provided and disclaims any liability for reliance placed on such information.            </p>
+            <p>
+            VT Markets does not offer its services to residents of certain jurisdictions, including, but not limited to, the United States, Singapore, India, Russia, and any jurisdictions listed by the Financial Action Task Force (FATF) or subject to international sanctions. The information on this website is not intended for distribution to, or use by, any person or entity in any jurisdiction where such distribution or use would contravene local law or regulation.            </p>
+            <p>
+                <strong>Regulatory Information</strong><br/>
+                VT Markets is a global brand comprising multiple entities, each authorised and registered in various jurisdictions:<br/>
+                • VT Markets (Pty) Ltd is an authorized Financial Services Provider (FSP No. 50865, Company Reg. No. 2015/072049/07) ("FSP") regulated by the Financial Sector Conduct Authority in South Africa. The FSP is not the market maker or product issuer and acts solely as an intermediary in terms of the FAIS Act between the client and VT Markets Limited (the "Product Supplier"), rendering only intermediary services in relation to derivative products offer by the Product Supplier. Therefore the FSP does not act as principal or counterparty in any of your transactions. Registered address: 18 Cavendish Road, Claremont, Cape Town, Western Cape, 7708, South Africa.<br/>
+                • VT Markets (Pty) Ltd – Dubai Branch is licensed by the UAE Capital Markets Authority (CMA) under License No. 20200000299 as a Category 5 licensee, authorised to carry out regulated activities of Introduction and Promotion in the UAE. It is not authorised to provide brokerage services or execute client trades.<br/>   
+                • VT Markets Limited is a Full-Service Investment Dealer (excluding Underwriting), authorised and regulated by the Financial Services Commission (FSC) of Mauritius (License No. GB23202269). Registered address: 40 Silicon Avenue, The Catalyst, Level 2, Suite 201, Ebene, Mauritius.<br/>  
+                VTMarkets Ltd, incorporated in the Republic of Cyprus with Company Reg. No. HE436466 and Registered address: 160 Archbishop Makarios III Avenue, Floor 1, 3026 Limassol, Cyprus. This entity does not offer regulated financial products or provide trading services.            </p>
+            <p class="footer_copyright">© 2026 VT Markets. All rights reserved.</p>                   
+        </div>
+    </div>
+</div>
+<div class="footer_exclude"></div>
+<style>
+    .float_right_btns{position: fixed;bottom: 140px;right: 16px;z-index: 999;}
+    .float_right_btns .content_box{position: relative;display: flex;flex-direction: column;justify-content: flex-end;gap: 8px;align-items: flex-end;}
+    .float_right_btns .content_box .btn_box{cursor: pointer;display: flex;justify-content: flex-end;align-items: center;gap: 16px;}
+    .float_right_btns .content_box .btn_box.server_icon.active{background: #0A36C7;border-radius: 30px;padding: 10px;width: max-content;}
+    .float_right_btns .content_box .btn_box img{transition: transform .3s;}
+    .float_right_btns .content_box .btn_box:hover img{transform: scale(0.9);}
+    .float_right_btns .content_box .btn_box .coverImage{box-shadow: 1px 1px 10px #00000026;border-radius: 50%;}
+    .float_right_btns .content_box .btn_box.sticky{display: none;}
+    .float_right_btns .content_box .btn_box .item_list{display: none;}
+    .float_right_btns .content_box .btn_box .item_list > a{display: inline-block;margin-right: 6px;}
+    .float_right_btns .content_box .btn_box .item_list > a:last-child{margin-right: 0;}
+    .float_right_btns .content_box .btn_box .item_list > a img{max-width:36px;}
+    .float_right_btns .content_box .btn_box .item_list > a img:hover{opacity: .6;}
+    .float_right_btns .content_box .btn_box.hasChildren{transition: all .3s ease;border-radius: 30px;}
+    .float_right_btns .content_box .btn_box.hasChildren:hover{background: #FFFFFF;padding-left:16px;box-shadow: 1px 1px 10px #00000026;}
+    .float_right_btns .content_box .btn_box.hasChildren:hover .item_list{display: block;}
+    .float_right_btns .content_box .btn_box.server_box{box-shadow: 1px 1px 10px #00000026;border-radius: 50%;background: #fff;transition: all 0.3s ease;}
+    .float_right_btns .content_box .btn_box.server_box.active{background: #0A36C7;}
+    .float_right_btns .content_box .btn_box .server_img{margin:9px 8px 8px 9px;}
+
+    .choose_box, .telegram_box {width: 382px;box-shadow: 1px 1px 10px #00000026;border-radius: 20px;position: fixed;bottom: 135px;right: 70px;transform: scale(0.8) translateY(100%);opacity: 0;transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);pointer-events: none;}
+    .choose_box.active, .telegram_box.active {transform: scale(1) translateY(0);opacity: 1;pointer-events: auto;}
+    .choose_box .blue_box{background: #0A36C7;padding: 24px 14px;border-radius: 20px 20px 0 0;}
+    .choose_box .blue_box p{line-height: 1;text-transform: capitalize;margin-bottom:6px;}
+    .choose_box .blue_box h3{font-size: 24px;line-height: 1;text-transform: capitalize;margin-bottom: 0;}
+    .choose_box .white_box{background: #fff;padding: 20px 14px 105px;border-radius: 0 0 20px 20px;}
+    .choose_box .white_box h4{color: #282D34;font-size: 16px;line-height: 1;text-transform: capitalize;margin-bottom:10px;}
+    .choose_box .white_box .live_content{margin-bottom:24px;}
+    .choose_box .white_box .list .upcoming,
+    .choose_box .white_box .live_chat{border-radius: 8px;background: #F4F5F6;display: flex;flex-direction: column;justify-content: center;align-items: center;gap: 4px;padding: 10px;max-width: 120px;width: 100%;min-height: 80px;height: 100%;border: 1px solid #F4F5F6;transition: all .3s linear;}
+    .choose_box .white_box .list .telegram .right_telegram,
+    .choose_box .white_box .live_chat{cursor: pointer;}
+    .choose_box .white_box span{color: #282D34;font-size: 10px;line-height: 1.6;text-transform: capitalize;font-family: "Roboto-Regular";}
+    .choose_box .white_box .upcoming span{color: #C2C7D0;}
+    .choose_box .white_box .list{display: flex;gap: 14px;}
+    .choose_box .white_box .list .telegram .right_telegram:hover,
+    .choose_box .white_box .live_chat:hover{border: 1px solid #0A36C7;background:#f5f7fd;}
+    .choose_box .white_box .list .telegram .right_telegram:hover span,
+    .choose_box .white_box .live_chat:hover span{color: #0A36C7;}
+    .choose_box .white_box .list .telegram .right_telegram:hover svg path,
+    .choose_box .white_box .live_chat:hover svg path{stroke: #0A36C7;}
+
+    .choose_box .white_box .list li{max-width: 120px;width: 100%;}
+    .choose_box .white_box .list .telegram{position: relative;}
+    .choose_box .white_box .list .telegram .right_telegram{border-radius: 8px;background: #F4F5F6;display: flex;flex-direction: column;justify-content: center;align-items: center;gap: 4px;min-height: 80px;height: 100%;padding: 10px;border: 1px solid #F4F5F6;transition: all .3s linear;}
+    .choose_box .white_box .list .telegram .on_hold{display:none;position: absolute;left: 0;top: 0;flex-direction: column;gap: 4px;align-items: center;justify-content: center;width: 100%;height: 100%;background: #F4F5F6;border: 1px solid #F4F5F6;border-radius: 8px;}
+    .choose_box .white_box .list .telegram .on_hold span{color: #C2C7D0;}
+
+    .telegram_box .blue_box{background: #0A36C7;padding: 24px 14px;border-radius: 20px 20px 0 0;}
+    .telegram_box .blue_box p{line-height: 1;text-transform: capitalize;margin-bottom:6px;}
+    .telegram_box .blue_box h3{font-size: 24px;line-height: 1;text-transform: capitalize;margin-bottom: 0;}
+    .telegram_box .tele_text{background: #fff;padding: 24px 14px 79px;border-radius: 0 0 20px 20px;}
+    .telegram_box .tele_text h3{color: #282D34;text-align: center;font-size: 20px;line-height: normal;text-transform: capitalize;margin-bottom:10px;}
+    .telegram_box .tele_text p{color: #282D34;font-size: 14px;line-height: 1.14;margin-bottom:24px;}
+    .telegram_box .tele_text p a{color: #0A36C7;text-decoration: underline;}
+    .telegram_box .tele_text .qr_box{padding:10px;border-radius: 8px;background:#f5f7fd;max-width: 153px;margin: 0 auto;display: block;}
+    .telegram_box .tele_text .qr_box img{border-radius: 8px;}
+
+    div[style*="visibility: visible;"] > div > iframe{border-radius: 20px !important;}
+
+    html[lang='ar'] .float_right_btns{right: auto;left: 16px;}
+    html[lang='ar'] .float_right_btns .content_box .btn_box{flex-direction: row-reverse;}
+    html[lang='ar'] .float_right_btns .content_box .btn_box.hasChildren:hover{padding-right: 16px;padding-left: 0;}
+    html[lang='ar'] .float_right_btns .content_box{align-items: flex-start;}
+    html[lang='ar'] .choose_box,
+    html[lang='ar'] .telegram_box{left: 70px;right: auto;}
+    html[lang='ar'] .choose_box .white_box .live_content{direction: rtl;}
+    html[lang='ar'] .choose_box .white_box .list{direction: rtl;}
+
+    @media (max-width: 768px){
+        .choose_box, .telegram_box{bottom: 20px;}
+    }
+    @media (max-width: 540px){
+        div[style*="visibility: visible;"] > div > iframe{border-radius: 0px !important;}
+        .choose_box, .telegram_box{margin-left: 16px;max-width: 382px;width:auto;right: 57px;}
+        .choose_box .blue_box h3{font-size: 18px;}
+        .telegram_box .blue_box h3{font-size: 18px;}
+        .telegram_box .tele_text{padding: 24px 14px 34px;}
+        .choose_box .white_box{padding: 20px 14px 65px;}
+
+        html[lang='ar'] .choose_box,
+        html[lang='ar'] .telegram_box{margin-right: 16px;margin-left: 0;left:57px;right:auto;}
+        html[lang='ar'] .choose_box{max-width:276px;width:100%;}
+    }
+    @media (max-width: 360px){
+        html[lang='ar'] .choose_box{max-width:230px;}
+    }
+</style>
+<div class="float_right_btns">
+    <div class="content_box">
+        <div class="btn_box sticky">
+            <img class="coverImage" src="/wp-content/themes/vt/images/svg/sticky_cricle_btn.svg?v=1" alt="Back To Top">
+        </div>
+        <div class="btn_box server_box">
+            <img class="server_img"  src="/wp-content/themes/vt/images/svg/kefu_server_icon.svg?v=3" alt="server" width="20" height="20">
+        </div>
+        <div class="btn_box hasChildren">
+            <div class="item_list">
+                <a href="https://www.linkedin.com/company/vt-markets/" target="_blank" aria-label="LinkedIn">
+                    <span class="textindent">Click</span>
+                    <img width="36" height="37" src="/wp-content/themes/vt/images/svg/footer_component_icon1.svg?v=1">
+                </a>
+                <a href="https://www.youtube.com/@vtmarkets" target="_blank" aria-label="YouTube">
+                    <span class="textindent">Click</span>
+                    <img width="32" height="32" src="/wp-content/themes/vt/images/svg/footer_component_icon2.svg?v=1">
+                </a>
+                <a href="https://x.com/vtmarketsglobal" target="_blank" aria-label="X">
+                    <span class="textindent">Click</span>
+                    <img width="36" height="36" src="/wp-content/themes/vt/images/svg/footer_component_icon3.svg?v=1">
+                </a>
+                <a href="https://www.facebook.com/vtmarketsglobal/" target="_blank" aria-label="Facebook">
+                    <span class="textindent">Click</span>
+                    <img width="36" height="36" src="/wp-content/themes/vt/images/svg/footer_component_icon4.svg?v=1">
+                </a>
+                <a href="https://www.instagram.com/vtmarkets/" target="_blank" aria-label="Instagram">
+                    <span class="textindent">Click</span>
+                    <img width="36" height="37" src="/wp-content/themes/vt/images/svg/footer_component_icon5.svg?v=1">
+                </a>
+            </div>
+            <img class="coverImage" src="/wp-content/themes/vt/images/svg/share_cricle_btn_blue2.svg?v=2" alt="Follow us on">
+        </div>
+    </div>
+    <div class="choose_box">
+        <div class="blue_box">
+            <p>Hello there 👋</p>
+            <h3>How can I help you?</h3>
+        </div>
+        <div class="white_box">
+            <div class="live_content">
+                <h4>Chat with our team instantly</h4>
+                <div class="live_chat">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <g clip-path="url(#clip0_13602_2397)">
+                        <path d="M15 13.3333C16.841 13.3333 18.3333 11.8409 18.3333 9.99996C18.3333 8.159 16.841 6.66663 15 6.66663" stroke="#282D34" stroke-width="1.6" stroke-linejoin="round"/>
+                        <path d="M4.99996 6.66663C3.15901 6.66663 1.66663 8.159 1.66663 9.99996C1.66663 11.8409 3.15901 13.3333 4.99996 13.3333" stroke="#282D34" stroke-width="1.6" stroke-linejoin="round"/>
+                        <path d="M5 13.3333V13.125V12.0833V9.99996V6.66663C5 3.9052 7.23858 1.66663 10 1.66663C12.7614 1.66663 15 3.9052 15 6.66663V13.3333C15 16.0947 12.7614 18.3333 10 18.3333" stroke="#282D34" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_13602_2397">
+                          <rect width="20" height="20" fill="white"/>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                    <span>Live Chat</span>
+                </div>
+            </div>
+            <div class="tele_content">
+                <h4>Start a live conversation through...</h4>
+                <ul class="list">
+                    <li class="telegram">
+                        <div class="right_telegram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M14.0203 7.55433L9.29854 12.0633C8.57904 12.6945 8.93879 13.2356 9.25358 13.5061C10.3778 14.4981 13.5706 16.5271 13.7505 16.6624C13.9753 16.8428 15.1895 17.6543 15.9989 17.474C16.8084 17.2936 16.8983 16.2566 16.8983 16.2566L17.9775 9.17754C18.2923 6.78779 18.697 4.57842 18.742 3.94716C18.8769 2.41412 17.258 3.04537 17.258 3.04537C12.3565 5.07438 6.82529 7.23867 2.3284 9.35788C0.484671 10.0343 1.56393 10.7106 1.56393 10.7106L4.48692 11.6124C5.83596 12.0182 6.55546 11.5673 6.55546 11.5673" stroke="#282D34" stroke-width="1.6" stroke-linecap="round"/>
+                            </svg>
+                            <span>Telegram</span>
+                        </div>
+                        <div class="on_hold">
+                            <img src="/wp-content/themes/vt/images/svg/telegram_on_hold.svg" alt="hold" width="20" height="20">
+                            <span>On hold</span>
+                        </div>
+                    </li>
+                    <li class="upcoming">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                          <path d="M2.91663 1.66663H17.0833" stroke="#C2C7D0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M2.91663 18.3334H17.0833" stroke="#C2C7D0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M4.58337 18.3333C5.6945 12.7755 7.50004 9.99767 10 10C12.5 10.0023 14.3056 12.7801 15.4167 18.3333H4.58337Z" stroke="#C2C7D0" stroke-width="1.6" stroke-linejoin="round"/>
+                          <path d="M15.4167 1.66663C14.3056 7.2245 12.5 10.0023 10 9.99996C7.50004 9.99763 5.6945 7.21988 4.58337 1.66663H15.4167Z" stroke="#C2C7D0" stroke-width="1.6" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Coming Soon...</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="telegram_box">
+        <div class="blue_box">
+            <p>Hello there 👋</p>
+            <h3>How can I help you?</h3>
+        </div>
+        <div class="tele_text">
+            <h3>telegram</h3>
+            <p>Scan the QR code with your smartphone to start a chat with us, or  <a href="https://t.me/VTMSupport_bot" target="_blank" id="entrance">click here</a>.</p>
+            <p>Don’t have the Telegram App or Desktop installed? Use  <a href="https://web.telegram.org/k/#@VTMSupport_bot" target="_blank" id="web_entrance">Web Telegram</a> instead.</p>
+            <a class="qr_box" href="https://t.me/VTMSupport_bot" target="_blank" id="qr_entrance">
+                <img src="/wp-content/themes/vt/images/telegram_qr.webp" alt="QR code" width="133" height="133">
+            </a>
+        </div>
+    </div>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    jQuery(document).ready(function($){
+        $(window).scroll(function() {
+            var windowHeight = $(window).height();
+            var scrollTop = $(window).scrollTop();
+            
+            if (scrollTop >= windowHeight) {
+                $('.float_right_btns .content_box .btn_box.sticky').css('display','flex')
+            }else{
+                $('.float_right_btns .content_box .btn_box.sticky').css('display','none')
+            }
+        });
+
+        $('.float_right_btns .content_box .btn_box.sticky').click(function(){
+            $('html, body').animate({scrollTop: 0}, 'slow');
+        })
+
+        // server
+        const serverBox = $('.server_box');
+        const chooseBox = $('.choose_box');
+        const telegramBox = $('.telegram_box');
+        const liveChat = $('.live_chat');
+        const telegramBtn = $('.right_telegram');
+        const serverImg = $('.server_img');
+        const originalImgSrc = serverImg.attr('src');
+        const activeImgSrc = '/wp-content/themes/vt/images/svg/kefu_server_icon_active_new.svg';
+    
+        let isChooseBoxActive = false;
+        let isTelegramBoxActive = false;
+        let isLiveChatActive = false;
+    
+        // click server_box
+        serverBox.click(function() {
+            if (isLiveChatActive) {
+                if (typeof zE !== 'undefined') {
+                    zE('messenger', 'close');
+                    try {
+                        sensors.track('CSentrance_backClick', {
+                            event_name_string : 'CSentrance_backClick'
+                        });
+                    } catch (error) {
+                        console.log(error);
+                    };
+                }
+                isLiveChatActive = false;
+
+                chooseBox.addClass('active');
+                isChooseBoxActive = true;
+                return;
+            }
+
+            if (isTelegramBoxActive) {
+                telegramBox.removeClass('active');
+                isTelegramBoxActive = false;
+                chooseBox.addClass('active');
+                isChooseBoxActive = true;
+
+                try {
+                    sensors.track('CSentrance_backClick', {
+                        event_name_string : 'CSentrance_backClick'
+                    });
+                } catch (error) {
+                    console.log(error);
+                };
+
+                return;
+            }
+            isChooseBoxActive = !isChooseBoxActive;
+            chooseBox.toggleClass('active', isChooseBoxActive);
+
+            if (isChooseBoxActive) {
+                serverBox.addClass('active');
+                serverImg.attr('src', activeImgSrc);
+            } else {
+                serverBox.removeClass('active');
+                serverImg.attr('src', originalImgSrc);
+        }
+
+            try {
+                sensors.track('CSentrance_Click', {
+                    event_name_string : 'CSentrance_Click'
+                });
+            } catch (error) {
+                console.log(error);
+            };
+        });
+    
+        // click Live Chat
+        liveChat.click(function() {
+            chooseBox.removeClass('active');
+            isChooseBoxActive = false;
+            isLiveChatActive = true;
+
+            if (typeof zE !== 'undefined') {
+                zE('messenger', 'open');
+            }
+
+            try {
+                sensors.track('CSchannelpage_LiveChat_click', {
+                    event_name_string : 'CSchannelpage_LiveChat_click'
+                });
+            } catch (error) {
+                console.log(error);
+            };
+        });
+
+        // click Telegram
+        telegramBtn.click(function() {
+            chooseBox.removeClass('active');
+            isChooseBoxActive = false;
+            isTelegramBoxActive = true;
+            telegramBox.addClass('active');
+
+            try {
+                sensors.track('CSchannelpage_Telegram_click', {
+                    event_name_string : 'CSchannelpage_Telegram_click'
+                });
+            } catch (error) {
+                console.log(error);
+            };
+        });
+    
+        if (typeof zE !== 'undefined') {
+        zE('messenger', 'open', function() {
+                isLiveChatActive = true;
+                serverBox.addClass('active');
+                serverImg.attr('src', activeImgSrc);
+        });
+
+        zE('messenger', 'close', function() {
+                isLiveChatActive = false;
+                if (!isChooseBoxActive && !isTelegramBoxActive) {
+                    serverBox.removeClass('active');
+                    serverImg.attr('src', originalImgSrc);
+                }
+                try {
+                    sensors.track('CSentrance_backClick', {
+                        event_name_string : 'CSentrance_backClick'
+                    });
+                } catch (error) {
+                    console.log(error);
+                };
+            });
+        }
+
+        if (isMobile()) {
+            zE('messenger:on', 'close', function() {
+                isLiveChatActive = false;
+                isChooseBoxActive = true;
+                chooseBox.addClass('active');
+                serverImg.attr('src', activeImgSrc);
+        })
+        }
+        
+        if (getPar("chat") === 'open') {
+            if (typeof zE !== 'undefined') {
+            zE('messenger', 'open');
+            }
+            serverBox.addClass('active');
+            serverImg.attr('src', activeImgSrc);
+        }
+
+        const entrance = $('#entrance');
+        const webEntrance = $('#web_entrance');
+        const qrEntrance = $('#qr_entrance');
+
+        entrance.click(function() {
+            try {
+                sensors.track('CS_Telegrampage_generalboturl_click', {
+                    event_name_string : 'CS_Telegrampage_generalboturl_click'
+                });
+            } catch (error) {
+                console.log(error);
+            };
+        })
+
+        webEntrance.click(function() {
+            try {
+                sensors.track('CS_Telegrampage_webboturl_click', {
+                    event_name_string : 'CS_Telegrampage_webboturl_click'
+                });
+            } catch (error) {
+                console.log(error);
+            };
+        })
+
+        qrEntrance.click(function() {
+            try {
+                sensors.track('CS_Telegrampage_qrcode_click', {
+                    event_name_string : 'CS_Telegrampage_qrcode_click'
+                });
+            } catch (error) {
+                console.log(error);
+            };
+        })
+
+        // Temporary Add
+        $("#live_chat_open").click(function () {
+            try {   
+                let modalGeneral = document.getElementById("popup_window_general");
+                modalGeneral.style.display = "none";
+            } catch (error) {
+                console.log(error);
+                
+            }
+            
+        })
+    });
+</script>
+<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=a6a0b4b8-d63b-4f4e-a8fe-a85fec0044d6"> </script>
+<script>
+        </script>
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/wp-content\/uploads\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/vt\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script>window.lazyLoadOptions=[{elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}},{elements_selector:".rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,}];window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://www.vtmarkets.com/wp-content/plugins/wp-rocket/assets/js/lazyload/17.8.3/lazyload.min.js"></script></body>
+</html>
+<!-- <div id="content">
+	<div id="error404" class="post">
+		<h1>Error 404 Not Found</h1>
+		<div class="post-content">
+			<p>Oops. Fail. The page cannot be found.</p>
+			<p>Please check your URL or use the search form below.</p> -->
+					</div><!--.post-content-->
+	</div><!--#error404 .post-->
+</div><!--#content-->

@@ -19,6 +19,13 @@ import {
   AvatarGroup,
   SocialProofItem,
 } from "@/components/ui/enhanced-effects";
+import {
+  LiveTradesTicker,
+  DashboardMockup,
+  GlowButton,
+  FloatingCard,
+  GradientText,
+} from "@/components/ui/premium-visuals";
 import { VideoHero } from "@/components/ui/video-hero";
 import { TrustLogos } from "@/components/ui/trust-logos";
 
@@ -632,6 +639,66 @@ export default function Home() {
       {/* Full-bleed VideoHero outside of shell */}
       <VideoHero />
       <TrustLogos />
+      
+      {/* Live Dashboard Preview */}
+      <section className="py-20 bg-transparent">
+        <div className="w-full max-w-[1200px] mx-auto px-5">
+          <div className="text-center mb-12">
+            <GradientText colors={['#667eea', '#764ba2']}>
+              <span className="text-[0.8rem] font-bold tracking-[0.2em] uppercase">
+                Dashboard en tiempo real
+              </span>
+            </GradientText>
+            <h2 className="mt-4 text-white text-[clamp(2rem,4vw,3rem)] font-black tracking-tight">
+              Control total de tu trading
+            </h2>
+            <p className="mt-4 text-[#8da0c2] max-w-[600px] mx-auto">
+              Gestiona posiciones, analiza rendimiento y controla el riesgo desde un solo dashboard
+            </p>
+          </div>
+          
+          <div className="grid lg:grid-cols-2 gap-8 items-start">
+            <DashboardMockup />
+            <div className="space-y-6">
+              <LiveTradesTicker />
+              <FloatingCard glowColor="#10b981" className="p-6">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center">
+                    <span className="text-2xl">📊</span>
+                  </div>
+                  <div>
+                    <div className="text-white font-bold">Risk Manager Pro</div>
+                    <div className="text-[#10b981] text-[0.85rem]">Protege tu capital automáticamente</div>
+                  </div>
+                </div>
+                <p className="text-[#8da0c2] text-[0.9rem]">
+                  Stop loss dinámicos, take profit inteligente y límites de exposición personalizables.
+                </p>
+              </FloatingCard>
+              <FloatingCard glowColor="#f59e0b" className="p-6">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-yellow-500/20 flex items-center justify-center">
+                    <span className="text-2xl">⚡</span>
+                  </div>
+                  <div>
+                    <div className="text-white font-bold">Ejecución Ultra-Rápida</div>
+                    <div className="text-[#f59e0b] text-[0.85rem]">0.1ms latency</div>
+                  </div>
+                </div>
+                <p className="text-[#8da0c2] text-[0.9rem]">
+                  Conexión directa a servidores de trading con ejecución en milisegundos.
+                </p>
+              </FloatingCard>
+            </div>
+          </div>
+          
+          <div className="text-center mt-12">
+            <GlowButton variant="primary" size="lg" href="#productos">
+              Prueba el Dashboard Gratis
+            </GlowButton>
+          </div>
+        </div>
+      </section>
       
       <div className="site-blue-shell relative z-10">
         <div className="site-side-glow site-side-glow--left" aria-hidden="true" />
