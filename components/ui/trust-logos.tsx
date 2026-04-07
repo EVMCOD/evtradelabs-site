@@ -56,7 +56,6 @@ export function TrustLogos({ title = "CON LA CONFIANZA DE" }: TrustLogosProps) {
                   width={100}
                   height={32}
                   className="w-auto h-auto max-w-full max-h-full object-contain"
-                  style={{ filter: 'brightness(0) invert(1)' }}
                 />
               </div>
               <span 
