@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import WaitlistForm from "./_components/WaitlistForm";
-import PlatformTicker from "./_components/PlatformTicker";
 import AffiliateCard from "./_components/AffiliateCard";
 import PacksSection from "./_components/PacksSection";
 import EVTLCoreSection from "./_components/EVTLCoreSection";
@@ -17,7 +16,6 @@ import {
 } from "@/components/ui/premium-effects";
 import {
   TestimonialCard,
-  TrustBadgesRow,
   AvatarGroup,
   SocialProofItem,
 } from "@/components/ui/enhanced-effects";
@@ -635,8 +633,6 @@ export default function Home() {
         <div className="site-side-glow site-side-glow--right" aria-hidden="true" />
         <main>
           <VideoHero />
-          <TrustBadgesRow />
-          <PlatformTicker />
           <SocialProof />
           <Testimonials />
           <MQL5Validation />
