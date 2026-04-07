@@ -7,7 +7,6 @@ import AffiliateCard from "./_components/AffiliateCard";
 import PacksSection from "./_components/PacksSection";
 import EVTLCoreSection from "./_components/EVTLCoreSection";
 import { 
-  TradingCounter, 
   TradingStats, 
   TradingParticles, 
   LiveChartLine,
@@ -15,17 +14,13 @@ import {
   Card3DHover,
   ScrollReveal,
   TradingProgress,
-  GlassCard,
-  PlatformMarquee
+  GlassCard
 } from "@/components/ui/premium-effects";
 import {
   TestimonialCard,
   TrustBadgesRow,
-  AnimatedHeroBackground,
-  CTACard,
   AvatarGroup,
   SocialProofItem,
-  ProductMockup,
 } from "@/components/ui/enhanced-effects";
 import { VideoHero } from "@/components/ui/video-hero";
 
@@ -35,112 +30,6 @@ function Kicker({ children }: { children: React.ReactNode }) {
     <span className="inline-block text-[0.72rem] font-semibold tracking-[0.18em] uppercase text-[#7b9ed9] mb-3">
       {children}
     </span>
-  );
-}
-
-/* ─── HERO ─────────────────────────────────────────────────── */
-function Hero() {
-  return (
-    <section
-      id="inicio"
-      className="relative overflow-hidden bg-[#0d1120] pt-20 pb-0"
-    >
-      {/* Enhanced animated background */}
-      <AnimatedHeroBackground />
-      
-      {/* Premium particles */}
-      <TradingParticles count={50} />
-      
-      {/* Radial glows */}
-      <div className="hero-ambient-glow absolute top-[-160px] left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full bg-[#1f6fff]/12 blur-[120px] pointer-events-none" />
-      <div className="hero-ambient-glow absolute right-[-120px] top-[80px] w-[420px] h-[420px] rounded-full bg-[#3b82f6]/10 blur-[140px] pointer-events-none" />
-
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-5">
-        <div className="pb-14 flex justify-center">
-          <div className="hero-copy pt-8 lg:pt-16 max-w-[860px] text-center items-center">
-            <ScrollReveal animation="fadeInDown">
-              <div className="hero-kicker inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/12 bg-white/5 text-[0.75rem] tracking-[0.08em] text-[#9aa6c1] mb-8">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                Sistemas de trading · Herramientas de plataforma · Infraestructura con foco en riesgo
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal animation="fadeInUp" delay={100}>
-              <h1 className="hero-title mx-auto text-white font-black text-[clamp(3.4rem,8vw,6.2rem)] leading-[0.9] tracking-[-0.065em] m-0 max-w-[13ch] text-balance">
-                Herramientas y sistemas de trading para traders serios
-              </h1>
-            </ScrollReveal>
-
-            <ScrollReveal animation="fadeInUp" delay={200}>
-              <p className="hero-body mx-auto mt-7 text-[1.08rem] leading-[1.9] text-[#97a8c6] max-w-[66ch]">
-                EV Trading Labs desarrolla sistemas, herramientas e infraestructura para traders que operan con MetaTrader, TradingView y entornos de ejecución conectados.
-              </p>
-            </ScrollReveal>
-
-            <ScrollReveal animation="fadeInUp" delay={300}>
-              <div className="hero-actions flex flex-wrap justify-center gap-3 mt-9">
-                <MagneticButton href="#productos" variant="primary" size="lg">
-                  Explorar el ecosistema
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </MagneticButton>
-                <MagneticButton href="#comunidad" variant="secondary" size="lg">
-                  Unirse al Discord
-                </MagneticButton>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal animation="fadeInUp" delay={400}>
-              <div className="hero-platforms flex flex-wrap justify-center gap-3 mt-9 text-[0.76rem] text-[#8da0c2]">
-                {["MetaTrader", "TradingView", "Risk tools", "Community + daily market brief"].map((item) => (
-                  <span key={item} className="rounded-full border border-white/8 bg-white/[0.035] px-3 py-1.5 backdrop-blur-sm">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </ScrollReveal>
-
-            {/* Premium animated stats */}
-            <ScrollReveal animation="fadeInUp" delay={500}>
-              <div className="hero-stats mt-11 pt-8 border-t border-white/10">
-                <TradingStats 
-                  stats={[
-                    { value: 5000, suffix: "+", label: "Descargas en MQL5", color: "#667eea" },
-                    { value: 8, suffix: "", label: "Estrategias en Portfolio", color: "#10b981" },
-                    { value: 24, suffix: "/7", label: "Comunidad Activa", color: "#f59e0b" },
-                  ]}
-                />
-              </div>
-            </ScrollReveal>
-          </div>
-
-        </div>
-      </div>
-
-      {/* Live chart preview */}
-      <ScrollReveal animation="fadeInUp" delay={600}>
-        <div className="relative z-10 w-full max-w-[1000px] mx-auto px-5 mt-8">
-          <GlassCard className="p-6" intensity="light">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-3 h-3 rounded-full bg-red-500" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                <div className="w-3 h-3 rounded-full bg-green-500" />
-                <span className="text-[#8da0c2] text-[0.8rem] ml-2">EV Portfolio Performance</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-green-400 text-[0.75rem]">LIVE</span>
-              </div>
-            </div>
-            <LiveChartLine color="#667eea" height={180} />
-          </GlassCard>
-        </div>
-      </ScrollReveal>
-
-      <div className="h-10" />
-    </section>
   );
 }
 
