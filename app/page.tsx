@@ -27,6 +27,7 @@ import {
   SocialProofItem,
   ProductMockup,
 } from "@/components/ui/enhanced-effects";
+import { VideoHero } from "@/components/ui/video-hero";
 
 /* ─── Utility ─────────────────────────────────────────────── */
 function Kicker({ children }: { children: React.ReactNode }) {
@@ -746,7 +747,7 @@ export default function Home() {
         <div className="site-side-glow site-side-glow--right" aria-hidden="true" />
         <Navbar />
         <main>
-          <Hero />
+          <VideoHero />
           <TrustBadgesRow />
           <PlatformTicker />
           <SocialProof />
