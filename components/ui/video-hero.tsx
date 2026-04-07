@@ -1,10 +1,260 @@
-// High-end video hero section for EV Trading Labs
+// CodeNest-style animated background for EV Trading Labs
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
 import { Menu, X, ArrowRight } from 'lucide-react'
 
-// Animated particles background
+// Matrix-style falling code effect
+function MatrixCode() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+    
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+    
+    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン{}[]<>/\\=+-*'
+    const fontSize = 14
+    const columns = canvas.width / fontSize
+    const drops: number[] = Array(Math.floor(columns)).fill(1)
+    
+    const draw = () => {
+      ctx.fillStyle = 'rgba(7, 11, 20, 0.05)'
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+      
+      ctx.fillStyle = '#667eea'
+      ctx.font = `${fontSize}px monospace`
+      
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)]
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize)
+        
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0
+        }
+        drops[i]++
+      }
+    }
+    
+    const interval = setInterval(draw, 50)
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+    })
+    
+    return () => {
+      clearInterval(interval)
+      window.removeEventListener('resize', () => {})
+    }
+  }, [])
+  
+  return (
+    <canvas 
+      ref={canvasRef} 
+      className="absolute inset-0 w-full h-full opacity-30"
+      style={{ filter: 'blur(1px)' }}
+    />
+  )
+}
+
+// Data stream lines
+function DataStreams() {
+  const streamsRef = useRef<Array<{
+    x: number
+    y: number
+    speed: number
+    length: number
+    opacity: number
+  }>>([])
+  
+  useEffect(() => {
+    streamsRef.current = Array.from({ length: 30 }, () => ({
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      speed: Math.random() * 2 + 0.5,
+      length: Math.random() * 100 + 50,
+      opacity: Math.random() * 0.3 + 0.1,
+    }))
+  }, [])
+  
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {streamsRef.current.map((s, i) => (
+        <div
+          key={i}
+          style={{
+            position: 'absolute',
+            left: `${s.x}%`,
+            top: `${s.y}%`,
+            width: '2px',
+            height: `${s.length}px`,
+            background: `linear-gradient(to bottom, transparent, #667eea, transparent)`,
+            opacity: s.opacity,
+            animation: `streamDown ${10 / s.speed}s linear infinite`,
+            animationDelay: `${i * 0.5}s`,
+          }}
+        />
+      ))}
+      <style>{`
+        @keyframes streamDown {
+          0% { transform: translateY(-100px); opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { transform: translateY(100vh); opacity: 0; }
+        }
+      `}</style>
+    </div>
+  )
+}
+
+// Floating geometric shapes
+function GeometricShapes() {
+  const shapes = useRef<Array<{
+    x: number
+    y: number
+    size: number
+    rotation: number
+    type: 'circle' | 'square' | 'triangle'
+    duration: number
+    delay: number
+  }>>([])
+  
+  useEffect(() => {
+    shapes.current = Array.from({ length: 15 }, (_, i) => ({
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 60 + 20,
+      rotation: Math.random() * 360,
+      type: (['circle', 'square', 'triangle'] as const)[i % 3],
+      duration: Math.random() * 20 + 15,
+      delay: Math.random() * 10,
+    }))
+  }, [])
+  
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {shapes.current.map((shape, i) => (
+        <div
+          key={i}
+          style={{
+            position: 'absolute',
+            left: `${shape.x}%`,
+            top: `${shape.y}%`,
+            width: shape.size,
+            height: shape.size,
+            border: '1px solid rgba(102, 126, 234, 0.2)',
+            animation: `floatRotate ${shape.duration}s ease-in-out infinite`,
+            animationDelay: `${shape.delay}s`,
+            ...(shape.type === 'circle' && { borderRadius: '50%' }),
+            ...(shape.type === 'triangle' && { 
+              width: 0, 
+              height: 0,
+              borderLeft: `${shape.size/2}px solid transparent`,
+              borderRight: `${shape.size/2}px solid transparent`,
+              borderBottom: `${shape.size}px solid rgba(102, 126, 234, 0.15)`,
+              background: 'none',
+            }),
+          }}
+        />
+      ))}
+      <style>{`
+        @keyframes floatRotate {
+          0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+          50% { transform: translateY(-30px) rotate(180deg); opacity: 0.6; }
+        }
+      `}</style>
+    </div>
+  )
+}
+
+// Glowing nodes network
+function NodeNetwork() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+    
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+    
+    const nodes: { x: number; y: number; vx: number; vy: number }[] = []
+    for (let i = 0; i < 50; i++) {
+      nodes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+      })
+    }
+    
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      
+      // Draw lines between nearby nodes
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x
+          const dy = nodes[i].y - nodes[j].y
+          const dist = Math.sqrt(dx * dx + dy * dy)
+          
+          if (dist < 150) {
+            ctx.beginPath()
+            ctx.strokeStyle = `rgba(102, 126, 234, ${0.15 * (1 - dist/150)})`
+            ctx.lineWidth = 1
+            ctx.moveTo(nodes[i].x, nodes[i].y)
+            ctx.lineTo(nodes[j].x, nodes[j].y)
+            ctx.stroke()
+          }
+        }
+      }
+      
+      // Draw nodes
+      for (const node of nodes) {
+        ctx.beginPath()
+        ctx.arc(node.x, node.y, 3, 0, Math.PI * 2)
+        ctx.fillStyle = 'rgba(102, 126, 234, 0.8)'
+        ctx.fill()
+        
+        // Update position
+        node.x += node.vx
+        node.y += node.vy
+        
+        // Bounce off edges
+        if (node.x < 0 || node.x > canvas.width) node.vx *= -1
+        if (node.y < 0 || node.y > canvas.height) node.vy *= -1
+      }
+    }
+    
+    const interval = setInterval(draw, 16)
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+    })
+    
+    return () => {
+      clearInterval(interval)
+      window.removeEventListener('resize', () => {})
+    }
+  }, [])
+  
+  return (
+    <canvas 
+      ref={canvasRef} 
+      className="absolute inset-0 w-full h-full opacity-40"
+    />
+  )
+}
+
+// Animated particles
 function AnimatedParticles() {
   const particles = useRef<Array<{
     x: number
@@ -16,7 +266,7 @@ function AnimatedParticles() {
   }>>([])
 
   useEffect(() => {
-    particles.current = Array.from({ length: 60 }, () => ({
+    particles.current = Array.from({ length: 80 }, () => ({
       x: Math.random() * 100,
       y: Math.random() * 100,
       size: Math.random() * 3 + 1,
@@ -103,32 +353,25 @@ export function VideoHero({ onCtaClick }: VideoHeroProps) {
 
   return (
     <section className="relative w-full h-screen min-h-[700px] overflow-hidden">
-      {/* Animated Background Gradient (always visible, replaces video) */}
+      {/* Base dark gradient */}
       <div 
         className="absolute inset-0"
         style={{
-          background: `
-            radial-gradient(ellipse at 20% 30%, rgba(102, 126, 234, 0.25) 0%, transparent 50%),
-            radial-gradient(ellipse at 80% 70%, rgba(118, 75, 162, 0.2) 0%, transparent 50%),
-            radial-gradient(ellipse at 50% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 40%),
-            linear-gradient(135deg, #070b14 0%, #0d1a1a 50%, #070b14 100%)
-          `,
-          animation: 'gradientShift 10s ease-in-out infinite',
+          background: 'linear-gradient(135deg, #070b14 0%, #0d1117 50%, #070b14 100%)',
         }}
-      >
-        <style>{`
-          @keyframes gradientShift {
-            0%, 100% { 
-              background-position: 0% 50%;
-              filter: hue-rotate(0deg);
-            }
-            50% { 
-              background-position: 100% 50%;
-              filter: hue-rotate(15deg);
-            }
-          }
-        `}</style>
-      </div>
+      />
+
+      {/* Matrix code falling effect */}
+      <MatrixCode />
+
+      {/* Node network connections */}
+      <NodeNetwork />
+
+      {/* Data streams */}
+      <DataStreams />
+
+      {/* Geometric shapes */}
+      <GeometricShapes />
 
       {/* Animated Particles */}
       <AnimatedParticles />
