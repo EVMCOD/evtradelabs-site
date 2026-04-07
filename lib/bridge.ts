@@ -10,6 +10,7 @@ export interface Account {
   freeMargin: number
   marginLevel: number
   server: string
+  type: 'master' | 'sleeve' | 'signal'
 }
 
 export interface Position {
@@ -23,6 +24,8 @@ export interface Position {
   swap: number
   comment: string
   time: string
+  sl: number // Stop Loss
+  tp: number // Take Profit
 }
 
 export interface Trade {
@@ -48,22 +51,58 @@ const BRIDGE_URL = process.env.NEXT_PUBLIC_BRIDGE_URL || 'https://your-bridge.on
 const BRIDGE_TOKEN = process.env.BRIDGE_TOKEN || ''
 
 // Mock data for development
-const MOCK_ACCOUNT: Account = {
-  login: '12345678',
-  name: 'EV Trading Account',
-  balance: 24521.50,
-  equity: 24834.20,
-  margin: 1240.00,
-  freeMargin: 23594.20,
-  marginLevel: 2002.76,
-  server: 'MetaQuotes-Demo',
-}
+const MOCK_ACCOUNTS: Account[] = [
+  {
+    login: '12345678',
+    name: 'Master Account',
+    balance: 24521.50,
+    equity: 24834.20,
+    margin: 1240.00,
+    freeMargin: 23594.20,
+    marginLevel: 2002.76,
+    server: 'MetaQuotes-Demo',
+    type: 'master',
+  },
+  {
+    login: '87654321',
+    name: 'Sleeve EUR',
+    balance: 8540.20,
+    equity: 8720.50,
+    margin: 420.00,
+    freeMargin: 8300.50,
+    marginLevel: 2076.31,
+    server: 'MetaQuotes-Demo',
+    type: 'sleeve',
+  },
+  {
+    login: '87654322',
+    name: 'Sleeve Gold',
+    balance: 12300.00,
+    equity: 12450.80,
+    margin: 620.00,
+    freeMargin: 11830.80,
+    marginLevel: 2008.19,
+    server: 'MetaQuotes-Demo',
+    type: 'sleeve',
+  },
+  {
+    login: '87654323',
+    name: 'Signal Acc',
+    balance: 5680.30,
+    equity: 5660.90,
+    margin: 200.00,
+    freeMargin: 5460.90,
+    marginLevel: 2830.45,
+    server: 'MetaQuotes-Demo',
+    type: 'signal',
+  },
+]
 
 const MOCK_POSITIONS: Position[] = [
-  { ticket: 12345, symbol: 'EURUSD', type: 'BUY', volume: 0.50, priceOpen: 1.0850, priceCurrent: 1.0874, profit: 120.00, swap: -2.50, comment: 'EUR Trend', time: '2026-04-07T10:30:00Z' },
-  { ticket: 12346, symbol: 'XAUUSD', type: 'SELL', volume: 0.25, priceOpen: 2050.00, priceCurrent: 2034.50, profit: 387.50, swap: -1.20, comment: 'Gold Squeeze', time: '2026-04-07T11:15:00Z' },
-  { ticket: 12347, symbol: 'GBPJPY', type: 'BUY', volume: 0.30, priceOpen: 188.50, priceCurrent: 188.23, profit: -81.00, swap: -0.80, comment: 'JPY Swing', time: '2026-04-07T12:00:00Z' },
-  { ticket: 12348, symbol: 'USDCHF', type: 'BUY', volume: 0.40, priceOpen: 0.8820, priceCurrent: 0.8842, profit: 88.00, swap: -1.00, comment: 'CHF Long', time: '2026-04-07T13:30:00Z' },
+  { ticket: 12345, symbol: 'EURUSD', type: 'BUY', volume: 0.50, priceOpen: 1.0850, priceCurrent: 1.0874, profit: 120.00, swap: -2.50, comment: 'EUR Trend', time: '2026-04-07T10:30:00Z', sl: 1.0800, tp: 1.0950 },
+  { ticket: 12346, symbol: 'XAUUSD', type: 'SELL', volume: 0.25, priceOpen: 2050.00, priceCurrent: 2034.50, profit: 387.50, swap: -1.20, comment: 'Gold Squeeze', time: '2026-04-07T11:15:00Z', sl: 2060.00, tp: 2020.00 },
+  { ticket: 12347, symbol: 'GBPJPY', type: 'BUY', volume: 0.30, priceOpen: 188.50, priceCurrent: 188.23, profit: -81.00, swap: -0.80, comment: 'JPY Swing', time: '2026-04-07T12:00:00Z', sl: 187.50, tp: 190.00 },
+  { ticket: 12348, symbol: 'USDCHF', type: 'BUY', volume: 0.40, priceOpen: 0.8820, priceCurrent: 0.8842, profit: 88.00, swap: -1.00, comment: 'CHF Long', time: '2026-04-07T13:30:00Z', sl: 0.8770, tp: 0.8920 },
 ]
 
 const MOCK_HISTORY: Trade[] = [
@@ -102,32 +141,41 @@ async function fetchBridge<T>(endpoint: string): Promise<T> {
 }
 
 // Use mock data or real bridge based on environment
-export async function getAccount(): Promise<Account> {
+export async function getAccounts(): Promise<Account[]> {
   if (!BRIDGE_TOKEN || BRIDGE_URL.includes('your-bridge')) {
-    return MOCK_ACCOUNT
+    return MOCK_ACCOUNTS
   }
-  return fetchBridge<Account>('/api/account')
+  return fetchBridge<Account[]>('/api/accounts')
 }
 
-export async function getPositions(): Promise<Position[]> {
+export async function getAccount(login?: string): Promise<Account | null> {
+  const accounts = await getAccounts()
+  if (login) {
+    return accounts.find(a => a.login === login) || accounts[0]
+  }
+  return accounts[0]
+}
+
+export async function getPositions(login?: string): Promise<Position[]> {
   if (!BRIDGE_TOKEN || BRIDGE_URL.includes('your-bridge')) {
+    // In real implementation, filter by login
     return MOCK_POSITIONS
   }
-  return fetchBridge<Position[]>('/api/positions')
+  return fetchBridge<Position[]>(`/api/positions${login ? `?login=${login}` : ''}`)
 }
 
-export async function getTradeHistory(): Promise<Trade[]> {
+export async function getTradeHistory(login?: string): Promise<Trade[]> {
   if (!BRIDGE_TOKEN || BRIDGE_URL.includes('your-bridge')) {
     return MOCK_HISTORY
   }
-  return fetchBridge<Trade[]>('/api/history')
+  return fetchBridge<Trade[]>(`/api/history${login ? `?login=${login}` : ''}`)
 }
 
-export async function getPerformance(): Promise<PerformanceData[]> {
+export async function getPerformance(login?: string): Promise<PerformanceData[]> {
   if (!BRIDGE_TOKEN || BRIDGE_URL.includes('your-bridge')) {
     return MOCK_PERFORMANCE
   }
-  return fetchBridge<PerformanceData[]>('/api/performance')
+  return fetchBridge<PerformanceData[]>(`/api/performance${login ? `?login=${login}` : ''}`)
 }
 
 // Calculate stats from positions
