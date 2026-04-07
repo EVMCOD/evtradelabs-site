@@ -15,8 +15,8 @@ export function TrustLogos({ title = "CON LA CONFIANZA DE" }: TrustLogosProps) {
     { name: 'TradingView', abbr: 'TV', color: '#2196F3' },
     { name: 'Interactive Brokers', abbr: 'IBKR', color: '#621B18' },
     { name: 'NinjaTrader', abbr: 'NT', color: '#0578B9' },
-    { name: 'Binance', abbr: 'BN', color: '#F0B90B' },
-    { name: 'Bybit', abbr: 'BY', color: '#F7A600' },
+    { name: 'Vantage', abbr: 'VAN', color: '#00AEEF' },
+    { name: 'VT Markets', abbr: 'VT', color: '#7B2D8E' },
   ]
 
   return (
