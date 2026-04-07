@@ -20,6 +20,7 @@ import {
   SocialProofItem,
 } from "@/components/ui/enhanced-effects";
 import { VideoHero } from "@/components/ui/video-hero";
+import { TrustLogos } from "@/components/ui/trust-logos";
 
 /* ─── Utility ─────────────────────────────────────────────── */
 function Kicker({ children }: { children: React.ReactNode }) {
@@ -630,6 +631,7 @@ export default function Home() {
     <>
       {/* Full-bleed VideoHero outside of shell */}
       <VideoHero />
+      <TrustLogos />
       
       <div className="site-blue-shell relative z-10">
         <div className="site-side-glow site-side-glow--left" aria-hidden="true" />
