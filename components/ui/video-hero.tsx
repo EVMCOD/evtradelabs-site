@@ -4,6 +4,72 @@
 import { useEffect, useRef, useState } from 'react'
 import { Menu, X, ArrowRight } from 'lucide-react'
 
+// Animated particles background
+function AnimatedParticles() {
+  const particles = useRef<Array<{
+    x: number
+    y: number
+    size: number
+    duration: number
+    delay: number
+    opacity: number
+  }>>([])
+
+  useEffect(() => {
+    particles.current = Array.from({ length: 60 }, () => ({
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 3 + 1,
+      duration: Math.random() * 20 + 15,
+      delay: Math.random() * 10,
+      opacity: Math.random() * 0.5 + 0.2,
+    }))
+  }, [])
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particles.current.map((p, i) => (
+        <div
+          key={i}
+          style={{
+            position: 'absolute',
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+            borderRadius: '50%',
+            background: i % 3 === 0 
+              ? 'radial-gradient(circle, #667eea, transparent)'
+              : i % 3 === 1 
+              ? 'radial-gradient(circle, #764ba2, transparent)'
+              : 'radial-gradient(circle, #10b981, transparent)',
+            opacity: p.opacity,
+            animation: `floatParticle${i % 3} ${p.duration}s ease-in-out infinite`,
+            animationDelay: `${p.delay}s`,
+          }}
+        />
+      ))}
+      <style>{`
+        @keyframes floatParticle0 {
+          0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.3; }
+          25% { transform: translateY(-40px) translateX(15px) scale(1.2); opacity: 0.7; }
+          50% { transform: translateY(-20px) translateX(-20px) scale(0.9); opacity: 0.5; }
+          75% { transform: translateY(-50px) translateX(10px) scale(1.1); opacity: 0.6; }
+        }
+        @keyframes floatParticle1 {
+          0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+          33% { transform: translateY(-30px) translateX(-25px); opacity: 0.6; }
+          66% { transform: translateY(-45px) translateX(20px); opacity: 0.5; }
+        }
+        @keyframes floatParticle2 {
+          0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+          50% { transform: translate(30px, -35px) scale(1.3); opacity: 0.6; }
+        }
+      `}</style>
+    </div>
+  )
+}
+
 // Video Hero Props
 interface VideoHeroProps {
   onCtaClick?: () => void
@@ -12,7 +78,7 @@ interface VideoHeroProps {
 export function VideoHero({ onCtaClick }: VideoHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false)
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
     const video = videoRef.current
@@ -21,16 +87,53 @@ export function VideoHero({ onCtaClick }: VideoHeroProps) {
     // Try native HLS first
     if (video.canPlayType('application/vnd.apple.mpegurl')) {
       video.src = 'https://stream.mux.com/tLkHO1qZoaaQOUeVWo8hEBeGQfySP02EPS02BmnNFyXys.m3u8'
-      video.addEventListener('loadeddata', () => setIsVideoLoaded(true))
-    } else {
-      // Fallback for browsers without HLS support
-      setIsVideoLoaded(true) // Show gradient background
     }
+  }, [])
+
+  // Mouse parallax effect
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 20
+      const y = (e.clientY / window.innerHeight - 0.5) * 20
+      setMousePos({ x, y })
+    }
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
   return (
     <section className="relative w-full h-screen min-h-[700px] overflow-hidden">
-      {/* Video Background */}
+      {/* Animated Background Gradient (always visible, replaces video) */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: `
+            radial-gradient(ellipse at 20% 30%, rgba(102, 126, 234, 0.25) 0%, transparent 50%),
+            radial-gradient(ellipse at 80% 70%, rgba(118, 75, 162, 0.2) 0%, transparent 50%),
+            radial-gradient(ellipse at 50% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 40%),
+            linear-gradient(135deg, #070b14 0%, #0d1a1a 50%, #070b14 100%)
+          `,
+          animation: 'gradientShift 10s ease-in-out infinite',
+        }}
+      >
+        <style>{`
+          @keyframes gradientShift {
+            0%, 100% { 
+              background-position: 0% 50%;
+              filter: hue-rotate(0deg);
+            }
+            50% { 
+              background-position: 100% 50%;
+              filter: hue-rotate(15deg);
+            }
+          }
+        `}</style>
+      </div>
+
+      {/* Animated Particles */}
+      <AnimatedParticles />
+
+      {/* Video Background (hidden, keeps structure for future) */}
       <video
         ref={videoRef}
         autoPlay
@@ -38,20 +141,8 @@ export function VideoHero({ onCtaClick }: VideoHeroProps) {
         loop
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
-        style={{ opacity: 0.6 }}
-      >
-        {/* HLS stream loaded via JS */}
-      </video>
-
-      {/* Fallback gradient when no video */}
-      {!isVideoLoaded && (
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, #0a0f14 0%, #0d1a1a 50%, #0a0f14 100%)',
-          }}
-        />
-      )}
+        style={{ opacity: 0 }}
+      />
 
       {/* Left gradient overlay */}
       <div 
@@ -69,8 +160,8 @@ export function VideoHero({ onCtaClick }: VideoHeroProps) {
         }}
       />
 
-      {/* Grid lines */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* Grid lines with animation */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Vertical grid lines at 25%, 50%, 75% */}
         <div className="absolute top-0 bottom-0 w-px" style={{ left: '25%', background: 'rgba(255,255,255,0.05)' }} />
         <div className="absolute top-0 bottom-0 w-px" style={{ left: '50%', background: 'rgba(255,255,255,0.08)' }} />
@@ -80,19 +171,48 @@ export function VideoHero({ onCtaClick }: VideoHeroProps) {
         <div className="absolute left-0 right-0 h-px" style={{ top: '66%', background: 'rgba(255,255,255,0.03)' }} />
       </div>
 
-      {/* Central glow */}
+      {/* Central glow - mouse reactive */}
       <div 
-        className="absolute pointer-events-none"
+        className="absolute pointer-events-none transition-transform duration-1000 ease-out"
         style={{
           top: '-10%',
           left: '50%',
-          transform: 'translateX(-50%)',
+          transform: `translateX(calc(-50% + ${mousePos.x}px)) translateY(${mousePos.y}px)`,
           width: '80%',
           height: '50%',
-          background: 'radial-gradient(ellipse at center, rgba(102, 126, 234, 0.15) 0%, transparent 70%)',
-          filter: 'blur(25px)',
+          background: 'radial-gradient(ellipse at center, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.15) 50%, transparent 70%)',
+          filter: 'blur(30px)',
+          animation: 'glowPulse 4s ease-in-out infinite',
         }}
-      />
+      >
+        <style>{`
+          @keyframes glowPulse {
+            0%, 100% { opacity: 0.8; transform: translateX(calc(-50% + var(--mouse-x, 0px))) scale(1); }
+            50% { opacity: 1; transform: translateX(calc(-50% + var(--mouse-x, 0px))) scale(1.1); }
+          }
+        `}</style>
+      </div>
+
+      {/* Secondary floating glow */}
+      <div 
+        className="absolute pointer-events-none"
+        style={{
+          top: '20%',
+          right: '10%',
+          width: '300px',
+          height: '300px',
+          background: 'radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%)',
+          filter: 'blur(40px)',
+          animation: 'floatGlow 8s ease-in-out infinite',
+        }}
+      >
+        <style>{`
+          @keyframes floatGlow {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+            50% { transform: translate(-30px, -20px) scale(1.2); opacity: 0.9; }
+          }
+        `}</style>
+      </div>
 
       {/* Navigation */}
       <header className="absolute top-0 left-0 right-0 z-50 px-6 py-5">
@@ -166,16 +286,20 @@ export function VideoHero({ onCtaClick }: VideoHeroProps) {
         {/* Liquid Glass Card */}
         <div 
           className="relative w-[200px] h-[200px] mb-8"
-          style={{ transform: 'translateY(-50px)' }}
+          style={{ 
+            transform: `translateY(-50px) translateX(${mousePos.x * 0.5}px)`,
+            transition: 'transform 0.3s ease-out',
+          }}
         >
           <div 
             className="absolute inset-0 rounded-3xl"
             style={{
-              background: 'rgba(255, 255, 255, 0.01)',
+              background: 'rgba(255, 255, 255, 0.02)',
               backgroundBlendMode: 'luminosity',
               backdropFilter: 'blur(4px)',
               WebkitBackdropFilter: 'blur(4px)',
               boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.1)',
+              animation: 'cardFloat 6s ease-in-out infinite',
             }}
           >
             {/* Border effect via pseudo-element */}
@@ -183,7 +307,9 @@ export function VideoHero({ onCtaClick }: VideoHeroProps) {
               className="absolute inset-0 rounded-3xl pointer-events-none"
               style={{
                 padding: '1.4px',
-                background: 'linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.05) 100%)',
+                background: 'linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(102,126,234,0.2) 50%, rgba(255,255,255,0.1) 100%)',
+                backgroundSize: '200% 200%',
+                animation: 'borderShine 3s linear infinite',
                 WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                 WebkitMaskComposite: 'xor',
                 maskComposite: 'exclude',
@@ -217,6 +343,18 @@ export function VideoHero({ onCtaClick }: VideoHeroProps) {
               & proven edge
             </div>
           </div>
+          
+          <style>{`
+            @keyframes cardFloat {
+              0%, 100% { transform: translateY(0); }
+              50% { transform: translateY(-8px); }
+            }
+            @keyframes borderShine {
+              0% { background-position: 0% 50%; }
+              50% { background-position: 100% 50%; }
+              100% { background-position: 0% 50%; }
+            }
+          `}</style>
         </div>
 
         {/* Eyebrow */}
@@ -274,13 +412,28 @@ export function VideoHero({ onCtaClick }: VideoHeroProps) {
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-          <span className="text-white/30 text-[0.65rem] tracking-widest uppercase">Scroll</span>
+          <span className="text-white/30 text-[0.65rem] tracking-widest uppercase" style={{ animation: 'fadeInOut 2s ease-in-out infinite' }}>Scroll</span>
           <div 
-            className="w-px h-8"
-            style={{
-              background: 'linear-gradient(to bottom, rgba(102,126,234,0.8), transparent)',
-            }}
-          />
+            className="w-px h-8 relative overflow-hidden"
+          >
+            <div 
+              className="absolute inset-x-0 top-0 h-4"
+              style={{
+                background: 'linear-gradient(to bottom, rgba(102,126,234,0.9), transparent)',
+                animation: 'scrollLine 1.5s ease-in-out infinite',
+              }}
+            />
+          </div>
+          <style>{`
+            @keyframes fadeInOut {
+              0%, 100% { opacity: 0.3; }
+              50% { opacity: 0.7; }
+            }
+            @keyframes scrollLine {
+              0% { transform: translateY(-100%); }
+              100% { transform: translateY(400%); }
+            }
+          `}</style>
         </div>
       </div>
     </section>
