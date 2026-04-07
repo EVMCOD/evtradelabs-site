@@ -113,7 +113,7 @@ export function GradientText({
 // Gradient border
 export function GradientBorder({ 
   children, 
-  colors = ['#667eea', '#764ba2', '#f093fb', #667eea'],
+  colors = ['#667eea', '#764ba2', '#f093fb'],
   radius = '16px',
   thickness = '2px',
   className = ''

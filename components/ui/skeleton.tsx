@@ -67,9 +67,9 @@ export function ProductGridSkeleton({ count = 6 }: { count?: number }) {
 }
 
 // Text skeleton
-export function TextSkeleton({ lines = 3, lastLineWidth = '60%' }: { lines?: number; lastLineWidth?: string }) {
+export function TextSkeleton({ lines = 3, lastLineWidth = '60%', style }: { lines?: number; lastLineWidth?: string; style?: React.CSSProperties }) {
   return (
-    <div>
+    <div style={style}>
       {Array.from({ length: lines }).map((_, i) => (
         <Skeleton
           key={i}

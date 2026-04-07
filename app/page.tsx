@@ -18,6 +18,15 @@ import {
   GlassCard,
   PlatformMarquee
 } from "@/components/ui/premium-effects";
+import {
+  TestimonialCard,
+  TrustBadgesRow,
+  AnimatedHeroBackground,
+  CTACard,
+  AvatarGroup,
+  SocialProofItem,
+  ProductMockup,
+} from "@/components/ui/enhanced-effects";
 
 /* ─── Utility ─────────────────────────────────────────────── */
 function Kicker({ children }: { children: React.ReactNode }) {
@@ -35,11 +44,11 @@ function Hero() {
       id="inicio"
       className="relative overflow-hidden bg-[#0d1120] pt-20 pb-0"
     >
-      <div className="hero-aurora hero-aurora--left" aria-hidden="true" />
-      <div className="hero-aurora hero-aurora--right" aria-hidden="true" />
+      {/* Enhanced animated background */}
+      <AnimatedHeroBackground />
       
       {/* Premium particles */}
-      <TradingParticles count={40} />
+      <TradingParticles count={50} />
       
       {/* Radial glows */}
       <div className="hero-ambient-glow absolute top-[-160px] left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full bg-[#1f6fff]/12 blur-[120px] pointer-events-none" />
@@ -641,6 +650,93 @@ function Footer() {
   );
 }
 
+/* ─── SOCIAL PROOF ───────────────────────────────────────── */
+function SocialProof() {
+  const stats = [
+    { number: "5,247", label: "Active Traders" },
+    { number: "€2.4M+", label: "Capital Managed" },
+    { number: "94%", label: "Success Rate" },
+    { number: "24/7", label: "Community" },
+  ]
+
+  return (
+    <section className="py-16 bg-transparent">
+      <div className="w-full max-w-[1200px] mx-auto px-5">
+        <ScrollReveal>
+          <div className="rounded-[24px] border border-white/10 bg-[rgba(17,26,45,0.4)] p-8 backdrop-blur-sm">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+              {stats.map((stat) => (
+                <SocialProofItem key={stat.label} number={stat.number} label={stat.label} />
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+  );
+}
+
+/* ─── TESTIMONIALS ───────────────────────────────────────── */
+function Testimonials() {
+  const testimonials = [
+    {
+      name: "Carlos M.",
+      role: "Professional Trader",
+      quote: "Llevo 3 años operando con sistemas y EVTL es lo primero que realmente funciona como promete. La gestión de riesgo integrada me ha salvado de operativas que habrían blown mi cuenta.",
+      platform: "MT5",
+      profit: "+47% Annual",
+    },
+    {
+      name: "María G.",
+      role: "Funded Trader",
+      quote: "Pasé de perder consistentemente a ser rentable en 6 meses. La estructura que ofrecen no es solo software — es una forma de pensar el trading.",
+      platform: "TradingView",
+      profit: "+32% Monthly",
+    },
+    {
+      name: "Antonio R.",
+      role: "Algo Trader",
+      quote: "Los conectores de plataforma son真实的. Puedo gestionar MT5 y TradingView desde un solo dashboard sin perder señal. Esto es lo que necesitaba.",
+      platform: "Multi-Platform",
+      profit: "+156% YTD",
+    },
+  ]
+
+  const traders = ["Carlos M.", "María G.", "Antonio R.", "Sofia L.", "David K."]
+
+  return (
+    <section id="testimonials" className="py-24 bg-transparent">
+      <div className="w-full max-w-[1200px] mx-auto px-5">
+        <ScrollReveal>
+          <div className="text-center mb-12">
+            <Kicker>Testimonios</Kicker>
+            <h2 className="m-0 text-[clamp(2rem,4vw,3rem)] font-black leading-[1.02] tracking-[-0.05em] text-white max-w-[600px] mx-auto text-balance">
+              Lo que dicen los traders que usan EVTL
+            </h2>
+          </div>
+        </ScrollReveal>
+
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
+          {testimonials.map((t, i) => (
+            <ScrollReveal key={t.name} animation="fadeInUp" delay={i * 100}>
+              <TestimonialCard {...t} />
+            </ScrollReveal>
+          ))}
+        </div>
+
+        <ScrollReveal>
+          <div className="flex flex-col items-center gap-4">
+            <AvatarGroup avatars={traders} max={5} />
+            <p className="text-[#8da0c2] text-[0.85rem]">
+              Join <span className="text-white font-medium">5,000+</span> traders growing with EVTL
+            </p>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+  );
+}
+
 /* ─── PAGE ─────────────────────────────────────────────────── */
 export default function Home() {
   return (
@@ -651,7 +747,10 @@ export default function Home() {
         <Navbar />
         <main>
           <Hero />
+          <TrustBadgesRow />
           <PlatformTicker />
+          <SocialProof />
+          <Testimonials />
           <MQL5Validation />
           <About />
           <WhatWeDo />

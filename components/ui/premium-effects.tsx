@@ -498,6 +498,7 @@ interface TradingProgressProps {
   label?: string
   color?: string
   showValue?: boolean
+  decimals?: number
   className?: string
 }
 
@@ -506,6 +507,7 @@ export function TradingProgress({
   label,
   color = '#667eea',
   showValue = true,
+  decimals = 0,
   className = ''
 }: TradingProgressProps) {
   const [width, setWidth] = useState(0)
@@ -529,12 +531,14 @@ export function TradingProgress({
     return () => observer.disconnect()
   }, [value])
 
+  const displayValue = decimals > 0 ? width.toFixed(decimals) : width
+
   return (
     <div ref={ref} className={className} style={{ width: '100%' }}>
       {(label || showValue) && (
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontSize: '0.85rem' }}>
           {label && <span style={{ color: '#8da0c2' }}>{label}</span>}
-          {showValue && <span style={{ color: '#fff', fontWeight: 600 }}>{width}%</span>}
+          {showValue && <span style={{ color: '#fff', fontWeight: 600 }}>{displayValue}%</span>}
         </div>
       )}
       <div style={{ height: '6px', background: 'rgba(255,255,255,0.1)', borderRadius: '3px', overflow: 'hidden' }}>
