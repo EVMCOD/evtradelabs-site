@@ -4,6 +4,8 @@ import WaitlistForm from "./_components/WaitlistForm";
 import AffiliateCard from "./_components/AffiliateCard";
 import PacksSection from "./_components/PacksSection";
 import EVTLCoreSection from "./_components/EVTLCoreSection";
+import EVQuantLabSection from "./_components/EVQuantLabSection";
+import PricingSection from "./_components/PricingSection";
 import { 
   TradingStats, 
   TradingParticles, 
@@ -709,7 +711,8 @@ export default function Home() {
           <MQL5Validation />
           <About />
           <WhatWeDo />
-          <PacksSection />
+          <EVQuantLabSection />
+          <PricingSection />
           <EVTLCoreSection />
           <MT5CTA />
           <HowItWorks />

@@ -121,6 +121,12 @@ export default function DashboardPage() {
             <Link href="/dashboard" className="text-white font-medium">
               Dashboard
             </Link>
+            <Link href="/dashboard/portfolio" className="text-[#8da0c2] hover:text-white transition-colors">
+              Portfolio
+            </Link>
+            <Link href="/dashboard/replication" className="text-[#8da0c2] hover:text-white transition-colors">
+              Replication
+            </Link>
           </nav>
           
           <div className="flex items-center gap-2">
