@@ -479,11 +479,8 @@ export function VideoHero({ onCtaClick }: VideoHeroProps) {
       <header className="absolute top-0 left-0 right-0 z-50 px-6 py-5">
         <div className="max-w-[1400px] mx-auto flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#667eea] to-[#764ba2] flex items-center justify-center">
-              <span className="text-white font-black text-[0.9rem]">EV</span>
-            </div>
-            <span className="text-white font-bold text-[1rem] tracking-tight">EV Trading Labs</span>
+          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#667eea] to-[#764ba2] flex items-center justify-center cursor-pointer">
+            <span className="text-white font-black text-[0.85rem]">EV</span>
           </div>
 
           {/* Desktop Menu */}
