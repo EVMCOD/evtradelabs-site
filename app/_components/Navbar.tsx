@@ -16,22 +16,48 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 12);
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight
+      const scrolled = (window.scrollY / scrollHeight) * 100
+      setScrollProgress(scrolled)
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 px-4 pt-3">
-      <div
-        className={`mx-auto flex w-full max-w-[1180px] items-center justify-between gap-6 rounded-[18px] border px-5 transition-all duration-300 ${
-          scrolled
-            ? "h-[54px] border-white/10 bg-[rgba(16,24,43,0.82)] shadow-[0_10px_28px_rgba(7,12,25,0.16)] backdrop-blur-xl"
-            : "h-[58px] border-white/8 bg-[rgba(16,24,43,0.68)] backdrop-blur-lg"
-        }`}
-      >
+    <>
+      {/* Scroll progress indicator */}
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: '2px',
+        background: 'rgba(255,255,255,0.1)',
+        zIndex: 9999,
+      }}>
+        <div style={{
+          height: '100%',
+          width: `${scrollProgress}%`,
+          background: 'linear-gradient(90deg, #667eea, #764ba2)',
+          transition: 'width 0.1s linear',
+          boxShadow: '0 0 10px #667eea',
+        }} />
+      </div>
+
+      <header className="sticky top-0 z-50 px-4 pt-3">
+        <div
+          className={`mx-auto flex w-full max-w-[1180px] items-center justify-between gap-6 rounded-[18px] border px-5 transition-all duration-300 ${
+            scrolled
+              ? "h-[54px] border-white/10 bg-[rgba(16,24,43,0.82)] shadow-[0_10px_28px_rgba(7,12,25,0.16),0_0_40px_rgba(102,126,234,0.1)] backdrop-blur-xl"
+              : "h-[58px] border-white/8 bg-[rgba(16,24,43,0.68)] backdrop-blur-lg"
+          }`}
+        >
         {/* Logo */}
         <Link
           href="#inicio"
@@ -111,6 +137,7 @@ export default function Navbar() {
           </Link>
         </div>
       )}
-    </header>
+      </header>
+    </>
   );
 }
