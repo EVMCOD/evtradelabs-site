@@ -381,7 +381,7 @@ export function VideoHero({ onCtaClick }: VideoHeroProps) {
   }, [])
 
   return (
-    <section className="relative w-full h-screen min-h-[700px] overflow-hidden">
+    <section className="relative w-full h-screen min-h-[700px] overflow-hidden" style={{ background: '#0d1120' }}>
       {/* Base dark gradient */}
       <div 
         className="absolute inset-0"

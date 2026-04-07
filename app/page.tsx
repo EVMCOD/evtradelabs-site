@@ -628,11 +628,13 @@ function Testimonials() {
 export default function Home() {
   return (
     <>
+      {/* Full-bleed VideoHero outside of shell */}
+      <VideoHero />
+      
       <div className="site-blue-shell relative z-10">
         <div className="site-side-glow site-side-glow--left" aria-hidden="true" />
         <div className="site-side-glow site-side-glow--right" aria-hidden="true" />
         <main>
-          <VideoHero />
           <SocialProof />
           <Testimonials />
           <MQL5Validation />
