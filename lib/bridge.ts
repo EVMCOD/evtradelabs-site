@@ -11,6 +11,10 @@ export interface Account {
   marginLevel: number
   server: string
   type: 'master' | 'sleeve' | 'signal'
+  riskProfile: 'conservative' | 'moderate' | 'aggressive'
+  maxRiskPercent: number // Max risk per trade (%)
+  targetRR: number // Target Risk:Reward ratio
+  maxDailyLoss: number // Max daily loss in %
 }
 
 export interface Position {
@@ -62,6 +66,10 @@ const MOCK_ACCOUNTS: Account[] = [
     marginLevel: 2002.76,
     server: 'MetaQuotes-Demo',
     type: 'master',
+    riskProfile: 'moderate',
+    maxRiskPercent: 2,
+    targetRR: 2,
+    maxDailyLoss: 5,
   },
   {
     login: '87654321',
@@ -73,6 +81,10 @@ const MOCK_ACCOUNTS: Account[] = [
     marginLevel: 2076.31,
     server: 'MetaQuotes-Demo',
     type: 'sleeve',
+    riskProfile: 'conservative',
+    maxRiskPercent: 1,
+    targetRR: 3,
+    maxDailyLoss: 3,
   },
   {
     login: '87654322',
@@ -84,6 +96,10 @@ const MOCK_ACCOUNTS: Account[] = [
     marginLevel: 2008.19,
     server: 'MetaQuotes-Demo',
     type: 'sleeve',
+    riskProfile: 'aggressive',
+    maxRiskPercent: 3,
+    targetRR: 2,
+    maxDailyLoss: 7,
   },
   {
     login: '87654323',
@@ -95,6 +111,10 @@ const MOCK_ACCOUNTS: Account[] = [
     marginLevel: 2830.45,
     server: 'MetaQuotes-Demo',
     type: 'signal',
+    riskProfile: 'moderate',
+    maxRiskPercent: 1.5,
+    targetRR: 2,
+    maxDailyLoss: 4,
   },
 ]
 
