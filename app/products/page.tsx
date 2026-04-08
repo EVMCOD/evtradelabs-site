@@ -5,14 +5,14 @@ import Image from "next/image";
 export const metadata: Metadata = {
   title: "Productos — EV Trading Labs",
   description:
-    "Sistemas de trading, Asesores Expertos, indicadores y herramientas de gestión del riesgo para MetaTrader 5.",
+    "Sistemas de trading, Asesores Expertos, herramientas de gestión del riesgo y replicación de cuentas para MetaTrader 5.",
 };
 
 const PRODUCTS = [
   {
     slug: "master-of-liquidity",
     name: "Master of Liquidity",
-    tagline: "Arquitectura multi-estrategia premium",
+    tagline: "Arquitectura multi-estrategia",
     description:
       "8 estrategias dentro de una sola arquitectura. Diseñado para traders que valoran la calidad de ejecución, la estructura y la consistencia sobre el ruido.",
     price: 249,
@@ -20,6 +20,7 @@ const PRODUCTS = [
     tier: "Pro / Lifetime",
     badge: "Destacado",
     badgeColor: "#667eea",
+    icon: "🎯",
     features: [
       "8 estrategias activas",
       "Gestión de riesgo avanzada",
@@ -27,102 +28,66 @@ const PRODUCTS = [
       "Actualizaciones de por vida",
       "Soporte prioritario",
     ],
-    image: "/products/mol-hero.png",
   },
   {
-    slug: "ev-quant-lab",
-    name: "EV Quant Lab",
-    tagline: "Suite de indicadores cuantitativos",
+    slug: "local-app",
+    name: "Local App",
+    tagline: "Tu entorno de trading en local",
     description:
-      "Conjunto de indicadores diseñados para análisis cuantitativo, detección de patrones y toma de decisiones basada en datos.",
-    price: 149,
-    currency: "EUR",
-    tier: "Studio License",
-    badge: null,
-    badgeColor: null,
-    features: [
-      "15+ indicadores",
-      "Alertas en tiempo real",
-      "Plantillas para TradingView",
-      "Backtesting integrado",
-    ],
-    image: "/products/quant-lab.png",
-  },
-  {
-    slug: "risk-manager-pro",
-    name: "Risk Manager Pro",
-    tagline: "Protección de capital automatizada",
-    description:
-      "Stop loss dinámicos, take profit inteligente y límites de exposición personalizables. Protege tu capital automáticamente.",
+      "Aplicación local para gestionar posiciones, trackear rendimiento y centralizar toda tu operativa MT5 desde un solo lugar.",
     price: 79,
     currency: "EUR",
     tier: "Core Access",
     badge: null,
     badgeColor: null,
+    icon: "💻",
     features: [
-      "Stop loss dinámico",
-      "Límites de exposición",
-      "Alertas de riesgo",
-      "Panel de control",
+      "Gestión de posiciones",
+      "Dashboard de rendimiento",
+      "Alertas y notificaciones",
+      "Sincronización MT5",
+      "Datos en local (sin cloud)",
     ],
-    image: "/products/risk-pro.png",
   },
   {
-    slug: "multi-signal-engine",
-    name: "Multi-Signal Engine",
-    tagline: "Señales multi-timeframe",
+    slug: "replicador",
+    name: "Replicador",
+    tagline: "Replicación de cuentas en tiempo real",
     description:
-      "Agrega señales de múltiples timeframe y fuentes en un solo dashboard. Decisiones más informadas, menos ruido.",
-    price: 199,
+      "Copias operaciones de una cuenta master a múltiples cuentas follower en tiempo real. Control total de ratios, riesgo y filtros.",
+    price: 149,
     currency: "EUR",
-    tier: "Pro / Lifetime",
+    tier: "Studio License",
     badge: "Nuevo",
     badgeColor: "#10b981",
+    icon: "⚡",
     features: [
-      "Multi-timeframe signals",
-      "Dashboard agregado",
-      "Filtros personalizables",
-      "Integración MT5",
+      "Replicación en tiempo real",
+      "Múltiples cuentas follower",
+      "Filtros por símbolo",
+      "Control de ratio y riesgo",
+      "Dashboard de seguimiento",
     ],
-    image: "/products/signal-engine.png",
   },
   {
-    slug: "portfolio-builder",
-    name: "Portfolio Builder",
-    tagline: "Construye tu portafolio de sistemas",
+    slug: "gestor",
+    name: "Gestor",
+    tagline: "Gestión avanzada del riesgo",
     description:
-      "Herramienta para organizar, comparar y gestionar múltiples estrategias y configuraciones dentro del ecosistema EVTL.",
-    price: 299,
-    currency: "EUR",
-    tier: "Pro / Lifetime",
-    badge: "Premium",
-    badgeColor: "#f59e0b",
-    features: [
-      "Gestión multi-sistema",
-      "Backtesting comparativo",
-      "Informes de rendimiento",
-      "Exportación de datos",
-    ],
-    image: "/products/portfolio.png",
-  },
-  {
-    slug: "ev-patterns-suite",
-    name: "EV Patterns Suite",
-    tagline: "Reconocimiento de patrones avanzado",
-    description:
-      "Suite de patrones de precio para TradingView. Identifica setups de alta probabilidad con precisión algorítmica.",
-    price: 129,
+      "Stop loss dinámicos, take profit inteligente, límites de exposición y control de drawdown. Protege tu capital automáticamente.",
+    price: 99,
     currency: "EUR",
     tier: "Studio License",
     badge: null,
     badgeColor: null,
+    icon: "🛡️",
     features: [
-      "20+ patrones",
-      "Alertas configurables",
-      "Histórico de señales",
-      "Filtros de confirmación",
+      "Stop loss dinámico",
+      "Límites de exposición",
+      "Control de drawdown",
+      "Alertas de riesgo",
+      "Panel de gestión",
     ],
-    image: "/products/patterns.png",
   },
 ];
 
@@ -153,7 +118,6 @@ function ProductCard({ product, index }: { product: typeof PRODUCTS[0]; index: n
       className="reveal-card rounded-[24px] border border-white/[0.08] bg-white/[0.02] p-6 md:p-8 backdrop-blur-sm flex flex-col transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(7,12,25,0.18)] hover:border-white/[0.14]"
       style={{ animationDelay: `${index * 80}ms` }}
     >
-      {/* Badge */}
       {product.badge && (
         <div className="mb-4">
           <span
@@ -165,27 +129,11 @@ function ProductCard({ product, index }: { product: typeof PRODUCTS[0]; index: n
         </div>
       )}
 
-      {/* Product image placeholder */}
-      <div className="mb-6 h-[160px] rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center overflow-hidden">
-        <div className="text-center">
-          <div className="text-4xl mb-2">
-            {product.slug === "master-of-liquidity"
-              ? "🎯"
-              : product.slug === "ev-quant-lab"
-              ? "📊"
-              : product.slug === "risk-manager-pro"
-              ? "🛡️"
-              : product.slug === "multi-signal-engine"
-              ? "⚡"
-              : product.slug === "portfolio-builder"
-              ? "📈"
-              : "🔍"}
-          </div>
-          <div className="text-[0.75rem] text-white/20">{product.name}</div>
-        </div>
+      {/* Icon */}
+      <div className="mb-6 h-[120px] rounded-2xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center">
+        <span className="text-6xl">{product.icon}</span>
       </div>
 
-      {/* Header */}
       <div className="mb-4">
         <TierBadge tier={product.tier} />
         <h3 className="mt-3 text-[1.3rem] font-black text-white tracking-tight">
@@ -194,12 +142,10 @@ function ProductCard({ product, index }: { product: typeof PRODUCTS[0]; index: n
         <p className="mt-1 text-[0.85rem] text-white/50">{product.tagline}</p>
       </div>
 
-      {/* Description */}
       <p className="flex-1 text-[0.9rem] text-white/60 leading-relaxed mb-6">
         {product.description}
       </p>
 
-      {/* Features */}
       <ul className="space-y-2 mb-6">
         {product.features.map((feature) => (
           <li key={feature} className="flex items-center gap-2.5 text-[0.85rem] text-white/60">
@@ -209,7 +155,6 @@ function ProductCard({ product, index }: { product: typeof PRODUCTS[0]; index: n
         ))}
       </ul>
 
-      {/* Price + CTA */}
       <div className="pt-5 border-t border-white/[0.08] flex items-center justify-between gap-4">
         <div>
           <div className="text-[1.5rem] font-black text-white">{formatPrice(product.price, product.currency)}</div>
@@ -229,7 +174,6 @@ function ProductCard({ product, index }: { product: typeof PRODUCTS[0]; index: n
 export default function ProductsPage() {
   return (
     <main className="relative overflow-hidden">
-      {/* Header */}
       <section className="pt-28 pb-16 bg-transparent">
         <div className="w-full max-w-[1200px] mx-auto px-5">
           <div className="text-center max-w-[640px] mx-auto">
@@ -237,20 +181,20 @@ export default function ProductsPage() {
               Productos
             </span>
             <h1 className="text-[clamp(2.2rem,5vw,3.5rem)] font-black text-white tracking-tight leading-[1.05] mb-5">
-              Sistemas, herramientas e infraestructura
+              Herramientas para traders serios
             </h1>
             <p className="text-[1rem] text-white/55 leading-relaxed">
-              Asesores Expertos, indicadores y herramientas pensadas para traders
-              que operan con estructura, gestión del riesgo y disciplina.
+              Local App, Replicador, Gestor y Master of Liquidity. Sistemas
+              diseñados para ejecutar con estructura y gestionar el riesgo
+              correctamente.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Products grid */}
       <section className="py-8 bg-transparent">
         <div className="w-full max-w-[1200px] mx-auto px-5">
-          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
             {PRODUCTS.map((product, i) => (
               <ProductCard key={product.slug} product={product} index={i} />
             ))}
@@ -258,16 +202,15 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="py-20 bg-transparent">
         <div className="w-full max-w-[1200px] mx-auto px-5">
           <div className="rounded-[24px] border border-white/[0.08] bg-white/[0.02] p-8 md:p-12 text-center">
             <h2 className="text-[1.8rem] font-black text-white mb-4">
-              ¿No sabes por dónde empezar?
+              ¿No sabes cuál necesitas?
             </h2>
             <p className="text-white/55 max-w-[480px] mx-auto mb-8">
-              Escríbenos y te ayudamos a elegir el sistema que mejor encaje con tu
-              perfil de trading y objetivos.
+              Escríbenos y te ayudamos a elegir la herramienta que mejor encaje
+              con tu operativa y perfil de riesgo.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -277,43 +220,30 @@ export default function ProductsPage() {
                 Contactar
               </Link>
               <Link
-                href="/pricing"
+                href="/#productos"
                 className="px-6 py-3.5 rounded-xl border border-white/10 text-white/70 font-semibold hover:border-white/20 hover:text-white transition-all"
               >
-                Ver precios
+                Ver más información
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <Footer />
-    </main>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="pt-12 pb-10 border-t border-white/[0.08] bg-transparent">
-      <div className="w-full max-w-[1200px] mx-auto px-5">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <p className="text-[0.82rem] text-white/35">
-            © {new Date().getFullYear()} EV Trading Labs
-          </p>
-          <div className="flex gap-6 text-[0.82rem] text-white/35">
-            <Link href="/terms" className="hover:text-white transition-colors">
-              Términos
-            </Link>
-            <Link href="/privacy" className="hover:text-white transition-colors">
-              Privacidad
-            </Link>
-            <Link href="/refund" className="hover:text-white transition-colors">
-              Reembolso
-            </Link>
+      <footer className="pt-12 pb-10 border-t border-white/[0.08] bg-transparent">
+        <div className="w-full max-w-[1200px] mx-auto px-5">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <p className="text-[0.82rem] text-white/35">
+              © {new Date().getFullYear()} EV Trading Labs
+            </p>
+            <div className="flex gap-6 text-[0.82rem] text-white/35">
+              <Link href="/terms" className="hover:text-white transition-colors">Términos</Link>
+              <Link href="/privacy" className="hover:text-white transition-colors">Privacidad</Link>
+              <Link href="/refund" className="hover:text-white transition-colors">Reembolso</Link>
+            </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </main>
   );
 }
