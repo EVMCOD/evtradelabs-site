@@ -10,23 +10,74 @@ export const metadata: Metadata = {
 
 const PRODUCTS = [
   {
-    slug: "master-of-liquidity",
-    name: "Master of Liquidity",
-    tagline: "Arquitectura multi-estrategia",
+    slug: "ev-quant-lab",
+    name: "EV Quant Lab",
+    tagline: "Tu estación de trading cuantitativo",
     description:
-      "8 estrategias dentro de una sola arquitectura. Diseñado para traders que valoran la calidad de ejecución, la estructura y la consistencia sobre el ruido.",
-    price: 249,
+      "Construye, valida y optimiza estrategias como un profesional. Visual Strategy Builder, Backtest Engine con tick data, Genetic Algorithm, Walk-Forward Analysis, Portfolio Lab, ML Lab y más.",
+    priceMonthly: 99.99,
+    priceLifetime: 4999.99,
     currency: "EUR",
     tier: "Pro / Lifetime",
-    badge: "Destacado",
+    badge: "Herramienta profesional",
+    badgeColor: "#10b981",
+    icon: "📊",
+    features: [
+      "Visual Strategy Builder",
+      "Backtest Engine con tick data",
+      "Genetic Algorithm para discovery",
+      "Walk-Forward Analysis",
+      "Portfolio Lab",
+      "ML Lab",
+      "Advanced Execution (TWAP, VWAP...)",
+      "Risk Management completo",
+      "Live Trading (Oanda, IB, Alpaca, Binance)",
+      "100% local en tu máquina",
+      "Sin coste de datos",
+    ],
+  },
+  {
+    slug: "master-of-liquidity",
+    name: "Master of Liquidity",
+    tagline: "Sistema multi-estrategia para MT5",
+    description:
+      "8 estrategias integradas con gestión de riesgo avanzada. Diseñado para traders que valoran la calidad de ejecución, la estructura y la consistencia.",
+    priceMonthly: 48.99,
+    priceLifetime: 1199.99,
+    currency: "EUR",
+    tier: "Pro / Lifetime",
+    badge: "MT5 EA",
     badgeColor: "#667eea",
     icon: "🎯",
     features: [
-      "8 estrategias activas",
+      "8 estrategias integradas",
+      "Arquitectura multi-estrategia",
       "Gestión de riesgo avanzada",
-      "Dashboard de control",
-      "Actualizaciones de por vida",
+      "Compatible con MT5",
+      "Ejecución estructurada",
+      "Reporting de rendimiento",
       "Soporte prioritario",
+    ],
+  },
+  {
+    slug: "replicador",
+    name: "Replicador",
+    tagline: "Replicación de cuentas en tiempo real",
+    description:
+      "Copia operaciones de una cuenta master a múltiples cuentas follower. Control total de ratios, riesgo y filtros con protección de daily loss.",
+    priceMonthly: 18.99,
+    priceLifetime: null,
+    currency: "EUR",
+    tier: "Studio License",
+    badge: "Nuevo",
+    badgeColor: "#10b981",
+    icon: "⚡",
+    features: [
+      "3 cuentas MT5 (plan básico)",
+      "Replicación en tiempo real",
+      "Risk profiles por cuenta",
+      "Protección daily loss",
+      "5 cuentas (plan avanzado)",
     ],
   },
   {
@@ -34,8 +85,9 @@ const PRODUCTS = [
     name: "Local App",
     tagline: "Tu entorno de trading en local",
     description:
-      "Aplicación local para gestionar posiciones, trackear rendimiento y centralizar toda tu operativa MT5 desde un solo lugar.",
-    price: 79,
+      "Aplicación local para gestionar posiciones, trackear rendimiento y centralizar toda tu operativa. Sin cloud, todos los datos en tu máquina.",
+    priceMonthly: null,
+    priceLifetime: null,
     currency: "EUR",
     tier: "Core Access",
     badge: null,
@@ -46,47 +98,7 @@ const PRODUCTS = [
       "Dashboard de rendimiento",
       "Alertas y notificaciones",
       "Sincronización MT5",
-      "Datos en local (sin cloud)",
-    ],
-  },
-  {
-    slug: "replicador",
-    name: "Replicador",
-    tagline: "Replicación de cuentas en tiempo real",
-    description:
-      "Copias operaciones de una cuenta master a múltiples cuentas follower en tiempo real. Control total de ratios, riesgo y filtros.",
-    price: 149,
-    currency: "EUR",
-    tier: "Studio License",
-    badge: "Nuevo",
-    badgeColor: "#10b981",
-    icon: "⚡",
-    features: [
-      "Replicación en tiempo real",
-      "Múltiples cuentas follower",
-      "Filtros por símbolo",
-      "Control de ratio y riesgo",
-      "Dashboard de seguimiento",
-    ],
-  },
-  {
-    slug: "gestor",
-    name: "Gestor",
-    tagline: "Gestión avanzada del riesgo",
-    description:
-      "Stop loss dinámicos, take profit inteligente, límites de exposición y control de drawdown. Protege tu capital automáticamente.",
-    price: 99,
-    currency: "EUR",
-    tier: "Studio License",
-    badge: null,
-    badgeColor: null,
-    icon: "🛡️",
-    features: [
-      "Stop loss dinámico",
-      "Límites de exposición",
-      "Control de drawdown",
-      "Alertas de riesgo",
-      "Panel de gestión",
+      "Datos 100% en local",
     ],
   },
 ];
@@ -155,16 +167,30 @@ function ProductCard({ product, index }: { product: typeof PRODUCTS[0]; index: n
         ))}
       </ul>
 
-      <div className="pt-5 border-t border-white/[0.08] flex items-center justify-between gap-4">
-        <div>
-          <div className="text-[1.5rem] font-black text-white">{formatPrice(product.price, product.currency)}</div>
-          <div className="text-[0.75rem] text-white/30">IVA incluido</div>
-        </div>
+      <div className="pt-5 border-t border-white/[0.08] flex flex-col gap-3">
+        {product.priceMonthly && (
+          <div className="flex items-baseline justify-between">
+            <div>
+              <div className="text-[1.3rem] font-black text-white">
+                €{product.priceMonthly}
+                <span className="text-[0.8rem] font-normal text-white/40">/mes</span>
+              </div>
+              {product.priceLifetime && (
+                <div className="text-[0.78rem] text-white/30">
+                  o €{product.priceLifetime} lifetime
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+        {!product.priceMonthly && (
+          <div className="text-[1.1rem] font-bold text-white/60">Consultar precio</div>
+        )}
         <Link
           href={`/checkout?product=${product.slug}`}
-          className="px-5 py-2.5 rounded-xl bg-[#667eea] text-white font-semibold text-[0.88rem] hover:bg-[#5a7fd8] transition-colors whitespace-nowrap"
+          className="px-5 py-2.5 rounded-xl bg-[#667eea] text-white font-semibold text-[0.88rem] hover:bg-[#5a7fd8] transition-colors text-center whitespace-nowrap"
         >
-          Comprar ahora
+          {product.priceMonthly ? "Suscribirse" : "Contactar"}
         </Link>
       </div>
     </article>
@@ -194,7 +220,7 @@ export default function ProductsPage() {
 
       <section className="py-8 bg-transparent">
         <div className="w-full max-w-[1200px] mx-auto px-5">
-          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             {PRODUCTS.map((product, i) => (
               <ProductCard key={product.slug} product={product} index={i} />
             ))}
