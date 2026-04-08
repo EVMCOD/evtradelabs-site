@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Navbar from "./_components/Navbar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,6 +20,15 @@ export const metadata: Metadata = {
     locale: "es_ES",
     type: "website",
   },
+  alternates: {
+    canonical: "https://evtradelabs.com",
+    languages: {
+      "es-ES": "https://evtradelabs.com",
+      "en-GB": "https://evtradelabs.com/en-gb",
+      "en-US": "https://evtradelabs.com/en-us",
+      "x-default": "https://evtradelabs.com",
+    },
+  },
 };
 
 export default function RootLayout({
@@ -29,6 +39,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${inter.variable} scroll-smooth`}>
       <body className="bg-[#faf7f1] text-[#171717] font-sans antialiased">
+        <Navbar />
         {children}
       </body>
     </html>

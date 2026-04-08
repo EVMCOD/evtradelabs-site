@@ -1,32 +1,52 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 const navLinks = [
   { href: "#inicio", label: "Inicio" },
-  { href: "#metatrader", label: "MetaTrader 5" },
   { href: "#productos", label: "Productos" },
+  { href: "#precios", label: "Precios" },
   { href: "#comunidad", label: "Comunidad" },
   { href: "#faq", label: "FAQ" },
-  { href: "#contacto", label: "Contacto" },
+  { href: "/dashboard", label: "Dashboard" },
+];
+
+const accountMenuItems = [
+  { href: "/account", label: "Mi Cuenta", icon: "👤" },
+  { href: "/account/downloads", label: "Descargas", icon: "📥" },
+  { href: "/account/licenses", label: "Licencias", icon: "🎫" },
+  { href: "/account/purchases", label: "Compras", icon: "🛒" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 12);
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight
-      const scrolled = (window.scrollY / scrollHeight) * 100
-      setScrollProgress(scrolled)
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (window.scrollY / scrollHeight) * 100;
+      setScrollProgress(scrolled);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setAccountMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -58,86 +78,147 @@ export default function Navbar() {
               : "h-[58px] border-white/8 bg-[rgba(16,24,43,0.68)] backdrop-blur-lg"
           }`}
         >
-        {/* Logo */}
-        <Link
-          href="#inicio"
-          className="shrink-0 flex items-center"
-          aria-label="EV Trading Labs"
-        >
-          <Image
-            src="/brand/evtl-logo.png"
-            alt="EV Trading Labs"
-            width={176}
-            height={58}
-            className="h-[40px] md:h-[44px] w-auto object-contain"
-            priority
-          />
-        </Link>
+          {/* Logo */}
+          <Link
+            href="#inicio"
+            className="shrink-0 flex items-center"
+            aria-label="EV Trading Labs"
+          >
+            <Image
+              src="/brand/evtl-logo.png"
+              alt="EV Trading Labs"
+              width={176}
+              height={58}
+              className="h-[40px] md:h-[44px] w-auto object-contain"
+              priority
+            />
+          </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-6 text-[0.82rem] text-[#c3d3ec]">
-          {navLinks.map((l) => (
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center gap-6 text-[0.82rem] text-[#c3d3ec]">
+            {navLinks.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="hover:text-white transition-colors duration-150 font-medium"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* CTA with Account Dropdown */}
+          <div className="hidden lg:flex items-center gap-3" ref={dropdownRef}>
+            {/* User is logged in - show dropdown */}
+            <div style={{ position: 'relative' }}>
+              <button
+                onClick={() => setAccountMenuOpen(!accountMenuOpen)}
+                className="flex items-center gap-2 text-[0.82rem] font-medium text-[#c3d3ec] hover:text-white transition-colors px-3 py-2 rounded-lg hover:bg-white/5"
+              >
+                <span>👤</span>
+                <span>Mi Cuenta</span>
+                <span style={{ transform: accountMenuOpen ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }}>▼</span>
+              </button>
+
+              {/* Dropdown menu */}
+              {accountMenuOpen && (
+                <div 
+                  className="absolute right-0 mt-2 w-56 rounded-xl border border-white/10 bg-[rgba(16,24,43,0.98)] shadow-xl backdrop-blur-xl overflow-hidden"
+                  style={{ animation: 'fadeIn 0.2s ease-out' }}
+                >
+                  <div style={{ padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                    <div className="text-xs text-[#8da0c2]">Conectado como</div>
+                    <div className="text-sm font-medium text-white mt-1">demo@evtl.io</div>
+                  </div>
+                  <div style={{ padding: '8px' }}>
+                    {accountMenuItems.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setAccountMenuOpen(false)}
+                        className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-[#c3d3ec] hover:text-white hover:bg-white/5 transition-colors"
+                      >
+                        <span style={{ fontSize: '1rem' }}>{item.icon}</span>
+                        <span>{item.label}</span>
+                      </Link>
+                    ))}
+                  </div>
+                  <div style={{ padding: '8px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+                    <button
+                      className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-red-400 hover:bg-red-500/10 transition-colors"
+                    >
+                      <span>🚪</span>
+                      <span>Cerrar sesión</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
             <Link
-              key={l.href}
-              href={l.href}
-              className="hover:text-white transition-colors duration-150 font-medium"
+              href="#acceso"
+              className="text-[0.82rem] font-semibold px-4 py-2 rounded-full border border-white/12 bg-white/[0.05] text-white hover:bg-white/[0.1] transition-colors duration-200"
             >
-              {l.label}
+              Acceso anticipado
             </Link>
-          ))}
-        </nav>
+          </div>
 
-        {/* CTA */}
-        <div className="hidden lg:flex items-center gap-3">
-          <Link
-            href="#"
-            className="text-[0.82rem] font-medium text-[#c3d3ec] hover:text-white transition-colors"
+          {/* Mobile hamburger */}
+          <button
+            className="lg:hidden p-2 rounded-lg text-white"
+            onClick={() => setOpen(!open)}
+            aria-label="Menú"
           >
-            Iniciar sesión
-          </Link>
-          <Link
-            href="#acceso"
-            className="text-[0.82rem] font-semibold px-4 py-2 rounded-full border border-white/12 bg-white/[0.05] text-white hover:bg-white/[0.1] transition-colors duration-200"
-          >
-            Acceso anticipado
-          </Link>
+            <span className="block w-5 h-px bg-current mb-1.5" />
+            <span className="block w-5 h-px bg-current mb-1.5" />
+            <span className="block w-3.5 h-px bg-current" />
+          </button>
         </div>
 
-        {/* Mobile hamburger */}
-        <button
-          className="lg:hidden p-2 rounded-lg text-white"
-          onClick={() => setOpen(!open)}
-          aria-label="Menú"
-        >
-          <span className="block w-5 h-px bg-current mb-1.5" />
-          <span className="block w-5 h-px bg-current mb-1.5" />
-          <span className="block w-3.5 h-px bg-current" />
-        </button>
-      </div>
-
-      {/* Mobile drawer */}
-      {open && (
-        <div className="lg:hidden border-t border-white/10 bg-[rgba(15,23,42,0.96)] px-5 py-4 flex flex-col gap-1 rounded-b-[26px]">
-          {navLinks.map((l) => (
+        {/* Mobile drawer */}
+        {open && (
+          <div className="lg:hidden border-t border-white/10 bg-[rgba(15,23,42,0.96)] px-5 py-4 flex flex-col gap-1 rounded-b-[26px]">
+            {navLinks.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="py-2.5 text-[0.95rem] font-medium text-[#c3d3ec] hover:text-white border-b border-white/8 last:border-0"
+              >
+                {l.label}
+              </Link>
+            ))}
+            <div className="mt-3 pt-3 border-t border-white/10">
+              <div className="px-3 py-2 text-xs text-[#8da0c2]">Mi Cuenta</div>
+              {accountMenuItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="flex items-center gap-3 py-2.5 text-[0.95rem] font-medium text-[#c3d3ec] hover:text-white border-b border-white/8 last:border-0"
+                >
+                  <span>{item.icon}</span>
+                  <span>{item.label}</span>
+                </Link>
+              ))}
+            </div>
             <Link
-              key={l.href}
-              href={l.href}
+              href="#acceso"
               onClick={() => setOpen(false)}
-              className="py-2.5 text-[0.95rem] font-medium text-[#c3d3ec] hover:text-white border-b border-white/8 last:border-0"
+              className="mt-3 text-center text-[0.9rem] font-semibold px-4 py-3 rounded-full border border-white/10 bg-white/[0.06] text-white"
             >
-              {l.label}
+              Acceso anticipado
             </Link>
-          ))}
-          <Link
-            href="#acceso"
-            onClick={() => setOpen(false)}
-            className="mt-3 text-center text-[0.9rem] font-semibold px-4 py-3 rounded-full border border-white/10 bg-white/[0.06] text-white"
-          >
-            Acceso anticipado
-          </Link>
-        </div>
-      )}
+          </div>
+        )}
       </header>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </>
   );
 }
