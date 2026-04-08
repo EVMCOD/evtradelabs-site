@@ -1,9 +1,6 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  turbopack: {
-    root: __dirname,
-  },
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
 };
 
 export default nextConfig;
