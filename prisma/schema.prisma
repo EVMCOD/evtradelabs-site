@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Order {
+  id              String    @id @default(cuid())
+  stripeSessionId String    @unique
+  customerEmail   String
+  customerName    String?
+  country         String?
+  productSlug     String
+  productName     String
+  amount          Int
+  currency        String    @default("eur")
+  status          String    @default("pending")
+  licenseKey      String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  licenses        License[]
+}
+
+model License {
+  id                 String    @id @default(cuid())
+  key                String    @unique
+  orderId            String
+  order              Order     @relation(fields: [orderId], references: [id])
+  productSlug        String
+  productName        String
+  customerEmail      String
+  status             String    @default("active")
+  expiresAt          DateTime?
+  maxAccounts        Int       @default(1)
+  activatedAccounts  Int       @default(0)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+}
