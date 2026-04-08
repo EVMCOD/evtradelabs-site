@@ -1,0 +1,28 @@
+0 verbose cli /opt/homebrew/Cellar/node/25.8.0/bin/node /opt/homebrew/lib/node_modules/npm/bin/npm-cli.js
+1 info using npm@11.11.0
+2 info using node@v25.8.0
+3 silly config load:file:/opt/homebrew/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/.npmrc
+5 silly config load:file:/Users/enriquevaleros/.npmrc
+6 silly config load:file:/opt/homebrew/etc/npmrc
+7 verbose title npm exec rm /Users/enriquevaleros/.openclaw/exec-approvals.json
+8 verbose argv "exec" "--" "rm" "/Users/enriquevaleros/.openclaw/exec-approvals.json"
+9 verbose logfile logs-max:10 dir:/Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-07T23_59_10_633Z-
+10 verbose logfile /Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-07T23_59_10_633Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 http fetch GET 200 https://registry.npmjs.org/rm 615ms (cache miss)
+14 verbose stack Error: could not determine executable to run
+14 verbose stack     at getBinFromManifest (/opt/homebrew/lib/node_modules/npm/node_modules/libnpmexec/lib/get-bin-from-manifest.js:17:23)
+14 verbose stack     at exec (/opt/homebrew/lib/node_modules/npm/node_modules/libnpmexec/lib/index.js:211:15)
+14 verbose stack     at async Npm.exec (/opt/homebrew/lib/node_modules/npm/lib/npm.js:209:9)
+14 verbose stack     at async module.exports (/opt/homebrew/lib/node_modules/npm/lib/cli/entry.js:67:5)
+15 verbose pkgid rm@0.1.8
+16 error could not determine executable to run
+17 verbose cwd /Users/enriquevaleros/.openclaw/workspace/evtradelabs-site
+18 verbose os Darwin 25.3.0
+19 verbose node v25.8.0
+20 verbose npm  v11.11.0
+21 verbose exit 1
+22 verbose code 1
+23 error A complete log of this run can be found in: /Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-07T23_59_10_633Z-debug-0.log
