@@ -492,54 +492,146 @@ function FAQ() {
 
 /* ─── FOOTER ───────────────────────────────────────────────── */
 function Footer() {
+  const currentYear = new Date().getFullYear();
+
+  const footerLinks = {
+    Products: [
+      { href: "/products", label: "Todos los productos" },
+      { href: "/products#eas", label: "Asesores Expertos" },
+      { href: "/products#indicators", label: "Indicadores" },
+      { href: "/products#risk", label: "Gestión del riesgo" },
+      { href: "/pricing", label: "Precios" },
+    ],
+    Company: [
+      { href: "/about", label: "Sobre nosotros" },
+      { href: "/blog", label: "Blog" },
+      { href: "/affiliate", label: "Programa de afiliado" },
+      { href: "/ib", label: "IB Partners" },
+      { href: "#comunidad", label: "Comunidad" },
+    ],
+    Legal: [
+      { href: "/terms", label: "Términos y condiciones" },
+      { href: "/privacy", label: "Política de privacidad" },
+      { href: "/licenses", label: "Licencias" },
+      { href: "/refund", label: "Política de reembolso" },
+      { href: "mailto:contact@evtradelabs.com", label: "Contacto" },
+    ],
+  };
+
+  const socialLinks = [
+    {
+      name: "Instagram",
+      href: "https://www.instagram.com/evtradelabs/",
+      icon: (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M16.98 3H7.02A4.02 4.02 0 0 0 3 7.02v9.96A4.02 4.02 0 0 0 7.02 21h9.96A4.02 4.02 0 0 0 21 16.98V7.02A4.02 4.02 0 0 0 16.98 3ZM12 9.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9Zm5.4-.75a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1Zm-5.4 2.25a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" fill="currentColor"/>
+        </svg>
+      ),
+    },
+    {
+      name: "Discord",
+      href: "https://discord.gg/rUBRF875j",
+      icon: (
+        <svg width="18" height="14" viewBox="0 0 16 12" fill="none" aria-hidden="true">
+          <path d="M13.55 1.24A13.3 13.3 0 0 0 10.2.5c-.14.26-.3.6-.42.88a12.3 12.3 0 0 0-3.56 0A9.3 9.3 0 0 0 5.8.5 13.3 13.3 0 0 0 2.45 1.24C.35 4.35-.21 7.37.07 10.35A13.4 13.4 0 0 0 4.16 12c.33-.43.62-.9.87-1.39a8.7 8.7 0 0 1-1.36-.64l.33-.24a9.6 9.6 0 0 0 8 0l.33.24c-.43.25-.89.47-1.37.64.25.49.54.96.87 1.39A13.4 13.4 0 0 0 15.93 10.35C16.26 6.92 15.38 3.93 13.55 1.24zM5.34 8.5c-.77 0-1.41-.7-1.41-1.55s.62-1.56 1.41-1.56c.78 0 1.42.7 1.41 1.56 0 .85-.63 1.55-1.41 1.55zm5.32 0c-.77 0-1.41-.7-1.41-1.55s.63-1.56 1.41-1.56c.78 0 1.41.7 1.41 1.56 0 .85-.63 1.55-1.41 1.55z" fill="currentColor"/>
+        </svg>
+      ),
+    },
+    {
+      name: "TradingView",
+      href: "https://www.tradingview.com/u/EVLabs/",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M2 14l4-4 3 3 5-5 4 4v5H2v-3z" fill="currentColor" opacity="0.9"/>
+        </svg>
+      ),
+    },
+    {
+      name: "YouTube",
+      href: "https://www.youtube.com/@evtradelabs",
+      icon: (
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true">
+          <path d="M18.96 2.67A2.48 2.48 0 0 0 17.34 1.5C15.77 1.3 10 1.3 10 1.3s-5.77 0-7.34.2A2.48 2.48 0 0 0 1.04 2.67 25.8 25.8 0 0 0 .84 7.1a25.8 25.8 0 0 0 .2 4.43 2.48 2.48 0 0 0 1.62 1.17c1.57.2 7.34.2 7.34.2s5.77 0 7.34-.2a2.48 2.48 0 0 0 1.62-1.17 25.8 25.8 0 0 0 .2-4.43 25.8 25.8 0 0 0-.2-4.43zM8.28 9.68V4.37l5.76 2.65-5.76 2.66z" fill="currentColor"/>
+        </svg>
+      ),
+    },
+  ];
+
   return (
-    <footer
-      id="contacto"
-      className="pt-14 pb-10 border-t border-white/10 bg-transparent"
-    >
+    <footer id="contacto" className="pt-16 pb-10 border-t border-white/[0.08] bg-transparent">
       <div className="w-full max-w-[1200px] mx-auto px-5">
-        <div className="grid sm:grid-cols-[1fr_auto] gap-10 pb-10 border-b border-[#e5ddd4]">
+        {/* Main grid */}
+        <div className="grid sm:grid-cols-[1.5fr_repeat(3,1fr)] gap-10 pb-12 border-b border-white/[0.08]">
+          {/* Brand column */}
           <div>
-            <div className="mb-4">
+            <div className="mb-5">
               <Image
                 src="/brand/evtl-logo.png"
                 alt="EV Trading Labs"
-                width={220}
-                height={72}
-                className="h-[56px] w-auto object-contain"
+                width={180}
+                height={56}
+                className="h-[44px] w-auto object-contain"
               />
             </div>
-            <p className="text-[0.9rem] text-[#9fb2d4] max-w-[36ch] leading-relaxed m-0">
-              Trading systems, risk management and execution infrastructure for
-              serious traders.
+            <p className="text-[0.9rem] text-white/50 leading-relaxed max-w-[280px] mb-6">
+              Sistemas de trading, gestión del riesgo e infraestructura de ejecución para traders serios.
             </p>
+            {/* Social links */}
+            <div className="flex gap-3">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.03] text-white/50 transition-all duration-300 hover:border-[#667eea]/30 hover:bg-[#667eea]/10 hover:text-[#667eea] hover:-translate-y-0.5"
+                  title={social.name}
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
           </div>
-          <nav className="grid sm:grid-cols-2 gap-x-12 gap-y-2 text-[0.88rem] text-[#9fb2d4]">
-            {[
-              { href: "#productos", label: "Productos" },
-              { href: "#metatrader", label: "MetaTrader 5" },
-              { href: "#comunidad", label: "Comunidad" },
-              { href: "#acceso", label: "Acceso anticipado" },
-              { href: "#faq", label: "FAQ" },
-              { href: "mailto:contact@evtradelabs.com", label: "Contacto" },
-            ].map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className="hover:text-white transition-colors py-1"
-              >
-                {l.label}
-              </Link>
-            ))}
-          </nav>
+
+          {/* Link columns */}
+          {Object.entries(footerLinks).map(([category, links]) => (
+            <nav key={category} className="grid gap-3">
+              <h4 className="text-[0.8rem] font-bold text-white/80 uppercase tracking-wider mb-2">
+                {category}
+              </h4>
+              {links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-[0.88rem] text-white/50 hover:text-white transition-colors py-0.5"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          ))}
         </div>
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pt-8">
-          <p className="text-[0.82rem] text-[#9a9087] m-0">
-            © {new Date().getFullYear()} EV Trading Labs. Todos los derechos
-            reservados.
-          </p>
-          <p className="text-[0.82rem] text-[#9a9087] m-0">
-            contact@evtradelabs.com
+
+        {/* Bottom bar */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-8">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 text-[0.82rem] text-white/40">
+            <p className="m-0">© {currentYear} EV Trading Labs. Todos los derechos reservados.</p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 text-[0.82rem] text-white/40">
+            <a href="mailto:contact@evtradelabs.com" className="hover:text-white transition-colors">
+              contact@evtradelabs.com
+            </a>
+            <span className="hidden sm:inline">·</span>
+            <a href="/ib" className="hover:text-white transition-colors">
+              IB Partners
+            </a>
+          </div>
+        </div>
+
+        {/* IB Partners badge */}
+        <div className="mt-8 p-4 rounded-xl border border-white/[0.05] bg-white/[0.02]">
+          <p className="text-[0.78rem] text-white/35 text-center">
+            IB Partners: VT Markets · PU Prime · Vantage — Commission $8/lot + CPA
           </p>
         </div>
       </div>
