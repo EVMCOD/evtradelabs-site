@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Order {
@@ -14,7 +14,7 @@ model Order {
   customerName    String?
   country         String?
   productSlug     String
-  productName     String
+  productName    String
   amount          Int
   currency        String    @default("eur")
   status          String    @default("pending")
@@ -35,7 +35,7 @@ model License {
   status             String    @default("active")
   expiresAt          DateTime?
   maxAccounts        Int       @default(1)
-  activatedAccounts  Int       @default(0)
+  activatedAccounts   Int       @default(0)
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
 }
