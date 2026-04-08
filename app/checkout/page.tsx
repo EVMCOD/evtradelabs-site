@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { loadStripe } from '@stripe/stripe-js';
+import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || 'pk_test_placeholder');
 
@@ -42,9 +43,7 @@ function OrderSummary({ slug, quantity = 1 }: { slug: string; quantity?: number 
             <div className="font-semibold text-white text-[0.95rem]">{product.name}</div>
             <div className="text-[0.78rem] text-white/40 mt-0.5">Suscripción mensual</div>
           </div>
-          <div className="text-white font-semibold shrink-0">
-            {formatCurrency(product.monthly)}
-          </div>
+          <div className="text-white font-semibold shrink-0">{formatCurrency(product.monthly)}</div>
         </div>
       </div>
       <div className="border-t border-white/[0.08] pt-4 space-y-2">
@@ -62,6 +61,108 @@ function OrderSummary({ slug, quantity = 1 }: { slug: string; quantity?: number 
         </div>
       </div>
     </div>
+  );
+}
+
+function PaymentForm({ formData, onBack, onSuccess }: { formData: FormData; onBack: () => void; onSuccess: () => void }) {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!stripe || !elements) return;
+    setLoading(true);
+    setError('');
+
+    const cardElement = elements.getElement(CardElement);
+    if (!cardElement) {
+      setError('Card element not found');
+      setLoading(false);
+      return;
+    }
+
+    // Create payment method first
+    const { error: pmError, paymentMethod } = await stripe.createPaymentMethod({
+      type: 'card',
+      card: cardElement,
+      billing_details: { name: formData.name, email: formData.email },
+    });
+
+    if (pmError) {
+      setError(pmError.message || 'Error with card');
+      setLoading(false);
+      return;
+    }
+
+    // Confirm payment with the payment method
+    const { error: piError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: paymentMethod.id,
+    });
+
+    if (piError) {
+      setError(piError.message || 'Payment failed');
+    } else if (paymentIntent?.status === 'succeeded') {
+      onSuccess();
+    }
+    setLoading(false);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="flex items-center gap-3 mb-4">
+        <button type="button" onClick={onBack} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-white transition-all">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
+        <span className="text-[0.88rem] text-white/50">Volver</span>
+      </div>
+
+      <div className="p-4 rounded-xl bg-[#667eea]/10 border border-[#667eea]/20 text-[#667eea] text-[0.88rem]">
+        Pago seguro con Stripe · Tus datos de tarjeta nunca tocan nuestro servidor
+      </div>
+
+      {error && (
+        <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-[0.88rem]">
+          {error}
+        </div>
+      )}
+
+      {/* Stripe Card Element */}
+      <div>
+        <label className="block text-[0.82rem] font-semibold text-white/70 mb-2">Datos de tarjeta</label>
+        <div className="p-4 rounded-xl bg-white/[0.05] border border-white/10">
+          <CardElement
+            options={{
+              style: {
+                base: {
+                  fontSize: '16px',
+                  color: '#ffffff',
+                  '::placeholder': { color: 'rgba(255,255,255,0.25)' },
+                  iconColor: '#667eea',
+                },
+                invalid: { color: '#ef4444' },
+              },
+            }}
+          />
+        </div>
+      </div>
+
+      <button type="submit" disabled={!stripe || loading}
+        className="w-full py-4 rounded-xl bg-[#667eea] text-white font-bold text-[1rem] hover:bg-[#5a7fd8] transition-colors flex items-center justify-center gap-2 disabled:opacity-60">
+        {loading ? 'Procesando pago...' : 'Pagar ahora'}
+      </button>
+
+      <div className="flex items-center justify-center gap-3 text-[0.82rem] text-white/40">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.2"/>
+          <path d="M1 6h14" stroke="currentColor" strokeWidth="1.2"/>
+        </svg>
+        <span>Pago 100% seguro</span>
+      </div>
+    </form>
   );
 }
 
@@ -119,29 +220,6 @@ export default function CheckoutPage() {
       }
     } catch (err) {
       setErrors({ email: 'Error de conexión' });
-    }
-    setLoading(false);
-  };
-
-  const handlePayment = async () => {
-    setLoading(true);
-    const stripe = await stripePromise;
-    if (!stripe || !clientSecret) {
-      setErrors({ email: 'Stripe no disponible' });
-      setLoading(false);
-      return;
-    }
-
-    const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        billing_details: { name: form.name, email: form.email },
-      },
-    });
-
-    if (error) {
-      setErrors({ email: error.message || 'Error en el pago' });
-    } else if (paymentIntent?.status === 'succeeded') {
-      setStep('success');
     }
     setLoading(false);
   };
@@ -231,41 +309,9 @@ export default function CheckoutPage() {
                 </button>
               </form>
             ) : (
-              <div className="space-y-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <button onClick={() => setStep('form')} className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-white transition-all">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </button>
-                  <span className="text-[0.88rem] text-white/50">Volver</span>
-                </div>
-
-                <div className="p-4 rounded-xl bg-[#667eea]/10 border border-[#667eea]/20 text-[#667eea] text-[0.88rem]">
-                  Pago seguro con Stripe · Tus datos de tarjeta nunca tocan nuestro servidor
-                </div>
-
-                {errors.email && (
-                  <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-[0.88rem]">
-                    {errors.email}
-                  </div>
-                )}
-
-                <button onClick={handlePayment} disabled={loading}
-                  className="w-full py-4 rounded-xl bg-[#667eea] text-white font-bold text-[1rem] hover:bg-[#5a7fd8] transition-colors flex items-center justify-center gap-2 disabled:opacity-60">
-                  {loading ? 'Procesando pago...' : 'Pagar ahora'}
-                </button>
-
-                <div className="text-center">
-                  <div className="flex items-center justify-center gap-3 text-[0.82rem] text-white/40">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.2"/>
-                      <path d="M1 6h14" stroke="currentColor" strokeWidth="1.2"/>
-                    </svg>
-                    <span>Pago 100% seguro</span>
-                  </div>
-                </div>
-              </div>
+              <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'night' } }}>
+                <PaymentForm formData={form} onBack={() => setStep('form')} onSuccess={() => setStep('success')} />
+              </Elements>
             )}
           </div>
 
