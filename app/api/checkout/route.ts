@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_placeholder", {
-  apiVersion: "2026-03-25.dahlia",
-});
-
 const PRODUCT_PRICES: Record<string, { amount: number; name: string }> = {
   "ev-quant-lab": { amount: 9999, name: "EV Quant Lab (mensual)" },
   "master-of-liquidity": { amount: 4899, name: "Master of Liquidity (mensual)" },
@@ -26,6 +22,10 @@ export async function POST(request: Request) {
     }
 
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_placeholder", {
+      apiVersion: "2026-03-25.dahlia",
+    });
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],

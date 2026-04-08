@@ -1,11 +1,26 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { prisma } from "@/lib/prisma";
-import { sendLicenseEmail } from "@/lib/email";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_placeholder", {
-  apiVersion: "2026-03-25.dahlia",
-});
+let stripeInstance: Stripe | null = null;
+
+function getStripe(): Stripe {
+  if (!stripeInstance) {
+    stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_placeholder", {
+      apiVersion: "2026-03-25.dahlia",
+    });
+  }
+  return stripeInstance;
+}
+
+let prisma: any = null;
+
+async function getPrisma() {
+  if (!prisma) {
+    const { PrismaClient } = await import("@prisma/client");
+    prisma = new PrismaClient({ log: ["error"] });
+  }
+  return prisma;
+}
 
 function generateLicenseKey(productSlug: string): string {
   const prefix = productSlug.slice(0, 4).toUpperCase();
@@ -22,6 +37,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ received: true });
   }
 
+  const stripe = getStripe();
   let event: Stripe.Event;
 
   try {
@@ -49,9 +65,10 @@ export async function POST(request: Request) {
     console.log("License Key:", licenseKey);
     console.log("=========================");
 
-    // Save order to database
     try {
-      const order = await prisma.order.create({
+      const db = await getPrisma();
+      
+      const order = await db.order.create({
         data: {
           stripeSessionId: orderId,
           customerEmail: customerEmail || "",
@@ -65,8 +82,7 @@ export async function POST(request: Request) {
         },
       });
 
-      // Create license
-      await prisma.license.create({
+      await db.license.create({
         data: {
           key: licenseKey,
           orderId: order.id,
@@ -79,7 +95,8 @@ export async function POST(request: Request) {
 
       console.log("Order saved to DB:", order.id);
 
-      // Send email with license key
+      // Send email
+      const { sendLicenseEmail } = await import("@/lib/email");
       await sendLicenseEmail({
         to: customerEmail || "",
         customerName: customerName || "Customer",
@@ -96,14 +113,14 @@ export async function POST(request: Request) {
     const session = event.data.object as Stripe.Checkout.Session;
     console.log("Checkout session expired:", session.id);
     
-    // Mark order as expired
     try {
-      await prisma.order.update({
+      const db = await getPrisma();
+      await db.order.update({
         where: { stripeSessionId: session.id },
         data: { status: "expired" },
       });
     } catch (e) {
-      // Session might not exist in DB yet
+      // Session might not exist
     }
   }
 

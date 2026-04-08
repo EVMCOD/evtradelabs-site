@@ -1,5 +1,16 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+
+let prisma: any = null;
+
+async function getPrisma() {
+  if (!prisma) {
+    const { PrismaClient } = await import("@prisma/client");
+    prisma = new PrismaClient({
+      log: ["error"],
+    });
+  }
+  return prisma;
+}
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -10,7 +21,8 @@ export async function GET(request: Request) {
   }
 
   try {
-    const order = await prisma.order.findUnique({
+    const db = await getPrisma();
+    const order = await db.order.findUnique({
       where: { stripeSessionId: sessionId },
       include: { licenses: true },
     });
@@ -25,7 +37,7 @@ export async function GET(request: Request) {
       licenseKey: order.licenseKey,
       licenses: order.licenses,
     });
-  } catch (err) {
+  } catch (err: any) {
     console.error("License lookup error:", err);
     return NextResponse.json({ error: "Database error" }, { status: 500 });
   }
