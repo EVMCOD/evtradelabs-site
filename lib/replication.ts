@@ -1,6 +1,8 @@
 // MT5 Replication Engine for EV Trading Labs
 // Handles position mirroring between master and sleeve accounts
 
+import type { Position } from './bridge'
+
 export interface ReplicationConfig {
   masterLogin: string
   sleeveLogin: string
