@@ -51,13 +51,8 @@ export default function Navbar() {
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="flex items-center justify-between h-[68px]">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#667eea] to-[#764ba2] flex items-center justify-center">
-              <span className="text-white font-black text-sm">EV</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-white/90 font-bold text-[0.9rem] tracking-wide">EV TRADING LABS</span>
-            </div>
+          <Link href="/" className="flex items-center gap-4">
+            <span className="text-white/80 font-black text-[1.05rem] tracking-wider">EV TRADING LABS</span>
           </Link>
 
           {/* Desktop Nav */}
