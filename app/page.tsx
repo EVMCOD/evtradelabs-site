@@ -226,16 +226,25 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="space-y-0 glass-strong rounded-2xl p-6">
+          <div className="space-y-0">
             {[
-              { q: "¿Necesito experiencia previa?", a: "No. Cada producto incluye documentación y soporte para empezar." },
-              { q: "¿Funciona con MT5?", a: "Sí. Todos nuestros sistemas son para MetaTrader 5." },
-              { q: "¿Puedo probar antes de comprar?", a: "Sí. Dispones de versiones demo para evaluar." },
-              { q: "¿Cómo recibo mi licencia?", a: "Automáticamente por email tras el pago." },
+              { q: "¿Necesito experiencia previa?", a: "No. Cada producto incluye documentación detallada y soporte para empezar desde cero." },
+              { q: "¿Funciona con MT5?", a: "Sí. Todos nuestros sistemas sonpara MetaTrader 5, la plataforma más usada por traders profesionales." },
+              { q: "¿Puedo probar antes de comprar?", a: "Sí. Dispones de versiones demo para evaluar cada producto sin compromiso." },
+              { q: "¿Cómo recibo mi licencia?", a: "Automáticamente por email tras el pago. Recibirás tus credenciales al instante." },
+              { q: "¿Ofrecéis soporte?", a: "Sí. Soporte por email y comunidad privada para todos los usuarios." },
             ].map((faq, i) => (
-              <div key={i} className="py-5 border-b border-white/[0.06] last:border-0">
-                <h3 className="font-bold text-[0.95rem] mb-2">{faq.q}</h3>
-                <p className="text-white/45 text-[0.88rem]">{faq.a}</p>
+              <div 
+                key={i} 
+                className="group py-5 border-b border-[#a78bfa]/20 last:border-0 cursor-pointer"
+              >
+                <h3 className="font-bold text-[0.95rem] text-white/70 group-hover:text-white transition-colors duration-200 flex items-center gap-2">
+                  <span className="text-[#a78bfa] text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">▸</span>
+                  {faq.q}
+                </h3>
+                <p className="text-white/40 text-[0.88rem] leading-relaxed max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-300 mt-0 group-hover:mt-2">
+                  {faq.a}
+                </p>
               </div>
             ))}
           </div>
