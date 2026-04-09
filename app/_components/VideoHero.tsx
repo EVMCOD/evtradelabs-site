@@ -106,16 +106,8 @@ export function VideoHero() {
 
       {/* Content */}
       <div className="relative z-10 max-w-[1200px] mx-auto px-5 text-center">
-        {/* Badge */}
-        <div className="mb-8 animate-fade-in-up opacity-0" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
-          <span className="inline-flex items-center gap-2 text-[0.7rem] font-bold tracking-[0.25em] uppercase text-[#667eea] px-5 py-2.5 rounded-full border border-[#667eea]/30 bg-[#667eea]/10 backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            Sistema activo
-          </span>
-        </div>
-
         {/* Headline */}
-        <h1 className="text-[clamp(2.8rem,8vw,5.5rem)] font-black tracking-tight leading-[1.0] mb-6 animate-fade-in-up opacity-0" style={{ animationDelay: '250ms', animationFillMode: 'forwards' }}>
+        <h1 className="text-[clamp(2.8rem,8vw,5.5rem)] font-black tracking-tight leading-[1.0] mb-6 animate-fade-in-up opacity-0" style={{ animationDelay: '150ms', animationFillMode: 'forwards' }}>
           <span className="block bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent">
             Trading automatizado
           </span>
