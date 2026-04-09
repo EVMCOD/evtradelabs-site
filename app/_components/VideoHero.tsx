@@ -3,6 +3,52 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
+function useCountUp(target: number, duration: number, started: boolean) {
+  const [count, setCount] = useState(0);
+  const frameRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (!started) return;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * target));
+      if (progress < 1) frameRef.current = requestAnimationFrame(tick);
+    };
+    frameRef.current = requestAnimationFrame(tick);
+    return () => { if (frameRef.current) cancelAnimationFrame(frameRef.current); };
+  }, [target, duration, started]);
+
+  return count;
+}
+
+function AnimatedStat({ value, label }: { value: string; label: string }) {
+  const [started, setStarted] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setStarted(true); }, { threshold: 0.5 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+
+  const num = parseInt(value.replace(/\D/g, ''));
+  const suffix = value.replace(/[\d]/g, '');
+  const count = useCountUp(num, 1800, started);
+
+  return (
+    <div ref={ref} className="text-center">
+      <div className="text-[2.2rem] font-black text-white mb-1">
+        {count.toLocaleString()}{suffix}
+      </div>
+      <div className="text-[0.75rem] text-white/35">{label}</div>
+    </div>
+  );
+}
+
 function MatrixColumn({ x, charSize }: { x: number; charSize: number }) {
   const [chars, setChars] = useState<number[]>([]);
   const [head, setHead] = useState(0);
@@ -139,16 +185,9 @@ export function VideoHero() {
 
         {/* Stats */}
         <div className="grid grid-cols-3 gap-6 max-w-[500px] mx-auto animate-fade-in-up opacity-0" style={{ animationDelay: '700ms', animationFillMode: 'forwards' }}>
-          {[
-            { value: '5000+', label: 'Traders activos' },
-            { value: '8', label: 'Estrategias' },
-            { value: '24/7', label: 'Monitorización' },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="text-[2.2rem] font-black text-white mb-1">{stat.value}</div>
-              <div className="text-[0.75rem] text-white/35">{stat.label}</div>
-            </div>
-          ))}
+          <AnimatedStat value="5000+" label="Traders activos" />
+          <AnimatedStat value="8" label="Estrategias" />
+          <AnimatedStat value="24/7" label="Monitorización" />
         </div>
       </div>
 
