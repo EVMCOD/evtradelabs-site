@@ -50,28 +50,65 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-5">
+          <div className="grid md:grid-cols-3 gap-6">
             {[
               {
                 title: "Ejecución precisa",
-                desc: "Elimina emociones de tu operativa. Operaciones ejecutadas con precisión milimétrica.",
-                icon: "🎯",
+                desc: "Elimina emociones de tu operativa. Operaciones ejecutadas con precisión milimétrica, sin retrasos ni slippage.",
+                accent: "from-[#667eea] to-[#8b7cf7]",
+                icon: (
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <circle cx="14" cy="14" r="12" stroke="currentColor" strokeWidth="2"/>
+                    <circle cx="14" cy="14" r="6" stroke="currentColor" strokeWidth="2"/>
+                    <circle cx="14" cy="14" r="2" fill="currentColor"/>
+                    <path d="M14 2v4M14 22v4M2 14h4M22 14h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  </svg>
+                ),
               },
               {
                 title: "Gestión del riesgo",
-                desc: "Protección automática de capital con stops inteligentes y límites de exposición.",
-                icon: "🛡️",
+                desc: "Protección automática de capital con stops inteligentes, límites de exposición y control de drawdown en tiempo real.",
+                accent: "from-[#f59e0b] to-[#f97316]",
+                icon: (
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <path d="M14 3L4 9v10l10 6 10-6V9L14 3z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
+                    <path d="M14 3v13M4 9l10 6 10-6" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
+                  </svg>
+                ),
               },
               {
                 title: "Multi-cuenta",
-                desc: "Gestiona múltiples cuentas desde un solo dashboard con replicación en tiempo real.",
-                icon: "⚡",
+                desc: "Gestiona múltiples cuentas desde un solo dashboard. Replicación en tiempo real, sincronizada y sin latencia.",
+                accent: "from-[#10b981] to-[#34d399]",
+                icon: (
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <rect x="4" y="8" width="8" height="12" rx="2" stroke="currentColor" strokeWidth="2"/>
+                    <rect x="16" y="8" width="8" height="12" rx="2" stroke="currentColor" strokeWidth="2"/>
+                    <path d="M8 14h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <path d="M20 11v10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  </svg>
+                ),
               },
-            ].map((item) => (
-              <div key={item.title} className="rounded-2xl p-8 transition-all group glass-card">
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">{item.icon}</div>
-                <h3 className="text-[1.05rem] font-bold mb-2">{item.title}</h3>
-                <p className="text-white/45 text-[0.88rem] leading-relaxed">{item.desc}</p>
+            ].map((item, i) => (
+              <div 
+                key={item.title} 
+                className="group relative rounded-2xl p-8 overflow-hidden transition-all duration-300 hover:-translate-y-1 animate-fade-in-up" 
+                style={{ animationDelay: `${i * 120}ms`, animationFillMode: 'forwards', opacity: 0 }}
+              >
+                {/* Gradient accent */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${item.accent} opacity-[0.05] group-hover:opacity-[0.09] transition-opacity duration-300`} />
+                <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${item.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                
+                {/* Icon */}
+                <div className={`relative mb-6 w-14 h-14 rounded-2xl bg-gradient-to-br ${item.accent} flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                  {item.icon}
+                </div>
+                
+                {/* Content */}
+                <div className="relative">
+                  <h3 className="text-[1.15rem] font-bold text-white mb-3">{item.title}</h3>
+                  <p className="text-white/50 text-[0.88rem] leading-relaxed">{item.desc}</p>
+                </div>
               </div>
             ))}
           </div>
