@@ -55,7 +55,7 @@ export default function HomePage() {
               {
                 title: "Ejecución precisa",
                 desc: "Elimina emociones de tu operativa. Operaciones ejecutadas con precisión milimétrica, sin retrasos ni slippage.",
-                accent: "from-[#667eea] to-[#8b7cf7]",
+                accent: "from-[#a78bfa] to-[#667eea]",
                 icon: (
                   <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
                     <circle cx="14" cy="14" r="12" stroke="currentColor" strokeWidth="2"/>
@@ -68,7 +68,7 @@ export default function HomePage() {
               {
                 title: "Gestión del riesgo",
                 desc: "Protección automática de capital con stops inteligentes, límites de exposición y control de drawdown en tiempo real.",
-                accent: "from-[#f59e0b] to-[#f97316]",
+                accent: "from-[#a78bfa] to-[#667eea]",
                 icon: (
                   <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
                     <path d="M14 3L4 9v10l10 6 10-6V9L14 3z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
@@ -79,7 +79,7 @@ export default function HomePage() {
               {
                 title: "Multi-cuenta",
                 desc: "Gestiona múltiples cuentas desde un solo dashboard. Replicación en tiempo real, sincronizada y sin latencia.",
-                accent: "from-[#10b981] to-[#34d399]",
+                accent: "from-[#a78bfa] to-[#667eea]",
                 icon: (
                   <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
                     <rect x="4" y="8" width="8" height="12" rx="2" stroke="currentColor" strokeWidth="2"/>
@@ -135,7 +135,8 @@ export default function HomePage() {
                 tag: "QUANT RESEARCH",
                 desc: "Plataforma quant para construir, validar y optimizar estrategias. Cloud + local. Backtesting, optimizador de parámetros y análisis Monte Carlo.",
                 prices: [{ label: "Mensual", price: "€99.99/mes" }, { label: "Lifetime", price: "€399" }],
-                accent: "from-[#667eea] to-[#8b7cf7]"
+                accent: "from-[#a78bfa] to-[#667eea]",
+                accentText: "text-[#a78bfa]"
               },
               { 
                 name: "Master of Liquidity", 
@@ -143,7 +144,8 @@ export default function HomePage() {
                 tag: "MT5 EA",
                 desc: "Asesor Experto para MetaTrader 5. 8 estrategias de liquidez integradas con gestión de riesgo avanzada. Listo para producción.",
                 prices: [{ label: "Mensual", price: "€48.99/mes" }, { label: "Lifetime", price: "€199" }],
-                accent: "from-[#f59e0b] to-[#f97316]"
+                accent: "from-[#a78bfa] to-[#667eea]",
+                accentText: "text-[#a78bfa]"
               },
               { 
                 name: "Replicador", 
@@ -151,7 +153,8 @@ export default function HomePage() {
                 tag: "COPY TRADING",
                 desc: "Replicación de cuentas master a múltiples followers en tiempo real. Control total de lotajes, filtros por instrumento y gestión centralizada.",
                 prices: [{ label: "Mensual", price: "€18.99/mes" }, { label: "Lifetime", price: "€79" }],
-                accent: "from-[#10b981] to-[#34d399]"
+                accent: "from-[#a3e635] to-[#84cc16]",
+                accentText: "text-[#a3e635]"
               },
             ].map((p, i) => (
               <div 
@@ -165,7 +168,7 @@ export default function HomePage() {
                 
                 {/* Tag */}
                 <div className="relative mb-5">
-                  <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[0.65rem] font-bold tracking-[0.15em] uppercase bg-gradient-to-r ${p.accent} text-white`}>
+                  <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[0.65rem] font-bold tracking-[0.15em] uppercase bg-gradient-to-r ${p.accent} text-[#0a0a0f]`}>
                     {p.tag}
                   </span>
                 </div>
@@ -180,7 +183,7 @@ export default function HomePage() {
                     {p.prices.map((pr) => (
                       <div key={pr.label} className="flex items-center justify-between">
                         <span className="text-white/40 text-[0.8rem]">{pr.label}</span>
-                        <span className="font-bold text-white">{pr.price}</span>
+                        <span className={`font-bold ${p.accentText}`}>{pr.price}</span>
                       </div>
                     ))}
                   </div>
@@ -188,7 +191,7 @@ export default function HomePage() {
                   {/* CTA */}
                   <Link 
                     href={`/products#${p.slug}`} 
-                    className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r ${p.accent} text-white text-[0.85rem] font-semibold hover:opacity-90 transition-opacity`}
+                    className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r ${p.accent} text-[#0a0a0f] text-[0.85rem] font-bold hover:opacity-90 transition-opacity`}
                   >
                     <span>Ver producto</span>
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
