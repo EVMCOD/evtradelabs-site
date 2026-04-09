@@ -157,10 +157,7 @@ export default function HomePage() {
                 style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'forwards', opacity: 0 }}
               >
                 {/* Animated lime border */}
-                <div className="absolute inset-0 rounded-2xl overflow-hidden">
-                  <div className="absolute inset-0 bg-[#0a0a0f]" />
-                  <div className="absolute inset-[-2px] rounded-2xl animated-border" />
-                </div>
+                <div className="absolute inset-0 rounded-2xl animated-border" />
                 
                 {/* Glass card */}
                 <div className="relative rounded-2xl p-8 h-full overflow-hidden backdrop-blur-2xl"
@@ -168,7 +165,7 @@ export default function HomePage() {
                     background: 'rgba(255,255,255,0.03)',
                     backdropFilter: 'blur(40px)',
                     WebkitBackdropFilter: 'blur(40px)',
-                    border: '1px solid rgba(255,255,255,0.08)',
+                    border: '1px solid rgba(255,255,255,0.06)',
                     boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)',
                   }}
                 >
