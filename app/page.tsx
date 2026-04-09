@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Navbar from "./_components/Navbar";
 import { VideoHero } from "./_components/VideoHero";
 import "./animations.css";
 
@@ -21,7 +20,6 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <main className="relative overflow-hidden bg-[#0a0a0f] text-white min-h-screen">
-      <Navbar />
       <VideoHero />
 
       {/* Trust logos */}
