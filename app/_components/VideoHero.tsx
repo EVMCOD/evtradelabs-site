@@ -187,7 +187,10 @@ export function VideoHero() {
         <div className="grid grid-cols-3 gap-6 max-w-[500px] mx-auto animate-fade-in-up opacity-0" style={{ animationDelay: '700ms', animationFillMode: 'forwards' }}>
           <AnimatedStat value="5000+" label="Traders activos" />
           <AnimatedStat value="8" label="Estrategias" />
-          <AnimatedStat value="24/7" label="Monitorización" />
+          <div className="text-center">
+            <div className="text-[2.2rem] font-black text-white mb-1">24/7</div>
+            <div className="text-[0.75rem] text-white/35">Monitorización</div>
+          </div>
         </div>
       </div>
 
