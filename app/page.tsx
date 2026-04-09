@@ -127,76 +127,70 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { 
                 name: "EV Quant Lab", 
                 slug: "ev-quant-lab", 
-                desc: "Construye, valida y optimiza estrategias quant como un profesional.",
-                price: "€99.99",
-                period: "/mes",
+                tag: "QUANT RESEARCH",
+                desc: "Plataforma quant para construir, validar y optimizar estrategias. Cloud + local. Backtesting, optimizador de parámetros y análisis Monte Carlo.",
+                prices: [{ label: "Mensual", price: "€99.99/mes" }, { label: "Lifetime", price: "€399" }],
                 accent: "from-[#667eea] to-[#8b7cf7]"
               },
               { 
                 name: "Master of Liquidity", 
                 slug: "master-of-liquidity", 
-                desc: "8 estrategias de liquidez con gestión de riesgo avanzada integrada.",
-                price: "€48.99",
-                period: "/mes",
+                tag: "MT5 EA",
+                desc: "Asesor Experto para MetaTrader 5. 8 estrategias de liquidez integradas con gestión de riesgo avanzada. Listo para producción.",
+                prices: [{ label: "Mensual", price: "€48.99/mes" }, { label: "Lifetime", price: "€199" }],
                 accent: "from-[#f59e0b] to-[#f97316]"
               },
               { 
                 name: "Replicador", 
                 slug: "replicador", 
-                desc: "Replicación de cuentas master a múltiples followers en tiempo real.",
-                price: "€18.99",
-                period: "/mes",
+                tag: "COPY TRADING",
+                desc: "Replicación de cuentas master a múltiples followers en tiempo real. Control total de lotajes, filtros por instrumento y gestión centralizada.",
+                prices: [{ label: "Mensual", price: "€18.99/mes" }, { label: "Lifetime", price: "€79" }],
                 accent: "from-[#10b981] to-[#34d399]"
-              },
-              { 
-                name: "Local App", 
-                slug: "local-app", 
-                desc: "Tu entorno de trading completo en local, sin dependencias cloud.",
-                price: "€79",
-                period: "",
-                accent: "from-[#ec4899] to-[#f472b6]"
               },
             ].map((p, i) => (
               <div 
                 key={p.slug} 
-                className="group relative rounded-2xl p-7 overflow-hidden transition-all duration-300 hover:-translate-y-1 animate-fade-in-up" 
+                className="group relative rounded-2xl p-8 overflow-hidden transition-all duration-300 hover:-translate-y-1 animate-fade-in-up" 
                 style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'forwards', opacity: 0 }}
               >
                 {/* Gradient accent background */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${p.accent} opacity-[0.06] group-hover:opacity-[0.1] transition-opacity duration-300`} />
-                
-                {/* Top accent line */}
                 <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${p.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                 
-                {/* Icon */}
-                <div className="relative mb-6">
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${p.accent} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                    <span className="text-white text-2xl font-bold">{p.name.charAt(0)}</span>
-                  </div>
+                {/* Tag */}
+                <div className="relative mb-5">
+                  <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[0.65rem] font-bold tracking-[0.15em] uppercase bg-gradient-to-r ${p.accent} text-white`}>
+                    {p.tag}
+                  </span>
                 </div>
                 
                 {/* Content */}
                 <div className="relative">
-                  <h3 className="text-[1.1rem] font-bold text-white mb-3 group-hover:text-white transition-colors">{p.name}</h3>
-                  <p className="text-white/45 text-[0.85rem] mb-5 leading-relaxed">{p.desc}</p>
+                  <h3 className="text-[1.3rem] font-bold text-white mb-3 group-hover:text-white transition-colors">{p.name}</h3>
+                  <p className="text-white/50 text-[0.88rem] mb-6 leading-relaxed">{p.desc}</p>
                   
-                  {/* Price */}
-                  <div className="flex items-baseline gap-1 mb-5">
-                    <span className="text-[1.6rem] font-black bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">{p.price}</span>
-                    <span className="text-white/40 text-[0.8rem]">{p.period}</span>
+                  {/* Prices */}
+                  <div className="space-y-2 mb-6">
+                    {p.prices.map((pr) => (
+                      <div key={pr.label} className="flex items-center justify-between">
+                        <span className="text-white/40 text-[0.8rem]">{pr.label}</span>
+                        <span className="font-bold text-white">{pr.price}</span>
+                      </div>
+                    ))}
                   </div>
                   
                   {/* CTA */}
                   <Link 
                     href={`/products#${p.slug}`} 
-                    className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r ${p.accent} text-white text-[0.82rem] font-semibold hover:opacity-90 transition-opacity`}
+                    className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r ${p.accent} text-white text-[0.85rem] font-semibold hover:opacity-90 transition-opacity`}
                   >
-                    <span>Ver más</span>
+                    <span>Ver producto</span>
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                       <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
