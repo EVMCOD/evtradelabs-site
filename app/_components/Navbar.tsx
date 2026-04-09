@@ -69,14 +69,7 @@ export default function Navbar() {
           </nav>
 
           {/* Right side */}
-          <div className="hidden lg:flex items-center gap-3" ref={dropdownRef}>
-            <Link
-              href="/products"
-              className="px-6 py-2.5 rounded-xl bg-[#667eea] text-white font-semibold text-[0.88rem] hover:bg-[#5a7fd8] transition-all shadow-[0_4px_20px_rgba(102,126,234,0.3)] hover:shadow-[0_4px_30px_rgba(102,126,234,0.45)] hover:scale-[1.02]"
-            >
-              Ver productos
-            </Link>
-
+          <div className="hidden lg:flex items-center gap-2" ref={dropdownRef}>
             {/* Account dropdown */}
             <div style={{ position: 'relative' }}>
               <button
