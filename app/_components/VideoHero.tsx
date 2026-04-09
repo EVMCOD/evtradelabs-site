@@ -57,11 +57,11 @@ function MatrixColumn({ x, charSize }: { x: number; charSize: number }) {
               color: isHead
                 ? '#ffffff'
                 : isTrail
-                ? `rgba(102, 126, 234, ${1 - (i - head) * 0.2})`
+                ? `rgba(163, 230, 53, ${1 - (i - head) * 0.2})`
                 : isFaded
-                ? 'rgba(102, 126, 234, 0.15)'
-                : 'rgba(102, 126, 234, 0.5)',
-              textShadow: isHead ? '0 0 8px rgba(102,126,234,0.8)' : 'none',
+                ? 'rgba(163, 230, 53, 0.1)'
+                : 'rgba(163, 230, 53, 0.45)',
+              textShadow: isHead ? '0 0 10px rgba(163,230,53,0.9)' : 'none',
               lineHeight: '1.4',
             }}
           >
