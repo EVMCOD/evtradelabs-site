@@ -6,6 +6,24 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* Animated lime border for glass cards */
+.animated-border {
+  background: linear-gradient(90deg, transparent 0%, #a3e635 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: borderFlow 3s linear infinite;
+  opacity: 0.6;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: xor;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  padding: 2px;
+}
+
+@keyframes borderFlow {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
 .glass-strong {
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(30px);

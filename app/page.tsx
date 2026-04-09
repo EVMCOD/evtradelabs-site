@@ -127,77 +127,89 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             {[
               { 
                 name: "EV Quant Lab", 
                 slug: "ev-quant-lab", 
                 tag: "QUANT RESEARCH",
-                desc: "Plataforma quant para construir, validar y optimizar estrategias. Cloud + local. Backtesting, optimizador de parámetros y análisis Monte Carlo.",
+                desc: "Plataforma quant para construir, validar y optimizar estrategias. Cloud + local. Backtesting y análisis Monte Carlo.",
                 prices: [{ label: "Mensual", price: "€99.99/mes" }, { label: "Lifetime", price: "€399" }],
-                accent: "from-[#a78bfa] to-[#667eea]",
-                accentText: "text-[#a78bfa]"
               },
               { 
                 name: "Master of Liquidity", 
                 slug: "master-of-liquidity", 
                 tag: "MT5 EA",
-                desc: "Asesor Experto para MetaTrader 5. 8 estrategias de liquidez integradas con gestión de riesgo avanzada. Listo para producción.",
+                desc: "Asesor Experto para MetaTrader 5. 8 estrategias de liquidez integradas con gestión de riesgo avanzada.",
                 prices: [{ label: "Mensual", price: "€48.99/mes" }, { label: "Lifetime", price: "€199" }],
-                accent: "from-[#a78bfa] to-[#667eea]",
-                accentText: "text-[#a78bfa]"
               },
               { 
                 name: "Replicador", 
                 slug: "replicador", 
                 tag: "COPY TRADING",
-                desc: "Replicación de cuentas master a múltiples followers en tiempo real. Control total de lotajes, filtros por instrumento y gestión centralizada.",
+                desc: "Replicación de cuentas master a múltiples followers en tiempo real. Control total de lotajes y filtros.",
                 prices: [{ label: "Mensual", price: "€18.99/mes" }, { label: "Lifetime", price: "€79" }],
-                accent: "from-[#a3e635] to-[#84cc16]",
-                accentText: "text-[#a3e635]"
               },
             ].map((p, i) => (
               <div 
                 key={p.slug} 
-                className="group relative rounded-2xl p-8 overflow-hidden transition-all duration-300 hover:-translate-y-1 animate-fade-in-up" 
+                className="group relative rounded-2xl p-8 animate-fade-in-up" 
                 style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'forwards', opacity: 0 }}
               >
-                {/* Gradient accent background */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${p.accent} opacity-[0.06] group-hover:opacity-[0.1] transition-opacity duration-300`} />
-                <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${p.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                
-                {/* Tag */}
-                <div className="relative mb-5">
-                  <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[0.65rem] font-bold tracking-[0.15em] uppercase bg-gradient-to-r ${p.accent} text-[#0a0a0f]`}>
-                    {p.tag}
-                  </span>
+                {/* Animated lime border */}
+                <div className="absolute inset-0 rounded-2xl overflow-hidden">
+                  <div className="absolute inset-0 bg-[#0a0a0f]" />
+                  <div className="absolute inset-[-2px] rounded-2xl animated-border" />
                 </div>
                 
-                {/* Content */}
-                <div className="relative">
-                  <h3 className="text-[1.3rem] font-bold text-white mb-3 group-hover:text-white transition-colors">{p.name}</h3>
-                  <p className="text-white/50 text-[0.88rem] mb-6 leading-relaxed">{p.desc}</p>
+                {/* Glass card */}
+                <div className="relative rounded-2xl p-8 h-full overflow-hidden backdrop-blur-2xl"
+                  style={{
+                    background: 'rgba(255,255,255,0.03)',
+                    backdropFilter: 'blur(40px)',
+                    WebkitBackdropFilter: 'blur(40px)',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)',
+                  }}
+                >
+                  {/* Inner glow on hover */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{ background: 'radial-gradient(ellipse at center, rgba(167,139,250,0.08) 0%, transparent 70%)' }}
+                  />
                   
-                  {/* Prices */}
-                  <div className="space-y-2 mb-6">
-                    {p.prices.map((pr) => (
-                      <div key={pr.label} className="flex items-center justify-between">
-                        <span className="text-white/40 text-[0.8rem]">{pr.label}</span>
-                        <span className={`font-bold ${p.accentText}`}>{pr.price}</span>
-                      </div>
-                    ))}
+                  {/* Tag */}
+                  <div className="relative mb-5">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[#a78bfa] border border-[#a78bfa]/30 bg-[#a78bfa]/10">
+                      {p.tag}
+                    </span>
                   </div>
                   
-                  {/* CTA */}
-                  <Link 
-                    href={`/products#${p.slug}`} 
-                    className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r ${p.accent} text-[#0a0a0f] text-[0.85rem] font-bold hover:opacity-90 transition-opacity`}
-                  >
-                    <span>Ver producto</span>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </Link>
+                  {/* Content */}
+                  <div className="relative">
+                    <h3 className="text-[1.3rem] font-bold text-white mb-3">{p.name}</h3>
+                    <p className="text-white/50 text-[0.88rem] mb-6 leading-relaxed">{p.desc}</p>
+                    
+                    {/* Prices */}
+                    <div className="space-y-2 mb-6">
+                      {p.prices.map((pr) => (
+                        <div key={pr.label} className="flex items-center justify-between">
+                          <span className="text-white/40 text-[0.8rem]">{pr.label}</span>
+                          <span className="font-bold text-[#a78bfa]">{pr.price}</span>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {/* CTA */}
+                    <Link 
+                      href={`/products#${p.slug}`} 
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-[#a78bfa] text-[0.85rem] font-semibold border border-[#a78bfa]/30 hover:bg-[#a78bfa]/10 transition-all"
+                    >
+                      <span>Ver producto</span>
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
