@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import Navbar from "./_components/Navbar";
+import { VideoHero } from "./_components/VideoHero";
 import "./animations.css";
 
 export const metadata: Metadata = {
   title: "EV Trading Labs — Sistemas automatizados para MT5",
-  description:
-    "Sistemas de trading automatizados, gestión del riesgo y replicación de cuentas para MetaTrader 5.",
+  description: "Sistemas de trading automatizados, gestión del riesgo y replicación de cuentas para MetaTrader 5.",
   alternates: {
     canonical: "https://evtradelabs.com",
     languages: {
@@ -23,62 +22,66 @@ export default function HomePage() {
   return (
     <main className="relative overflow-hidden bg-[#0a0a0f] text-white min-h-screen">
       <Navbar />
+      <VideoHero />
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-5">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#667eea]/20 via-[#0a0a0f] to-[#764ba2]/20 animate-gradient" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#667eea]/10 via-transparent to-transparent" />
-
-        <div className="relative z-10 max-w-[1200px] mx-auto text-center">
-          <div className="mb-6 animate-fade-in-up">
-            <span className="inline-block text-[0.72rem] font-bold tracking-[0.2em] uppercase text-[#667eea] px-4 py-2 rounded-full border border-[#667eea]/30 bg-[#667eea]/10">
-              Trading automatizado
-            </span>
-          </div>
-
-          <h1 className="text-[clamp(2.5rem,6vw,4.5rem)] font-black tracking-tight leading-[1.05] mb-6 bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent animate-fade-in-up delay-100">
-            Sistemas, herramientas e infraestructura<br />para traders serios
-          </h1>
-
-          <p className="text-[1.1rem] text-white/60 max-w-[640px] mx-auto mb-10 leading-relaxed animate-fade-in-up delay-200">
-            Asesores Expertos, gestión del riesgo y replicación de cuentas para MetaTrader 5.
-            Diseñado para traders que operan con estructura.
+      {/* Trust logos */}
+      <section className="py-16 px-5 bg-[#0a0a0f] border-y border-white/[0.05]">
+        <div className="max-w-[1200px] mx-auto">
+          <p className="text-center text-[0.72rem] text-white/30 uppercase tracking-widest mb-8">
+            Compatible con las principales plataformas
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-fade-in-up delay-300">
-            <Link
-              href="/products"
-              className="px-8 py-4 rounded-xl bg-[#667eea] text-white font-bold text-[0.95rem] hover:bg-[#5a7fd8] transition-all hover:scale-105 btn-animated"
-            >
-              Ver productos
-            </Link>
-            <Link
-              href="/dashboard"
-              className="px-8 py-4 rounded-xl border border-white/20 text-white/80 font-semibold text-[0.95rem] hover:border-white/40 hover:text-white transition-all hover:scale-105"
-            >
-              Dashboard
-            </Link>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 max-w-[500px] mx-auto animate-fade-in-up delay-400">
-            {[
-              { value: "5000+", label: "Usuarios" },
-              { value: "8", label: "Estrategias" },
-              { value: "24/7", label: "Operativa" },
-            ].map((stat) => (
-              <div key={stat.label} className="animate-float">
-                <div className="text-[2rem] font-black text-white mb-1">{stat.value}</div>
-                <div className="text-[0.8rem] text-white/40">{stat.label}</div>
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+            {['MetaTrader 5', 'TradingView', 'Interactive Brokers', 'NinjaTrader', 'Vantage', 'VT Markets'].map((platform) => (
+              <div key={platform} className="text-white/30 text-[0.88rem] font-medium">
+                {platform}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Products Section */}
-      <section id="productos" className="py-24 px-5 bg-[#0a0a0f]">
+      {/* What We Do */}
+      <section className="py-24 px-5 bg-[#0a0a0f]">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="text-center mb-16">
+            <span className="inline-block text-[0.72rem] font-bold tracking-[0.2em] uppercase text-[#667eea] mb-4">
+              Qué hacemos
+            </span>
+            <h2 className="text-[2.5rem] font-black tracking-tight">
+              Automatiza tu trading
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "Ejecución precisa",
+                desc: "Elimina emociones de tu operativa. Operaciones ejecutadas con precisión milimétrica.",
+                icon: "🎯",
+              },
+              {
+                title: "Gestión del riesgo",
+                desc: "Protección automática de capital con stops inteligentes y límites de exposición.",
+                icon: "🛡️",
+              },
+              {
+                title: "Multi-cuenta",
+                desc: "Gestiona múltiples cuentas desde un solo dashboard con replicación en tiempo real.",
+                icon: "⚡",
+              },
+            ].map((item, i) => (
+              <div key={item.title} className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-8 hover:border-[#667eea]/30 transition-all group card-animated">
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">{item.icon}</div>
+                <h3 className="text-[1.1rem] font-bold mb-2">{item.title}</h3>
+                <p className="text-white/50 text-[0.9rem] leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Products */}
+      <section id="productos" className="py-24 px-5 bg-gradient-to-b from-[#0a0a0f] to-[#0f0f18]">
         <div className="max-w-[1200px] mx-auto">
           <div className="text-center mb-16">
             <span className="inline-block text-[0.72rem] font-bold tracking-[0.2em] uppercase text-[#667eea] mb-4">
@@ -91,48 +94,17 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              {
-                name: "EV Quant Lab",
-                price: "€99.99/mes",
-                slug: "ev-quant-lab",
-                icon: "📊",
-                desc: "Construye, valida y optimiza estrategias como un profesional.",
-              },
-              {
-                name: "Master of Liquidity",
-                price: "€48.99/mes",
-                slug: "master-of-liquidity",
-                icon: "🎯",
-                desc: "8 estrategias integradas con gestión de riesgo avanzada.",
-              },
-              {
-                name: "Replicador",
-                price: "€18.99/mes",
-                slug: "replicador",
-                icon: "⚡",
-                desc: "Replicación de cuentas master a múltiples followers.",
-              },
-              {
-                name: "Local App",
-                price: "€79",
-                slug: "local-app",
-                icon: "💻",
-                desc: "Tu entorno de trading en local, sin cloud.",
-              },
-            ].map((product, i) => (
-              <div
-                key={product.slug}
-                className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 hover:border-[#667eea]/30 transition-all group card-animated animate-fade-in-up"
-                style={{ animationDelay: `${i * 100}ms` }}
-              >
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">{product.icon}</div>
-                <h3 className="text-[1.1rem] font-bold mb-2">{product.name}</h3>
-                <p className="text-white/50 text-[0.88rem] mb-4 leading-relaxed">{product.desc}</p>
-                <div className="text-[1.3rem] font-black text-[#667eea] mb-4">{product.price}</div>
-                <Link
-                  href={`/products#${product.slug}`}
-                  className="inline-block px-4 py-2 rounded-lg bg-[#667eea]/20 text-[#667eea] text-[0.85rem] font-semibold hover:bg-[#667eea]/30 transition-colors"
-                >
+              { name: "EV Quant Lab", price: "€99.99/mes", slug: "ev-quant-lab", icon: "📊", desc: "Construye y optimiza estrategias." },
+              { name: "Master of Liquidity", price: "€48.99/mes", slug: "master-of-liquidity", icon: "🎯", desc: "8 estrategias con gestión de riesgo." },
+              { name: "Replicador", price: "€18.99/mes", slug: "replicador", icon: "⚡", desc: "Replicación multi-cuenta en tiempo real." },
+              { name: "Local App", price: "€79", slug: "local-app", icon: "💻", desc: "Tu entorno de trading en local." },
+            ].map((p, i) => (
+              <div key={p.slug} className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 hover:border-[#667eea]/30 transition-all card-animated animate-fade-in-up" style={{ animationDelay: `${i * 100}ms` }}>
+                <div className="text-4xl mb-4">{p.icon}</div>
+                <h3 className="font-bold mb-1">{p.name}</h3>
+                <p className="text-white/50 text-[0.85rem] mb-3">{p.desc}</p>
+                <div className="text-[1.2rem] font-black text-[#667eea] mb-4">{p.price}</div>
+                <Link href={`/products#${p.slug}`} className="text-[#667eea] text-[0.85rem] font-semibold hover:underline">
                   Más información →
                 </Link>
               </div>
@@ -141,8 +113,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="py-24 px-5 bg-gradient-to-b from-[#0a0a0f] to-[#0f0f18]">
+      {/* Pricing */}
+      <section id="pricing" className="py-24 px-5 bg-[#0a0a0f]">
         <div className="max-w-[1200px] mx-auto">
           <div className="text-center mb-16">
             <span className="inline-block text-[0.72rem] font-bold tracking-[0.2em] uppercase text-[#667eea] mb-4">
@@ -163,12 +135,9 @@ export default function HomePage() {
             ].map((plan, i) => (
               <div key={plan.slug} className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 text-center card-animated animate-fade-in-up" style={{ animationDelay: `${i * 100}ms` }}>
                 <h3 className="font-bold mb-2">{plan.name}</h3>
-                <div className="text-[1.8rem] font-black text-[#667eea] mb-1">{plan.price}</div>
+                <div className="text-[1.8rem] font-black text-[#667eea]">{plan.price}</div>
                 <div className="text-white/40 text-[0.85rem] mb-6">{plan.period}</div>
-                <Link
-                  href={`/checkout?product=${plan.slug}`}
-                  className="block w-full py-3 rounded-xl bg-[#667eea] text-white font-semibold text-[0.9rem] hover:bg-[#5a7fd8] transition-colors btn-animated"
-                >
+                <Link href={`/checkout?product=${plan.slug}`} className="block w-full py-3 rounded-xl bg-[#667eea] text-white font-semibold text-[0.9rem] hover:bg-[#5a7fd8] transition-colors btn-animated">
                   Suscribirse
                 </Link>
               </div>
@@ -177,8 +146,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-24 px-5 bg-[#0a0a0f]">
+      {/* FAQ */}
+      <section className="py-24 px-5 bg-gradient-to-b from-[#0a0a0f] to-[#0f0f18]">
         <div className="max-w-[700px] mx-auto">
           <div className="text-center mb-16">
             <span className="inline-block text-[0.72rem] font-bold tracking-[0.2em] uppercase text-[#667eea] mb-4">
@@ -191,22 +160,10 @@ export default function HomePage() {
 
           <div className="space-y-6">
             {[
-              {
-                q: "¿Necesito experiencia previa?",
-                a: "No. Cada producto incluye documentación y soporte para empezar.",
-              },
-              {
-                q: "¿Funciona con MT5?",
-                a: "Sí. Todos nuestros sistemas son para MetaTrader 5.",
-              },
-              {
-                q: "¿Puedo probar antes de comprar?",
-                a: "Sí. Dispones de versiones demo para evaluar.",
-              },
-              {
-                q: "¿Cómo recibo mi licencia?",
-                a: "Automáticamente por email tras el pago.",
-              },
+              { q: "¿Necesito experiencia previa?", a: "No. Cada producto incluye documentación y soporte para empezar." },
+              { q: "¿Funciona con MT5?", a: "Sí. Todos nuestros sistemas son para MetaTrader 5." },
+              { q: "¿Puedo probar antes de comprar?", a: "Sí. Dispones de versiones demo para evaluar." },
+              { q: "¿Cómo recibo mi licencia?", a: "Automáticamente por email tras el pago." },
             ].map((faq, i) => (
               <div key={i} className="border-b border-white/[0.08] pb-6">
                 <h3 className="font-bold text-[1rem] mb-2">{faq.q}</h3>
@@ -234,44 +191,26 @@ export default function HomePage() {
             </div>
 
             <div>
-              <h4 className="font-semibold text-[0.8rem] uppercase tracking-wider text-white/40 mb-4">
-                Productos
-              </h4>
+              <h4 className="font-semibold text-[0.8rem] uppercase tracking-wider text-white/40 mb-4">Productos</h4>
               <div className="space-y-2">
-                <Link href="/products" className="block text-white/60 hover:text-white text-[0.88rem] transition-colors">
-                  Todos los productos
-                </Link>
-                <Link href="/products#ev-quant-lab" className="block text-white/60 hover:text-white text-[0.88rem] transition-colors">
-                  EV Quant Lab
-                </Link>
-                <Link href="/products#master-of-liquidity" className="block text-white/60 hover:text-white text-[0.88rem] transition-colors">
-                  Master of Liquidity
-                </Link>
+                <Link href="/products" className="block text-white/60 hover:text-white text-[0.88rem]">Todos</Link>
+                <Link href="/products#ev-quant-lab" className="block text-white/60 hover:text-white text-[0.88rem]">EV Quant Lab</Link>
+                <Link href="/products#master-of-liquidity" className="block text-white/60 hover:text-white text-[0.88rem]">Master of Liquidity</Link>
               </div>
             </div>
 
             <div>
-              <h4 className="font-semibold text-[0.8rem] uppercase tracking-wider text-white/40 mb-4">
-                Legal
-              </h4>
+              <h4 className="font-semibold text-[0.8rem] uppercase tracking-wider text-white/40 mb-4">Legal</h4>
               <div className="space-y-2">
-                <Link href="/terms" className="block text-white/60 hover:text-white text-[0.88rem] transition-colors">
-                  Términos
-                </Link>
-                <Link href="/privacy" className="block text-white/60 hover:text-white text-[0.88rem] transition-colors">
-                  Privacidad
-                </Link>
-                <Link href="/refund" className="block text-white/60 hover:text-white text-[0.88rem] transition-colors">
-                  Reembolso
-                </Link>
+                <Link href="/terms" className="block text-white/60 hover:text-white text-[0.88rem]">Términos</Link>
+                <Link href="/privacy" className="block text-white/60 hover:text-white text-[0.88rem]">Privacidad</Link>
+                <Link href="/refund" className="block text-white/60 hover:text-white text-[0.88rem]">Reembolso</Link>
               </div>
             </div>
           </div>
 
           <div className="pt-8 border-t border-white/[0.08] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <p className="text-white/35 text-[0.82rem]">
-              © {new Date().getFullYear()} EV Trading Labs
-            </p>
+            <p className="text-white/35 text-[0.82rem]">© {new Date().getFullYear()} EV Trading Labs</p>
             <a href="mailto:contact@evtradelabs.com" className="text-white/35 text-[0.82rem] hover:text-white transition-colors">
               contact@evtradelabs.com
             </a>
