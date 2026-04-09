@@ -505,8 +505,6 @@ function Footer() {
     Company: [
       { href: "/about", label: "Sobre nosotros" },
       { href: "/blog", label: "Blog" },
-      { href: "/affiliate", label: "Programa de afiliado" },
-      { href: "/ib", label: "IB Partners" },
       { href: "#comunidad", label: "Comunidad" },
     ],
     Legal: [
@@ -543,15 +541,6 @@ function Footer() {
       icon: (
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
           <path d="M2 14l4-4 3 3 5-5 4 4v5H2v-3z" fill="currentColor" opacity="0.9"/>
-        </svg>
-      ),
-    },
-    {
-      name: "YouTube",
-      href: "https://www.youtube.com/@evtradelabs",
-      icon: (
-        <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true">
-          <path d="M18.96 2.67A2.48 2.48 0 0 0 17.34 1.5C15.77 1.3 10 1.3 10 1.3s-5.77 0-7.34.2A2.48 2.48 0 0 0 1.04 2.67 25.8 25.8 0 0 0 .84 7.1a25.8 25.8 0 0 0 .2 4.43 2.48 2.48 0 0 0 1.62 1.17c1.57.2 7.34.2 7.34.2s5.77 0 7.34-.2a2.48 2.48 0 0 0 1.62-1.17 25.8 25.8 0 0 0 .2-4.43 25.8 25.8 0 0 0-.2-4.43zM8.28 9.68V4.37l5.76 2.65-5.76 2.66z" fill="currentColor"/>
         </svg>
       ),
     },
@@ -621,19 +610,9 @@ function Footer() {
             <a href="mailto:contact@evtradelabs.com" className="hover:text-white transition-colors">
               contact@evtradelabs.com
             </a>
-            <span className="hidden sm:inline">·</span>
-            <a href="/ib" className="hover:text-white transition-colors">
-              IB Partners
-            </a>
           </div>
         </div>
 
-        {/* IB Partners badge */}
-        <div className="mt-8 p-4 rounded-xl border border-white/[0.05] bg-white/[0.02]">
-          <p className="text-[0.78rem] text-white/35 text-center">
-            IB Partners: VT Markets · PU Prime · Vantage — Commission $8/lot + CPA
-          </p>
-        </div>
       </div>
     </footer>
   );
