@@ -503,14 +503,11 @@ function Footer() {
       { href: "/pricing", label: "Precios" },
     ],
     Company: [
-      { href: "/about", label: "Sobre nosotros" },
-      { href: "/blog", label: "Blog" },
       { href: "#comunidad", label: "Comunidad" },
     ],
     Legal: [
       { href: "/terms", label: "Términos y condiciones" },
       { href: "/privacy", label: "Política de privacidad" },
-      { href: "/licenses", label: "Licencias" },
       { href: "/refund", label: "Política de reembolso" },
       { href: "mailto:contact@evtradelabs.com", label: "Contacto" },
     ],
