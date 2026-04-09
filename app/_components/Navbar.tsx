@@ -52,12 +52,11 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-[68px]">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#667eea] to-[#764ba2] flex items-center justify-center shadow-[0_0_20px_rgba(102,126,234,0.35)] group-hover:shadow-[0_0_30px_rgba(102,126,234,0.5)] transition-all">
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#667eea] to-[#764ba2] flex items-center justify-center">
               <span className="text-white font-black text-sm">EV</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-white font-bold text-[0.95rem] leading-tight">EV Trading Labs</span>
-              <span className="text-white/30 text-[0.65rem] tracking-widest uppercase">Automated Trading</span>
+              <span className="text-white/90 font-bold text-[0.9rem] tracking-wide">EV TRADING LABS</span>
             </div>
           </Link>
 
