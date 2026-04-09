@@ -68,7 +68,7 @@ export default function HomePage() {
                 icon: "⚡",
               },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-8 hover:border-[#667eea]/25 transition-all group card-animated">
+              <div key={item.title} className="rounded-2xl p-8 transition-all group glass-card">
                 <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">{item.icon}</div>
                 <h3 className="text-[1.05rem] font-bold mb-2">{item.title}</h3>
                 <p className="text-white/45 text-[0.88rem] leading-relaxed">{item.desc}</p>
@@ -97,12 +97,12 @@ export default function HomePage() {
               { name: "Replicador", slug: "replicador", icon: "⚡", desc: "Replicación de cuentas master a múltiples followers en tiempo real.", price: "€18.99/mes" },
               { name: "Local App", slug: "local-app", icon: "💻", desc: "Tu entorno de trading en local, sin dependencias cloud.", price: "€79" },
             ].map((p, i) => (
-              <div key={p.slug} className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 hover:border-[#667eea]/25 transition-all card-animated animate-fade-in-up" style={{ animationDelay: `${i * 80}ms`, animationFillMode: 'forwards' }}>
+              <div key={p.slug} className="rounded-2xl p-6 transition-all glass-card animate-fade-in-up" style={{ animationDelay: `${i * 80}ms`, animationFillMode: 'forwards' }}>
                 <div className="text-4xl mb-4">{p.icon}</div>
                 <h3 className="font-bold mb-1">{p.name}</h3>
                 <p className="text-white/45 text-[0.85rem] mb-4 leading-relaxed">{p.desc}</p>
                 <div className="text-[1.1rem] font-black text-[#667eea] mb-4">{p.price}</div>
-                <Link href={`/products#${p.slug}`} className="inline-block px-4 py-2 rounded-lg bg-[#667eea]/15 text-[#667eea] text-[0.82rem] font-semibold hover:bg-[#667eea]/25 transition-colors">
+                <Link href={`/products#${p.slug}`} className="inline-block px-4 py-2 rounded-lg glass-btn text-[#8b9eff] text-[0.82rem] font-semibold transition-colors">
                   Más información →
                 </Link>
               </div>
@@ -123,14 +123,14 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="space-y-0">
+          <div className="space-y-0 glass-strong rounded-2xl p-6">
             {[
               { q: "¿Necesito experiencia previa?", a: "No. Cada producto incluye documentación y soporte para empezar." },
               { q: "¿Funciona con MT5?", a: "Sí. Todos nuestros sistemas son para MetaTrader 5." },
               { q: "¿Puedo probar antes de comprar?", a: "Sí. Dispones de versiones demo para evaluar." },
               { q: "¿Cómo recibo mi licencia?", a: "Automáticamente por email tras el pago." },
             ].map((faq, i) => (
-              <div key={i} className="py-6 border-b border-white/[0.05]">
+              <div key={i} className="py-5 border-b border-white/[0.06] last:border-0">
                 <h3 className="font-bold text-[0.95rem] mb-2">{faq.q}</h3>
                 <p className="text-white/45 text-[0.88rem]">{faq.a}</p>
               </div>
@@ -140,7 +140,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-16 px-5 bg-[#0a0a0f]">
+      <footer className="py-16 px-5 glass mt-4">
         <div className="max-w-[1200px] mx-auto">
           <div className="grid md:grid-cols-4 gap-10 mb-12">
             {/* Brand */}
@@ -178,7 +178,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="pt-8 border-t border-white/[0.05] flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div className="pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-white/25 text-[0.8rem]">
               © {new Date().getFullYear()} EV Trading Labs
             </p>
