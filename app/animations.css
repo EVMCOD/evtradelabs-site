@@ -9,7 +9,6 @@
 /* Animated lime border for glass cards — electric glow */
 .animated-border {
   position: relative;
-  border-radius: inherit;
 }
 
 .animated-border::before {
@@ -17,11 +16,12 @@
   position: absolute;
   inset: -2px;
   border-radius: inherit;
-  background: linear-gradient(45deg, #a3e635, #84cc16, #a3e635, #65a30d);
-  background-size: 300% 300%;
-  animation: electricBorder 2s ease-in-out infinite;
-  filter: blur(2px);
-  opacity: 0.7;
+  background: linear-gradient(90deg, #a3e635, #84cc16, #a3e635, #65a30d);
+  background-size: 400% 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: electricBorder 2s linear infinite paused;
+  filter: blur(3px);
 }
 
 .animated-border::after {
@@ -29,19 +29,30 @@
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  background: linear-gradient(45deg, transparent, #a3e635, transparent);
-  background-size: 200% 200%;
-  animation: electricSweep 1.5s ease-in-out infinite;
+  background: linear-gradient(90deg, transparent 0%, #a3e635 50%, transparent 100%);
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: borderSweep 1.5s ease-in-out infinite paused;
+}
+
+/* On hover — start the animations */
+.group:hover .animated-border::before {
+  opacity: 0.8;
+  animation-play-state: running;
+}
+
+.group:hover .animated-border::after {
+  opacity: 1;
+  animation-play-state: running;
 }
 
 @keyframes electricBorder {
-  0%, 100% { background-position: 0% 50%; opacity: 0.5; filter: blur(2px); }
-  25% { background-position: 100% 50%; opacity: 0.8; filter: blur(3px); }
-  50% { background-position: 100% 100%; opacity: 0.5; filter: blur(2px); }
-  75% { background-position: 0% 100%; opacity: 0.9; filter: blur(4px); }
+  0% { background-position: 0% 0; }
+  100% { background-position: 400% 0; }
 }
 
-@keyframes electricSweep {
+@keyframes borderSweep {
   0% { background-position: -100% 0; }
   100% { background-position: 200% 0; }
 }
