@@ -1,0 +1,36 @@
+0 verbose cli /opt/homebrew/Cellar/node/25.8.0/bin/node /opt/homebrew/lib/node_modules/npm/bin/npm-cli.js
+1 info using npm@11.11.0
+2 info using node@v25.8.0
+3 silly config load:file:/opt/homebrew/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/.npmrc
+5 silly config load:file:/Users/enriquevaleros/.npmrc
+6 silly config load:file:/opt/homebrew/etc/npmrc
+7 verbose title npm exec plugins add vercel/vercel-plugin --target claude-code -y
+8 verbose argv "exec" "--" "plugins" "add" "vercel/vercel-plugin" "--target" "claude-code" "-y"
+9 verbose logfile logs-max:10 dir:/Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-09T10_29_25_330Z-
+10 verbose logfile /Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-09T10_29_25_330Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 http fetch GET 200 https://registry.npmjs.org/plugins 290ms (cache miss)
+14 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+15 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+16 warn exec The following package was not found and will be installed: plugins@1.2.9
+17 silly idealTree buildDeps
+18 silly fetch manifest plugins@1.2.9
+19 silly packumentCache full:https://registry.npmjs.org/plugins cache-miss
+20 http fetch GET 200 https://registry.npmjs.org/plugins 217ms (cache miss)
+21 silly packumentCache full:https://registry.npmjs.org/plugins set size:undefined disposed:false
+22 silly placeDep ROOT plugins@1.2.9 OK for:  want: 1.2.9
+23 silly reify moves {}
+24 silly audit bulk request { plugins: [ '1.2.9' ] }
+25 http cache plugins@https://registry.npmjs.org/plugins/-/plugins-1.2.9.tgz 0ms (cache hit)
+26 silly tarball no local data for plugins@https://registry.npmjs.org/plugins/-/plugins-1.2.9.tgz. Extracting by manifest.
+27 http fetch GET 200 https://registry.npmjs.org/plugins/-/plugins-1.2.9.tgz 110ms (cache miss)
+28 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 185ms
+29 silly audit report {}
+30 verbose cwd /Users/enriquevaleros/.openclaw/workspace/evtradelabs-site
+31 verbose os Darwin 25.3.0
+32 verbose node v25.8.0
+33 verbose npm  v11.11.0
+34 verbose exit 0
+35 info ok
