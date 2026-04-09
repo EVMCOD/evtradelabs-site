@@ -5,12 +5,10 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 const navLinks = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#productos", label: "Productos" },
-  { href: "#precios", label: "Precios" },
-  { href: "#comunidad", label: "Comunidad" },
-  { href: "#faq", label: "FAQ" },
-  { href: "/dashboard", label: "Dashboard" },
+  { href: "/", label: "Inicio" },
+  { href: "/products", label: "Productos" },
+  { href: "/products#pricing", label: "Precios" },
+  { href: "/account", label: "Mi Cuenta" },
 ];
 
 const accountMenuItems = [
@@ -80,18 +78,14 @@ export default function Navbar() {
         >
           {/* Logo */}
           <Link
-            href="#inicio"
+            href="/"
             className="shrink-0 flex items-center"
             aria-label="EV Trading Labs"
           >
-            <Image
-              src="/brand/evtl-logo.png"
-              alt="EV Trading Labs"
-              width={176}
-              height={58}
-              className="h-[40px] md:h-[44px] w-auto object-contain"
-              priority
-            />
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#667eea] to-[#764ba2] flex items-center justify-center">
+              <span className="text-white font-black text-sm">EV</span>
+            </div>
+            <span className="ml-2 font-semibold text-white text-[0.9rem]">EV Trading Labs</span>
           </Link>
 
           {/* Desktop Nav */}
@@ -156,10 +150,10 @@ export default function Navbar() {
             </div>
 
             <Link
-              href="#acceso"
-              className="text-[0.82rem] font-semibold px-4 py-2 rounded-full border border-white/12 bg-white/[0.05] text-white hover:bg-white/[0.1] transition-colors duration-200"
+              href="/products"
+              className="text-[0.82rem] font-semibold px-4 py-2 rounded-full bg-[#667eea] text-white hover:bg-[#5a7fd8] transition-colors duration-200"
             >
-              Acceso anticipado
+              Ver productos
             </Link>
           </div>
 
@@ -203,11 +197,11 @@ export default function Navbar() {
               ))}
             </div>
             <Link
-              href="#acceso"
+              href="/products"
               onClick={() => setOpen(false)}
-              className="mt-3 text-center text-[0.9rem] font-semibold px-4 py-3 rounded-full border border-white/10 bg-white/[0.06] text-white"
+              className="mt-3 text-center text-[0.9rem] font-semibold px-4 py-3 rounded-xl bg-[#667eea] text-white"
             >
-              Acceso anticipado
+              Ver productos
             </Link>
           </div>
         )}
