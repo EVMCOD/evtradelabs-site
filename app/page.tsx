@@ -156,11 +156,11 @@ export default function HomePage() {
                 className="group relative rounded-2xl p-8 animate-fade-in-up" 
                 style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'forwards', opacity: 0 }}
               >
-                {/* Animated lime border */}
-                <div className="absolute inset-0 rounded-2xl animated-border" />
+                {/* Animated lime border — full perimeter */}
+                <div className="absolute inset-0 rounded-2xl animated-border pointer-events-none" />
                 
                 {/* Glass card */}
-                <div className="relative rounded-2xl p-8 h-full overflow-hidden backdrop-blur-2xl"
+                <div className="relative rounded-2xl p-8 h-full backdrop-blur-2xl"
                   style={{
                     background: 'rgba(255,255,255,0.03)',
                     backdropFilter: 'blur(40px)',
@@ -170,7 +170,7 @@ export default function HomePage() {
                   }}
                 >
                   {/* Inner glow on hover */}
-                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{ background: 'radial-gradient(ellipse at center, rgba(167,139,250,0.08) 0%, transparent 70%)' }}
                   />
                   
