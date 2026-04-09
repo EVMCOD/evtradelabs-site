@@ -214,6 +214,77 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Free Tools — TradingView Indicators */}
+      <section className="py-20 px-5 bg-[#0a0a0f] overflow-hidden">
+        <div className="max-w-[1200px] mx-auto mb-12">
+          <div className="text-center">
+            <span className="inline-block text-[0.7rem] font-bold tracking-[0.25em] uppercase text-[#a78bfa] mb-4">
+              GRATIS
+            </span>
+            <h2 className="text-[2.5rem] font-black tracking-tight">
+              Free Trading Tools
+            </h2>
+            <p className="text-white/40 mt-3 text-[0.9rem]">Indicadores públicos gratuitos en TradingView</p>
+          </div>
+        </div>
+
+        {/* Scrolling ticker */}
+        <div className="relative">
+          {/* Left fade */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0a0a0f] to-transparent z-10" />
+          {/* Right fade */}
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0a0a0f] to-transparent z-10" />
+
+          <div className="flex gap-6 animate-ticker">
+            {[
+              { name: "EV Liquidity Zones", views: "42K", likes: "1.2K", color: "#a78bfa" },
+              { name: "EV Volume Profile", views: "38K", likes: "980", color: "#667eea" },
+              { name: "EV Smart Money", views: "31K", likes: "870", color: "#a78bfa" },
+              { name: "EV Order Blocks", views: "28K", likes: "760", color: "#667eea" },
+              { name: "EV Trend Strength", views: "25K", likes: "650", color: "#a78bfa" },
+              { name: "EV Support Resistance", views: "22K", likes: "590", color: "#667eea" },
+              { name: "EV Fibonacci Auto", views: "19K", likes: "510", color: "#a78bfa" },
+              { name: "EV Momentum Divergence", views: "17K", likes: "480", color: "#667eea" },
+            ].map((tool, i) => (
+              <div 
+                key={tool.name}
+                className="flex-shrink-0 rounded-2xl p-5 min-w-[220px] border border-white/[0.06] hover:border-[#a78bfa]/30 transition-all cursor-pointer group"
+                style={{ background: 'rgba(255,255,255,0.02)' }}
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div 
+                    className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold"
+                    style={{ background: tool.color }}
+                  >
+                    EV
+                  </div>
+                  <div className="flex items-center gap-1 text-[0.7rem] text-white/30">
+                    <span>❤</span>
+                    <span>{tool.likes}</span>
+                  </div>
+                </div>
+                <h3 className="text-white font-semibold text-[0.9rem] mb-1 group-hover:text-[#a78bfa] transition-colors">{tool.name}</h3>
+                <div className="flex items-center gap-1 text-[0.7rem] text-white/30">
+                  <span>👁</span>
+                  <span>{tool.views}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="text-center mt-10">
+          <a 
+            href="https://www.tradingview.com/u/EVTradingLabs/" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-[#a78bfa] text-[0.85rem] font-semibold hover:underline"
+          >
+            Ver todos en TradingView →
+          </a>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="py-28 px-5 bg-[#0a0a0f]">
         <div className="max-w-[700px] mx-auto">

@@ -57,6 +57,20 @@
   100% { background-position: 200% 0; }
 }
 
+/* Ticker scroll animation */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-ticker {
+  animation: ticker 30s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+
 .glass-strong {
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(30px);
