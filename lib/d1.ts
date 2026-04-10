@@ -1,7 +1,7 @@
 // D1 Client using Cloudflare REST API
 const ACCOUNT_ID = "c5ec26eda22903c2898aadecbe94ea98";
 const DATABASE_ID = "11cb5f69-c57e-4317-a524-d114efbd4ad4";
-const API_TOKEN = "cfat_f9PoI5LwxsfQXds5LrVeJxbaoUJoXQcbU6JNed1Q344f8ce3";
+const API_TOKEN = process.env.CF_D1_TOKEN;
 
 export interface D1Result {
   results: any[];

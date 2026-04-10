@@ -54,3 +54,4 @@ _cacache/
 !.env.example
 _npx
 _npx/
+.env.local
