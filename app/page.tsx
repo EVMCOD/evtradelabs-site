@@ -215,8 +215,8 @@ export default function HomePage() {
       </section>
 
       {/* Free Tools — TradingView Indicators */}
-      <section className="py-28 px-5 bg-[#0a0a0f]">
-        <div className="max-w-[1200px] mx-auto mb-16">
+      <section className="py-20 px-5" style={{ background: 'linear-gradient(180deg, #0a0a0f 0%, #0d1117 50%, #0a0a0f 100%)' }}>
+        <div className="max-w-[1200px] mx-auto mb-12">
           <div className="text-center">
             <span className="inline-block text-[0.7rem] font-bold tracking-[0.25em] uppercase text-[#a78bfa] mb-4">
               GRATIS
@@ -228,169 +228,198 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* BigBeluga-style cards with mini chart visuals */}
         <div className="max-w-[1100px] mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {/* Mini chart SVG components */}
-            {[
-              { 
-                name: "EV Liquidity Zones", 
-                desc: "Identifica zonas de liquidez donde institutions colocan órdenes.", 
-                chart: (
-                  <svg viewBox="0 0 200 100" className="w-full h-20">
-                    <defs>
-                      <linearGradient id="liq1" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#f97316" stopOpacity="0.3"/>
-                        <stop offset="100%" stopColor="#f97316" stopOpacity="0"/>
-                      </linearGradient>
-                      <linearGradient id="liq2" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#f97316" stopOpacity="0.2"/>
-                        <stop offset="100%" stopColor="#f97316" stopOpacity="0"/>
-                      </linearGradient>
-                    </defs>
-                    {/* Price line */}
-                    <polyline points="10,80 40,75 60,70 90,72 110,55 140,58 160,45 190,40" fill="none" stroke="#f97316" strokeWidth="2"/>
-                    {/* Liquidity zones */}
-                    <rect x="55" y="68" width="12" height="32" fill="url(#liq1)" rx="2"/>
-                    <rect x="135" y="55" width="12" height="45" fill="url(#liq2)" rx="2"/>
-                    {/* Dashed lines */}
-                    <line x1="55" y1="68" x2="67" y2="68" stroke="#f97316" strokeWidth="1" strokeDasharray="2,2"/>
-                    <line x1="135" y1="55" x2="147" y2="55" stroke="#f97316" strokeWidth="1" strokeDasharray="2,2"/>
-                  </svg>
-                ),
-              },
-              { 
-                name: "EV Volume Profile", 
-                desc: "Visualiza áreas de alto volumen para identificar puntos de control.",
-                chart: (
-                  <svg viewBox="0 0 200 100" className="w-full h-20">
-                    <defs>
-                      <linearGradient id="vp1" x1="0" y1="0" x2="1" y2="0">
-                        <stop offset="0%" stopColor="#22c55e" stopOpacity="0.8"/>
-                        <stop offset="100%" stopColor="#22c55e" stopOpacity="0.3"/>
-                      </linearGradient>
-                    </defs>
-                    {/* Bars */}
-                    {[20,35,55,45,70,60,80,65,90,75,85,60,40].map((h, i) => (
-                      <rect key={i} x={10 + i * 14} y={90 - h/1.5} width="10" height={h/1.5} fill="url(#vp1)" rx="1" opacity={0.5 + (i / 13) * 0.5}/>
-                    ))}
-                    {/* POC line */}
-                    <line x1="10" y1="62" x2="190" y2="62" stroke="#22c55e" strokeWidth="1" strokeDasharray="3,3" opacity="0.6"/>
-                    <text x="170" y="58" fill="#22c55e" fontSize="8" fontFamily="monospace">POC</text>
-                  </svg>
-                ),
-              },
-              { 
-                name: "EV Smart Money", 
-                desc: "Detecta BOS y CHOCH para entender el flujo de instituciones.",
-                chart: (
-                  <svg viewBox="0 0 200 100" className="w-full h-20">
-                    <polyline points="10,75 30,70 50,72 70,30 90,35 110,75 130,70 150,25 170,28 190,20" fill="none" stroke="#a78bfa" strokeWidth="2"/>
-                    {/* BOS/CHOCH markers */}
-                    <circle cx="70" cy="30" r="4" fill="#f97316"/>
-                    <text x="74" y="28" fill="#f97316" fontSize="7" fontFamily="monospace">BOS</text>
-                    <circle cx="150" cy="25" r="4" fill="#22c55e"/>
-                    <text x="154" y="23" fill="#22c55e" fontSize="7" fontFamily="monospace">CH</text>
-                    {/* Breaks */}
-                    <line x1="70" y1="72" x2="70" y2="30" stroke="#f97316" strokeWidth="1" strokeDasharray="2,2" opacity="0.5"/>
-                    <line x1="150" y1="70" x2="150" y2="25" stroke="#22c55e" strokeWidth="1" strokeDasharray="2,2" opacity="0.5"/>
-                  </svg>
-                ),
-              },
-              { 
-                name: "EV Chart Patterns", 
-                desc: "Reconoce canales, wedges y patrones chartistas automáticamente.",
-                chart: (
-                  <svg viewBox="0 0 200 100" className="w-full h-20">
-                    {/* Trend channel */}
-                    <line points="10,80 190,30" stroke="#a78bfa" strokeWidth="1" strokeDasharray="4,4" opacity="0.4"/>
-                    <line points="10,90 190,40" stroke="#a78bfa" strokeWidth="1" strokeDasharray="4,4" opacity="0.4"/>
-                    {/* Price action */}
-                    <polyline points="10,85 30,78 50,82 70,65 90,70 110,50 130,55 150,40 170,45 190,35" fill="none" stroke="#a78bfa" strokeWidth="2"/>
-                    {/* Wedge annotation */}
-                    <text x="100" y="18" fill="#a78bfa" fontSize="8" fontFamily="monospace" textAnchor="middle">WEDGE</text>
-                    <line x1="115" y1="22" x2="115" y2="50" stroke="#a78bfa" strokeWidth="1" strokeDasharray="2,2"/>
-                  </svg>
-                ),
-              },
-              { 
-                name: "EV Money Flow", 
-                desc: "Combina indicadores de flujo de dinero con señales de entrada.",
-                chart: (
-                  <svg viewBox="0 0 200 100" className="w-full h-20">
-                    <defs>
-                      <linearGradient id="mf1" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#22c55e" stopOpacity="0.4"/>
-                        <stop offset="100%" stopColor="#22c55e" stopOpacity="0"/>
-                      </linearGradient>
-                      <linearGradient id="mf2" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#ef4444" stopOpacity="0.4"/>
-                        <stop offset="100%" stopColor="#ef4444" stopOpacity="0"/>
-                      </linearGradient>
-                    </defs>
-                    {/* Positive flow */}
-                    <rect x="10" y="30" width="80" height="60" fill="url(#mf1)" rx="2"/>
-                    <text x="18" y="48" fill="#22c55e" fontSize="8" fontFamily="monospace">IN</text>
-                    {/* Negative flow */}
-                    <rect x="100" y="30" width="90" height="60" fill="url(#mf2)" rx="2"/>
-                    <text x="170" y="48" fill="#ef4444" fontSize="8" fontFamily="monospace">OUT</text>
-                    {/* Arrow */}
-                    <line x1="90" y1="60" x2="100" y2="60" stroke="#ffffff" strokeWidth="1.5"/>
-                  </svg>
-                ),
-              },
-              { 
-                name: "EV Support Resistance", 
-                desc: "Auto-detecta niveles de soporte y resistencia con confluencias.",
-                chart: (
-                  <svg viewBox="0 0 200 100" className="w-full h-20">
-                    <line points="10,70 190,70" stroke="#f97316" strokeWidth="1.5" strokeDasharray="6,3"/>
-                    <line points="10,40 190,40" stroke="#22c55e" strokeWidth="1.5" strokeDasharray="6,3"/>
-                    {/* Price line */}
-                    <polyline points="10,85 40,80 60,75 80,72 100,68 120,60 140,65 160,55 190,50" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
-                    {/* Touches */}
-                    <circle cx="70" cy="70" r="3" fill="#f97316"/>
-                    <circle cx="120" cy="40" r="3" fill="#22c55e"/>
-                    <text x="74" y="68" fill="#f97316" fontSize="7" fontFamily="monospace">S</text>
-                    <text x="124" y="38" fill="#22c55e" fontSize="7" fontFamily="monospace">R</text>
-                  </svg>
-                ),
-              },
-            ].map((tool, i) => (
-              <div 
-                key={tool.name}
-                className="group relative rounded-2xl overflow-hidden cursor-pointer animate-fade-in-up"
-                style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'forwards', opacity: 0 }}
-              >
-                {/* Card background */}
-                <div 
-                  className="relative p-6 h-full"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(15,23,42,0.95) 100%)',
-                    border: '1px solid rgba(255,255,255,0.06)',
-                    borderRadius: 'inherit',
-                  }}
-                >
-                  {/* Chart visual */}
-                  <div className="mb-4 -mx-2">
-                    {tool.chart}
-                  </div>
-                  
-                  {/* Text */}
-                  <h3 className="text-white font-bold text-[1rem] mb-2 group-hover:text-[#a78bfa] transition-colors">{tool.name}</h3>
-                  <p className="text-white/40 text-[0.82rem] leading-relaxed">{tool.desc}</p>
-                  
-                  {/* TV badge */}
-                  <div className="mt-4 flex items-center gap-2">
-                    <div className="px-2.5 py-1 rounded-md bg-[#1e293b] border border-white/10 text-[0.7rem] text-white/50 font-medium">
-                      TradingView
-                    </div>
-                    <span className="text-[#a78bfa] text-[0.75rem] group-hover:underline">Ver indicador →</span>
-                  </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* Card 1 */}
+            <div className="group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:z-10">
+              <div className="relative h-[160px] overflow-hidden" style={{ background: '#0d1117' }}>
+                <svg viewBox="0 0 280 160" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
+                  <line x1="0" y1="40" x2="280" y2="40" stroke="#1e2530" strokeWidth="1"/>
+                  <line x1="0" y1="80" x2="280" y2="80" stroke="#1e2530" strokeWidth="1"/>
+                  <line x1="0" y1="120" x2="280" y2="120" stroke="#1e2530" strokeWidth="1"/>
+                  <rect x="20" y="90" width="12" height="30" rx="2" fill="#ef4444" opacity="0.8"/>
+                  <rect x="40" y="70" width="12" height="50" rx="2" fill="#22c55e" opacity="0.8"/>
+                  <rect x="60" y="85" width="12" height="35" rx="2" fill="#ef4444" opacity="0.8"/>
+                  <rect x="80" y="60" width="12" height="60" rx="2" fill="#22c55e" opacity="0.8"/>
+                  <rect x="100" y="75" width="12" height="45" rx="2" fill="#ef4444" opacity="0.8"/>
+                  <rect x="120" y="55" width="12" height="65" rx="2" fill="#22c55e" opacity="0.8"/>
+                  <rect x="140" y="80" width="12" height="40" rx="2" fill="#ef4444" opacity="0.8"/>
+                  <rect x="160" y="50" width="12" height="70" rx="2" fill="#22c55e" opacity="0.8"/>
+                  <rect x="180" y="65" width="12" height="55" rx="2" fill="#ef4444" opacity="0.8"/>
+                  <rect x="200" y="45" width="12" height="75" rx="2" fill="#22c55e" opacity="0.8"/>
+                  <rect x="160" y="40" width="60" height="20" rx="3" fill="#a78bfa" opacity="0.2"/>
+                  <rect x="160" y="40" width="60" height="20" rx="3" fill="none" stroke="#a78bfa" strokeWidth="1.5" strokeDasharray="4 2"/>
+                  <text x="190" y="55" fill="#a78bfa" fontSize="8" textAnchor="middle" fontFamily="monospace">LIQUIDITY</text>
+                </svg>
+                <div className="absolute top-3 left-3 px-2 py-1 rounded-md text-[0.6rem] font-bold bg-[#a78bfa]/20 text-[#a78bfa] border border-[#a78bfa]/30">FREE</div>
+              </div>
+              <div className="p-4" style={{ background: '#161b22' }}>
+                <h3 className="text-white font-semibold text-[0.88rem] mb-1">EV Liquidity Zones</h3>
+                <div className="flex items-center gap-3 text-[0.7rem] text-white/40"><span>👁 52K</span><span>❤ 1.8K</span></div>
+              </div>
+            </div>
+
+            {/* Card 2 */}
+            <div className="group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:z-10">
+              <div className="relative h-[160px] overflow-hidden" style={{ background: '#0d1117' }}>
+                <svg viewBox="0 0 280 160" className="w-full h-full">
+                  <line x1="70" y1="0" x2="70" y2="160" stroke="#1e2530" strokeWidth="1"/>
+                  <line x1="140" y1="0" x2="140" y2="160" stroke="#1e2530" strokeWidth="1"/>
+                  <line x1="210" y1="0" x2="210" y2="160" stroke="#1e2530" strokeWidth="1"/>
+                  <rect x="20" y="100" width="30" height="60" rx="2" fill="#667eea" opacity="0.3"/>
+                  <rect x="60" y="80" width="30" height="80" rx="2" fill="#667eea" opacity="0.5"/>
+                  <rect x="100" y="50" width="30" height="110" rx="2" fill="#667eea" opacity="0.7"/>
+                  <rect x="140" y="30" width="30" height="130" rx="2" fill="#667eea" opacity="0.9"/>
+                  <rect x="180" y="60" width="30" height="100" rx="2" fill="#667eea" opacity="0.6"/>
+                  <rect x="220" y="90" width="30" height="70" rx="2" fill="#667eea" opacity="0.4"/>
+                  <line x1="10" y1="80" x2="270" y2="80" stroke="#22c55e" strokeWidth="1.5" strokeDasharray="3 3"/>
+                  <text x="260" y="76" fill="#22c55e" fontSize="7" fontFamily="monospace">POC</text>
+                </svg>
+                <div className="absolute top-3 left-3 px-2 py-1 rounded-md text-[0.6rem] font-bold bg-[#22c55e]/20 text-[#22c55e] border border-[#22c55e]/30">FREE</div>
+              </div>
+              <div className="p-4" style={{ background: '#161b22' }}>
+                <h3 className="text-white font-semibold text-[0.88rem] mb-1">EV Volume Profile</h3>
+                <div className="flex items-center gap-3 text-[0.7rem] text-white/40"><span>👁 38K</span><span>❤ 1.1K</span></div>
+              </div>
+            </div>
+
+            {/* Card 3 */}
+            <div className="group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:z-10">
+              <div className="relative h-[160px] overflow-hidden" style={{ background: '#0d1117' }}>
+                <svg viewBox="0 0 280 160" className="w-full h-full">
+                  <rect x="20" y="120" width="14" height="30" rx="2" fill="#22c55e" opacity="0.8"/>
+                  <rect x="42" y="100" width="14" height="50" rx="2" fill="#22c55e" opacity="0.8"/>
+                  <rect x="64" y="90" width="14" height="60" rx="2" fill="#22c55e" opacity="0.8"/>
+                  <rect x="86" y="70" width="14" height="80" rx="2" fill="#22c55e" opacity="0.8"/>
+                  <rect x="108" y="55" width="14" height="95" rx="2" fill="#22c55e" opacity="0.8"/>
+                  <rect x="130" y="50" width="14" height="100" rx="2" fill="#22c55e" opacity="0.8"/>
+                  <rect x="152" y="30" width="14" height="120" rx="2" fill="#22c55e" opacity="0.8"/>
+                  <line x1="20" y1="130" x2="166" y2="40" stroke="#a78bfa" strokeWidth="2"/>
+                  <circle cx="152" cy="30" r="8" fill="none" stroke="#a78bfa" strokeWidth="2"/>
+                  <text x="152" y="22" fill="#a78bfa" fontSize="6" textAnchor="middle" fontFamily="monospace">BOS</text>
+                </svg>
+                <div className="absolute top-3 left-3 px-2 py-1 rounded-md text-[0.6rem] font-bold bg-[#a78bfa]/20 text-[#a78bfa] border border-[#a78bfa]/30">FREE</div>
+              </div>
+              <div className="p-4" style={{ background: '#161b22' }}>
+                <h3 className="text-white font-semibold text-[0.88rem] mb-1">EV Smart Money</h3>
+                <div className="flex items-center gap-3 text-[0.7rem] text-white/40"><span>👁 31K</span><span>❤ 920</span></div>
+              </div>
+            </div>
+
+            {/* Card 4 */}
+            <div className="group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:z-10">
+              <div className="relative h-[160px] overflow-hidden" style={{ background: '#0d1117' }}>
+                <svg viewBox="0 0 280 160" className="w-full h-full">
+                  <rect x="20" y="80" width="14" height="40" rx="2" fill="#ef4444" opacity="0.7"/>
+                  <rect x="42" y="90" width="14" height="30" rx="2" fill="#ef4444" opacity="0.7"/>
+                  <rect x="64" y="100" width="14" height="20" rx="2" fill="#ef4444" opacity="0.7"/>
+                  <rect x="86" y="110" width="14" height="10" rx="2" fill="#ef4444" opacity="0.7"/>
+                  <rect x="20" y="70" width="80" height="25" rx="2" fill="#f59e0b" opacity="0.15"/>
+                  <rect x="20" y="70" width="80" height="25" rx="2" fill="none" stroke="#f59e0b" strokeWidth="1.5"/>
+                  <text x="60" y="87" fill="#f59e0b" fontSize="7" textAnchor="middle" fontFamily="monospace">ORDER BLOCK</text>
+                  <path d="M120 40 L120 130" stroke="#f59e0b" strokeWidth="1.5" strokeDasharray="3 3"/>
+                  <path d="M115 45 L120 35 L125 45" fill="none" stroke="#f59e0b" strokeWidth="1.5"/>
+                  <rect x="86" y="50" width="60" height="20" rx="2" fill="#f59e0b" opacity="0.1"/>
+                  <text x="116" y="64" fill="#f59e0b" fontSize="6" textAnchor="middle" fontFamily="monospace">MITIGATION</text>
+                </svg>
+                <div className="absolute top-3 left-3 px-2 py-1 rounded-md text-[0.6rem] font-bold bg-[#f59e0b]/20 text-[#f59e0b] border border-[#f59e0b]/30">FREE</div>
+              </div>
+              <div className="p-4" style={{ background: '#161b22' }}>
+                <h3 className="text-white font-semibold text-[0.88rem] mb-1">EV Order Blocks</h3>
+                <div className="flex items-center gap-3 text-[0.7rem] text-white/40"><span>👁 28K</span><span>❤ 780</span></div>
+              </div>
+            </div>
+
+            {/* Card 5 */}
+            <div className="group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:z-10">
+              <div className="relative h-[160px] overflow-hidden" style={{ background: '#0d1117' }}>
+                <svg viewBox="0 0 280 160" className="w-full h-full">
+                  <path d="M10 120 Q40 80 70 100 T130 80 T190 60 T250 40" fill="none" stroke="#667eea" strokeWidth="2.5"/>
+                  <path d="M10 130 Q40 90 70 110 T130 90 T190 70 T250 50" fill="none" stroke="#a78bfa" strokeWidth="1.5" opacity="0.5"/>
+                  <rect x="20" y="140" width="20" height="8" rx="2" fill="#22c55e"/>
+                  <rect x="45" y="140" width="20" height="8" rx="2" fill="#22c55e"/>
+                  <rect x="70" y="140" width="20" height="8" rx="2" fill="#eab308"/>
+                  <rect x="95" y="140" width="20" height="8" rx="2" fill="#eab308"/>
+                  <rect x="120" y="140" width="20" height="8" rx="2" fill="#ef4444"/>
+                  <rect x="145" y="140" width="20" height="8" rx="2" fill="#ef4444"/>
+                  <text x="200" y="148" fill="#667eea" fontSize="8" fontFamily="monospace">STRENGTH</text>
+                </svg>
+                <div className="absolute top-3 left-3 px-2 py-1 rounded-md text-[0.6rem] font-bold bg-[#667eea]/20 text-[#667eea] border border-[#667eea]/30">FREE</div>
+              </div>
+              <div className="p-4" style={{ background: '#161b22' }}>
+                <h3 className="text-white font-semibold text-[0.88rem] mb-1">EV Trend Strength</h3>
+                <div className="flex items-center gap-3 text-[0.7rem] text-white/40"><span>👁 25K</span><span>❤ 670</span></div>
+              </div>
+            </div>
+
+            {/* Card 6 */}
+            <div className="group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:z-10">
+              <div className="relative h-[160px] overflow-hidden" style={{ background: '#0d1117' }}>
+                <svg viewBox="0 0 280 160" className="w-full h-full">
+                  <rect x="20" y="100" width="14" height="40" rx="2" fill="#22c55e" opacity="0.7"/>
+                  <rect x="42" y="90" width="14" height="50" rx="2" fill="#22c55e" opacity="0.7"/>
+                  <rect x="64" y="110" width="14" height="30" rx="2" fill="#ef4444" opacity="0.7"/>
+                  <rect x="86" y="120" width="14" height="20" rx="2" fill="#ef4444" opacity="0.7"/>
+                  <rect x="108" y="100" width="14" height="40" rx="2" fill="#22c55e" opacity="0.7"/>
+                  <rect x="130" y="85" width="14" height="55" rx="2" fill="#22c55e" opacity="0.7"/>
+                  <line x1="0" y1="120" x2="200" y2="120" stroke="#ef4444" strokeWidth="1.5" strokeDasharray="4 4"/>
+                  <line x1="0" y1="90" x2="200" y2="90" stroke="#22c55e" strokeWidth="1.5" strokeDasharray="4 4"/>
+                  <text x="205" y="124" fill="#ef4444" fontSize="7" fontFamily="monospace">S</text>
+                  <text x="205" y="94" fill="#22c55e" fontSize="7" fontFamily="monospace">R</text>
+                </svg>
+                <div className="absolute top-3 left-3 px-2 py-1 rounded-md text-[0.6rem] font-bold bg-[#22c55e]/20 text-[#22c55e] border border-[#22c55e]/30">FREE</div>
+              </div>
+              <div className="p-4" style={{ background: '#161b22' }}>
+                <h3 className="text-white font-semibold text-[0.88rem] mb-1">EV Support Resistance</h3>
+                <div className="flex items-center gap-3 text-[0.7rem] text-white/40"><span>👁 22K</span><span>❤ 610</span></div>
+              </div>
+            </div>
+
+            {/* Card 7 */}
+            <div className="group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:z-10">
+              <div className="relative h-[160px] overflow-hidden" style={{ background: '#0d1117' }}>
+                <svg viewBox="0 0 280 160" className="w-full h-full">
+                  <line x1="40" y1="140" x2="240" y2="40" stroke="#667eea" strokeWidth="2"/>
+                  <line x1="40" y1="40" x2="240" y2="40" stroke="#a78bfa" strokeWidth="1" strokeDasharray="3 3" opacity="0.8"/>
+                  <line x1="40" y1="65" x2="240" y2="65" stroke="#a78bfa" strokeWidth="1" strokeDasharray="3 3" opacity="0.7"/>
+                  <line x1="40" y1="90" x2="240" y2="90" stroke="#a78bfa" strokeWidth="1" strokeDasharray="3 3" opacity="0.6"/>
+                  <line x1="40" y1="115" x2="240" y2="115" stroke="#a78bfa" strokeWidth="1" strokeDasharray="3 3" opacity="0.5"/>
+                  <line x1="40" y1="140" x2="240" y2="140" stroke="#a78bfa" strokeWidth="1" strokeDasharray="3 3" opacity="0.4"/>
+                  <text x="245" y="44" fill="#a78bfa" fontSize="6" fontFamily="monospace">0%</text>
+                  <text x="245" y="69" fill="#a78bfa" fontSize="6" fontFamily="monospace">23.6%</text>
+                  <text x="245" y="94" fill="#a78bfa" fontSize="6" fontFamily="monospace">38.2%</text>
+                  <text x="245" y="119" fill="#a78bfa" fontSize="6" fontFamily="monospace">61.8%</text>
+                  <text x="245" y="144" fill="#a78bfa" fontSize="6" fontFamily="monospace">100%</text>
+                </svg>
+                <div className="absolute top-3 left-3 px-2 py-1 rounded-md text-[0.6rem] font-bold bg-[#a78bfa]/20 text-[#a78bfa] border border-[#a78bfa]/30">FREE</div>
+              </div>
+              <div className="p-4" style={{ background: '#161b22' }}>
+                <h3 className="text-white font-semibold text-[0.88rem] mb-1">EV Fibonacci Auto</h3>
+                <div className="flex items-center gap-3 text-[0.7rem] text-white/40"><span>👁 19K</span><span>❤ 540</span></div>
+              </div>
+            </div>
+
+            {/* Card 8 */}
+            <div className="group relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:z-10">
+              <div className="relative h-[160px] overflow-hidden flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #161b22 0%, #0d1117 100%)' }}>
+                <div className="text-center">
+                  <div className="text-4xl mb-2">🔍</div>
+                  <p className="text-white/50 text-[0.8rem]">+12 more indicators</p>
+                  <p className="text-white/30 text-[0.7rem] mt-1">on TradingView</p>
                 </div>
               </div>
-            ))}
+              <div className="p-4" style={{ background: '#161b22' }}>
+                <h3 className="text-white font-semibold text-[0.88rem] mb-1">View All Indicators</h3>
+                <div className="flex items-center gap-3 text-[0.7rem] text-white/40"><span>TradingView →</span></div>
+              </div>
+            </div>
           </div>
+        </div>
+
+        <div className="text-center mt-10">
+          <a href="https://es.tradingview.com/u/EVLabs/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#a78bfa] text-[0.85rem] font-semibold hover:underline">
+            Ver todos en TradingView →
+          </a>
         </div>
       </section>
 
