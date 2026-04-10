@@ -53,3 +53,4 @@ _cacache/
 !.dev.vars.example
 !.env.example
 _npx
+_npx/
