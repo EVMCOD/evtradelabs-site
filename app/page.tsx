@@ -215,8 +215,8 @@ export default function HomePage() {
       </section>
 
       {/* Free Tools — TradingView Indicators */}
-      <section className="py-20 px-5 bg-[#0a0a0f] overflow-hidden">
-        <div className="max-w-[1200px] mx-auto mb-12">
+      <section className="py-28 px-5 bg-[#0a0a0f]">
+        <div className="max-w-[1200px] mx-auto mb-16">
           <div className="text-center">
             <span className="inline-block text-[0.7rem] font-bold tracking-[0.25em] uppercase text-[#a78bfa] mb-4">
               GRATIS
@@ -228,60 +228,169 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Scrolling ticker */}
-        <div className="relative">
-          {/* Left fade */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0a0a0f] to-transparent z-10" />
-          {/* Right fade */}
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0a0a0f] to-transparent z-10" />
-
-          <div className="flex gap-6 animate-ticker">
+        {/* BigBeluga-style cards with mini chart visuals */}
+        <div className="max-w-[1100px] mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {/* Mini chart SVG components */}
             {[
-              { name: "EV Liquidity Zones", views: "42K", likes: "1.2K", color: "#a78bfa" },
-              { name: "EV Volume Profile", views: "38K", likes: "980", color: "#667eea" },
-              { name: "EV Smart Money", views: "31K", likes: "870", color: "#a78bfa" },
-              { name: "EV Order Blocks", views: "28K", likes: "760", color: "#667eea" },
-              { name: "EV Trend Strength", views: "25K", likes: "650", color: "#a78bfa" },
-              { name: "EV Support Resistance", views: "22K", likes: "590", color: "#667eea" },
-              { name: "EV Fibonacci Auto", views: "19K", likes: "510", color: "#a78bfa" },
-              { name: "EV Momentum Divergence", views: "17K", likes: "480", color: "#667eea" },
+              { 
+                name: "EV Liquidity Zones", 
+                desc: "Identifica zonas de liquidez donde institutions colocan órdenes.", 
+                chart: (
+                  <svg viewBox="0 0 200 100" className="w-full h-20">
+                    <defs>
+                      <linearGradient id="liq1" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#f97316" stopOpacity="0.3"/>
+                        <stop offset="100%" stopColor="#f97316" stopOpacity="0"/>
+                      </linearGradient>
+                      <linearGradient id="liq2" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#f97316" stopOpacity="0.2"/>
+                        <stop offset="100%" stopColor="#f97316" stopOpacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    {/* Price line */}
+                    <polyline points="10,80 40,75 60,70 90,72 110,55 140,58 160,45 190,40" fill="none" stroke="#f97316" strokeWidth="2"/>
+                    {/* Liquidity zones */}
+                    <rect x="55" y="68" width="12" height="32" fill="url(#liq1)" rx="2"/>
+                    <rect x="135" y="55" width="12" height="45" fill="url(#liq2)" rx="2"/>
+                    {/* Dashed lines */}
+                    <line x1="55" y1="68" x2="67" y2="68" stroke="#f97316" strokeWidth="1" strokeDasharray="2,2"/>
+                    <line x1="135" y1="55" x2="147" y2="55" stroke="#f97316" strokeWidth="1" strokeDasharray="2,2"/>
+                  </svg>
+                ),
+              },
+              { 
+                name: "EV Volume Profile", 
+                desc: "Visualiza áreas de alto volumen para identificar puntos de control.",
+                chart: (
+                  <svg viewBox="0 0 200 100" className="w-full h-20">
+                    <defs>
+                      <linearGradient id="vp1" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stopColor="#22c55e" stopOpacity="0.8"/>
+                        <stop offset="100%" stopColor="#22c55e" stopOpacity="0.3"/>
+                      </linearGradient>
+                    </defs>
+                    {/* Bars */}
+                    {[20,35,55,45,70,60,80,65,90,75,85,60,40].map((h, i) => (
+                      <rect key={i} x={10 + i * 14} y={90 - h/1.5} width="10" height={h/1.5} fill="url(#vp1)" rx="1" opacity={0.5 + (i / 13) * 0.5}/>
+                    ))}
+                    {/* POC line */}
+                    <line x1="10" y1="62" x2="190" y2="62" stroke="#22c55e" strokeWidth="1" strokeDasharray="3,3" opacity="0.6"/>
+                    <text x="170" y="58" fill="#22c55e" fontSize="8" fontFamily="monospace">POC</text>
+                  </svg>
+                ),
+              },
+              { 
+                name: "EV Smart Money", 
+                desc: "Detecta BOS y CHOCH para entender el flujo de instituciones.",
+                chart: (
+                  <svg viewBox="0 0 200 100" className="w-full h-20">
+                    <polyline points="10,75 30,70 50,72 70,30 90,35 110,75 130,70 150,25 170,28 190,20" fill="none" stroke="#a78bfa" strokeWidth="2"/>
+                    {/* BOS/CHOCH markers */}
+                    <circle cx="70" cy="30" r="4" fill="#f97316"/>
+                    <text x="74" y="28" fill="#f97316" fontSize="7" fontFamily="monospace">BOS</text>
+                    <circle cx="150" cy="25" r="4" fill="#22c55e"/>
+                    <text x="154" y="23" fill="#22c55e" fontSize="7" fontFamily="monospace">CH</text>
+                    {/* Breaks */}
+                    <line x1="70" y1="72" x2="70" y2="30" stroke="#f97316" strokeWidth="1" strokeDasharray="2,2" opacity="0.5"/>
+                    <line x1="150" y1="70" x2="150" y2="25" stroke="#22c55e" strokeWidth="1" strokeDasharray="2,2" opacity="0.5"/>
+                  </svg>
+                ),
+              },
+              { 
+                name: "EV Chart Patterns", 
+                desc: "Reconoce canales, wedges y patrones chartistas automáticamente.",
+                chart: (
+                  <svg viewBox="0 0 200 100" className="w-full h-20">
+                    {/* Trend channel */}
+                    <line points="10,80 190,30" stroke="#a78bfa" strokeWidth="1" strokeDasharray="4,4" opacity="0.4"/>
+                    <line points="10,90 190,40" stroke="#a78bfa" strokeWidth="1" strokeDasharray="4,4" opacity="0.4"/>
+                    {/* Price action */}
+                    <polyline points="10,85 30,78 50,82 70,65 90,70 110,50 130,55 150,40 170,45 190,35" fill="none" stroke="#a78bfa" strokeWidth="2"/>
+                    {/* Wedge annotation */}
+                    <text x="100" y="18" fill="#a78bfa" fontSize="8" fontFamily="monospace" textAnchor="middle">WEDGE</text>
+                    <line x1="115" y1="22" x2="115" y2="50" stroke="#a78bfa" strokeWidth="1" strokeDasharray="2,2"/>
+                  </svg>
+                ),
+              },
+              { 
+                name: "EV Money Flow", 
+                desc: "Combina indicadores de flujo de dinero con señales de entrada.",
+                chart: (
+                  <svg viewBox="0 0 200 100" className="w-full h-20">
+                    <defs>
+                      <linearGradient id="mf1" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#22c55e" stopOpacity="0.4"/>
+                        <stop offset="100%" stopColor="#22c55e" stopOpacity="0"/>
+                      </linearGradient>
+                      <linearGradient id="mf2" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#ef4444" stopOpacity="0.4"/>
+                        <stop offset="100%" stopColor="#ef4444" stopOpacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    {/* Positive flow */}
+                    <rect x="10" y="30" width="80" height="60" fill="url(#mf1)" rx="2"/>
+                    <text x="18" y="48" fill="#22c55e" fontSize="8" fontFamily="monospace">IN</text>
+                    {/* Negative flow */}
+                    <rect x="100" y="30" width="90" height="60" fill="url(#mf2)" rx="2"/>
+                    <text x="170" y="48" fill="#ef4444" fontSize="8" fontFamily="monospace">OUT</text>
+                    {/* Arrow */}
+                    <line x1="90" y1="60" x2="100" y2="60" stroke="#ffffff" strokeWidth="1.5"/>
+                  </svg>
+                ),
+              },
+              { 
+                name: "EV Support Resistance", 
+                desc: "Auto-detecta niveles de soporte y resistencia con confluencias.",
+                chart: (
+                  <svg viewBox="0 0 200 100" className="w-full h-20">
+                    <line points="10,70 190,70" stroke="#f97316" strokeWidth="1.5" strokeDasharray="6,3"/>
+                    <line points="10,40 190,40" stroke="#22c55e" strokeWidth="1.5" strokeDasharray="6,3"/>
+                    {/* Price line */}
+                    <polyline points="10,85 40,80 60,75 80,72 100,68 120,60 140,65 160,55 190,50" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
+                    {/* Touches */}
+                    <circle cx="70" cy="70" r="3" fill="#f97316"/>
+                    <circle cx="120" cy="40" r="3" fill="#22c55e"/>
+                    <text x="74" y="68" fill="#f97316" fontSize="7" fontFamily="monospace">S</text>
+                    <text x="124" y="38" fill="#22c55e" fontSize="7" fontFamily="monospace">R</text>
+                  </svg>
+                ),
+              },
             ].map((tool, i) => (
               <div 
                 key={tool.name}
-                className="flex-shrink-0 rounded-2xl p-5 min-w-[220px] border border-white/[0.06] hover:border-[#a78bfa]/30 transition-all cursor-pointer group"
-                style={{ background: 'rgba(255,255,255,0.02)' }}
+                className="group relative rounded-2xl overflow-hidden cursor-pointer animate-fade-in-up"
+                style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'forwards', opacity: 0 }}
               >
-                <div className="flex items-start justify-between mb-3">
-                  <div 
-                    className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold"
-                    style={{ background: tool.color }}
-                  >
-                    EV
+                {/* Card background */}
+                <div 
+                  className="relative p-6 h-full"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(15,23,42,0.95) 100%)',
+                    border: '1px solid rgba(255,255,255,0.06)',
+                    borderRadius: 'inherit',
+                  }}
+                >
+                  {/* Chart visual */}
+                  <div className="mb-4 -mx-2">
+                    {tool.chart}
                   </div>
-                  <div className="flex items-center gap-1 text-[0.7rem] text-white/30">
-                    <span>❤</span>
-                    <span>{tool.likes}</span>
+                  
+                  {/* Text */}
+                  <h3 className="text-white font-bold text-[1rem] mb-2 group-hover:text-[#a78bfa] transition-colors">{tool.name}</h3>
+                  <p className="text-white/40 text-[0.82rem] leading-relaxed">{tool.desc}</p>
+                  
+                  {/* TV badge */}
+                  <div className="mt-4 flex items-center gap-2">
+                    <div className="px-2.5 py-1 rounded-md bg-[#1e293b] border border-white/10 text-[0.7rem] text-white/50 font-medium">
+                      TradingView
+                    </div>
+                    <span className="text-[#a78bfa] text-[0.75rem] group-hover:underline">Ver indicador →</span>
                   </div>
-                </div>
-                <h3 className="text-white font-semibold text-[0.9rem] mb-1 group-hover:text-[#a78bfa] transition-colors">{tool.name}</h3>
-                <div className="flex items-center gap-1 text-[0.7rem] text-white/30">
-                  <span>👁</span>
-                  <span>{tool.views}</span>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-
-        <div className="text-center mt-10">
-          <a 
-            href="https://www.tradingview.com/u/EVTradingLabs/" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[#a78bfa] text-[0.85rem] font-semibold hover:underline"
-          >
-            Ver todos en TradingView →
-          </a>
         </div>
       </section>
 
