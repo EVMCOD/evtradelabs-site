@@ -7,7 +7,13 @@
 6 silly config load:file:/opt/homebrew/etc/npmrc
 7 verbose title npm run dev
 8 verbose argv "run" "dev"
-9 verbose logfile logs-max:10 dir:/Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-09T17_39_21_559Z-
-10 verbose logfile /Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-09T17_39_21_559Z-debug-0.log
+9 verbose logfile logs-max:10 dir:/Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-10T10_50_12_854Z-
+10 verbose logfile /Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-10T10_50_12_854Z-debug-0.log
 11 silly logfile start cleaning logs, removing 1 files
 12 silly logfile done cleaning log files
+13 verbose cwd /Users/enriquevaleros/.openclaw/workspace/evtradelabs-site
+14 verbose os Darwin 25.3.0
+15 verbose node v25.8.0
+16 verbose npm  v11.11.0
+17 verbose exit 143
+18 verbose code 143

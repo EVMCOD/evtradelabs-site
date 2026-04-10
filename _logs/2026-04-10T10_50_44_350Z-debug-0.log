@@ -1,0 +1,124 @@
+0 verbose cli /opt/homebrew/Cellar/node/25.8.0/bin/node /opt/homebrew/bin/npm
+1 info using npm@11.11.0
+2 info using node@v25.8.0
+3 silly config load:file:/opt/homebrew/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/.npmrc
+5 silly config load:file:/Users/enriquevaleros/.npmrc
+6 silly config load:file:/opt/homebrew/etc/npmrc
+7 verbose title npm install nodemailer
+8 verbose argv "install" "nodemailer"
+9 verbose logfile logs-max:10 dir:/Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-10T10_50_44_350Z-
+10 verbose logfile /Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-10T10_50_44_350Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 silly logfile done cleaning log files
+14 silly idealTree buildDeps
+15 silly fetch manifest nodemailer@*
+16 silly packumentCache full:https://registry.npmjs.org/nodemailer cache-miss
+17 http fetch GET 200 https://registry.npmjs.org/nodemailer 194ms (cache revalidated)
+18 silly packumentCache full:https://registry.npmjs.org/nodemailer set size:572865 disposed:false
+19 silly placeDep ROOT nodemailer@8.0.5 OK for: evtradelabs-site@0.1.0 want: *
+20 silly fetch manifest nodemailer@^7.0.7
+21 silly packumentCache full:https://registry.npmjs.org/nodemailer cache-hit
+22 warn ERESOLVE overriding peer dependency {
+22 warn ERESOLVE   code: 'ERESOLVE',
+22 warn ERESOLVE   edge: {
+22 warn ERESOLVE     type: 'peerOptional',
+22 warn ERESOLVE     name: 'nodemailer',
+22 warn ERESOLVE     spec: '^7.0.7',
+22 warn ERESOLVE     error: 'INVALID',
+22 warn ERESOLVE     from: {
+22 warn ERESOLVE       name: '@auth/core',
+22 warn ERESOLVE       version: '0.41.1',
+22 warn ERESOLVE       location: 'node_modules/@auth/core',
+22 warn ERESOLVE       isWorkspace: false,
+22 warn ERESOLVE       dependents: [Array]
+22 warn ERESOLVE     }
+22 warn ERESOLVE   },
+22 warn ERESOLVE   dep: {
+22 warn ERESOLVE     name: 'nodemailer',
+22 warn ERESOLVE     version: '7.0.13',
+22 warn ERESOLVE     whileInstalling: {
+22 warn ERESOLVE       name: '@auth/core',
+22 warn ERESOLVE       version: '0.41.1',
+22 warn ERESOLVE       path: '/Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/node_modules/@auth/core'
+22 warn ERESOLVE     },
+22 warn ERESOLVE     location: 'node_modules/nodemailer',
+22 warn ERESOLVE     isWorkspace: false,
+22 warn ERESOLVE     dependents: [ [Object] ]
+22 warn ERESOLVE   },
+22 warn ERESOLVE   force: false,
+22 warn ERESOLVE   isMine: false,
+22 warn ERESOLVE   strictPeerDeps: false,
+22 warn ERESOLVE   current: {
+22 warn ERESOLVE     name: 'nodemailer',
+22 warn ERESOLVE     version: '8.0.5',
+22 warn ERESOLVE     location: 'node_modules/nodemailer',
+22 warn ERESOLVE     isWorkspace: false,
+22 warn ERESOLVE     dependents: [ [Object] ]
+22 warn ERESOLVE   },
+22 warn ERESOLVE   peerConflict: {
+22 warn ERESOLVE     current: {
+22 warn ERESOLVE       name: 'nodemailer',
+22 warn ERESOLVE       version: '8.0.5',
+22 warn ERESOLVE       location: 'node_modules/nodemailer',
+22 warn ERESOLVE       isWorkspace: false,
+22 warn ERESOLVE       dependents: [Array]
+22 warn ERESOLVE     },
+22 warn ERESOLVE     peer: {
+22 warn ERESOLVE       name: 'nodemailer',
+22 warn ERESOLVE       version: '7.0.13',
+22 warn ERESOLVE       whileInstalling: [Object],
+22 warn ERESOLVE       location: 'node_modules/nodemailer',
+22 warn ERESOLVE       isWorkspace: false,
+22 warn ERESOLVE       dependents: [Array]
+22 warn ERESOLVE     }
+22 warn ERESOLVE   }
+22 warn ERESOLVE }
+23 verbose stack Error: could not resolve
+23 verbose stack     at PlaceDep.failPeerConflict (/opt/homebrew/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/place-dep.js:503:25)
+23 verbose stack     at new PlaceDep (/opt/homebrew/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/place-dep.js:157:21)
+23 verbose stack     at #buildDepStep (/opt/homebrew/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:933:18)
+23 verbose stack     at async Arborist.buildIdealTree (/opt/homebrew/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:170:7)
+23 verbose stack     at async Promise.all (index 1)
+23 verbose stack     at async Arborist.reify (/opt/homebrew/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/reify.js:110:5)
+23 verbose stack     at async Install.exec (/opt/homebrew/lib/node_modules/npm/lib/commands/install.js:152:5)
+23 verbose stack     at async Npm.exec (/opt/homebrew/lib/node_modules/npm/lib/npm.js:209:9)
+23 verbose stack     at async module.exports (/opt/homebrew/lib/node_modules/npm/lib/cli/entry.js:67:5)
+24 error code ERESOLVE
+25 error ERESOLVE could not resolve
+26 error
+27 error While resolving: next-auth@5.0.0-beta.30
+27 error Found: nodemailer@8.0.5
+27 error node_modules/nodemailer
+27 error   nodemailer@"*" from the root project
+27 error
+27 error Could not resolve dependency:
+27 error peerOptional nodemailer@"^7.0.7" from next-auth@5.0.0-beta.30
+27 error node_modules/next-auth
+27 error   next-auth@"^5.0.0-beta.30" from the root project
+27 error
+27 error Conflicting peer dependency: nodemailer@7.0.13
+27 error node_modules/nodemailer
+27 error   peerOptional nodemailer@"^7.0.7" from next-auth@5.0.0-beta.30
+27 error   node_modules/next-auth
+27 error     next-auth@"^5.0.0-beta.30" from the root project
+27 error
+27 error Fix the upstream dependency conflict, or retry
+27 error this command with --force or --legacy-peer-deps
+27 error to accept an incorrect (and potentially broken) dependency resolution.
+28 error
+28 error
+28 error For a full report see:
+28 error /Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-10T10_50_44_350Z-eresolve-report.txt
+29 silly unfinished npm timer reify 1775818244550
+30 silly unfinished npm timer reify:loadTrees 1775818244550
+31 silly unfinished npm timer idealTree:buildDeps 1775818244615
+32 silly unfinished npm timer idealTree:node_modules/next-auth 1775818244825
+33 verbose cwd /Users/enriquevaleros/.openclaw/workspace/evtradelabs-site
+34 verbose os Darwin 25.3.0
+35 verbose node v25.8.0
+36 verbose npm  v11.11.0
+37 verbose exit 1
+38 verbose code 1
+39 error A complete log of this run can be found in: /Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-10T10_50_44_350Z-debug-0.log

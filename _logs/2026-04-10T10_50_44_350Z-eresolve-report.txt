@@ -1,0 +1,24 @@
+'Log files:
+/Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-10T10_50_44_350Z-debug-0.log
+
+# npm resolution error report
+
+While resolving: next-auth@5.0.0-beta.30
+Found: nodemailer@8.0.5
+node_modules/nodemailer
+  nodemailer@"*" from the root project
+
+Could not resolve dependency:
+peerOptional nodemailer@"^7.0.7" from next-auth@5.0.0-beta.30
+node_modules/next-auth
+  next-auth@"^5.0.0-beta.30" from the root project
+
+Conflicting peer dependency: nodemailer@7.0.13
+node_modules/nodemailer
+  peerOptional nodemailer@"^7.0.7" from next-auth@5.0.0-beta.30
+  node_modules/next-auth
+    next-auth@"^5.0.0-beta.30" from the root project
+
+Fix the upstream dependency conflict, or retry
+this command with --force or --legacy-peer-deps
+to accept an incorrect (and potentially broken) dependency resolution.

@@ -7,7 +7,6 @@ const navLinks = [
   { href: "/", label: "Inicio" },
   { href: "/products", label: "Productos" },
   { href: "/products#pricing", label: "Precios" },
-  { href: "/account", label: "Mi Cuenta" },
 ];
 
 const accountMenuItems = [

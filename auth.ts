@@ -1,7 +1,6 @@
 import NextAuth from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import Credentials from "next-auth/providers/credentials";
-import Email from "next-auth/providers/email";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
@@ -45,17 +44,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           name: user.name,
         };
       },
-    }),
-
-    Email({
-      server: {
-        host: "https://api.resend.com",
-        auth: {
-          user: process.env.RESEND_API_KEY,
-          pass: process.env.RESEND_API_KEY,
-        },
-      },
-      from: "EV Trading Labs <contact@evtradelabs.com>",
     }),
   ],
 
