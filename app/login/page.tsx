@@ -1,17 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [justRegistered, setJustRegistered] = useState(false);
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const justRegistered = searchParams.get('registered') === 'true';
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setJustRegistered(params.get('registered') === 'true');
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,24 +23,44 @@ export default function LoginPage() {
     setError('');
 
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
+
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
+        signal: controller.signal,
       });
 
-      const data = await res.json();
+      clearTimeout(timeoutId);
 
       if (!res.ok) {
-        setError(data.error || 'Error al iniciar sesión');
+        const text = await res.text();
+        try {
+          const data = JSON.parse(text);
+          setError(data.error || 'Error al iniciar sesión');
+        } catch {
+          setError(`Error (${res.status}): ${text.substring(0, 100)}`);
+        }
         setLoading(false);
         return;
       }
 
-      router.push('/dashboard');
-      router.refresh();
-    } catch {
-      setError('Error de conexión');
+      const data = await res.json();
+      
+      if (data.success) {
+        window.location.href = '/dashboard';
+      } else {
+        setError(data.error || 'Error desconocido');
+        setLoading(false);
+      }
+    } catch (err: any) {
+      if (err.name === 'AbortError') {
+        setError('Tiempo de espera agotado. Intenta de nuevo.');
+      } else {
+        setError('Error de conexión');
+      }
       setLoading(false);
     }
   };
