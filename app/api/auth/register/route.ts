@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { query } from "../../../../lib/d1";
 
-const prisma = new PrismaClient();
 const JWT_SECRET = process.env.JWT_SECRET || "evtradelabs-jwt-secret-change-in-production";
 
 export async function POST(req: Request) {
@@ -14,9 +13,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Email y password requeridos" }, { status: 400 });
     }
 
-    // Check existing
-    const existing = await prisma.user.findUnique({ where: { email } });
-    if (existing) {
+    // Check existing user
+    const existing = await query(
+      "SELECT id FROM User WHERE email = ? LIMIT 1",
+      [email]
+    );
+
+    if (existing.results.length > 0) {
       return NextResponse.json({ error: "Email ya registrado" }, { status: 400 });
     }
 
@@ -24,28 +27,26 @@ export async function POST(req: Request) {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     // Create user
-    const user = await prisma.user.create({
-      data: {
-        email,
-        name: name || email.split("@")[0],
-        password: hashedPassword,
-      },
-    });
+    const userId = crypto.randomUUID();
+    const now = new Date().toISOString();
+
+    await query(
+      "INSERT INTO User (id, email, name, password, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?)",
+      [userId, email, name || email.split("@")[0], hashedPassword, now, now]
+    );
 
     // Create JWT
     const token = jwt.sign(
-      { userId: user.id, email: user.email },
+      { userId, email },
       JWT_SECRET,
       { expiresIn: "7d" }
     );
 
-    // Create response
     const response = NextResponse.json({ 
       success: true, 
-      user: { id: user.id, email: user.email, name: user.name } 
+      user: { id: userId, email, name: name || email.split("@")[0] } 
     });
 
-    // Set cookie
     response.cookies.set("auth_token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",

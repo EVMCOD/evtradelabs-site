@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import crypto from "crypto";
-import { getAuthUser } from "@/lib/auth";
+import { query } from "../../../../lib/d1";
+import { getAuthUser } from "../../../../lib/auth";
 
-const prisma = new PrismaClient();
 const METAAPI_URL = "https://api.metaapi.cloud/v1";
 
 function encrypt(text: string): string {
@@ -17,33 +16,34 @@ function encrypt(text: string): string {
 
 export async function POST(req: Request) {
   try {
-    // Get user from cookie
     const user = getAuthUser(req as any);
     if (!user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { broker, server, login, password, investorPassword } = await req.json();
+    const { broker, server, login, investorPassword } = await req.json();
 
     if (!broker || !server || !login || !investorPassword) {
       return NextResponse.json({ error: "Todos los campos son requeridos" }, { status: 400 });
     }
 
     // Check existing
-    const existing = await prisma.mt5Account.findFirst({
-      where: { userId: user.userId, login, server },
-    });
-    if (existing) {
+    const existing = await query(
+      "SELECT id FROM Mt5Account WHERE userId = ? AND login = ? AND server = ? LIMIT 1",
+      [user.userId, login, server]
+    );
+
+    if (existing.results.length > 0) {
       return NextResponse.json({ error: "Cuenta ya conectada" }, { status: 400 });
     }
 
-    // Register account in MetaApi
+    // Register in MetaApi
     const token = process.env.METAAPI_TOKEN;
     
     const provisioningRes = await fetch(`${METAAPI_URL}/users/current/accounts`, {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -63,26 +63,16 @@ export async function POST(req: Request) {
       }, { status: 400 });
     }
 
-    const metaApiAccount = await provisioningRes.json();
-    
-    // Save to our DB
-    const account = await prisma.mt5Account.create({
-      data: {
-        userId: user.userId,
-        broker,
-        server,
-        login,
-        password: encrypt(investorPassword),
-        status: "connected",
-        lastSync: new Date(),
-      },
-    });
+    // Save to D1
+    const accountId = crypto.randomUUID();
+    const now = new Date().toISOString();
 
-    return NextResponse.json({ 
-      success: true, 
-      accountId: account.id,
-      metaApiId: metaApiAccount.id,
-    });
+    await query(
+      "INSERT INTO Mt5Account (id, userId, broker, server, login, password, status, lastSync, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      [accountId, user.userId, broker, server, login, encrypt(investorPassword), "connected", now, now, now]
+    );
+
+    return NextResponse.json({ success: true, accountId });
   } catch (error) {
     console.error("MT5 connect error:", error);
     return NextResponse.json({ error: "Error al conectar cuenta" }, { status: 500 });
@@ -96,20 +86,12 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const accounts = await prisma.mt5Account.findMany({
-      where: { userId: user.userId },
-      select: {
-        id: true,
-        broker: true,
-        server: true,
-        login: true,
-        status: true,
-        lastSync: true,
-        createdAt: true,
-      },
-    });
+    const result = await query(
+      "SELECT id, broker, server, login, status, lastSync, createdAt FROM Mt5Account WHERE userId = ?",
+      [user.userId]
+    );
 
-    return NextResponse.json({ accounts });
+    return NextResponse.json({ accounts: result.results });
   } catch (error) {
     console.error("MT5 list error:", error);
     return NextResponse.json({ error: "Error al obtener cuentas" }, { status: 500 });
