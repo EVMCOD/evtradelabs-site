@@ -3,8 +3,58 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  password      String?
+  emailVerified DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+  licenses      License[]
+  mt5Accounts   Mt5Account[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  createdAt         DateTime @default(now())
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expires      DateTime
+  createdAt    DateTime @default(now())
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
 
 model Order {
@@ -14,7 +64,7 @@ model Order {
   customerName    String?
   country         String?
   productSlug     String
-  productName    String
+  productName     String
   amount          Int
   currency        String    @default("eur")
   status          String    @default("pending")
@@ -32,10 +82,27 @@ model License {
   productSlug        String
   productName        String
   customerEmail      String
+  userId             String?
+  user               User?     @relation(fields: [userId], references: [id])
   status             String    @default("active")
   expiresAt          DateTime?
   maxAccounts        Int       @default(1)
-  activatedAccounts   Int       @default(0)
+  activatedAccounts  Int       @default(0)
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
+}
+
+model Mt5Account {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  broker       String
+  server       String
+  login        String
+  password     String   // encrypted
+  investorPass String? // encrypted
+  status       String   @default("disconnected") // connected, disconnected, error
+  lastSync     DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

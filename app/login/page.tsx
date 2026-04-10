@@ -2,99 +2,101 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password) {
-      setError('Completa todos los campos');
-      return;
-    }
     setLoading(true);
     setError('');
-    
-    // Demo mode — simulates login
-    setTimeout(() => {
-      if (email.includes('@') && password.length >= 4) {
-        window.location.href = '/account';
-      } else {
-        setError('Email o contraseña incorrectos');
-        setLoading(false);
-      }
-    }, 800);
+
+    const result = await signIn('credentials', {
+      email,
+      password,
+      redirect: false,
+    });
+
+    setLoading(false);
+
+    if (result?.error) {
+      setError('Email o contraseña incorrectos');
+    } else {
+      router.push('/dashboard');
+    }
   };
 
   return (
-    <main className="shell">
-      <div className="wrap stack page-gap-lg max-w-[400px] mx-auto py-12">
-        <div className="text-center">
-          <h1 className="h1">Iniciar sesión</h1>
-          <p className="p text-white/50 mt-2">
-            Accede a tu cuenta y gestiona tus licencias.
-          </p>
+    <div className="min-h-screen flex items-center justify-center px-5" style={{ background: 'linear-gradient(180deg, #0a0a0f 0%, #0d1117 100%)' }}>
+      <div className="w-full max-w-md">
+        {/* Logo */}
+        <div className="text-center mb-8">
+          <Link href="/">
+            <span className="text-white/80 font-black text-xl tracking-wider">EV TRADING LABS</span>
+          </Link>
         </div>
 
-        <form onSubmit={handleSubmit} className="card card-strong space-y-5">
+        {/* Card */}
+        <div className="rounded-2xl p-8" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
+          <h1 className="text-2xl font-bold text-white mb-2">Iniciar sesión</h1>
+          <p className="text-white/40 text-sm mb-6">Accede a tu dashboard de trading</p>
+
           {error && (
-            <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-[0.88rem]">
+            <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
               {error}
             </div>
           )}
 
-          <div>
-            <label className="block text-[0.82rem] font-semibold text-white/70 mb-2">Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="tu@email.com"
-              className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/10 text-white text-[0.95rem] placeholder:text-white/25 focus:border-[#667eea] focus:outline-none focus:ring-1 focus:ring-[#667eea]/50 transition-all"
-            />
-          </div>
-
-          <div>
-            <div className="flex items-center justify-between mb-2">
-              <label className="text-[0.82rem] font-semibold text-white/70">Contraseña</label>
-              <Link href="/forgot-password" className="text-[0.78rem] text-[#667eea] hover:underline">
-                ¿Olvidaste la contraseña?
-              </Link>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-white/60 text-sm mb-2">Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#a78bfa]/50 transition-colors"
+                placeholder="tu@email.com"
+                required
+              />
             </div>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/10 text-white text-[0.95rem] placeholder:text-white/25 focus:border-[#667eea] focus:outline-none focus:ring-1 focus:ring-[#667eea]/50 transition-all"
-            />
+
+            <div>
+              <label className="block text-white/60 text-sm mb-2">Contraseña</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#a78bfa]/50 transition-colors"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 rounded-xl bg-[#a78bfa] text-white font-semibold hover:bg-[#8b7cf7] transition-colors disabled:opacity-50"
+            >
+              {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
+            </button>
+          </form>
+
+          <div className="mt-6 text-center">
+            <p className="text-white/40 text-sm">
+              ¿No tienes cuenta?{' '}
+              <Link href="/register" className="text-[#a78bfa] hover:underline">
+                Regístrate
+              </Link>
+            </p>
           </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-3 rounded-xl bg-[#667eea] text-white font-bold text-[0.95rem] hover:bg-[#5a7fd8] transition-colors disabled:opacity-60"
-          >
-            {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
-          </button>
-        </form>
-
-        <p className="text-center text-[0.88rem] text-white/50">
-          ¿No tienes cuenta?{' '}
-          <Link href="/register" className="text-[#667eea] font-semibold hover:underline">
-            Regístrate
-          </Link>
-        </p>
-
-        <div className="text-center p-4 rounded-xl border border-white/[0.06] bg-white/[0.02]">
-          <p className="text-[0.78rem] text-white/30">
-            Demo: usa cualquier email válido y contraseña de 4+ caracteres
-          </p>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

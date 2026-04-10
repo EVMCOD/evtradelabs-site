@@ -2,121 +2,145 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [acceptTerms, setAcceptTerms] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !email || !password) {
-      setError('Completa todos los campos');
-      return;
-    }
-    if (!acceptTerms) {
-      setError('Debes aceptar los términos');
-      return;
-    }
-    if (password.length < 6) {
-      setError('La contraseña debe tener al menos 6 caracteres');
-      return;
-    }
     setLoading(true);
     setError('');
 
-    // Demo mode
-    setTimeout(() => {
-      window.location.href = '/account';
-    }, 800);
+    if (password !== confirmPassword) {
+      setError('Las contraseñas no coinciden');
+      setLoading(false);
+      return;
+    }
+
+    if (password.length < 8) {
+      setError('La contraseña debe tener al menos 8 caracteres');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || 'Error al registrar');
+        setLoading(false);
+        return;
+      }
+
+      // Auto-login after register
+      router.push('/login?registered=true');
+    } catch {
+      setError('Error de conexión');
+      setLoading(false);
+    }
   };
 
   return (
-    <main className="shell">
-      <div className="wrap stack page-gap-lg max-w-[400px] mx-auto py-12">
-        <div className="text-center">
-          <h1 className="h1">Crear cuenta</h1>
-          <p className="p text-white/50 mt-2">
-            Regístrate para acceder a licencias y descargas.
-          </p>
+    <div className="min-h-screen flex items-center justify-center px-5" style={{ background: 'linear-gradient(180deg, #0a0a0f 0%, #0d1117 100%)' }}>
+      <div className="w-full max-w-md">
+        {/* Logo */}
+        <div className="text-center mb-8">
+          <Link href="/">
+            <span className="text-white/80 font-black text-xl tracking-wider">EV TRADING LABS</span>
+          </Link>
         </div>
 
-        <form onSubmit={handleSubmit} className="card card-strong space-y-5">
+        {/* Card */}
+        <div className="rounded-2xl p-8" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
+          <h1 className="text-2xl font-bold text-white mb-2">Crear cuenta</h1>
+          <p className="text-white/40 text-sm mb-6">Regístrate para acceder al dashboard</p>
+
           {error && (
-            <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-[0.88rem]">
+            <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
               {error}
             </div>
           )}
 
-          <div>
-            <label className="block text-[0.82rem] font-semibold text-white/70 mb-2">Nombre</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Tu nombre"
-              className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/10 text-white text-[0.95rem] placeholder:text-white/25 focus:border-[#667eea] focus:outline-none focus:ring-1 focus:ring-[#667eea]/50 transition-all"
-            />
-          </div>
-
-          <div>
-            <label className="block text-[0.82rem] font-semibold text-white/70 mb-2">Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="tu@email.com"
-              className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/10 text-white text-[0.95rem] placeholder:text-white/25 focus:border-[#667eea] focus:outline-none focus:ring-1 focus:ring-[#667eea]/50 transition-all"
-            />
-          </div>
-
-          <div>
-            <label className="block text-[0.82rem] font-semibold text-white/70 mb-2">Contraseña</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Mínimo 6 caracteres"
-              className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/10 text-white text-[0.95rem] placeholder:text-white/25 focus:border-[#667eea] focus:outline-none focus:ring-1 focus:ring-[#667eea]/50 transition-all"
-            />
-          </div>
-
-          <div>
-            <label className="flex items-start gap-2.5 cursor-pointer">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-white/60 text-sm mb-2">Nombre</label>
               <input
-                type="checkbox"
-                checked={acceptTerms}
-                onChange={(e) => setAcceptTerms(e.target.checked)}
-                className="mt-0.5 w-4 h-4 rounded border-white/20 bg-white/[0.05] text-[#667eea] cursor-pointer"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#a78bfa]/50 transition-colors"
+                placeholder="Tu nombre"
               />
-              <span className="text-[0.82rem] text-white/60 leading-relaxed">
-                Acepto los{' '}
-                <Link href="/terms" className="text-[#667eea] hover:underline">términos y condiciones</Link>
-                {' '}y la{' '}
-                <Link href="/privacy" className="text-[#667eea] hover:underline">política de privacidad</Link>
-              </span>
-            </label>
+            </div>
+
+            <div>
+              <label className="block text-white/60 text-sm mb-2">Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#a78bfa]/50 transition-colors"
+                placeholder="tu@email.com"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-white/60 text-sm mb-2">Contraseña</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#a78bfa]/50 transition-colors"
+                placeholder="Mínimo 8 caracteres"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-white/60 text-sm mb-2">Confirmar contraseña</label>
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#a78bfa]/50 transition-colors"
+                placeholder="Repite la contraseña"
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 rounded-xl bg-[#a78bfa] text-white font-semibold hover:bg-[#8b7cf7] transition-colors disabled:opacity-50"
+            >
+              {loading ? 'Creando cuenta...' : 'Crear cuenta'}
+            </button>
+          </form>
+
+          <div className="mt-6 text-center">
+            <p className="text-white/40 text-sm">
+              ¿Ya tienes cuenta?{' '}
+              <Link href="/login" className="text-[#a78bfa] hover:underline">
+                Inicia sesión
+              </Link>
+            </p>
           </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-3 rounded-xl bg-[#667eea] text-white font-bold text-[0.95rem] hover:bg-[#5a7fd8] transition-colors disabled:opacity-60"
-          >
-            {loading ? 'Creando cuenta...' : 'Crear cuenta'}
-          </button>
-        </form>
-
-        <p className="text-center text-[0.88rem] text-white/50">
-          ¿Ya tienes cuenta?{' '}
-          <Link href="/login" className="text-[#667eea] font-semibold hover:underline">
-            Inicia sesión
-          </Link>
-        </p>
+        </div>
       </div>
-    </main>
+    </div>
   );
 }
