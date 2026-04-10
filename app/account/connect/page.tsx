@@ -23,7 +23,7 @@ export default function ConnectMT5Page() {
       const res = await fetch('/api/mt5/connect', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ broker: form.broker, server: form.server, login: form.login, investorPassword: form.password }),
       });
 
       const data = await res.json();
@@ -102,17 +102,17 @@ export default function ConnectMT5Page() {
           </div>
 
           <div>
-            <label className="block text-white/60 text-sm mb-2">Contraseña</label>
+            <label className="block text-white/60 text-sm mb-2">Contraseña Investor</label>
             <input
               type="password"
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
-              placeholder="Contraseña de tu cuenta MT5"
+              placeholder="Contraseña investor de tu cuenta MT5"
               className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#a78bfa]/50 transition-colors"
               required
             />
             <p className="text-white/30 text-xs mt-2">
-              🔒 Tu contraseña se almacena encriptada. Solo tu la conoces.
+              🔒 Usa la contraseña investor (solo lectura). No la contraseña principal.
             </p>
           </div>
 

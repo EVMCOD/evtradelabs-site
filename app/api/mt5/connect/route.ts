@@ -4,8 +4,8 @@ import { PrismaClient } from "@prisma/client";
 import crypto from "crypto";
 
 const prisma = new PrismaClient();
+const METAAPI_URL = "https://api.metaapi.cloud/v1";
 
-// Encrypt password
 function encrypt(text: string): string {
   const key = Buffer.from(process.env.ENCRYPTION_KEY || "default-key-32-chars!!!!!", "utf-8");
   const iv = crypto.randomBytes(16);
@@ -22,38 +22,70 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { broker, server, login, password } = await req.json();
+    const { broker, server, login, password, investorPassword } = await req.json();
 
-    if (!broker || !server || !login || !password) {
-      return NextResponse.json({ error: "All fields required" }, { status: 400 });
+    if (!broker || !server || !login || !investorPassword) {
+      return NextResponse.json({ error: "Todos los campos son requeridos" }, { status: 400 });
     }
 
-    // Check if user already has this account connected
+    // Check existing
     const existing = await prisma.mt5Account.findFirst({
       where: { userId: session.user.id, login, server },
     });
-
     if (existing) {
-      return NextResponse.json({ error: "Account already connected" }, { status: 400 });
+      return NextResponse.json({ error: "Cuenta ya conectada" }, { status: 400 });
     }
 
-    // Save account
+    // Register account in MetaApi
+    const token = process.env.METAAPI_TOKEN;
+    
+    const provisioningRes = await fetch(`${METAAPI_URL}/users/current/accounts`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: `${broker} ${login}`,
+        login,
+        password: investorPassword,
+        server,
+        platform: "mt5",
+      }),
+    });
+
+    if (!provisioningRes.ok) {
+      const err = await provisioningRes.json();
+      console.error("MetaApi error:", err);
+      return NextResponse.json({ 
+        error: "No se pudo conectar a MetaApi. Verifica los datos.", 
+        details: err.message || "Unknown error" 
+      }, { status: 400 });
+    }
+
+    const metaApiAccount = await provisioningRes.json();
+    
+    // Save to our DB
     const account = await prisma.mt5Account.create({
       data: {
         userId: session.user.id,
         broker,
         server,
         login,
-        password: encrypt(password),
+        password: encrypt(investorPassword),
         status: "connected",
         lastSync: new Date(),
       },
     });
 
-    return NextResponse.json({ success: true, accountId: account.id });
+    return NextResponse.json({ 
+      success: true, 
+      accountId: account.id,
+      metaApiId: metaApiAccount.id,
+    });
   } catch (error) {
     console.error("MT5 connect error:", error);
-    return NextResponse.json({ error: "Failed to connect account" }, { status: 500 });
+    return NextResponse.json({ error: "Error al conectar cuenta" }, { status: 500 });
   }
 }
 
@@ -80,6 +112,6 @@ export async function GET() {
     return NextResponse.json({ accounts });
   } catch (error) {
     console.error("MT5 list error:", error);
-    return NextResponse.json({ error: "Failed to fetch accounts" }, { status: 500 });
+    return NextResponse.json({ error: "Error al obtener cuentas" }, { status: 500 });
   }
 }
