@@ -215,6 +215,122 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Desktop App Downloads */}
+      <section className="py-28 px-5 bg-[#0a0a0f]">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="text-center mb-16">
+            <span className="inline-block text-[0.7rem] font-bold tracking-[0.25em] uppercase text-[#38bdf8] mb-4">
+              Descargas
+            </span>
+            <h2 className="text-[2.5rem] font-black tracking-tight">
+              App de Escritorio
+            </h2>
+            <p className="text-white/50 text-[0.95rem] mt-4 max-w-[600px] mx-auto">
+              Descarga la aplicación de escritorio para Windows, macOS y Linux. 
+              Accede a herramientas avanzadas de trading con datos en tiempo real y ejecución local.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { 
+                name: "Windows", 
+                icon: (
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect x="4" y="4" width="10" height="10" rx="1" stroke="currentColor" strokeWidth="2"/>
+                    <rect x="18" y="4" width="10" height="10" rx="1" stroke="currentColor" strokeWidth="2"/>
+                    <rect x="4" y="18" width="10" height="10" rx="1" stroke="currentColor" strokeWidth="2"/>
+                    <rect x="18" y="18" width="10" height="10" rx="1" stroke="currentColor" strokeWidth="2"/>
+                  </svg>
+                ),
+                versions: "Windows 10/11 (64-bit)",
+                size: "180 MB",
+                color: "#38bdf8",
+              },
+              { 
+                name: "macOS", 
+                icon: (
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="M20 26c1.5 1 4-1 5-2.5M16 23c2.5 1 5.5 0 7.5-2M10 9c0-1.5 1.5-3 4-3s4 1.5 4 3c0 2.5-3 4-4 5-1-1-4-2.5-4-5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  </svg>
+                ),
+                versions: "macOS 12+ (Intel + Apple Silicon)",
+                size: "150 MB",
+                color: "#a78bfa",
+              },
+              { 
+                name: "Linux", 
+                icon: (
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="11" stroke="currentColor" strokeWidth="2"/>
+                    <path d="M16 5v22M10 9c0 0 2 3 6 3s6-3 6-3M8 21c2-1 4-1 6-1s4 0 6 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  </svg>
+                ),
+                versions: "Ubuntu 20.04+ / Debian",
+                size: "120 MB",
+                color: "#34d399",
+              },
+            ].map((app, i) => (
+              <div 
+                key={app.name} 
+                className="group relative rounded-2xl p-8 animate-fade-in-up" 
+                style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'forwards', opacity: 0 }}
+              >
+                {/* Border gradient */}
+                <div className="absolute inset-0 rounded-2xl" 
+                  style={{ 
+                    background: 'linear-gradient(135deg, transparent 0%, transparent 50%, rgba(56,189,248,0.1) 100%)',
+                    padding: '1px'
+                  }}
+                >
+                  <div className="w-full h-full rounded-2xl bg-[#0a0a0f]" />
+                </div>
+                
+                <div className="relative">
+                  <div 
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6"
+                    style={{ 
+                      background: `linear-gradient(135deg, ${app.color}22 0%, ${app.color}11 100%)`,
+                      color: app.color 
+                    }}
+                  >
+                    {app.icon}
+                  </div>
+                  
+                  <h3 className="text-[1.3rem] font-bold text-white mb-2">{app.name}</h3>
+                  <p className="text-white/40 text-[0.88rem] mb-4">{app.versions}</p>
+                  <p className="text-white/30 text-[0.75rem] mb-6">{app.size}</p>
+                  
+                  <button 
+                    className="w-full py-3 rounded-xl font-semibold text-[0.85rem] transition-all duration-300 flex items-center justify-center gap-2"
+                    style={{ 
+                      background: `linear-gradient(135deg, ${app.color}22 0%, ${app.color}11 100%)`,
+                      border: `1px solid ${app.color}33`,
+                      color: app.color,
+                    }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M8 2v9M4 7l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M2 13h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                    </svg>
+                    Descargar
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link 
+              href="/local-app" 
+              className="inline-flex items-center gap-2 text-[0.9rem] text-white/50 hover:text-white transition-colors"
+            >
+              Ver todas las versiones y requisitos →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <FreeToolsSection />
 
       {/* FAQ */}
