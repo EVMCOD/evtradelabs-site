@@ -11,6 +11,7 @@ const navLinks = [
 
 const accountMenuItems = [
   { href: "/account", label: "Mi Cuenta", icon: "👤" },
+  { href: "/account/connect", label: "Conectar MT5", icon: "📊" },
   { href: "/account/downloads", label: "Descargas", icon: "📥" },
   { href: "/account/licenses", label: "Licencias", icon: "🎫" },
   { href: "/account/purchases", label: "Compras", icon: "🛒" },
