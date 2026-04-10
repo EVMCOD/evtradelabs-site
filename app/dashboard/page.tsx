@@ -306,7 +306,7 @@ export default function DashboardPage() {
               <div>
                 <div className="flex justify-between text-[0.8rem] mb-1">
                   <span className="text-white/50">Total Volume</span>
-                  <span className="text-white font-semibold">{mockData.stats.totalVolume.toLocaleString()} lots</span>
+                  <span className="text-white font-semibold">{mockData.stats.totalVolume.toLocaleString('en-US')} lots</span>
                 </div>
                 <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.05)' }}>
                   <div className="h-full rounded-full bg-gradient-to-r from-[#22c55e] to-[#4ade80]" style={{ width: '78%' }} />
