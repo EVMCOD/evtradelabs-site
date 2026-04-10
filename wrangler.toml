@@ -1,8 +1,0 @@
-name = "evtradelabs"
-compatibility_date = "2024-01-01"
-account_id = "c5ec26eda22903c2898aadecbe94ea98"
-
-[[d1_databases]]
-binding = "DB"
-database_name = "evtradelabs-db"
-database_id = "ab7f92e3-1f1e-4a8a-b28e-8f65da8b3a53"
