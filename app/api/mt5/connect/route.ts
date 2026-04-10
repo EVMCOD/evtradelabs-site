@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { auth } from "../../../../auth";
 import { PrismaClient } from "@prisma/client";
 import crypto from "crypto";
+import { getAuthUser } from "@/lib/auth";
 
 const prisma = new PrismaClient();
 const METAAPI_URL = "https://api.metaapi.cloud/v1";
@@ -17,8 +17,9 @@ function encrypt(text: string): string {
 
 export async function POST(req: Request) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
+    // Get user from cookie
+    const user = getAuthUser(req as any);
+    if (!user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -30,7 +31,7 @@ export async function POST(req: Request) {
 
     // Check existing
     const existing = await prisma.mt5Account.findFirst({
-      where: { userId: session.user.id, login, server },
+      where: { userId: user.userId, login, server },
     });
     if (existing) {
       return NextResponse.json({ error: "Cuenta ya conectada" }, { status: 400 });
@@ -56,7 +57,6 @@ export async function POST(req: Request) {
 
     if (!provisioningRes.ok) {
       const err = await provisioningRes.json();
-      console.error("MetaApi error:", err);
       return NextResponse.json({ 
         error: "No se pudo conectar a MetaApi. Verifica los datos.", 
         details: err.message || "Unknown error" 
@@ -68,7 +68,7 @@ export async function POST(req: Request) {
     // Save to our DB
     const account = await prisma.mt5Account.create({
       data: {
-        userId: session.user.id,
+        userId: user.userId,
         broker,
         server,
         login,
@@ -89,15 +89,15 @@ export async function POST(req: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
+    const user = getAuthUser(req as any);
+    if (!user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const accounts = await prisma.mt5Account.findMany({
-      where: { userId: session.user.id },
+      where: { userId: user.userId },
       select: {
         id: true,
         broker: true,

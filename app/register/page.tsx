@@ -45,8 +45,8 @@ export default function RegisterPage() {
         return;
       }
 
-      // Auto-login after register
-      router.push('/login?registered=true');
+      router.push('/dashboard');
+      router.refresh();
     } catch {
       setError('Error de conexión');
       setLoading(false);
@@ -56,14 +56,12 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen flex items-center justify-center px-5" style={{ background: 'linear-gradient(180deg, #0a0a0f 0%, #0d1117 100%)' }}>
       <div className="w-full max-w-md">
-        {/* Logo */}
         <div className="text-center mb-8">
           <Link href="/">
             <span className="text-white/80 font-black text-xl tracking-wider">EV TRADING LABS</span>
           </Link>
         </div>
 
-        {/* Card */}
         <div className="rounded-2xl p-8" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
           <h1 className="text-2xl font-bold text-white mb-2">Crear cuenta</h1>
           <p className="text-white/40 text-sm mb-6">Regístrate para acceder al dashboard</p>

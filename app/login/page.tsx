@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
@@ -17,32 +16,38 @@ export default function LoginPage() {
     setLoading(true);
     setError('');
 
-    const result = await signIn('credentials', {
-      email,
-      password,
-      redirect: false,
-    });
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
 
-    setLoading(false);
+      const data = await res.json();
 
-    if (result?.error) {
-      setError('Email o contraseña incorrectos');
-    } else {
+      if (!res.ok) {
+        setError(data.error || 'Error al iniciar sesión');
+        setLoading(false);
+        return;
+      }
+
       router.push('/dashboard');
+      router.refresh();
+    } catch {
+      setError('Error de conexión');
+      setLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center px-5" style={{ background: 'linear-gradient(180deg, #0a0a0f 0%, #0d1117 100%)' }}>
       <div className="w-full max-w-md">
-        {/* Logo */}
         <div className="text-center mb-8">
           <Link href="/">
             <span className="text-white/80 font-black text-xl tracking-wider">EV TRADING LABS</span>
           </Link>
         </div>
 
-        {/* Card */}
         <div className="rounded-2xl p-8" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
           <h1 className="text-2xl font-bold text-white mb-2">Iniciar sesión</h1>
           <p className="text-white/40 text-sm mb-6">Accede a tu dashboard de trading</p>

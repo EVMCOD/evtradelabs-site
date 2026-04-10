@@ -8,29 +8,21 @@ const JWT_SECRET = process.env.JWT_SECRET || "evtradelabs-jwt-secret-change-in-p
 
 export async function POST(req: Request) {
   try {
-    const { name, email, password } = await req.json();
+    const { email, password } = await req.json();
 
     if (!email || !password) {
       return NextResponse.json({ error: "Email y password requeridos" }, { status: 400 });
     }
 
-    // Check existing
-    const existing = await prisma.user.findUnique({ where: { email } });
-    if (existing) {
-      return NextResponse.json({ error: "Email ya registrado" }, { status: 400 });
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user || !user.password) {
+      return NextResponse.json({ error: "Credenciales inválidas" }, { status: 401 });
     }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 12);
-
-    // Create user
-    const user = await prisma.user.create({
-      data: {
-        email,
-        name: name || email.split("@")[0],
-        password: hashedPassword,
-      },
-    });
+    const isValid = await bcrypt.compare(password, user.password);
+    if (!isValid) {
+      return NextResponse.json({ error: "Credenciales inválidas" }, { status: 401 });
+    }
 
     // Create JWT
     const token = jwt.sign(
@@ -50,13 +42,13 @@ export async function POST(req: Request) {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
-      maxAge: 60 * 60 * 24 * 7,
+      maxAge: 60 * 60 * 24 * 7, // 7 days
       path: "/",
     });
 
     return response;
   } catch (error) {
-    console.error("Register error:", error);
-    return NextResponse.json({ error: "Error al registrar" }, { status: 500 });
+    console.error("Login error:", error);
+    return NextResponse.json({ error: "Error en el servidor" }, { status: 500 });
   }
 }

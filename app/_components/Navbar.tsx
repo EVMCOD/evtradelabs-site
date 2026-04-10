@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const navLinks = [
   { href: "/", label: "Inicio" },
@@ -23,6 +23,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -104,14 +105,17 @@ export default function Navbar() {
                     ))}
                   </div>
                   <div className="p-2 border-t border-white/[0.06]">
-                    <Link
-                      href="/api/auth/signout"
-                      onClick={(e) => { e.preventDefault(); signOut({ callbackUrl: "/login" }); }}
-                      className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-red-400/80 hover:text-red-400 hover:bg-red-500/10 transition-colors cursor-pointer"
+                    <button
+                      onClick={async () => {
+                        await fetch('/api/auth/logout', { method: 'POST' });
+                        router.push('/login');
+                        router.refresh();
+                      }}
+                      className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-red-400/80 hover:text-red-400 hover:bg-red-500/10 transition-colors"
                     >
                       <span>🚪</span>
                       <span>Cerrar sesión</span>
-                    </Link>
+                    </button>
                   </div>
                 </div>
               )}
