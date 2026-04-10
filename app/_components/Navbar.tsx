@@ -89,7 +89,6 @@ export default function Navbar() {
                 >
                   <div className="px-4 py-4 border-b border-white/[0.06]">
                     <div className="text-[0.7rem] text-white/40 uppercase tracking-wider">Conectado como</div>
-                    <div className="text-sm font-semibold text-white mt-1">demo@evtl.io</div>
                   </div>
                   <div className="p-2">
                     {accountMenuItems.map((item) => (
