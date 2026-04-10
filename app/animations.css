@@ -71,6 +71,20 @@
   animation-play-state: paused;
 }
 
+/* Slow ticker for free tools */
+@keyframes slowTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-slow-ticker {
+  animation: slowTicker 40s linear infinite;
+}
+
+.animate-slow-ticker:hover {
+  animation-play-state: paused;
+}
+
 .glass-strong {
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(30px);
