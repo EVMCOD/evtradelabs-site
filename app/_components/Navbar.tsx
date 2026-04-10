@@ -104,13 +104,14 @@ export default function Navbar() {
                     ))}
                   </div>
                   <div className="p-2 border-t border-white/[0.06]">
-                    <button
-                      onClick={() => signOut({ redirect: false, callbackUrl: "/login" })}
-                      className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-red-400/80 hover:text-red-400 hover:bg-red-500/10 transition-colors"
+                    <Link
+                      href="/api/auth/signout"
+                      onClick={(e) => { e.preventDefault(); signOut({ callbackUrl: "/login" }); }}
+                      className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-red-400/80 hover:text-red-400 hover:bg-red-500/10 transition-colors cursor-pointer"
                     >
                       <span>🚪</span>
                       <span>Cerrar sesión</span>
-                    </button>
+                    </Link>
                   </div>
                 </div>
               )}
