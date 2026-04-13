@@ -24,14 +24,14 @@ export default function HomePage() {
       <VideoHero />
 
       {/* Trust logos */}
-      <section className="py-16 px-5 bg-[#0a0a0f]">
+      <section className="py-12 md:py-16 px-5 bg-[#0a0a0f]">
         <div className="max-w-[1200px] mx-auto">
-          <p className="text-center text-[0.7rem] text-white/25 uppercase tracking-[0.2em] mb-8">
+          <p className="text-center text-[0.65rem] md:text-[0.7rem] text-white/25 uppercase tracking-[0.2em] mb-6 md:mb-8">
             Compatible con las principales plataformas
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-14">
+          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-14">
             {['MetaTrader 5', 'TradingView', 'Interactive Brokers', 'NinjaTrader', 'Vantage', 'VT Markets'].map((platform) => (
-              <div key={platform} className="text-white/25 text-[0.85rem] font-medium tracking-wide">
+              <div key={platform} className="text-white/25 text-[0.75rem] md:text-[0.85rem] font-medium tracking-wide">
                 {platform}
               </div>
             ))}
@@ -40,18 +40,18 @@ export default function HomePage() {
       </section>
 
       {/* What We Do */}
-      <section className="py-28 px-5 bg-[#0a0a0f]">
+      <section className="py-16 md:py-28 px-5 bg-[#0a0a0f]">
         <div className="max-w-[1200px] mx-auto">
-          <div className="text-center mb-16">
-            <span className="inline-block text-[0.7rem] font-bold tracking-[0.25em] uppercase text-[#667eea] mb-4">
+          <div className="text-center mb-10 md:mb-16">
+            <span className="inline-block text-[0.65rem] md:text-[0.7rem] font-bold tracking-[0.25em] uppercase text-[#667eea] mb-4">
               Qué hacemos
             </span>
-            <h2 className="text-[2.5rem] font-black tracking-tight">
+            <h2 className="text-[1.75rem] md:text-[2.5rem] font-black tracking-tight">
               Automatiza tu trading
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {[
               {
                 title: "Ejecución precisa",
@@ -93,7 +93,7 @@ export default function HomePage() {
             ].map((item, i) => (
               <div 
                 key={item.title} 
-                className="group relative rounded-2xl p-8 overflow-hidden transition-all duration-300 hover:-translate-y-1 animate-fade-in-up" 
+                className="group relative rounded-2xl p-5 md:p-8 overflow-hidden transition-all duration-300 hover:-translate-y-1 animate-fade-in-up" 
                 style={{ animationDelay: `${i * 120}ms`, animationFillMode: 'forwards', opacity: 0 }}
               >
                 {/* Gradient accent */}
@@ -101,14 +101,14 @@ export default function HomePage() {
                 <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${item.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                 
                 {/* Icon */}
-                <div className={`relative mb-6 w-14 h-14 rounded-2xl bg-gradient-to-br ${item.accent} flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`relative mb-4 md:mb-6 w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br ${item.accent} flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                   {item.icon}
                 </div>
                 
                 {/* Content */}
                 <div className="relative">
-                  <h3 className="text-[1.15rem] font-bold text-white mb-3">{item.title}</h3>
-                  <p className="text-white/50 text-[0.88rem] leading-relaxed">{item.desc}</p>
+                  <h3 className="text-[1rem] md:text-[1.15rem] font-bold text-white mb-2 md:mb-3">{item.title}</h3>
+                  <p className="text-white/50 text-[0.82rem] md:text-[0.88rem] leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -117,18 +117,18 @@ export default function HomePage() {
       </section>
 
       {/* Products */}
-      <section id="productos" className="py-28 px-5 bg-[#0a0a0f]">
+      <section id="productos" className="py-16 md:py-28 px-5 bg-[#0a0a0f]">
         <div className="max-w-[1200px] mx-auto">
-          <div className="text-center mb-16">
-            <span className="inline-block text-[0.7rem] font-bold tracking-[0.25em] uppercase text-[#667eea] mb-4">
+          <div className="text-center mb-10 md:mb-16">
+            <span className="inline-block text-[0.65rem] md:text-[0.7rem] font-bold tracking-[0.25em] uppercase text-[#667eea] mb-4">
               Productos
             </span>
-            <h2 className="text-[2.5rem] font-black tracking-tight">
+            <h2 className="text-[1.75rem] md:text-[2.5rem] font-black tracking-tight">
               Herramientas para traders serios
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {[
               { 
                 name: "EV Quant Lab", 
@@ -176,16 +176,16 @@ export default function HomePage() {
                   />
                   
                   {/* Tag */}
-                  <div className="relative mb-5">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[#a78bfa] border border-[#a78bfa]/30 bg-[#a78bfa]/10">
+                  <div className="relative mb-4 md:mb-5">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 md:px-3 md:py-1 rounded-full text-[0.6rem] md:text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[#a78bfa] border border-[#a78bfa]/30 bg-[#a78bfa]/10">
                       {p.tag}
                     </span>
                   </div>
                   
                   {/* Content */}
                   <div className="relative">
-                    <h3 className="text-[1.3rem] font-bold text-white mb-3">{p.name}</h3>
-                    <p className="text-white/50 text-[0.88rem] mb-6 leading-relaxed">{p.desc}</p>
+                    <h3 className="text-[1.1rem] md:text-[1.3rem] font-bold text-white mb-2 md:mb-3">{p.name}</h3>
+                    <p className="text-white/50 text-[0.82rem] md:text-[0.88rem] mb-4 md:mb-6 leading-relaxed">{p.desc}</p>
                     
                     {/* Prices */}
                     <div className="space-y-2 mb-6">
@@ -231,13 +231,13 @@ export default function HomePage() {
 
 
       {/* FAQ */}
-      <section className="py-28 px-5 bg-[#0a0a0f]">
+      <section className="py-16 md:py-28 px-5 bg-[#0a0a0f]">
         <div className="max-w-[700px] mx-auto">
-          <div className="text-center mb-16">
-            <span className="inline-block text-[0.7rem] font-bold tracking-[0.25em] uppercase text-[#667eea] mb-4">
+          <div className="text-center mb-10 md:mb-16">
+            <span className="inline-block text-[0.65rem] md:text-[0.7rem] font-bold tracking-[0.25em] uppercase text-[#667eea] mb-4">
               FAQ
             </span>
-            <h2 className="text-[2.5rem] font-black tracking-tight">
+            <h2 className="text-[1.75rem] md:text-[2.5rem] font-black tracking-tight">
               Preguntas frecuentes
             </h2>
           </div>
@@ -252,13 +252,13 @@ export default function HomePage() {
             ].map((faq, i) => (
               <div 
                 key={i} 
-                className="group py-5 border-b border-[#a78bfa]/20 last:border-0 cursor-pointer"
+                className="group py-4 md:py-5 border-b border-[#a78bfa]/20 last:border-0 cursor-pointer"
               >
-                <h3 className="font-bold text-[0.95rem] text-white/70 group-hover:text-white transition-colors duration-200 flex items-center gap-2">
+                <h3 className="font-bold text-[0.88rem] md:text-[0.95rem] text-white/70 group-hover:text-white transition-colors duration-200 flex items-center gap-2">
                   <span className="text-[#a78bfa] text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">▸</span>
                   {faq.q}
                 </h3>
-                <p className="text-white/40 text-[0.88rem] leading-relaxed max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-300 mt-0 group-hover:mt-2">
+                <p className="text-white/40 text-[0.82rem] md:text-[0.88rem] leading-relaxed max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-300 mt-0 group-hover:mt-2">
                   {faq.a}
                 </p>
               </div>
