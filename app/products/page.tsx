@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 const PRODUCTS = [
   {
     slug: "ev-quant-lab",
+    hasPage: true,
     name: "EV Quant Lab",
     tagline: "Tu estación de trading cuantitativo",
     description:
@@ -37,6 +38,7 @@ const PRODUCTS = [
   },
   {
     slug: "master-of-liquidity",
+    hasPage: true,
     name: "Master of Liquidity",
     tagline: "Sistema multi-estrategia para MT5",
     description:
@@ -60,6 +62,7 @@ const PRODUCTS = [
   },
   {
     slug: "replicador",
+    hasPage: true,
     name: "Replicador",
     tagline: "Replicación de cuentas en tiempo real",
     description:
@@ -81,6 +84,7 @@ const PRODUCTS = [
   },
   {
     slug: "local-app",
+    hasPage: false,
     name: "Local App",
     tagline: "Tu entorno de trading en local",
     description:
@@ -185,12 +189,22 @@ function ProductCard({ product, index }: { product: typeof PRODUCTS[0]; index: n
         {!product.priceMonthly && (
           <div className="text-[1.1rem] font-bold text-white/60">Consultar precio</div>
         )}
-        <Link
-          href={`/checkout?product=${product.slug}`}
-          className="px-5 py-2.5 rounded-xl bg-[#667eea] text-white font-semibold text-[0.88rem] hover:bg-[#5a7fd8] transition-colors text-center whitespace-nowrap"
-        >
-          {product.priceMonthly ? "Suscribirse" : "Contactar"}
-        </Link>
+        <div className="flex gap-2">
+          {product.hasPage && (
+            <Link
+              href={`/products/${product.slug}`}
+              className="flex-1 px-5 py-2.5 rounded-xl border border-white/10 text-white/60 font-semibold text-[0.88rem] hover:border-white/20 hover:text-white transition-all text-center whitespace-nowrap"
+            >
+              Ver más
+            </Link>
+          )}
+          <Link
+            href={product.hasPage ? `/products/${product.slug}` : `/checkout?product=${product.slug}`}
+            className="flex-1 px-5 py-2.5 rounded-xl bg-[#667eea] text-white font-semibold text-[0.88rem] hover:bg-[#5a7fd8] transition-colors text-center whitespace-nowrap"
+          >
+            {product.priceMonthly ? "Suscribirse" : "Contactar"}
+          </Link>
+        </div>
       </div>
     </article>
   );

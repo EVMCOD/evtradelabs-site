@@ -9,7 +9,7 @@ type AuthState = "loading" | "authenticated" | "unauthenticated";
 const navLinks = [
   { href: "/", label: "Inicio" },
   { href: "/products", label: "Productos" },
-  { href: "/products#pricing", label: "Precios" },
+  { href: "/metricas", label: "Métricas" },
 ];
 
 const accountMenuItems = [
