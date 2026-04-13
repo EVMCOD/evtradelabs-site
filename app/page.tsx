@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { VideoHero } from "./_components/VideoHero";
 import FreeToolsSection from "./_components/FreeToolsSection";
+import FAQAccordion from "./_components/FAQAccordion";
 import "./animations.css";
 
 export const metadata: Metadata = {
@@ -26,13 +27,28 @@ export default function HomePage() {
       {/* Trust logos */}
       <section className="py-12 md:py-16 px-5 bg-[#0a0a0f]">
         <div className="max-w-[1200px] mx-auto">
-          <p className="text-center text-[0.65rem] md:text-[0.7rem] text-white/25 uppercase tracking-[0.2em] mb-6 md:mb-8">
+          <p className="text-center text-[0.65rem] md:text-[0.7rem] text-white/25 uppercase tracking-[0.2em] mb-8 md:mb-10">
             Compatible con las principales plataformas
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-14">
-            {['MetaTrader 5', 'TradingView', 'Interactive Brokers', 'NinjaTrader', 'Vantage', 'VT Markets'].map((platform) => (
-              <div key={platform} className="text-white/25 text-[0.75rem] md:text-[0.85rem] font-medium tracking-wide">
-                {platform}
+          <div className="flex flex-wrap justify-center items-center gap-5 md:gap-10">
+            {[
+              { name: 'MetaTrader 5', abbr: 'MT5', color: '#4ade80' },
+              { name: 'TradingView', abbr: 'TV', color: '#60a5fa' },
+              { name: 'Interactive Brokers', abbr: 'IB', color: '#f59e0b' },
+              { name: 'NinjaTrader', abbr: 'NT', color: '#a78bfa' },
+              { name: 'Vantage', abbr: 'VG', color: '#34d399' },
+              { name: 'VT Markets', abbr: 'VT', color: '#f472b6' },
+            ].map((p) => (
+              <div key={p.name} className="flex items-center gap-2.5 group">
+                <div
+                  className="w-8 h-8 rounded-lg flex items-center justify-center text-[0.6rem] font-black shrink-0 transition-all duration-300 group-hover:scale-110"
+                  style={{ background: `${p.color}18`, border: `1px solid ${p.color}35`, color: p.color }}
+                >
+                  {p.abbr}
+                </div>
+                <span className="text-white/30 text-[0.78rem] md:text-[0.82rem] font-medium group-hover:text-white/50 transition-colors duration-300">
+                  {p.name}
+                </span>
               </div>
             ))}
           </div>
@@ -91,10 +107,10 @@ export default function HomePage() {
                 ),
               },
             ].map((item, i) => (
-              <div 
-                key={item.title} 
-                className="group relative rounded-2xl p-5 md:p-8 overflow-hidden transition-all duration-300 hover:-translate-y-1 animate-fade-in-up" 
-                style={{ animationDelay: `${i * 120}ms`, animationFillMode: 'forwards', opacity: 0 }}
+              <div
+                key={item.title}
+                className="group relative rounded-2xl p-5 md:p-8 overflow-hidden transition-all duration-300 hover:-translate-y-1 animate-fade-in-up"
+                style={{ animationDelay: `${i * 120}ms`, animationFillMode: 'forwards', opacity: 0, background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.06)', boxShadow: '0 4px 24px rgba(0,0,0,0.3)' }}
               >
                 {/* Gradient accent */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${item.accent} opacity-[0.05] group-hover:opacity-[0.09] transition-opacity duration-300`} />
@@ -241,34 +257,12 @@ export default function HomePage() {
               Preguntas frecuentes
             </h2>
           </div>
-
-          <div className="space-y-0">
-            {[
-              { q: "¿Necesito experiencia previa?", a: "No. Cada producto incluye documentación detallada y soporte para empezar desde cero." },
-              { q: "¿Funciona con MT5?", a: "Sí. Todos nuestros sistemas sonpara MetaTrader 5, la plataforma más usada por traders profesionales." },
-              { q: "¿Puedo probar antes de comprar?", a: "Sí. Dispones de versiones demo para evaluar cada producto sin compromiso." },
-              { q: "¿Cómo recibo mi licencia?", a: "Automáticamente por email tras el pago. Recibirás tus credenciales al instante." },
-              { q: "¿Ofrecéis soporte?", a: "Sí. Soporte por email y comunidad privada para todos los usuarios." },
-            ].map((faq, i) => (
-              <div 
-                key={i} 
-                className="group py-4 md:py-5 border-b border-[#a78bfa]/20 last:border-0 cursor-pointer"
-              >
-                <h3 className="font-bold text-[0.88rem] md:text-[0.95rem] text-white/70 group-hover:text-white transition-colors duration-200 flex items-center gap-2">
-                  <span className="text-[#a78bfa] text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">▸</span>
-                  {faq.q}
-                </h3>
-                <p className="text-white/40 text-[0.82rem] md:text-[0.88rem] leading-relaxed max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-300 mt-0 group-hover:mt-2">
-                  {faq.a}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FAQAccordion />
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-16 px-5 glass mt-4">
+      <footer className="py-16 px-5 glass mt-20">
         <div className="max-w-[1200px] mx-auto">
           <div className="grid md:grid-cols-4 gap-10 mb-12">
             {/* Brand */}
