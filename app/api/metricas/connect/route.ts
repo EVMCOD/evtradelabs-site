@@ -1,14 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthUser } from "@/lib/auth";
-
-let prisma: any = null;
-async function getPrisma() {
-  if (!prisma) {
-    const { PrismaClient } = await import("@prisma/client");
-    prisma = new PrismaClient({ log: ["error"] });
-  }
-  return prisma;
-}
+import { query } from "@/lib/d1";
 
 function generateApiKey(): string {
   const bytes = new Uint8Array(24);
@@ -16,69 +8,76 @@ function generateApiKey(): string {
   return "evm_" + Array.from(bytes).map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-// GET — returns existing API key, creates one if not exists
+// GET — get existing account (creates one if this is the first time)
 export async function GET(req: NextRequest) {
   const user = getAuthUser(req);
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const db = await getPrisma();
+  try {
+    // Try to find existing account
+    const { results } = await query<any>(
+      `SELECT id, apiKey, accountLogin, accountName, broker, server, currency,
+              balance, equity, leverage, status, lastSyncAt, connectedAt
+       FROM MetricasAccount WHERE userId = ?`,
+      [user.userId]
+    );
 
-  let account = await db.metricasAccount.findUnique({
-    where: { userId: user.userId },
-    select: {
-      apiKey: true,
-      accountLogin: true,
-      accountName: true,
-      broker: true,
-      server: true,
-      currency: true,
-      balance: true,
-      equity: true,
-      status: true,
-      lastSyncAt: true,
-      connectedAt: true,
-    },
-  });
+    if (results.length > 0) {
+      return NextResponse.json({ account: results[0] });
+    }
 
-  if (!account) {
-    account = await db.metricasAccount.create({
-      data: {
-        userId: user.userId,
-        apiKey: generateApiKey(),
-      },
-      select: {
-        apiKey: true,
-        accountLogin: true,
-        accountName: true,
-        broker: true,
-        server: true,
-        currency: true,
-        balance: true,
-        equity: true,
-        status: true,
-        lastSyncAt: true,
-        connectedAt: true,
+    // First time — create account with new API key
+    const id     = crypto.randomUUID();
+    const apiKey = generateApiKey();
+
+    await query(
+      `INSERT INTO MetricasAccount (id, userId, apiKey) VALUES (?, ?, ?)`,
+      [id, user.userId, apiKey]
+    );
+
+    return NextResponse.json({
+      account: {
+        id, apiKey, accountLogin: null, accountName: null, broker: null,
+        server: null, currency: "USD", balance: null, equity: null,
+        leverage: null, status: "pending", lastSyncAt: null, connectedAt: null,
       },
     });
+  } catch (err) {
+    console.error("metricas/connect GET:", err);
+    return NextResponse.json({ error: "Internal error" }, { status: 500 });
   }
-
-  return NextResponse.json({ account });
 }
 
-// POST — regenerates API key
+// POST — regenerate API key
 export async function POST(req: NextRequest) {
   const user = getAuthUser(req);
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const db = await getPrisma();
-  const newKey = generateApiKey();
+  try {
+    const newKey = generateApiKey();
+    const now    = new Date().toISOString();
 
-  const account = await db.metricasAccount.upsert({
-    where: { userId: user.userId },
-    update: { apiKey: newKey, status: "pending" },
-    create: { userId: user.userId, apiKey: newKey },
-    select: { apiKey: true, status: true },
-  });
+    // Upsert — update if exists, insert if not
+    const { results } = await query<any>(
+      `SELECT id FROM MetricasAccount WHERE userId = ?`,
+      [user.userId]
+    );
 
-  return NextResponse.json({ account });
+    if (results.length > 0) {
+      await query(
+        `UPDATE MetricasAccount SET apiKey = ?, status = 'pending', updatedAt = ? WHERE userId = ?`,
+        [newKey, now, user.userId]
+      );
+    } else {
+      await query(
+        `INSERT INTO MetricasAccount (id, userId, apiKey) VALUES (?, ?, ?)`,
+        [crypto.randomUUID(), user.userId, newKey]
+      );
+    }
+
+    return NextResponse.json({ account: { apiKey: newKey, status: "pending" } });
+  } catch (err) {
+    console.error("metricas/connect POST:", err);
+    return NextResponse.json({ error: "Internal error" }, { status: 500 });
+  }
 }

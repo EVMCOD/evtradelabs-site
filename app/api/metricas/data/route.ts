@@ -1,128 +1,108 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthUser } from "@/lib/auth";
-
-let prisma: any = null;
-async function getPrisma() {
-  if (!prisma) {
-    const { PrismaClient } = await import("@prisma/client");
-    prisma = new PrismaClient({ log: ["error"] });
-  }
-  return prisma;
-}
+import { query } from "@/lib/d1";
 
 export async function GET(req: NextRequest) {
   const user = getAuthUser(req);
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const db = await getPrisma();
+  try {
+    // Load account
+    const { results: accounts } = await query<any>(
+      `SELECT id, apiKey, accountLogin, accountName, broker, server, currency,
+              balance, equity, leverage, status, lastSyncAt, connectedAt
+       FROM MetricasAccount WHERE userId = ?`,
+      [user.userId]
+    );
 
-  const metricasAccount = await db.metricasAccount.findUnique({
-    where: { userId: user.userId },
-    select: {
-      id: true,
-      apiKey: true,
-      accountLogin: true,
-      accountName: true,
-      broker: true,
-      server: true,
-      currency: true,
-      balance: true,
-      equity: true,
-      leverage: true,
-      status: true,
-      lastSyncAt: true,
-      connectedAt: true,
-    },
-  });
+    if (accounts.length === 0) {
+      return NextResponse.json({ account: null, trades: [], snapshots: [], stats: null });
+    }
 
-  if (!metricasAccount) {
-    return NextResponse.json({ account: null, trades: [], snapshots: [], stats: null });
+    const account = accounts[0];
+
+    // Load trades + snapshots in parallel
+    const [tradesRes, snapshotsRes] = await Promise.all([
+      query<any>(
+        `SELECT ticket, symbol, type, lots, price, profit, commission, swap,
+                entry, time, comment
+         FROM MetricasTrade
+         WHERE accountId = ?
+         ORDER BY time DESC
+         LIMIT 500`,
+        [account.id]
+      ),
+      query<any>(
+        `SELECT balance, equity, timestamp
+         FROM MetricasSnapshot
+         WHERE accountId = ?
+         ORDER BY timestamp ASC
+         LIMIT 90`,
+        [account.id]
+      ),
+    ]);
+
+    const trades    = tradesRes.results;
+    const snapshots = snapshotsRes.results;
+
+    // Compute stats from closed trades
+    const closed = trades.filter((t: any) => t.entry === "out");
+    const stats  = computeStats(closed);
+
+    return NextResponse.json({ account, trades, snapshots, stats });
+  } catch (err) {
+    console.error("metricas/data GET:", err);
+    return NextResponse.json({ error: "Internal error" }, { status: 500 });
   }
-
-  const [trades, snapshots] = await Promise.all([
-    db.metricasTrade.findMany({
-      where: { accountId: metricasAccount.id },
-      orderBy: { time: "desc" },
-      take: 500,
-      select: {
-        ticket: true,
-        symbol: true,
-        type: true,
-        lots: true,
-        price: true,
-        profit: true,
-        commission: true,
-        swap: true,
-        entry: true,
-        time: true,
-        comment: true,
-      },
-    }),
-    db.metricasSnapshot.findMany({
-      where: { accountId: metricasAccount.id },
-      orderBy: { timestamp: "asc" },
-      take: 90,
-      select: { balance: true, equity: true, timestamp: true },
-    }),
-  ]);
-
-  // Compute stats from closed trades (entry === "out")
-  const closed = trades.filter((t: any) => t.entry === "out");
-  const stats = computeStats(closed, metricasAccount.balance);
-
-  return NextResponse.json({
-    account: metricasAccount,
-    trades,
-    snapshots,
-    stats,
-  });
 }
 
-function computeStats(closed: any[], currentBalance: number | null) {
+function computeStats(closed: any[]) {
   if (closed.length === 0) return null;
 
-  const winners = closed.filter((t: any) => t.profit + t.commission + t.swap > 0);
-  const losers  = closed.filter((t: any) => t.profit + t.commission + t.swap <= 0);
+  const net = (t: any) => t.profit + t.commission + t.swap;
+  const winners = closed.filter((t) => net(t) > 0);
+  const losers  = closed.filter((t) => net(t) <= 0);
 
-  const grossWin  = winners.reduce((s: number, t: any) => s + t.profit + t.commission + t.swap, 0);
-  const grossLoss = Math.abs(losers.reduce((s: number, t: any) => s + t.profit + t.commission + t.swap, 0));
+  const grossWin  = winners.reduce((s, t) => s + net(t), 0);
+  const grossLoss = Math.abs(losers.reduce((s, t) => s + net(t), 0));
 
   const profitFactor = grossLoss === 0 ? grossWin : grossWin / grossLoss;
-  const winRate      = closed.length > 0 ? (winners.length / closed.length) * 100 : 0;
-  const avgWin       = winners.length > 0 ? grossWin / winners.length : 0;
-  const avgLoss      = losers.length > 0 ? grossLoss / losers.length : 0;
-  const netProfit    = closed.reduce((s: number, t: any) => s + t.profit + t.commission + t.swap, 0);
+  const winRate      = (winners.length / closed.length) * 100;
+  const netProfit    = closed.reduce((s, t) => s + net(t), 0);
 
   // Symbol breakdown
   const bySymbol: Record<string, { trades: number; profit: number; wins: number }> = {};
   for (const t of closed) {
     if (!bySymbol[t.symbol]) bySymbol[t.symbol] = { trades: 0, profit: 0, wins: 0 };
-    const net = t.profit + t.commission + t.swap;
+    const n = net(t);
     bySymbol[t.symbol].trades++;
-    bySymbol[t.symbol].profit += net;
-    if (net > 0) bySymbol[t.symbol].wins++;
+    bySymbol[t.symbol].profit += n;
+    if (n > 0) bySymbol[t.symbol].wins++;
   }
 
   const symbols = Object.entries(bySymbol)
-    .map(([name, d]: [string, any]) => ({
+    .map(([name, d]) => ({
       name,
       trades: d.trades,
-      profit: d.profit,
-      winRate: d.trades > 0 ? (d.wins / d.trades) * 100 : 0,
-      share: closed.length > 0 ? (d.trades / closed.length) * 100 : 0,
+      profit: round2(d.profit),
+      winRate: round1(d.trades > 0 ? (d.wins / d.trades) * 100 : 0),
+      share: round1(closed.length > 0 ? (d.trades / closed.length) * 100 : 0),
     }))
     .sort((a, b) => b.trades - a.trades)
     .slice(0, 8);
 
   return {
     totalTrades: closed.length,
-    winRate: Math.round(winRate * 10) / 10,
-    profitFactor: Math.round(profitFactor * 100) / 100,
-    netProfit: Math.round(netProfit * 100) / 100,
-    grossWin: Math.round(grossWin * 100) / 100,
-    grossLoss: Math.round(grossLoss * 100) / 100,
-    avgWin: Math.round(avgWin * 100) / 100,
-    avgLoss: Math.round(avgLoss * 100) / 100,
+    winRate: round1(winRate),
+    profitFactor: round2(profitFactor),
+    netProfit: round2(netProfit),
+    grossWin: round2(grossWin),
+    grossLoss: round2(grossLoss),
+    avgWin: round2(winners.length > 0 ? grossWin / winners.length : 0),
+    avgLoss: round2(losers.length > 0 ? grossLoss / losers.length : 0),
     symbols,
   };
 }
+
+const round1 = (n: number) => Math.round(n * 10) / 10;
+const round2 = (n: number) => Math.round(n * 100) / 100;
