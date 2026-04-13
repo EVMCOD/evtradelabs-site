@@ -17,8 +17,9 @@ model User {
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
   sessions      Session[]
-  licenses      License[]
-  mt5Accounts   Mt5Account[]
+  licenses        License[]
+  mt5Accounts     Mt5Account[]
+  metricasAccount MetricasAccount?
 }
 
 model Account {
@@ -105,4 +106,59 @@ model Mt5Account {
   lastSync     DateTime?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+// ── EV Métricas (EA push) ─────────────────────────────────────────
+
+model MetricasAccount {
+  id           String   @id @default(cuid())
+  userId       String   @unique
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  apiKey       String   @unique
+  accountLogin String?  // MT5 account number (filled on first sync)
+  accountName  String?
+  broker       String?
+  server       String?
+  currency     String   @default("USD")
+  balance      Float?
+  equity       Float?
+  leverage     Int?
+  status       String   @default("pending") // pending | connected | disconnected
+  lastSyncAt   DateTime?
+  connectedAt  DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  trades       MetricasTrade[]
+  snapshots    MetricasSnapshot[]
+}
+
+model MetricasTrade {
+  id         String   @id @default(cuid())
+  accountId  String
+  account    MetricasAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  ticket     String   // MT5 deal ticket (string to avoid BigInt issues)
+  positionId String?  // MT5 position ID
+  symbol     String
+  type       String   // buy | sell
+  lots       Float
+  price      Float    // execution price
+  profit     Float    @default(0)
+  commission Float    @default(0)
+  swap       Float    @default(0)
+  entry      String   // in | out
+  time       DateTime
+  comment    String?
+  createdAt  DateTime @default(now())
+
+  @@unique([accountId, ticket])
+}
+
+model MetricasSnapshot {
+  id        String   @id @default(cuid())
+  accountId String
+  account   MetricasAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  balance   Float
+  equity    Float
+  margin    Float    @default(0)
+  timestamp DateTime @default(now())
 }
