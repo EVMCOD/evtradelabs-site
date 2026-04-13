@@ -24,7 +24,9 @@ async function getPrisma() {
 
 function generateLicenseKey(productSlug: string): string {
   const prefix = productSlug.slice(0, 4).toUpperCase();
-  const random = Math.random().toString(36).substring(2, 8).toUpperCase();
+  const bytes = new Uint8Array(6);
+  crypto.getRandomValues(bytes);
+  const random = Array.from(bytes).map(b => b.toString(36).padStart(2, '0')).join('').slice(0, 8).toUpperCase();
   return `EVTL-${prefix}-${random}`;
 }
 
@@ -33,8 +35,8 @@ export async function POST(request: Request) {
   const sig = request.headers.get("stripe-signature");
 
   if (!sig || !process.env.STRIPE_WEBHOOK_SECRET) {
-    console.log("Missing stripe signature or webhook secret");
-    return NextResponse.json({ received: true });
+    console.error("Missing stripe signature or webhook secret");
+    return NextResponse.json({ error: "Unauthorized" }, { status: 400 });
   }
 
   const stripe = getStripe();

@@ -153,8 +153,9 @@ export default function CheckoutPage() {
               <div>
                 <label className="block text-[0.82rem] font-semibold text-white/70 mb-2">País</label>
                 <select value={form.country} onChange={(e) => setForm({ ...form, country: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/10 text-white text-[0.95rem] focus:border-[#667eea] focus:outline-none focus:ring-1 focus:ring-[#667eea]/50 transition-all appearance-none cursor-pointer">
-                  {COUNTRIES.map((c) => <option key={c} value={c}>{c}</option>)}
+                  className="w-full px-4 py-3 rounded-xl bg-white/[0.05] border border-white/10 text-white text-[0.95rem] focus:border-[#667eea] focus:outline-none focus:ring-1 focus:ring-[#667eea]/50 transition-all appearance-none cursor-pointer"
+                  style={{ colorScheme: 'dark' }}>
+                  {COUNTRIES.map((c) => <option key={c} value={c} style={{ background: '#0d1120', color: '#fff' }}>{c}</option>)}
                 </select>
               </div>
 

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Productos — EV Trading Labs",
@@ -16,7 +15,7 @@ const PRODUCTS = [
     description:
       "Construye, valida y optimiza estrategias como un profesional. Visual Strategy Builder, Backtest Engine con tick data, Genetic Algorithm, Walk-Forward Analysis, Portfolio Lab, ML Lab y más.",
     priceMonthly: 99.99,
-    priceLifetime: 4999.99,
+    priceLifetime: 399,
     currency: "EUR",
     tier: "Pro / Lifetime",
     badge: "Herramienta profesional",
@@ -43,7 +42,7 @@ const PRODUCTS = [
     description:
       "8 estrategias integradas con gestión de riesgo avanzada. Diseñado para traders que valoran la calidad de ejecución, la estructura y la consistencia.",
     priceMonthly: 48.99,
-    priceLifetime: 1199.99,
+    priceLifetime: 199,
     currency: "EUR",
     tier: "Pro / Lifetime",
     badge: "MT5 EA",
