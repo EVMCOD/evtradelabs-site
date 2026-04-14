@@ -30,13 +30,7 @@ export async function POST(req: Request) {
     const token = await signJWT({ userId, email }, JWT_SECRET);
 
     const response = NextResponse.json({ success: true, user: { id: userId, email, name: displayName } });
-    response.cookies.set("auth_token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "lax",
-      maxAge: 60 * 60 * 24 * 7,
-      path: "/",
-    });
+    response.headers.set("Set-Cookie", `auth_token=${token}; HttpOnly; Secure; SameSite=Lax; Max-Age=${60 * 60 * 24 * 7}; Path=/`);
     return response;
   } catch (error: any) {
     console.error("Register error:", error);
