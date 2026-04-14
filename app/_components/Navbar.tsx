@@ -10,6 +10,7 @@ const navLinks = [
   { href: "/", label: "Inicio" },
   { href: "/products", label: "Productos" },
   { href: "/metricas", label: "Métricas" },
+  { href: "/partners", label: "Partners", highlight: true },
 ];
 
 const accountMenuItems = [
@@ -73,7 +74,9 @@ export default function Navbar() {
               <Link
                 key={l.href}
                 href={l.href}
-                className="px-4 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/[0.06] transition-all text-[0.88rem] font-medium"
+                className={`px-4 py-2 rounded-lg text-white/60 hover:text-white hover:bg-white/[0.06] transition-all text-[0.88rem] font-medium ${
+                  l.highlight ? "bg-[#667eea]/20 text-[#667eea] hover:text-white" : ""
+                }`}
               >
                 {l.label}
               </Link>
