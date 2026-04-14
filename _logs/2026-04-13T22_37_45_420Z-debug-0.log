@@ -5,10 +5,10 @@
 4 silly config load:file:/Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/.npmrc
 5 silly config load:file:/Users/enriquevaleros/.npmrc
 6 silly config load:file:/opt/homebrew/etc/npmrc
-7 verbose title npm exec wrangler d1 list
-8 verbose argv "exec" "--" "wrangler" "d1" "list"
-9 verbose logfile logs-max:10 dir:/Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-10T17_31_00_835Z-
-10 verbose logfile /Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-10T17_31_00_835Z-debug-0.log
+7 verbose title npm exec prisma db push
+8 verbose argv "exec" "--" "prisma" "db" "push"
+9 verbose logfile logs-max:10 dir:/Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-13T22_37_45_420Z-
+10 verbose logfile /Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-13T22_37_45_420Z-debug-0.log
 11 silly logfile start cleaning logs, removing 1 files
 12 silly logfile done cleaning log files
 13 verbose cwd /Users/enriquevaleros/.openclaw/workspace/evtradelabs-site

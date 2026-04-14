@@ -1,16 +1,5 @@
 import { NextResponse } from "next/server";
-
-let prisma: any = null;
-
-async function getPrisma() {
-  if (!prisma) {
-    const { PrismaClient } = await import("@prisma/client");
-    prisma = new PrismaClient({
-      log: ["error"],
-    });
-  }
-  return prisma;
-}
+import { query } from "@/lib/d1";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -21,24 +10,30 @@ export async function GET(request: Request) {
   }
 
   try {
-    const db = await getPrisma();
-    const order = await db.order.findUnique({
-      where: { stripeSessionId: sessionId },
-      include: { licenses: true },
-    });
+    const { results: orders } = await query<any>(
+      `SELECT id, status, licenseKey FROM "Order" WHERE stripeSessionId = ? LIMIT 1`,
+      [sessionId]
+    );
 
-    if (!order) {
+    if (orders.length === 0) {
       return NextResponse.json({ error: "Order not found" }, { status: 404 });
     }
+
+    const order = orders[0];
+
+    const { results: licenses } = await query<any>(
+      `SELECT id, key, productSlug, productName, status FROM License WHERE orderId = ?`,
+      [order.id]
+    );
 
     return NextResponse.json({
       orderId: order.id,
       status: order.status,
       licenseKey: order.licenseKey,
-      licenses: order.licenses,
+      licenses,
     });
-  } catch (err: any) {
-    console.error("License lookup error:", err);
+  } catch (err) {
+    console.error("license GET:", err);
     return NextResponse.json({ error: "Database error" }, { status: 500 });
   }
 }
