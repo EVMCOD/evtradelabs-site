@@ -36,6 +36,9 @@ interface Position {
   swap: number;
   mae: number | null;
   mfe: number | null;
+  sl: number | null;
+  tp: number | null;
+  closeReason: string | null;
   comment: string | null;
 }
 
@@ -321,22 +324,42 @@ function Analytics({ positions, currency, symbols, selectedSymbol }: {
   );
 }
 
+/* ─── Close reason badge ─────────────────────────────────── */
+function ReasonBadge({ reason }: { reason: string | null }) {
+  if (!reason || reason === "manual") return <span className="text-white/20 text-[0.6rem]">Manual</span>;
+  if (reason === "sl") return (
+    <span className="px-1.5 py-0.5 rounded text-[0.58rem] font-bold bg-rose-500/15 text-rose-400 border border-rose-500/20">SL</span>
+  );
+  if (reason === "tp") return (
+    <span className="px-1.5 py-0.5 rounded text-[0.58rem] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/20">TP</span>
+  );
+  if (reason === "so") return (
+    <span className="px-1.5 py-0.5 rounded text-[0.58rem] font-bold bg-amber-500/15 text-amber-400 border border-amber-500/20">SO</span>
+  );
+  return <span className="text-white/20 text-[0.6rem]">{reason}</span>;
+}
+
 /* ─── Trades table ───────────────────────────────────────── */
 function TradesTable({ positions, currency }: { positions: Position[]; currency: string }) {
   const recent = positions.slice(0, 50);
-  const HEADS = ["Símbolo","Dir","Lots","Apertura","P. Entrada","Cierre","P. Salida","MAE","MFE","Neto"];
+  const HEADS = ["","Símbolo","Dir","Lots","Apertura","P.Entrada","SL","TP","Cierre","P.Salida","MAE","MFE","Neto"];
   return (
     <div className="rounded-2xl overflow-hidden" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
       <div className="px-6 py-4 border-b border-white/[0.05] flex items-center justify-between">
         <h2 className="font-black text-sm">Operaciones</h2>
-        <span className="text-xs text-white/25">{positions.length} cerradas</span>
+        <div className="flex items-center gap-4 text-[0.62rem] text-white/25">
+          <span className="flex items-center gap-1"><span className="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 font-bold">TP</span> Take profit</span>
+          <span className="flex items-center gap-1"><span className="px-1.5 py-0.5 rounded bg-rose-500/15 text-rose-400 border border-rose-500/20 font-bold">SL</span> Stop loss</span>
+          <span className="flex items-center gap-1"><span className="px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-400 border border-amber-500/20 font-bold">SO</span> Stop out</span>
+          <span>{positions.length} cerradas</span>
+        </div>
       </div>
       <div className="overflow-x-auto">
-        <table className="w-full text-xs min-w-[900px]">
+        <table className="w-full text-xs min-w-[1100px]">
           <thead>
             <tr className="border-b border-white/[0.04]">
               {HEADS.map((h) => (
-                <th key={h} className="px-4 py-3 text-left font-semibold text-white/25 uppercase tracking-wider text-[0.58rem] whitespace-nowrap">{h}</th>
+                <th key={h} className="px-3 py-3 text-left font-semibold text-white/25 uppercase tracking-wider text-[0.56rem] whitespace-nowrap">{h}</th>
               ))}
             </tr>
           </thead>
@@ -344,30 +367,33 @@ function TradesTable({ positions, currency }: { positions: Position[]; currency:
             {recent.map((p, i) => {
               const n = net(p);
               const isLong = p.type === "buy";
+              const rowBg = p.closeReason === "sl" ? "rgba(239,68,68,0.03)"
+                          : p.closeReason === "tp" ? "rgba(34,197,94,0.03)"
+                          : "transparent";
               return (
-                <tr key={i} className="border-b border-white/[0.03] hover:bg-white/[0.015] transition-colors">
-                  <td className="px-4 py-3 font-bold text-white/80">{p.symbol}</td>
-                  <td className="px-4 py-3">
+                <tr key={i} className="border-b border-white/[0.03] hover:bg-white/[0.02] transition-colors" style={{ background: rowBg }}>
+                  {/* Close reason */}
+                  <td className="px-3 py-3"><ReasonBadge reason={p.closeReason}/></td>
+                  <td className="px-3 py-3 font-bold text-white/80">{p.symbol}</td>
+                  <td className="px-3 py-3">
                     <span className={`px-2 py-0.5 rounded text-[0.6rem] font-bold ${isLong ? "bg-blue-500/10 text-blue-400" : "bg-rose-500/10 text-rose-400"}`}>
                       {isLong ? "Long" : "Short"}
                     </span>
                   </td>
-                  <td className="px-4 py-3 font-mono text-white/40">{p.lots}</td>
-                  <td className="px-4 py-3 text-white/30 whitespace-nowrap">
-                    {p.openTime ? dateShort(p.openTime) : "—"}
+                  <td className="px-3 py-3 font-mono text-white/35">{p.lots}</td>
+                  <td className="px-3 py-3 text-white/30 whitespace-nowrap">{p.openTime ? dateShort(p.openTime) : "—"}</td>
+                  <td className="px-3 py-3 font-mono text-white/55">{p.openPrice != null ? fmtNum(p.openPrice, 5) : "—"}</td>
+                  <td className="px-3 py-3 font-mono text-rose-400/50">{p.sl ? fmtNum(p.sl, 5) : "—"}</td>
+                  <td className="px-3 py-3 font-mono text-emerald-400/50">{p.tp ? fmtNum(p.tp, 5) : "—"}</td>
+                  <td className="px-3 py-3 text-white/30 whitespace-nowrap">{dateShort(p.closeTime)}</td>
+                  <td className="px-3 py-3 font-mono text-white/55">{fmtNum(p.closePrice, 5)}</td>
+                  <td className="px-3 py-3 font-mono text-rose-400/70">
+                    {p.mae != null ? fmtNum(p.mae, 2) : "—"}
                   </td>
-                  <td className="px-4 py-3 font-mono text-white/50">
-                    {p.openPrice != null ? fmtNum(p.openPrice, 2) : "—"}
+                  <td className="px-3 py-3 font-mono text-emerald-400/70">
+                    {p.mfe != null ? fmtNum(p.mfe, 2) : "—"}
                   </td>
-                  <td className="px-4 py-3 text-white/30 whitespace-nowrap">{dateShort(p.closeTime)}</td>
-                  <td className="px-4 py-3 font-mono text-white/50">{fmtNum(p.closePrice, 2)}</td>
-                  <td className="px-4 py-3 font-mono text-rose-400/70">
-                    {p.mae != null && p.mae !== 0 ? fmtNum(p.mae, 2) : "—"}
-                  </td>
-                  <td className="px-4 py-3 font-mono text-emerald-400/70">
-                    {p.mfe != null && p.mfe !== 0 ? fmtNum(p.mfe, 2) : "—"}
-                  </td>
-                  <td className="px-4 py-3 font-bold font-mono" style={{ color: n >= 0 ? "#4ade80" : "#f87171" }}>
+                  <td className="px-3 py-3 font-bold font-mono" style={{ color: n >= 0 ? "#4ade80" : "#f87171" }}>
                     {n >= 0 ? "+" : "−"}{currency} {fmtNum(Math.abs(n))}
                   </td>
                 </tr>

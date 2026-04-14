@@ -2,7 +2,7 @@
 //| EVTradeLabs_Sync.mq5                                              |
 //+------------------------------------------------------------------+
 #property copyright "EVTradeLabs"
-#property version   "1.1"
+#property version   "1.2"
 #property strict
 
 #define SYNC_URL "https://evtradelabs.com/api/metricas/sync"
@@ -12,7 +12,7 @@ input string ApiKey = "evm_paNKoHq532Nb01iuNz1yUqp0u8NwAqxR"; // API Key (EVTrad
 
 datetime g_lastSync = 0;
 
-// MAE/MFE tracking for open positions (ticket -> extreme profit)
+// MAE/MFE tracking for open positions
 struct PosExtreme { ulong ticket; double mae; double mfe; };
 PosExtreme g_extremes[];
 
@@ -24,11 +24,11 @@ int OnInit() {
    SendSync();
    return INIT_SUCCEEDED;
 }
-
 void OnDeinit(const int reason) { EventKillTimer(); }
 
+//+------------------------------------------------------------------+
+// Track MAE/MFE (net P&L extremes) for each open position
 void OnTick() {
-   // Track MAE/MFE for all open positions
    int total = PositionsTotal();
    for (int i = 0; i < total; i++) {
       ulong ticket = PositionGetTicket(i);
@@ -45,8 +45,8 @@ void OnTick() {
          g_extremes[idx].mae    = 0;
          g_extremes[idx].mfe    = 0;
       }
-      if (profit < g_extremes[idx].mae) g_extremes[idx].mae = profit; // most negative = MAE
-      if (profit > g_extremes[idx].mfe) g_extremes[idx].mfe = profit; // most positive = MFE
+      if (profit < g_extremes[idx].mae) g_extremes[idx].mae = profit;
+      if (profit > g_extremes[idx].mfe) g_extremes[idx].mfe = profit;
    }
 }
 
@@ -70,15 +70,9 @@ void SendSync() {
    string body = StringFormat(
       "{\"event\":\"sync\","
       "\"account\":{"
-         "\"login\":%d,"
-         "\"name\":\"%s\","
-         "\"broker\":\"%s\","
-         "\"server\":\"%s\","
-         "\"currency\":\"%s\","
-         "\"balance\":%.2f,"
-         "\"equity\":%.2f,"
-         "\"margin\":%.2f,"
-         "\"leverage\":%d"
+         "\"login\":%d,\"name\":\"%s\",\"broker\":\"%s\",\"server\":\"%s\","
+         "\"currency\":\"%s\",\"balance\":%.2f,\"equity\":%.2f,"
+         "\"margin\":%.2f,\"leverage\":%d"
       "},"
       "\"trades\":[%s%s%s]}",
       AccountInfoInteger(ACCOUNT_LOGIN),
@@ -94,7 +88,7 @@ void SendSync() {
    );
 
    string headers = "Content-Type: application/json\r\nX-Api-Key: " + ApiKey;
-   char   bodyArr[], respArr[];
+   char bodyArr[], respArr[];
    string respHeaders;
    StringToCharArray(body, bodyArr, 0, StringLen(body));
 
@@ -108,27 +102,30 @@ void SendSync() {
 }
 
 //+------------------------------------------------------------------+
-// Closed deal history (last 30 days)
+// Closed deal history (last 30 days) — includes SL/TP/closeReason
 string BuildHistoryJSON() {
    string out = "";
    int count  = 0;
    if (!HistorySelect(TimeCurrent() - 30 * 86400, TimeCurrent())) return out;
+
    int total = HistoryDealsTotal();
    for (int i = 0; i < total; i++) {
       ulong ticket = HistoryDealGetTicket(i);
       if (ticket == 0) continue;
       string symbol = HistoryDealGetString(ticket, DEAL_SYMBOL);
       if (symbol == "") continue;
-      ENUM_DEAL_ENTRY entryType = (ENUM_DEAL_ENTRY)HistoryDealGetInteger(ticket, DEAL_ENTRY);
-      string entryStr = DealEntryStr(entryType);
 
-      // For OUT deals, look up tracked MAE/MFE by positionId
-      ulong posId = (ulong)HistoryDealGetInteger(ticket, DEAL_POSITION_ID);
+      ENUM_DEAL_ENTRY entryType = (ENUM_DEAL_ENTRY)HistoryDealGetInteger(ticket, DEAL_ENTRY);
+      ulong   posId  = (ulong)HistoryDealGetInteger(ticket, DEAL_POSITION_ID);
+      double  sl     = HistoryDealGetDouble(ticket, DEAL_SL);
+      double  tp     = HistoryDealGetDouble(ticket, DEAL_TP);
+      int     reason = (int)HistoryDealGetInteger(ticket, DEAL_REASON);
+
+      // MAE/MFE from OnTick tracking (only available if position was open during this session)
       double mae = 0, mfe = 0;
-      if (entryType == DEAL_ENTRY_OUT) {
-         int idx = FindExtreme(posId); // posId used as proxy (ticket reuse unlikely)
-         if (idx >= 0) { mae = g_extremes[idx].mae; mfe = g_extremes[idx].mfe; }
-      }
+      int idx = FindExtreme(ticket);
+      if (idx < 0) idx = FindExtreme(posId); // fallback: match by positionId
+      if (idx >= 0) { mae = g_extremes[idx].mae; mfe = g_extremes[idx].mfe; }
 
       string sep = (count > 0) ? "," : "";
       out += StringFormat(
@@ -136,7 +133,8 @@ string BuildHistoryJSON() {
          "\"type\":\"%s\",\"lots\":%.2f,\"price\":%.5f,"
          "\"profit\":%.2f,\"commission\":%.2f,\"swap\":%.2f,"
          "\"entry\":\"%s\",\"time\":%llu,\"comment\":\"%s\","
-         "\"mae\":%.2f,\"mfe\":%.2f}",
+         "\"mae\":%.2f,\"mfe\":%.2f,\"sl\":%.5f,\"tp\":%.5f,"
+         "\"closeReason\":\"%s\"}",
          sep, ticket, posId, symbol,
          DealTypeStr((ENUM_DEAL_TYPE)HistoryDealGetInteger(ticket, DEAL_TYPE)),
          HistoryDealGetDouble(ticket, DEAL_VOLUME),
@@ -144,17 +142,18 @@ string BuildHistoryJSON() {
          HistoryDealGetDouble(ticket, DEAL_PROFIT),
          HistoryDealGetDouble(ticket, DEAL_COMMISSION),
          HistoryDealGetDouble(ticket, DEAL_SWAP),
-         entryStr,
+         DealEntryStr(entryType),
          (ulong)HistoryDealGetInteger(ticket, DEAL_TIME),
          EscapeJSON(HistoryDealGetString(ticket, DEAL_COMMENT)),
-         mae, mfe
+         mae, mfe, sl, tp,
+         DealReasonStr(reason, entryType)
       );
       count++;
    }
    return out;
 }
 
-// Currently open positions (sent as IN deals so dashboard shows them)
+// Open positions — entry="in", with current MAE/MFE/SL/TP
 string BuildOpenJSON() {
    string out = "";
    int count  = 0;
@@ -168,6 +167,8 @@ string BuildOpenJSON() {
       int idx = FindExtreme(ticket);
       double mae = (idx >= 0) ? g_extremes[idx].mae : 0;
       double mfe = (idx >= 0) ? g_extremes[idx].mfe : 0;
+      double sl  = PositionGetDouble(POSITION_SL);
+      double tp  = PositionGetDouble(POSITION_TP);
 
       string typeStr = (PositionGetInteger(POSITION_TYPE) == POSITION_TYPE_BUY) ? "buy" : "sell";
       string sep = (count > 0) ? "," : "";
@@ -176,7 +177,8 @@ string BuildOpenJSON() {
          "\"type\":\"%s\",\"lots\":%.2f,\"price\":%.5f,"
          "\"profit\":%.2f,\"commission\":%.2f,\"swap\":%.2f,"
          "\"entry\":\"in\",\"time\":%llu,\"comment\":\"%s\","
-         "\"mae\":%.2f,\"mfe\":%.2f}",
+         "\"mae\":%.2f,\"mfe\":%.2f,\"sl\":%.5f,\"tp\":%.5f,"
+         "\"closeReason\":null}",
          sep, ticket,
          (ulong)PositionGetInteger(POSITION_IDENTIFIER),
          symbol, typeStr,
@@ -187,18 +189,29 @@ string BuildOpenJSON() {
          PositionGetDouble(POSITION_SWAP),
          (ulong)PositionGetInteger(POSITION_TIME),
          EscapeJSON(PositionGetString(POSITION_COMMENT)),
-         mae, mfe
+         mae, mfe, sl, tp
       );
       count++;
    }
    return out;
 }
 
+//+------------------------------------------------------------------+
 string DealTypeStr(ENUM_DEAL_TYPE t) {
    switch (t) { case DEAL_TYPE_BUY: return "buy"; case DEAL_TYPE_SELL: return "sell"; default: return "other"; }
 }
 string DealEntryStr(ENUM_DEAL_ENTRY e) {
    switch (e) { case DEAL_ENTRY_IN: return "in"; case DEAL_ENTRY_OUT: return "out"; case DEAL_ENTRY_INOUT: return "inout"; default: return "out"; }
+}
+string DealReasonStr(int reason, ENUM_DEAL_ENTRY entry) {
+   // Only OUT deals have a meaningful close reason
+   if (entry != DEAL_ENTRY_OUT) return "null";
+   switch (reason) {
+      case DEAL_REASON_SL: return "sl";
+      case DEAL_REASON_TP: return "tp";
+      case DEAL_REASON_SO: return "so";
+      default:             return "manual";
+   }
 }
 string EscapeJSON(string s) {
    StringReplace(s, "\\", "\\\\"); StringReplace(s, "\"", "\\\"");

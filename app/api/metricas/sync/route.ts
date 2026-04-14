@@ -96,8 +96,8 @@ export async function POST(req: NextRequest) {
         await query(
           `INSERT OR IGNORE INTO MetricasTrade
              (id, accountId, ticket, positionId, symbol, type, lots, price,
-              profit, commission, swap, entry, time, comment, mae, mfe)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+              profit, commission, swap, entry, time, comment, mae, mfe, sl, tp, closeReason)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           [
             crypto.randomUUID(),
             accountId,
@@ -113,23 +113,31 @@ export async function POST(req: NextRequest) {
             t.entry ?? "out",
             t.time ? String(t.time) : now,
             t.comment ?? null,
-            t.mae != null ? Number(t.mae) : null,
-            t.mfe != null ? Number(t.mfe) : null,
+            t.mae         != null ? Number(t.mae)  : null,
+            t.mfe         != null ? Number(t.mfe)  : null,
+            t.sl          != null ? Number(t.sl)   : null,
+            t.tp          != null ? Number(t.tp)   : null,
+            t.closeReason ?? null,
           ]
         );
-        // Update mutable fields (profit may change on corrections, mae/mfe accumulate)
         await query(
           `UPDATE MetricasTrade
            SET profit = ?, commission = ?, swap = ?,
-               mae = CASE WHEN ? IS NOT NULL THEN ? ELSE mae END,
-               mfe = CASE WHEN ? IS NOT NULL THEN ? ELSE mfe END
+               mae         = CASE WHEN ? IS NOT NULL THEN ? ELSE mae         END,
+               mfe         = CASE WHEN ? IS NOT NULL THEN ? ELSE mfe         END,
+               sl          = CASE WHEN ? IS NOT NULL THEN ? ELSE sl          END,
+               tp          = CASE WHEN ? IS NOT NULL THEN ? ELSE tp          END,
+               closeReason = CASE WHEN ? IS NOT NULL THEN ? ELSE closeReason END
            WHERE accountId = ? AND ticket = ?`,
           [
             t.profit     != null ? Number(t.profit)     : 0,
             t.commission != null ? Number(t.commission) : 0,
             t.swap       != null ? Number(t.swap)       : 0,
-            t.mae != null ? 1 : null, t.mae != null ? Number(t.mae) : null,
-            t.mfe != null ? 1 : null, t.mfe != null ? Number(t.mfe) : null,
+            t.mae         != null ? 1 : null, t.mae         != null ? Number(t.mae)  : null,
+            t.mfe         != null ? 1 : null, t.mfe         != null ? Number(t.mfe)  : null,
+            t.sl          != null ? 1 : null, t.sl          != null ? Number(t.sl)   : null,
+            t.tp          != null ? 1 : null, t.tp          != null ? Number(t.tp)   : null,
+            t.closeReason != null ? 1 : null, t.closeReason ?? null,
             accountId,
             String(t.ticket),
           ]

@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
     const [tradesRes, snapshotsRes] = await Promise.all([
       query<any>(
         `SELECT ticket, positionId, symbol, type, lots, price, profit,
-                commission, swap, entry, time, comment, mae, mfe
+                commission, swap, entry, time, comment, mae, mfe, sl, tp, closeReason
          FROM MetricasTrade WHERE accountId = ?
          ORDER BY time ASC
          LIMIT 2000`,
@@ -59,21 +59,27 @@ export async function GET(req: NextRequest) {
 
     const positions = Object.entries(outMap).map(([posId, out]) => {
       const inp = inMap[posId];
+      // MAE/MFE: non-zero wins over zero (0 = untracked default)
+      const pickExtreme = (a: number | null, b: number | null) =>
+        (a != null && a !== 0) ? a : (b != null && b !== 0) ? b : null;
       return {
-        positionId:  posId,
-        symbol:      out.symbol,
-        type:        out.type,
-        lots:        out.lots || inp?.lots || 0,
-        openPrice:   inp?.price  ?? null,
-        openTime:    inp?.time   ?? null,
-        closePrice:  out.price,
-        closeTime:   out.time,
-        profit:      out.profit,
-        commission:  out.commission,
-        swap:        out.swap,
-        mae:         out.mae   || inp?.mae   || null,
-        mfe:         out.mfe   || inp?.mfe   || null,
-        comment:     out.comment ?? inp?.comment ?? null,
+        positionId:   posId,
+        symbol:       out.symbol,
+        type:         out.type,
+        lots:         out.lots || inp?.lots || 0,
+        openPrice:    inp?.price  ?? null,
+        openTime:     inp?.time   ?? null,
+        closePrice:   out.price,
+        closeTime:    out.time,
+        profit:       out.profit,
+        commission:   out.commission,
+        swap:         out.swap,
+        mae:          pickExtreme(out.mae, inp?.mae),
+        mfe:          pickExtreme(out.mfe, inp?.mfe),
+        sl:           inp?.sl  ?? out.sl  ?? null,
+        tp:           inp?.tp  ?? out.tp  ?? null,
+        closeReason:  out.closeReason ?? null,
+        comment:      out.comment ?? inp?.comment ?? null,
       };
     }).sort((a, b) => new Date(b.closeTime).getTime() - new Date(a.closeTime).getTime());
 
