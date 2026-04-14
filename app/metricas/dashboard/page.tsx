@@ -65,72 +65,88 @@ const timeAgo = (iso: string) => {
   return `hace ${Math.floor(s / 3600)}h`;
 };
 
+/* ─── Smooth bezier path from points ────────────────────── */
+function smoothPath(pts: [number, number][]): string {
+  if (pts.length < 2) return "";
+  let d = `M ${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
+  for (let i = 1; i < pts.length; i++) {
+    const [x0, y0] = pts[i - 1];
+    const [x1, y1] = pts[i];
+    const cpx = (x0 + x1) / 2;
+    d += ` C ${cpx.toFixed(1)} ${y0.toFixed(1)}, ${cpx.toFixed(1)} ${y1.toFixed(1)}, ${x1.toFixed(1)} ${y1.toFixed(1)}`;
+  }
+  return d;
+}
+
 /* ─── Equity curve SVG ────────────────────────────────────── */
 function EquityCurve({ snapshots }: { snapshots: Snapshot[] }) {
   if (snapshots.length < 2) return null;
-  const W = 1000, H = 220, PAD = { t: 20, r: 20, b: 36, l: 60 };
+
+  const W = 800, H = 180;
+  const PL = 12, PR = 12, PT = 12, PB = 12;
+  const chartW = W - PL - PR;
+  const chartH = H - PT - PB;
+
   const values = snapshots.map((s) => s.balance);
   const min = Math.min(...values), max = Math.max(...values);
-  const range = max - min || 1;
+  const range = max - min || max * 0.01 || 1;
   const n = snapshots.length;
 
-  const px = (i: number) => PAD.l + (i / (n - 1)) * (W - PAD.l - PAD.r);
-  const py = (v: number) => PAD.t + (1 - (v - min) / range) * (H - PAD.t - PAD.b);
+  const px = (i: number) => PL + (i / (n - 1)) * chartW;
+  const py = (v: number) => PT + (1 - (v - min) / range) * chartH;
 
-  const linePts = snapshots.map((s, i) => `${px(i).toFixed(1)},${py(s.balance).toFixed(1)}`).join(" L ");
-  const fillPts = `M ${px(0).toFixed(1)},${(H - PAD.b).toFixed(1)} L ${linePts} L ${px(n - 1).toFixed(1)},${(H - PAD.b).toFixed(1)} Z`;
+  const pts: [number, number][] = snapshots.map((s, i) => [px(i), py(s.balance)]);
+  const linePath = smoothPath(pts);
+  const fillPath = `${linePath} L ${px(n - 1).toFixed(1)} ${(PT + chartH).toFixed(1)} L ${PL.toFixed(1)} ${(PT + chartH).toFixed(1)} Z`;
 
-  const lastX = px(n - 1), lastY = py(values[n - 1]);
+  const [lastX, lastY] = pts[pts.length - 1];
   const isUp = values[n - 1] >= values[0];
-
-  // Y-axis labels (3 levels)
-  const yLevels = [min, min + range / 2, max];
-  // X-axis: first, mid, last
-  const xLabels = [0, Math.floor(n / 2), n - 1].map((i) => ({
-    x: px(i),
-    label: dateLabel(snapshots[i].timestamp),
-  }));
+  const color = isUp ? "#3b82f6" : "#ef4444";
+  const colorLight = isUp ? "#93c5fd" : "#fca5a5";
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ height: 220 }} preserveAspectRatio="none">
-      <defs>
-        <linearGradient id="eqFill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={isUp ? "#3b82f6" : "#ef4444"} stopOpacity="0.18" />
-          <stop offset="100%" stopColor={isUp ? "#3b82f6" : "#ef4444"} stopOpacity="0.01" />
-        </linearGradient>
-        <linearGradient id="eqLine" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor={isUp ? "#60a5fa" : "#f87171"} />
-          <stop offset="100%" stopColor={isUp ? "#3b82f6" : "#ef4444"} />
-        </linearGradient>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="3" result="blur" />
-          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-        </filter>
-      </defs>
+    <div style={{ position: "relative" }}>
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ height: 180, display: "block" }}>
+        <defs>
+          <linearGradient id="eqFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stopColor={color} stopOpacity="0.22" />
+            <stop offset="100%" stopColor={color} stopOpacity="0.02" />
+          </linearGradient>
+          <filter id="dotGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+        </defs>
 
-      {/* Grid lines */}
-      {yLevels.map((v, i) => (
-        <g key={i}>
-          <line x1={PAD.l} y1={py(v)} x2={W - PAD.r} y2={py(v)} stroke="rgba(255,255,255,0.05)" strokeWidth="1" strokeDasharray="4 4" />
-          <text x={PAD.l - 6} y={py(v) + 4} textAnchor="end" fontSize="10" fill="rgba(255,255,255,0.3)">
+        {/* Subtle horizontal grid */}
+        {[0.25, 0.5, 0.75].map((f) => (
+          <line key={f}
+            x1={PL} y1={(PT + f * chartH).toFixed(1)}
+            x2={W - PR} y2={(PT + f * chartH).toFixed(1)}
+            stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
+        ))}
+
+        {/* Fill area */}
+        <path d={fillPath} fill="url(#eqFill)" />
+
+        {/* Smooth line */}
+        <path d={linePath} fill="none" stroke={colorLight} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+
+        {/* Last point */}
+        <circle cx={lastX} cy={lastY} r="6" fill={color} opacity="0.25" filter="url(#dotGlow)" />
+        <circle cx={lastX} cy={lastY} r="3" fill={color} />
+        <circle cx={lastX} cy={lastY} r="1.5" fill="white" />
+      </svg>
+
+      {/* Y labels positioned absolute so they don't distort */}
+      <div style={{ position: "absolute", top: PT, left: 0, height: chartH, display: "flex", flexDirection: "column", justifyContent: "space-between", pointerEvents: "none" }}>
+        {[max, min + range / 2, min].map((v, i) => (
+          <span key={i} style={{ fontSize: 10, color: "rgba(255,255,255,0.25)", lineHeight: 1 }}>
             {v.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-          </text>
-        </g>
-      ))}
-
-      {/* X labels */}
-      {xLabels.map((l, i) => (
-        <text key={i} x={l.x} y={H - 6} textAnchor="middle" fontSize="10" fill="rgba(255,255,255,0.25)">{l.label}</text>
-      ))}
-
-      {/* Fill + line */}
-      <path d={fillPts} fill="url(#eqFill)" />
-      <path d={`M ${linePts}`} fill="none" stroke="url(#eqLine)" strokeWidth="2" strokeLinejoin="round" />
-
-      {/* Last point glow dot */}
-      <circle cx={lastX} cy={lastY} r="5" fill={isUp ? "#3b82f6" : "#ef4444"} filter="url(#glow)" />
-      <circle cx={lastX} cy={lastY} r="3" fill="white" />
-    </svg>
+          </span>
+        ))}
+      </div>
+    </div>
   );
 }
 
