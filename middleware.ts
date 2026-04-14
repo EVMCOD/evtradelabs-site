@@ -1,28 +1,42 @@
 import { NextRequest, NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "evtradelabs-jwt-secret-change-in-production";
 
-export function middleware(req: NextRequest) {
-  const token = req.cookies.get("auth_token");
-  const isDashboard = req.nextUrl.pathname.startsWith("/dashboard");
-  const isAccount = req.nextUrl.pathname.startsWith("/account");
-  const isProtected = isDashboard || isAccount;
-
-  if (isProtected && !token) {
-    return NextResponse.redirect(new URL("/login", req.url));
+async function verifyToken(token: string): Promise<boolean> {
+  try {
+    const [header, body, sig] = token.split(".");
+    if (!header || !body || !sig) return false;
+    const enc = new TextEncoder();
+    const key = await crypto.subtle.importKey(
+      "raw", enc.encode(JWT_SECRET),
+      { name: "HMAC", hash: "SHA-256" }, false, ["verify"]
+    );
+    const sigBytes = Uint8Array.from(
+      atob(sig.replace(/-/g, "+").replace(/_/g, "/")),
+      c => c.charCodeAt(0)
+    );
+    const valid = await crypto.subtle.verify("HMAC", key, sigBytes, enc.encode(`${header}.${body}`));
+    if (!valid) return false;
+    const payload = JSON.parse(atob(body.replace(/-/g, "+").replace(/_/g, "/")));
+    return !payload.exp || payload.exp > Math.floor(Date.now() / 1000);
+  } catch {
+    return false;
   }
+}
 
-  if (isProtected && token) {
-    try {
-      jwt.verify(token.value, JWT_SECRET);
-      // Valid token - allow
-    } catch {
-      // Invalid token - redirect to login
-      const response = NextResponse.redirect(new URL("/login", req.url));
-      response.cookies.set("auth_token", "", { maxAge: 0 });
-      return response;
-    }
+export async function middleware(req: NextRequest) {
+  const token = req.cookies.get("auth_token");
+  const isProtected = req.nextUrl.pathname.startsWith("/dashboard") ||
+                      req.nextUrl.pathname.startsWith("/account");
+
+  if (!isProtected) return NextResponse.next();
+  if (!token) return NextResponse.redirect(new URL("/login", req.url));
+
+  const valid = await verifyToken(token.value);
+  if (!valid) {
+    const res = NextResponse.redirect(new URL("/login", req.url));
+    res.headers.set("Set-Cookie", "auth_token=; HttpOnly; Secure; SameSite=Lax; Max-Age=0; Path=/");
+    return res;
   }
 
   return NextResponse.next();
