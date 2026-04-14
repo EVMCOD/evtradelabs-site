@@ -96,8 +96,8 @@ export async function POST(req: NextRequest) {
         await query(
           `INSERT OR IGNORE INTO MetricasTrade
              (id, accountId, ticket, positionId, symbol, type, lots, price,
-              profit, commission, swap, entry, time, comment)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+              profit, commission, swap, entry, time, comment, mae, mfe)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           [
             crypto.randomUUID(),
             accountId,
@@ -105,25 +105,31 @@ export async function POST(req: NextRequest) {
             t.positionId ? String(t.positionId) : null,
             t.symbol,
             t.type ?? "buy",
-            t.lots != null ? Number(t.lots) : 0,
-            t.price != null ? Number(t.price) : 0,
-            t.profit != null ? Number(t.profit) : 0,
+            t.lots       != null ? Number(t.lots)       : 0,
+            t.price      != null ? Number(t.price)      : 0,
+            t.profit     != null ? Number(t.profit)     : 0,
             t.commission != null ? Number(t.commission) : 0,
-            t.swap != null ? Number(t.swap) : 0,
+            t.swap       != null ? Number(t.swap)       : 0,
             t.entry ?? "out",
             t.time ? String(t.time) : now,
             t.comment ?? null,
+            t.mae != null ? Number(t.mae) : null,
+            t.mfe != null ? Number(t.mfe) : null,
           ]
         );
-        // Update profit/commission/swap in case they changed (e.g. corrections)
+        // Update mutable fields (profit may change on corrections, mae/mfe accumulate)
         await query(
           `UPDATE MetricasTrade
-           SET profit = ?, commission = ?, swap = ?
+           SET profit = ?, commission = ?, swap = ?,
+               mae = CASE WHEN ? IS NOT NULL THEN ? ELSE mae END,
+               mfe = CASE WHEN ? IS NOT NULL THEN ? ELSE mfe END
            WHERE accountId = ? AND ticket = ?`,
           [
-            t.profit != null ? Number(t.profit) : 0,
+            t.profit     != null ? Number(t.profit)     : 0,
             t.commission != null ? Number(t.commission) : 0,
-            t.swap != null ? Number(t.swap) : 0,
+            t.swap       != null ? Number(t.swap)       : 0,
+            t.mae != null ? 1 : null, t.mae != null ? Number(t.mae) : null,
+            t.mfe != null ? 1 : null, t.mfe != null ? Number(t.mfe) : null,
             accountId,
             String(t.ticket),
           ]
