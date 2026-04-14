@@ -15,6 +15,7 @@ interface MetricasAccount {
   currency: string;
   balance: number | null;
   equity: number | null;
+  leverage: number | null;
   status: string;
   lastSyncAt: string | null;
   connectedAt: string | null;
@@ -416,7 +417,7 @@ function Dashboard({ account, trades, snapshots, stats }: {
               { label: "Servidor",  value: account.server    ?? "—" },
               { label: "Login",     value: "#" + (account.accountLogin ?? "—") },
               { label: "Moneda",    value: account.currency },
-              { label: "Apalanca.", value: account.leverage ? "1:" + (account as any).leverage : "—" },
+              { label: "Apalanca.", value: account.leverage ? "1:" + account.leverage : "—" },
               { label: "Conectado", value: account.connectedAt ? dateLabel(account.connectedAt) : "—" },
             ].map(({ label, value }) => (
               <div key={label} className="flex items-center justify-between border-b border-white/[0.04] pb-3 last:border-0 last:pb-0">
