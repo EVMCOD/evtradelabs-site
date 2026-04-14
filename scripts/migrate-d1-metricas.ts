@@ -1,3 +1,5 @@
+export {};
+
 /**
  * Crea las tablas de EV Métricas en Cloudflare D1.
  * Ejecutar una vez: npx tsx scripts/migrate-d1-metricas.ts

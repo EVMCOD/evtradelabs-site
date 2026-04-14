@@ -1,3 +1,5 @@
+export {};
+
 /**
  * Crea las tablas principales (Order, License) en Cloudflare D1.
  * La tabla User ya existe (creada previamente para auth).
