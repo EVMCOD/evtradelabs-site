@@ -274,6 +274,14 @@
   opacity: 1;
 }
 
+/* Indicators auto-scroll ticker */
+.animate-indicators-ticker {
+  animation: ticker 70s linear infinite;
+}
+.animate-indicators-ticker:hover {
+  animation-play-state: paused;
+}
+
 /* Hide scrollbar for carousels */
 .scrollbar-hide {
   -ms-overflow-style: none;
