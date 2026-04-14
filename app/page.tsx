@@ -246,6 +246,110 @@ export default function HomePage() {
 
 
 
+      {/* TradingView Indicators Showcase */}
+      <section className="py-16 md:py-24 bg-[#0a0a0f] overflow-hidden">
+        <div className="max-w-[1200px] mx-auto px-5 mb-10 md:mb-14">
+          <div className="text-center">
+            <span className="inline-block text-[0.65rem] md:text-[0.7rem] font-bold tracking-[0.25em] uppercase text-[#60a5fa] mb-4">
+              TradingView · Gratuitos
+            </span>
+            <h2 className="text-[1.75rem] md:text-[2.5rem] font-black tracking-tight mb-3">
+              Indicadores públicos
+            </h2>
+            <p className="text-white/40 text-[0.88rem] max-w-[480px] mx-auto">
+              Scripts gratuitos publicados en TradingView. Añádelos directamente a tu gráfico con un clic.
+            </p>
+          </div>
+        </div>
+
+        {/* Carousel */}
+        <div className="relative">
+          {/* Fade edges */}
+          <div className="absolute left-0 top-0 bottom-4 w-12 md:w-20 z-10 pointer-events-none bg-gradient-to-r from-[#0a0a0f] to-transparent" />
+          <div className="absolute right-0 top-0 bottom-4 w-12 md:w-20 z-10 pointer-events-none bg-gradient-to-l from-[#0a0a0f] to-transparent" />
+
+          <div
+            className="flex gap-4 px-6 md:px-10 pb-4 overflow-x-auto scrollbar-hide"
+            style={{ scrollSnapType: 'x mandatory' }}
+          >
+            {([
+              { name: "EV RSI Reversion",             slug: "z7B1Dsk9", img: "https://s3.tradingview.com/z/z7B1Dsk9_mid.png",  desc: "Detecta sobrecompra/sobreventa con señales de reversión visuales basadas en RSI." },
+              { name: "EV Fair Value Gaps",            slug: "QLuXENre", img: "https://s3.tradingview.com/q/QLuXENre_mid.png",  desc: "Identifica y visualiza Fair Value Gaps con seguimiento de mitigación." },
+              { name: "BOS + CHoCH",                  slug: "H84iLWHh", img: "https://s3.tradingview.com/h/H84iLWHh_mid.png",  desc: "Detecta Break of Structure y Change of Character para análisis Smart Money." },
+              { name: "Liquidity Sweeps by EV",       slug: "Up6uhYGN", img: "https://s3.tradingview.com/u/Up6uhYGN_mid.png",  desc: "Identifica barridos de liquidez por encima y por debajo de máximos clave." },
+              { name: "Session Levels by EV",         slug: "SHt4Bkun", img: "https://s3.tradingview.com/s/SHt4Bkun_mid.png",  desc: "Niveles de apertura de las sesiones NY, Londres y Asia en el gráfico." },
+              { name: "EV FVG Probability Engine",    slug: "DlTOCCzj", img: "https://s3.tradingview.com/d/DlTOCCzj_mid.png",  desc: "Calcula la probabilidad estadística de relleno de cada Fair Value Gap." },
+              { name: "EV Levels",                    slug: "tHIFxAs5", img: "https://s3.tradingview.com/t/tHIFxAs5_mid.png",  desc: "Niveles de soporte y resistencia clave calculados automáticamente." },
+              { name: "FVG by EV",                    slug: "EjOkmVp9", img: "https://s3.tradingview.com/e/EjOkmVp9_mid.png",  desc: "Zonas de Fair Value Gap con estado activo o mitigado en tiempo real." },
+              { name: "ATR BUY / SELL by EV",         slug: "9Ivx5VFg", img: "https://s3.tradingview.com/9/9Ivx5VFg_mid.png",  desc: "Señales largas y cortas basadas en ATR con trailing stop dinámico." },
+              { name: "RSI Divergence by EV",         slug: "dPms91Ax", img: "https://s3.tradingview.com/d/dPms91Ax_mid.png",  desc: "Detecta divergencias alcistas y bajistas en el RSI automáticamente." },
+              { name: "EV London Sweep Strategy",     slug: "TX2c7nb1", img: "https://s3.tradingview.com/t/TX2c7nb1_mid.png",  desc: "Estrategia de barrido de liquidez en la apertura de la sesión de Londres." },
+              { name: "S/R + Trend",                  slug: "PVYlfXia", img: "https://s3.tradingview.com/p/PVYlfXia_mid.png",  desc: "Soporte y resistencia con indicador de dirección de tendencia integrado." },
+              { name: "Volume + RVOL",                slug: "GsWJESGj", img: "https://s3.tradingview.com/g/GsWJESGj_mid.png",  desc: "Volumen relativo (RVOL) para detectar actividad institucional inusual." },
+              { name: "MACD by EV",                   slug: "Nep6MbTu", img: "https://s3.tradingview.com/n/Nep6MbTu_mid.png",  desc: "MACD mejorado con histograma de color dinámico y señales visuales." },
+              { name: "EMA Trend by EV",              slug: "ugE8Ssov", img: "https://s3.tradingview.com/u/ugE8Ssov_mid.png",  desc: "Dirección de tendencia con múltiples EMAs y zonas de color de fondo." },
+              { name: "Bollinger Bands by EV",        slug: "aVorrbba", img: "https://s3.tradingview.com/a/aVorrbba_mid.png",  desc: "Bandas de Bollinger con alertas de compresión y expansión de volatilidad." },
+              { name: "Supertrend & ATR Trailing Stop", slug: "ciAnmI0p", img: "https://s3.tradingview.com/c/ciAnmI0p_mid.png", desc: "Supertrend y ATR Trailing Stop combinados para seguir tendencias." },
+              { name: "Stochastic Dynamic Bands",     slug: "hLUmqpmU", img: "https://s3.tradingview.com/h/hLUmqpmU_mid.png",  desc: "Estocástico con bandas dinámicas para zonas de reversión y momentum." },
+            ] as { name: string; slug: string; img: string; desc: string }[]).map((ind) => (
+              <a
+                key={ind.slug}
+                href={`https://www.tradingview.com/script/${ind.slug}/`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex-none w-[220px] md:w-[260px] rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1"
+                style={{
+                  scrollSnapAlign: 'start',
+                  background: 'rgba(255,255,255,0.03)',
+                  border: '1px solid rgba(255,255,255,0.07)',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                }}
+              >
+                {/* Thumbnail */}
+                <div className="relative w-full overflow-hidden bg-[#0d1015]" style={{ aspectRatio: '16/9' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={ind.img}
+                    alt={ind.name}
+                    width={520}
+                    height={293}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: 'rgba(96,165,250,0.06)' }} />
+                </div>
+
+                {/* Content */}
+                <div className="p-4">
+                  <h3 className="text-[0.88rem] font-bold text-white mb-1.5 leading-snug">{ind.name}</h3>
+                  <p className="text-white/40 text-[0.75rem] leading-relaxed line-clamp-2">{ind.desc}</p>
+                  <div className="mt-3 flex items-center gap-1.5 text-[#60a5fa] text-[0.7rem] font-semibold opacity-70 group-hover:opacity-100 group-hover:gap-2 transition-all duration-200">
+                    <span>Ver en TradingView</span>
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                      <path d="M1 5h8M5.5 1.5l4 3.5-4 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div className="text-center mt-6 px-5">
+          <a
+            href="https://www.tradingview.com/u/EVLabs/#published-scripts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-white/30 hover:text-white/60 text-[0.8rem] transition-colors"
+          >
+            Ver todos los scripts en TradingView
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="py-16 md:py-28 px-5 bg-[#0a0a0f]">
         <div className="max-w-[700px] mx-auto">
