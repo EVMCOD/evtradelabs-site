@@ -3,7 +3,7 @@ import { getAuthUser } from "@/lib/auth";
 import { query } from "@/lib/d1";
 
 export async function GET(req: NextRequest) {
-  const user = getAuthUser(req);
+  const user = await getAuthUser(req);
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   try {

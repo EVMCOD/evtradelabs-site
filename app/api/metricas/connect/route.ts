@@ -10,7 +10,7 @@ function generateApiKey(): string {
 
 // GET — get existing account (creates one if this is the first time)
 export async function GET(req: NextRequest) {
-  const user = getAuthUser(req);
+  const user = await getAuthUser(req);
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   try {
@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
 
 // POST — regenerate API key
 export async function POST(req: NextRequest) {
-  const user = getAuthUser(req);
+  const user = await getAuthUser(req);
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   try {

@@ -16,7 +16,7 @@ function encrypt(text: string): string {
 
 export async function POST(req: Request) {
   try {
-    const user = getAuthUser(req as any);
+    const user = await getAuthUser(req as any);
     if (!user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
@@ -81,7 +81,7 @@ export async function POST(req: Request) {
 
 export async function GET(req: Request) {
   try {
-    const user = getAuthUser(req as any);
+    const user = await getAuthUser(req as any);
     if (!user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
