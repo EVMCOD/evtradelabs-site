@@ -35,8 +35,8 @@ export async function query<T = any>(
   }
 
   return {
-    results: data.results?.[0]?.results || [],
-    meta: data.results?.[0]?.meta || {},
-    duration: data.results?.[0]?.duration || 0,
+    results: data.result?.[0]?.results || [],
+    meta: data.result?.[0]?.meta || {},
+    duration: data.result?.[0]?.meta?.duration || 0,
   };
 }
