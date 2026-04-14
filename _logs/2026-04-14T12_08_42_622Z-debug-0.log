@@ -7,8 +7,8 @@
 6 silly config load:file:/opt/homebrew/etc/npmrc
 7 verbose title npm run build
 8 verbose argv "run" "build"
-9 verbose logfile logs-max:10 dir:/Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-13T10_40_24_526Z-
-10 verbose logfile /Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-13T10_40_24_526Z-debug-0.log
+9 verbose logfile logs-max:10 dir:/Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-14T12_08_42_622Z-
+10 verbose logfile /Users/enriquevaleros/.openclaw/workspace/evtradelabs-site/_logs/2026-04-14T12_08_42_622Z-debug-0.log
 11 silly logfile start cleaning logs, removing 1 files
 12 silly logfile done cleaning log files
 13 verbose cwd /Users/enriquevaleros/.openclaw/workspace/evtradelabs-site
