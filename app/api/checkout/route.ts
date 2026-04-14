@@ -57,6 +57,7 @@ export async function POST(request: Request) {
         customerName: name || "",
         country: country || "",
       },
+      allow_promotion_codes: true,
       success_url: `${baseUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}/checkout?product=${productSlug}&canceled=true`,
     });
