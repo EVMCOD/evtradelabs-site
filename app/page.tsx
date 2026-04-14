@@ -160,12 +160,12 @@ export default function HomePage() {
                 desc: "Asesor Experto para MetaTrader 5. 8 estrategias de liquidez integradas con gestión de riesgo avanzada.",
                 prices: [{ label: "Mensual", price: "€48.99/mes" }, { label: "Lifetime", price: "€199" }],
               },
-              { 
-                name: "Replicador", 
-                slug: "replicador", 
+              {
+                name: "Replicador",
+                slug: "replicador",
                 tag: "COPY TRADING",
                 desc: "Replicación de cuentas master a múltiples followers en tiempo real. Control total de lotajes y filtros.",
-                prices: [{ label: "Mensual", price: "€18.99/mes" }, { label: "Lifetime", price: "€79" }],
+                prices: [{ label: "Mensual", price: "€18.99/mes" }],
               },
             ].map((p, i) => (
               <div 
@@ -216,7 +216,7 @@ export default function HomePage() {
                     {/* CTA */}
                     <div className="flex flex-col gap-3">
                       <Link 
-                        href={`/products#${p.slug}`} 
+                        href={`/products/${p.slug}`}
                         className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-[#a78bfa] text-[0.85rem] font-semibold border border-[#a78bfa]/30 hover:bg-[#a78bfa]/10 transition-all"
                       >
                         <span>Suscribirse</span>

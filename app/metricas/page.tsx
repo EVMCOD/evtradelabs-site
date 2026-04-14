@@ -281,13 +281,12 @@ export default function MetricasLandingPage() {
               },
               {
                 step: "02",
-                title: "Vincula tu MT5",
-                desc: "Introduce las credenciales de solo lectura de tu cuenta MT5. Sin acceso de trading.",
+                title: "Instala el EA en MT5",
+                desc: "Descarga EVMetricas.mq5, adjúntalo a cualquier gráfico y pega tu API key. Sin credenciales, sin riesgos.",
                 color: "#a78bfa",
                 icon: (
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                    <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                    <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 ),
               },
