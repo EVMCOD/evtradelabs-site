@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const { event, account, trades } = body;
+  const { event, account, trades, balanceOps } = body;
 
   // ── Update account metadata ────────────────────────────────────
   if (account) {
@@ -149,5 +149,27 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  return NextResponse.json({ ok: true, event, tradesProcessed: inserted });
+  // ── Upsert balance ops (deposits / withdrawals) ───────────────
+  let balanceInserted = 0;
+  if (Array.isArray(balanceOps) && balanceOps.length > 0) {
+    for (const op of balanceOps) {
+      if (!op.ticket) continue;
+      try {
+        const opTime = op.time && /^\d+$/.test(String(op.time))
+          ? new Date(Number(op.time) * 1000).toISOString()
+          : String(op.time ?? now);
+        await query(
+          `INSERT OR IGNORE INTO MetricasBalanceOp (id, accountId, ticket, amount, type, time, comment)
+           VALUES (?, ?, ?, ?, ?, ?, ?)`,
+          [crypto.randomUUID(), accountId, String(op.ticket),
+           Number(op.amount), op.type ?? "deposit", opTime, op.comment ?? null]
+        );
+        balanceInserted++;
+      } catch (err) {
+        console.error("metricas/sync balanceOp error:", op.ticket, err);
+      }
+    }
+  }
+
+  return NextResponse.json({ ok: true, event, tradesProcessed: inserted, balanceOpsProcessed: balanceInserted });
 }

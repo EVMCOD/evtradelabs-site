@@ -48,6 +48,14 @@ interface Snapshot {
   timestamp: string;
 }
 
+interface BalanceOp {
+  ticket: string;
+  amount: number;
+  type: string;
+  time: string;
+  comment: string | null;
+}
+
 interface Stats {
   totalTrades: number;
   winRate: number;
@@ -90,54 +98,91 @@ function smoothPath(pts: [number, number][]): string {
 }
 
 /* ─── Equity Curve ───────────────────────────────────────── */
-function EquityCurve({ snapshots }: { snapshots: Snapshot[] }) {
+function EquityCurve({ snapshots, balanceOps, currency }: { snapshots: Snapshot[]; balanceOps: BalanceOp[]; currency: string }) {
   if (snapshots.length < 2) {
     return <div className="flex items-center justify-center h-40 text-white/20 text-sm">Acumulando datos…</div>;
   }
-  const W = 800, H = 160, PL = 4, PR = 4, PT = 8, PB = 8;
+  const W = 800, H = 170, PL = 4, PR = 4, PT = 10, PB = 10;
   const cW = W - PL - PR, cH = H - PT - PB;
+
+  const tStart = new Date(snapshots[0].timestamp).getTime();
+  const tEnd   = new Date(snapshots[snapshots.length - 1].timestamp).getTime();
+  const tRange = tEnd - tStart || 1;
+
   const vals = snapshots.map((s) => s.balance);
   const min = Math.min(...vals), max = Math.max(...vals);
   const range = max - min || max * 0.01 || 1;
   const n = snapshots.length;
+
   const px = (i: number) => PL + (i / (n - 1)) * cW;
   const py = (v: number) => PT + (1 - (v - min) / range) * cH;
+  const pxTime = (iso: string) => PL + ((new Date(iso).getTime() - tStart) / tRange) * cW;
+
   const pts: [number, number][] = snapshots.map((s, i) => [px(i), py(s.balance)]);
   const line = smoothPath(pts);
   const fill = `${line} L ${px(n-1).toFixed(1)} ${(PT+cH).toFixed(1)} L ${PL} ${(PT+cH).toFixed(1)} Z`;
   const [lx, ly] = pts[pts.length - 1];
   const isUp = vals[n - 1] >= vals[0];
   const col = isUp ? "#3b82f6" : "#ef4444";
-  const pct = ((vals[n-1] - vals[0]) / vals[0] * 100);
+  const pct = ((vals[n - 1] - vals[0]) / vals[0] * 100);
+
+  // Balance ops within snapshot time range
+  const visibleOps = balanceOps.filter((op) => {
+    const t = new Date(op.time).getTime();
+    return t >= tStart && t <= tEnd;
+  });
 
   return (
     <div>
       <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-3">
-          <span className="text-xs text-white/30">{snapshots.length} puntos · {dateShort(snapshots[0].timestamp)} → {dateShort(snapshots[snapshots.length-1].timestamp)}</span>
-        </div>
+        <span className="text-xs text-white/30">
+          {snapshots.length} puntos · {dateShort(snapshots[0].timestamp)} → {dateShort(snapshots[snapshots.length-1].timestamp)}
+        </span>
         <span className="text-sm font-black" style={{ color: col }}>
           {pct >= 0 ? "+" : ""}{pct.toFixed(2)}%
         </span>
       </div>
       <div className="relative">
-        <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ height: 160, display: "block" }}>
+        <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ height: 170, display: "block" }}>
           <defs>
             <linearGradient id="eqFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stopColor={col} stopOpacity="0.2" />
-              <stop offset="100%" stopColor={col} stopOpacity="0.01" />
+              <stop offset="0%"   stopColor={col} stopOpacity="0.18"/>
+              <stop offset="100%" stopColor={col} stopOpacity="0.01"/>
             </linearGradient>
             <filter id="dg"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
           </defs>
+
+          {/* Grid */}
           {[0.25, 0.5, 0.75].map((f) => (
             <line key={f} x1={PL} y1={PT + f*cH} x2={W-PR} y2={PT + f*cH} stroke="rgba(255,255,255,0.04)" strokeWidth="1"/>
           ))}
+
+          {/* Fill + line */}
           <path d={fill} fill="url(#eqFill)"/>
           <path d={line} fill="none" stroke={col} strokeWidth="1.8" strokeLinecap="round"/>
-          <circle cx={lx} cy={ly} r="7" fill={col} opacity="0.2" filter="url(#dg)"/>
+
+          {/* Balance op markers */}
+          {visibleOps.map((op, i) => {
+            const x = pxTime(op.time);
+            const isDeposit = op.amount > 0;
+            const mc = isDeposit ? "#22c55e" : "#f59e0b";
+            const label = (isDeposit ? "+" : "−") + currency + " " + Math.abs(op.amount).toLocaleString("en-US", { maximumFractionDigits: 0 });
+            const labelY = isDeposit ? PT + 14 : PT + cH - 4;
+            return (
+              <g key={i}>
+                <line x1={x} y1={PT} x2={x} y2={PT + cH} stroke={mc} strokeWidth="1" strokeDasharray="3 3" opacity="0.6"/>
+                <circle cx={x} cy={isDeposit ? PT + 4 : PT + cH - 4} r="3.5" fill={mc} opacity="0.9"/>
+                <text x={x + 5} y={labelY} fontSize="9" fill={mc} opacity="0.85" fontWeight="600">{label}</text>
+              </g>
+            );
+          })}
+
+          {/* Last point dot */}
+          <circle cx={lx} cy={ly} r="6" fill={col} opacity="0.2" filter="url(#dg)"/>
           <circle cx={lx} cy={ly} r="3" fill={col}/>
           <circle cx={lx} cy={ly} r="1.5" fill="white"/>
         </svg>
+
         {/* Y labels */}
         <div className="absolute top-0 right-0 h-full flex flex-col justify-between text-right pr-1 pointer-events-none" style={{ paddingTop: PT, paddingBottom: PB }}>
           {[max, min + range/2, min].map((v, i) => (
@@ -145,6 +190,22 @@ function EquityCurve({ snapshots }: { snapshots: Snapshot[] }) {
           ))}
         </div>
       </div>
+
+      {/* Balance ops legend */}
+      {balanceOps.length > 0 && (
+        <div className="flex flex-wrap gap-3 mt-3 pt-3 border-t border-white/[0.04]">
+          {balanceOps.map((op, i) => (
+            <div key={i} className="flex items-center gap-1.5 text-[0.65rem]">
+              <span className="w-2 h-2 rounded-full" style={{ background: op.amount > 0 ? "#22c55e" : "#f59e0b" }}/>
+              <span className="text-white/40">{dateShort(op.time)}</span>
+              <span className="font-bold" style={{ color: op.amount > 0 ? "#22c55e" : "#f59e0b" }}>
+                {op.amount > 0 ? "+" : "−"}{currency} {Math.abs(op.amount).toLocaleString("en-US", { maximumFractionDigits: 0 })}
+              </span>
+              {op.comment && <span className="text-white/25">· {op.comment}</span>}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -490,10 +551,11 @@ function PendingScreen({ account, onShowSetup }: { account: MetricasAccount; onS
 }
 
 /* ─── Full Dashboard ─────────────────────────────────────── */
-function Dashboard({ account, positions, snapshots, stats }: {
+function Dashboard({ account, positions, snapshots, balanceOps, stats }: {
   account: MetricasAccount;
   positions: Position[];
   snapshots: Snapshot[];
+  balanceOps: BalanceOp[];
   stats: Stats;
 }) {
   const [selectedSymbol, setSelectedSymbol] = useState("ALL");
@@ -601,7 +663,7 @@ function Dashboard({ account, positions, snapshots, stats }: {
         <div className="max-w-[1200px] mx-auto grid lg:grid-cols-[1fr_260px] gap-4">
           <div className="rounded-2xl p-5" style={{ background:"rgba(255,255,255,0.02)", border:"1px solid rgba(255,255,255,0.06)" }}>
             <h2 className="font-black text-sm mb-4">Equity Curve</h2>
-            <EquityCurve snapshots={snapshots}/>
+            <EquityCurve snapshots={snapshots} balanceOps={balanceOps} currency={cur}/>
           </div>
           <div className="rounded-2xl p-5 flex flex-col gap-3" style={{ background:"rgba(255,255,255,0.02)", border:"1px solid rgba(255,255,255,0.06)" }}>
             <h2 className="font-black text-sm">Cuenta</h2>
@@ -641,11 +703,12 @@ function Dashboard({ account, positions, snapshots, stats }: {
 
 /* ─── Page entry ─────────────────────────────────────────── */
 export default function MetricasDashboardPage() {
-  const [state, setState]         = useState<PageState>("loading");
-  const [account, setAccount]     = useState<MetricasAccount | null>(null);
-  const [positions, setPositions] = useState<Position[]>([]);
-  const [snapshots, setSnapshots] = useState<Snapshot[]>([]);
-  const [stats, setStats]         = useState<Stats | null>(null);
+  const [state, setState]           = useState<PageState>("loading");
+  const [account, setAccount]       = useState<MetricasAccount | null>(null);
+  const [positions, setPositions]   = useState<Position[]>([]);
+  const [snapshots, setSnapshots]   = useState<Snapshot[]>([]);
+  const [balanceOps, setBalanceOps] = useState<BalanceOp[]>([]);
+  const [stats, setStats]           = useState<Stats | null>(null);
 
   const load = useCallback(async () => {
     const authRes = await fetch("/api/auth/me").catch(() => null);
@@ -664,6 +727,7 @@ export default function MetricasDashboardPage() {
     if (data.stats) {
       setPositions(data.positions ?? []);
       setSnapshots(data.snapshots ?? []);
+      setBalanceOps(data.balanceOps ?? []);
       setStats(data.stats);
       setState("connected");
     } else {
@@ -689,5 +753,5 @@ export default function MetricasDashboardPage() {
   if (state === "unauthenticated") return <UnauthScreen/>;
   if (state === "setup")          return <SetupScreen account={account!} onRegenerate={load}/>;
   if (state === "pending")        return <PendingScreen account={account!} onShowSetup={() => setState("setup")}/>;
-  return <Dashboard account={account!} positions={positions} snapshots={snapshots} stats={stats!}/>;
+  return <Dashboard account={account!} positions={positions} snapshots={snapshots} balanceOps={balanceOps} stats={stats!}/>;
 }

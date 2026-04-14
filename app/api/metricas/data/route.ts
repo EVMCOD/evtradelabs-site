@@ -25,18 +25,23 @@ export async function GET(req: NextRequest) {
 
     const account = accounts[0];
 
-    const [tradesRes, snapshotsRes] = await Promise.all([
+    const [tradesRes, snapshotsRes, balanceOpsRes] = await Promise.all([
       query<any>(
         `SELECT ticket, positionId, symbol, type, lots, price, profit,
                 commission, swap, entry, time, comment, mae, mfe, sl, tp, closeReason
          FROM MetricasTrade WHERE accountId = ?
          ORDER BY time ASC
-         LIMIT 2000`,
+         LIMIT 5000`,
         [account.id]
       ),
       query<any>(
         `SELECT balance, equity, timestamp FROM MetricasSnapshot
-         WHERE accountId = ? ORDER BY timestamp ASC LIMIT 200`,
+         WHERE accountId = ? ORDER BY timestamp ASC LIMIT 500`,
+        [account.id]
+      ),
+      query<any>(
+        `SELECT ticket, amount, type, time, comment FROM MetricasBalanceOp
+         WHERE accountId = ? ORDER BY time ASC`,
         [account.id]
       ),
     ]);
@@ -87,7 +92,7 @@ export async function GET(req: NextRequest) {
     const closed = deals.filter((t: any) => t.entry === "out");
     const stats  = computeStats(closed);
 
-    return NextResponse.json({ account, deals, positions, snapshots: snapshotsRes.results, stats });
+    return NextResponse.json({ account, deals, positions, snapshots: snapshotsRes.results, balanceOps: balanceOpsRes.results, stats });
   } catch (err) {
     console.error("metricas/data GET:", err);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
