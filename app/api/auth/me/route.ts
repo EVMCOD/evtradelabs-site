@@ -3,8 +3,6 @@ import { getAuthUser } from "@/lib/auth";
 
 export async function GET(req: NextRequest) {
   const user = await getAuthUser(req);
-  if (!user) {
-    return NextResponse.json({ authenticated: false }, { status: 401 });
-  }
-  return NextResponse.json({ authenticated: true, email: user.email, userId: user.userId });
+  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  return NextResponse.json({ userId: user.userId, email: user.email });
 }
