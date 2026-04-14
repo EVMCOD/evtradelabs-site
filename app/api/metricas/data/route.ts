@@ -42,7 +42,14 @@ export async function GET(req: NextRequest) {
       ),
     ]);
 
-    const trades    = tradesRes.results;
+    // Normalise trades: convert Unix timestamp → ISO string, strip broker suffix from symbol
+    const trades = tradesRes.results.map((t: any) => ({
+      ...t,
+      symbol: t.symbol?.replace(/-(?:STD|ECN|Raw|Pro|Prime|Classic|Mini|Micro)\b.*$/i, "") ?? t.symbol,
+      time: t.time && /^\d+$/.test(String(t.time))
+        ? new Date(Number(t.time) * 1000).toISOString()
+        : t.time,
+    }));
     const snapshots = snapshotsRes.results;
 
     // Compute stats from closed trades
