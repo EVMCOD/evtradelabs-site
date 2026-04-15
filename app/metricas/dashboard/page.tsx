@@ -97,36 +97,82 @@ function smoothPath(pts: [number, number][]): string {
   return d;
 }
 
+/* ─── Equity curve helpers ───────────────────────────────── */
+type TF = "1W" | "1M" | "3M" | "6M" | "1Y" | "ALL";
+
+function bucketKey(iso: string, tf: TF): string {
+  const d = new Date(iso);
+  const Y = d.getUTCFullYear(), M = d.getUTCMonth(), D = d.getUTCDate();
+  if (tf === "1W")  return `${Y}-${M}-${D}-${d.getUTCHours()}`;  // hourly buckets
+  if (tf === "1M")  return `${Y}-${M}-${D}`;                      // daily
+  if (tf === "3M")  return `${Y}-${M}-${D}`;                      // daily
+  if (tf === "6M") {
+    const week = Math.floor(D / 7);
+    return `${Y}-${M}-w${week}`;                                   // weekly
+  }
+  if (tf === "1Y")  return `${Y}-${M}`;                           // monthly
+  return `${Y}-${M}`;                                              // ALL → monthly
+}
+
+function resample(all: Snapshot[], tf: TF): Snapshot[] {
+  const now = Date.now();
+  const cutoffs: Record<TF, number> = {
+    "1W":  7  * 86400e3,
+    "1M":  30 * 86400e3,
+    "3M":  90 * 86400e3,
+    "6M":  180 * 86400e3,
+    "1Y":  365 * 86400e3,
+    "ALL": Infinity,
+  };
+  const filtered = tf === "ALL" ? all : all.filter(s => now - new Date(s.timestamp).getTime() <= cutoffs[tf]);
+  if (filtered.length === 0) return all.slice(-2);
+
+  // Keep last snapshot per bucket
+  const map = new Map<string, Snapshot>();
+  for (const s of filtered) map.set(bucketKey(s.timestamp, tf), s);
+  return Array.from(map.values()).sort((a, b) => a.timestamp.localeCompare(b.timestamp));
+}
+
 /* ─── Equity Curve ───────────────────────────────────────── */
-function EquityCurve({ snapshots, balanceOps, currency }: { snapshots: Snapshot[]; balanceOps: BalanceOp[]; currency: string }) {
+function EquityCurve({ snapshots, balanceOps, currency }: {
+  snapshots: Snapshot[];
+  balanceOps: BalanceOp[];
+  currency: string;
+}) {
+  const [tf, setTf] = useState<TF>("ALL");
+  const TFS: TF[] = ["1W","1M","3M","6M","1Y","ALL"];
+
+  const data = useMemo(() => resample(snapshots, tf), [snapshots, tf]);
+
   if (snapshots.length < 2) {
     return <div className="flex items-center justify-center h-40 text-white/20 text-sm">Acumulando datos…</div>;
   }
+
   const W = 800, H = 170, PL = 4, PR = 4, PT = 10, PB = 10;
   const cW = W - PL - PR, cH = H - PT - PB;
 
-  const tStart = new Date(snapshots[0].timestamp).getTime();
-  const tEnd   = new Date(snapshots[snapshots.length - 1].timestamp).getTime();
+  const tStart = new Date(data[0].timestamp).getTime();
+  const tEnd   = new Date(data[data.length - 1].timestamp).getTime();
   const tRange = tEnd - tStart || 1;
 
-  const vals = snapshots.map((s) => s.balance);
-  const min = Math.min(...vals), max = Math.max(...vals);
+  const vals  = data.map((s) => s.balance);
+  const min   = Math.min(...vals), max = Math.max(...vals);
   const range = max - min || max * 0.01 || 1;
-  const n = snapshots.length;
+  const n     = data.length;
 
-  const px = (i: number) => PL + (i / (n - 1)) * cW;
-  const py = (v: number) => PT + (1 - (v - min) / range) * cH;
+  const px     = (i: number)   => PL + (i / (n - 1)) * cW;
+  const py     = (v: number)   => PT + (1 - (v - min) / range) * cH;
   const pxTime = (iso: string) => PL + ((new Date(iso).getTime() - tStart) / tRange) * cW;
 
-  const pts: [number, number][] = snapshots.map((s, i) => [px(i), py(s.balance)]);
+  const pts: [number, number][] = data.map((s, i) => [px(i), py(s.balance)]);
   const line = smoothPath(pts);
   const fill = `${line} L ${px(n-1).toFixed(1)} ${(PT+cH).toFixed(1)} L ${PL} ${(PT+cH).toFixed(1)} Z`;
   const [lx, ly] = pts[pts.length - 1];
-  const isUp = vals[n - 1] >= vals[0];
-  const col = isUp ? "#3b82f6" : "#ef4444";
-  const pct = ((vals[n - 1] - vals[0]) / vals[0] * 100);
 
-  // Balance ops within snapshot time range
+  const isUp = vals[n - 1] >= vals[0];
+  const col  = isUp ? "#3b82f6" : "#ef4444";
+  const pct  = ((vals[n - 1] - vals[0]) / vals[0]) * 100;
+
   const visibleOps = balanceOps.filter((op) => {
     const t = new Date(op.time).getTime();
     return t >= tStart && t <= tEnd;
@@ -134,14 +180,32 @@ function EquityCurve({ snapshots, balanceOps, currency }: { snapshots: Snapshot[
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-3">
-        <span className="text-xs text-white/30">
-          {snapshots.length} puntos · {dateShort(snapshots[0].timestamp)} → {dateShort(snapshots[snapshots.length-1].timestamp)}
-        </span>
-        <span className="text-sm font-black" style={{ color: col }}>
-          {pct >= 0 ? "+" : ""}{pct.toFixed(2)}%
-        </span>
+      {/* Header row */}
+      <div className="flex items-center justify-between mb-4">
+        {/* TF pills */}
+        <div className="flex items-center gap-1">
+          {TFS.map((t) => (
+            <button key={t} onClick={() => setTf(t)}
+              className="px-2.5 py-1 rounded-lg text-[0.65rem] font-bold transition-all"
+              style={{
+                background: tf === t ? "rgba(59,130,246,0.2)"    : "rgba(255,255,255,0.04)",
+                border:     tf === t ? "1px solid rgba(59,130,246,0.4)" : "1px solid rgba(255,255,255,0.06)",
+                color:      tf === t ? "#60a5fa" : "rgba(255,255,255,0.35)",
+              }}>
+              {t}
+            </button>
+          ))}
+        </div>
+        {/* P&L */}
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-white/25">{dateShort(data[0].timestamp)} → {dateShort(data[data.length-1].timestamp)}</span>
+          <span className="text-sm font-black" style={{ color: col }}>
+            {pct >= 0 ? "+" : ""}{pct.toFixed(2)}%
+          </span>
+        </div>
       </div>
+
+      {/* SVG */}
       <div className="relative">
         <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ height: 170, display: "block" }}>
           <defs>
@@ -149,42 +213,43 @@ function EquityCurve({ snapshots, balanceOps, currency }: { snapshots: Snapshot[
               <stop offset="0%"   stopColor={col} stopOpacity="0.18"/>
               <stop offset="100%" stopColor={col} stopOpacity="0.01"/>
             </linearGradient>
-            <filter id="dg"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <filter id="dg">
+              <feGaussianBlur stdDeviation="4" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
           </defs>
 
-          {/* Grid */}
           {[0.25, 0.5, 0.75].map((f) => (
-            <line key={f} x1={PL} y1={PT + f*cH} x2={W-PR} y2={PT + f*cH} stroke="rgba(255,255,255,0.04)" strokeWidth="1"/>
+            <line key={f} x1={PL} y1={PT + f*cH} x2={W-PR} y2={PT + f*cH}
+              stroke="rgba(255,255,255,0.04)" strokeWidth="1"/>
           ))}
 
-          {/* Fill + line */}
           <path d={fill} fill="url(#eqFill)"/>
           <path d={line} fill="none" stroke={col} strokeWidth="1.8" strokeLinecap="round"/>
 
-          {/* Balance op markers */}
           {visibleOps.map((op, i) => {
-            const x = pxTime(op.time);
-            const isDeposit = op.amount > 0;
-            const mc = isDeposit ? "#22c55e" : "#f59e0b";
-            const label = (isDeposit ? "+" : "−") + currency + " " + Math.abs(op.amount).toLocaleString("en-US", { maximumFractionDigits: 0 });
-            const labelY = isDeposit ? PT + 14 : PT + cH - 4;
+            const x  = pxTime(op.time);
+            const mc = op.amount > 0 ? "#22c55e" : "#f59e0b";
+            const cy = op.amount > 0 ? PT + 5 : PT + cH - 5;
+            const label = (op.amount > 0 ? "+" : "−") + currency + " "
+              + Math.abs(op.amount).toLocaleString("en-US", { maximumFractionDigits: 0 });
             return (
               <g key={i}>
-                <line x1={x} y1={PT} x2={x} y2={PT + cH} stroke={mc} strokeWidth="1" strokeDasharray="3 3" opacity="0.6"/>
-                <circle cx={x} cy={isDeposit ? PT + 4 : PT + cH - 4} r="3.5" fill={mc} opacity="0.9"/>
-                <text x={x + 5} y={labelY} fontSize="9" fill={mc} opacity="0.85" fontWeight="600">{label}</text>
+                <line x1={x} y1={PT} x2={x} y2={PT+cH} stroke={mc} strokeWidth="1" strokeDasharray="3 3" opacity="0.5"/>
+                <circle cx={x} cy={cy} r="3.5" fill={mc} opacity="0.9"/>
+                <text x={x+5} y={cy+4} fontSize="9" fill={mc} opacity="0.85" fontWeight="600">{label}</text>
               </g>
             );
           })}
 
-          {/* Last point dot */}
           <circle cx={lx} cy={ly} r="6" fill={col} opacity="0.2" filter="url(#dg)"/>
           <circle cx={lx} cy={ly} r="3" fill={col}/>
           <circle cx={lx} cy={ly} r="1.5" fill="white"/>
         </svg>
 
         {/* Y labels */}
-        <div className="absolute top-0 right-0 h-full flex flex-col justify-between text-right pr-1 pointer-events-none" style={{ paddingTop: PT, paddingBottom: PB }}>
+        <div className="absolute top-0 right-0 h-full flex flex-col justify-between text-right pr-1 pointer-events-none"
+          style={{ paddingTop: PT, paddingBottom: PB }}>
           {[max, min + range/2, min].map((v, i) => (
             <span key={i} className="text-[0.55rem] text-white/20 leading-none">{fmtNum(v, 0)}</span>
           ))}
@@ -192,16 +257,16 @@ function EquityCurve({ snapshots, balanceOps, currency }: { snapshots: Snapshot[
       </div>
 
       {/* Balance ops legend */}
-      {balanceOps.length > 0 && (
+      {visibleOps.length > 0 && (
         <div className="flex flex-wrap gap-3 mt-3 pt-3 border-t border-white/[0.04]">
-          {balanceOps.map((op, i) => (
+          {visibleOps.map((op, i) => (
             <div key={i} className="flex items-center gap-1.5 text-[0.65rem]">
-              <span className="w-2 h-2 rounded-full" style={{ background: op.amount > 0 ? "#22c55e" : "#f59e0b" }}/>
-              <span className="text-white/40">{dateShort(op.time)}</span>
+              <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: op.amount > 0 ? "#22c55e" : "#f59e0b" }}/>
+              <span className="text-white/35">{dateShort(op.time)}</span>
               <span className="font-bold" style={{ color: op.amount > 0 ? "#22c55e" : "#f59e0b" }}>
                 {op.amount > 0 ? "+" : "−"}{currency} {Math.abs(op.amount).toLocaleString("en-US", { maximumFractionDigits: 0 })}
               </span>
-              {op.comment && <span className="text-white/25">· {op.comment}</span>}
+              {op.comment && <span className="text-white/20">· {op.comment}</span>}
             </div>
           ))}
         </div>
