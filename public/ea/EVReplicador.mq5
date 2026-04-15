@@ -35,10 +35,10 @@ input bool           InpEnableTrading   = true;              // [Follower] Habil
 CTrade  g_Trade;
 string  g_ConnectURL;
 string  g_SignalURL;
-string  g_PollURL;
+string  g_WaitURL;
 string  g_ConfirmURL;
-int     g_TimerTick   = 0;
 bool    g_Initialized = false;
+bool    g_Polling     = false; // evita ejecuciones solapadas del long-poll
 
 // Position map (follower): masterPositionId → local ticket
 #define MAX_POS 200
@@ -57,16 +57,17 @@ int OnInit()
 
    g_ConnectURL = InpServerURL + "/api/replicador/connect";
    g_SignalURL  = InpServerURL + "/api/replicador/signal";
-   g_PollURL    = InpServerURL + "/api/replicador/poll";
+   g_WaitURL    = InpServerURL + "/api/replicador/wait";
    g_ConfirmURL = InpServerURL + "/api/replicador/confirm";
 
    g_Trade.SetDeviationInPoints(InpMaxSlippage);
-   g_Trade.SetTypeFilling(ORDER_FILLING_IOC);
 
    // Registrar con el servidor
    SendConnect();
 
-   int timerSec = (InpRole == ROLE_MASTER) ? InpHeartbeatSec : MathMax(1, InpPollSec);
+   // Master: heartbeat periódico. Follower: timer de 1s actúa como watchdog;
+   // el long-poll bloquea el hilo, así que la espera real viene de WebRequest.
+   int timerSec = (InpRole == ROLE_MASTER) ? InpHeartbeatSec : 1;
    EventSetTimer(timerSec);
 
    g_Initialized = true;
@@ -93,7 +94,12 @@ void OnTimer()
    }
    else
    {
+      // g_Polling evita solapar cuando los eventos de timer se acumulan
+      // durante el bloqueo del WebRequest (hasta 25s)
+      if(g_Polling) return;
+      g_Polling = true;
       PollAndExecute();
+      g_Polling = false;
    }
 }
 
@@ -108,10 +114,17 @@ void OnTradeTransaction(const MqlTradeTransaction &trans,
    if(trans.type != TRADE_TRANSACTION_DEAL_ADD) return;
 
    ulong ticket = trans.deal;
-   if(!HistoryDealSelect(ticket)) return;
+   // Asegurar que el deal está en historia antes de seleccionarlo
+   HistorySelect(TimeCurrent() - 86400, TimeCurrent() + 60);
+   if(!HistoryDealSelect(ticket))
+   {
+      Print("EVReplicador MASTER: HistoryDealSelect falló para ticket=", ticket);
+      return;
+   }
 
    long dealType  = HistoryDealGetInteger(ticket, DEAL_TYPE);
    long dealEntry = HistoryDealGetInteger(ticket, DEAL_ENTRY);
+   Print("EVReplicador MASTER: deal=", ticket, " type=", dealType, " entry=", dealEntry);
 
    // Solo BUY/SELL de mercado
    if(dealType  != DEAL_TYPE_BUY  && dealType  != DEAL_TYPE_SELL) return;
@@ -183,7 +196,7 @@ void OnTradeTransaction(const MqlTradeTransaction &trans,
 void PollAndExecute()
 {
    string respBody;
-   int status = HttpGet(g_PollURL, respBody);
+   int status = HttpGet(g_WaitURL, respBody); // bloquea hasta señal o 25s timeout
    if(status != 200) return;
 
    // Extraer array de señales
@@ -193,7 +206,10 @@ void PollAndExecute()
    int sigEnd = StringFind(respBody, "]", sigStart + 1);
    if(sigEnd < 0) return;
    string arrStr = StringSubstr(respBody, sigStart + 1, sigEnd - sigStart - 1);
-   if(StringLen(StringTrimLeft(StringTrimRight(arrStr))) == 0) return;
+   string trimCheck = arrStr;
+   StringTrimLeft(trimCheck);
+   StringTrimRight(trimCheck);
+   if(StringLen(trimCheck) == 0) return;
 
    // Dividir por objetos individuales (búsqueda de },{)
    string signals[];
@@ -245,6 +261,8 @@ void ProcessSignal(const string sig)
 
       double useSL = InpCopyStopLoss  && sl > 0 ? sl : 0;
       double useTP = InpCopyTakeProfit && tp > 0 ? tp : 0;
+
+      g_Trade.SetTypeFilling(GetFilling(localSymbol));
 
       bool ok = isBuy
          ? g_Trade.Buy (lots, localSymbol, askBid, useSL, useTP, "EVR")
@@ -442,9 +460,14 @@ int HttpPost(const string url, const string body)
    char  req[], res[];
    string resHeaders;
    string reqHeaders = "Content-Type: application/json\r\nX-Api-Key: " + InpAPIKey;
-   int    len = StringLen(body);
-   ArrayResize(req, len);
-   StringToCharArray(body, req, 0, len, CP_UTF8);
+
+   // Encoding correcto: uchar→char, sin null terminator
+   uchar raw[];
+   int byteCount = StringToCharArray(body, raw, 0, WHOLE_ARRAY, CP_UTF8);
+   if(byteCount > 1) byteCount--; // quitar null terminator
+   else byteCount = 0;
+   ArrayResize(req, byteCount);
+   for(int k = 0; k < byteCount; k++) req[k] = (char)raw[k];
 
    int code = WebRequest("POST", url, reqHeaders, 5000, req, res, resHeaders);
    if(code == -1)
@@ -459,7 +482,12 @@ int HttpPost(const string url, const string body)
    else if(code == 401 || code == 403)
       Print("EVReplicador ERROR: API Key inválida (HTTP ", code, ")");
    else if(code >= 400)
+   {
+      string resp = CharArrayToString(res, 0, WHOLE_ARRAY, CP_UTF8);
       Print("EVReplicador WARN: HTTP ", code, " → POST ", url);
+      Print("EVReplicador WARN: body enviado: ", body);
+      Print("EVReplicador WARN: respuesta: ", resp);
+   }
    return code;
 }
 
@@ -470,7 +498,8 @@ int HttpGet(const string url, string &respBody)
    string reqHeaders = "X-Api-Key: " + InpAPIKey;
    ArrayResize(req, 0);
 
-   int code = WebRequest("GET", url, reqHeaders, 5000, req, res, resHeaders);
+   // 25000ms timeout: el servidor retiene la conexión hasta 20s
+   int code = WebRequest("GET", url, reqHeaders, 25000, req, res, resHeaders);
    if(code == 200)
       respBody = CharArrayToString(res, 0, ArraySize(res), CP_UTF8);
    else if(code == -1)
@@ -543,9 +572,20 @@ void SplitObjects(const string arr, string &out[])
 }
 
 //+------------------------------------------------------------------+
-string EscapeJson(const string input)
+// Detecta el modo de filling soportado por el broker para el símbolo
+//+------------------------------------------------------------------+
+ENUM_ORDER_TYPE_FILLING GetFilling(const string symbol)
 {
-   string s = input;
+   int modes = (int)SymbolInfoInteger(symbol, SYMBOL_FILLING_MODE);
+   if((modes & SYMBOL_FILLING_IOC) != 0) return ORDER_FILLING_IOC;
+   if((modes & SYMBOL_FILLING_FOK) != 0) return ORDER_FILLING_FOK;
+   return ORDER_FILLING_RETURN;
+}
+
+//+------------------------------------------------------------------+
+string EscapeJson(const string src)
+{
+   string s = src;
    StringReplace(s, "\\", "\\\\");
    StringReplace(s, "\"", "\\\"");
    StringReplace(s, "\n", "\\n");
