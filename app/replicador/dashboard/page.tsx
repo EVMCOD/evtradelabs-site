@@ -601,8 +601,8 @@ function Dashboard({
                 <span className="flex-none w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-xs text-white/40 font-medium">1</span>
                 <span>
                   Descarga{" "}
-                  <a href="/ea/EVReplicador.mq5" className="text-white/80 underline underline-offset-2 hover:text-white" download>
-                    EVReplicador.mq5
+                  <a href="/ea/EVReplicador.ex5" className="text-white/80 underline underline-offset-2 hover:text-white" download>
+                    EVReplicador.ex5
                   </a>{" "}
                   y compílalo en MetaEditor.
                 </span>
