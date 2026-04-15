@@ -82,17 +82,40 @@ export async function POST(req: NextRequest) {
             now,
           ]
         );
+        // Prune snapshots older than 30 days — runs at most once per minute
+        const cutoff = new Date(Date.now() - 30 * 24 * 60 * 60_000).toISOString();
+        await query(
+          `DELETE FROM MetricasSnapshot WHERE accountId = ? AND timestamp < ?`,
+          [accountId, cutoff]
+        );
       }
     }
   }
+
+  // ── Helpers ────────────────────────────────────────────────────
+  // Normalise Unix timestamp (seconds) → ISO string; pass-through if already ISO
+  const toISO = (t: unknown): string => {
+    const s = String(t ?? "");
+    return /^\d{9,11}$/.test(s) ? new Date(Number(s) * 1000).toISOString() : (s || now);
+  };
+  // Sanitise closeReason: EA sends "null" string for IN deals; treat as SQL NULL
+  const sanitizeReason = (r: unknown): string | null => {
+    if (!r || r === "null") return null;
+    return String(r);
+  };
+  // Only update MAE/MFE when the incoming value is non-zero (preserve existing tracked value)
+  const maeArg = (v: unknown) => (v != null && Number(v) !== 0) ? Number(v) : null;
 
   // ── Upsert trades ──────────────────────────────────────────────
   let inserted = 0;
   if (Array.isArray(trades) && trades.length > 0) {
     for (const t of trades) {
       if (!t.ticket || !t.symbol) continue;
+      const tradeTime    = toISO(t.time);
+      const closeReason  = sanitizeReason(t.closeReason);
+      const mae          = maeArg(t.mae);
+      const mfe          = maeArg(t.mfe);
       try {
-        // INSERT OR IGNORE to avoid duplicate error, then update mutable fields
         await query(
           `INSERT OR IGNORE INTO MetricasTrade
              (id, accountId, ticket, positionId, symbol, type, lots, price,
@@ -111,13 +134,12 @@ export async function POST(req: NextRequest) {
             t.commission != null ? Number(t.commission) : 0,
             t.swap       != null ? Number(t.swap)       : 0,
             t.entry ?? "out",
-            t.time ? String(t.time) : now,
+            tradeTime,
             t.comment ?? null,
-            t.mae         != null ? Number(t.mae)  : null,
-            t.mfe         != null ? Number(t.mfe)  : null,
-            t.sl          != null ? Number(t.sl)   : null,
-            t.tp          != null ? Number(t.tp)   : null,
-            t.closeReason ?? null,
+            mae, mfe,
+            t.sl != null ? Number(t.sl) : null,
+            t.tp != null ? Number(t.tp) : null,
+            closeReason,
           ]
         );
         await query(
@@ -133,11 +155,11 @@ export async function POST(req: NextRequest) {
             t.profit     != null ? Number(t.profit)     : 0,
             t.commission != null ? Number(t.commission) : 0,
             t.swap       != null ? Number(t.swap)       : 0,
-            t.mae         != null ? 1 : null, t.mae         != null ? Number(t.mae)  : null,
-            t.mfe         != null ? 1 : null, t.mfe         != null ? Number(t.mfe)  : null,
-            t.sl          != null ? 1 : null, t.sl          != null ? Number(t.sl)   : null,
-            t.tp          != null ? 1 : null, t.tp          != null ? Number(t.tp)   : null,
-            t.closeReason != null ? 1 : null, t.closeReason ?? null,
+            mae, mae,
+            mfe, mfe,
+            t.sl != null ? Number(t.sl) : null, t.sl != null ? Number(t.sl) : null,
+            t.tp != null ? Number(t.tp) : null, t.tp != null ? Number(t.tp) : null,
+            closeReason, closeReason,
             accountId,
             String(t.ticket),
           ]
@@ -149,20 +171,26 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // ── Upsert balance ops (deposits / withdrawals) ───────────────
+  // ── Upsert balance ops (deposits / withdrawals / corrections) ─
   let balanceInserted = 0;
   if (Array.isArray(balanceOps) && balanceOps.length > 0) {
     for (const op of balanceOps) {
       if (!op.ticket) continue;
       try {
-        const opTime = op.time && /^\d+$/.test(String(op.time))
-          ? new Date(Number(op.time) * 1000).toISOString()
-          : String(op.time ?? now);
+        const opTime = toISO(op.time);
+        const opType = op.type ?? "deposit";
         await query(
           `INSERT OR IGNORE INTO MetricasBalanceOp (id, accountId, ticket, amount, type, time, comment)
            VALUES (?, ?, ?, ?, ?, ?, ?)`,
           [crypto.randomUUID(), accountId, String(op.ticket),
-           Number(op.amount), op.type ?? "deposit", opTime, op.comment ?? null]
+           Number(op.amount), opType, opTime, op.comment ?? null]
+        );
+        // UPDATE handles broker corrections (same ticket, different amount)
+        await query(
+          `UPDATE MetricasBalanceOp
+           SET amount = ?, type = ?, comment = COALESCE(?, comment)
+           WHERE accountId = ? AND ticket = ?`,
+          [Number(op.amount), opType, op.comment ?? null, accountId, String(op.ticket)]
         );
         balanceInserted++;
       } catch (err) {

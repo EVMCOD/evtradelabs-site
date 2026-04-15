@@ -2,7 +2,7 @@
 //| EVTradeLabs_Sync.mq5                                              |
 //+------------------------------------------------------------------+
 #property copyright "EVTradeLabs"
-#property version   "1.3"
+#property version   "1.4"
 #property strict
 
 #define SYNC_URL "https://evtradelabs.com/api/metricas/sync"
@@ -10,8 +10,7 @@
 
 input string ApiKey = "evm_paNKoHq532Nb01iuNz1yUqp0u8NwAqxR"; // API Key (EVTradeLabs)
 
-datetime g_lastSync  = 0;
-bool     g_fullSynced = false; // first sync sends full history, subsequent send recent only
+datetime g_lastSync = 0;
 
 struct PosExtreme { ulong ticket; double mae; double mfe; };
 PosExtreme g_extremes[];
@@ -99,8 +98,7 @@ void SendSync(bool fullHistory) {
 
    int status = WebRequest("POST", SYNC_URL, headers, 30000, bodyArr, respArr, respHeaders);
    if (status == 200) {
-      g_lastSync   = TimeCurrent();
-      g_fullSynced = true;
+      g_lastSync = TimeCurrent();
       Print("EVSync OK | ", CharArrayToString(respArr));
    } else {
       Print("EVSync ERR | HTTP ", status, " | ", CharArrayToString(respArr));
@@ -135,6 +133,11 @@ string BuildHistoryJSON(datetime fromTime) {
       if (idx < 0) idx = FindExtreme(posId);
       if (idx >= 0) { mae = g_extremes[idx].mae; mfe = g_extremes[idx].mfe; }
 
+      // closeReason: JSON null for IN deals, quoted string for OUT
+      string crJson = (entryType == DEAL_ENTRY_OUT)
+         ? ("\"" + DealReasonStr(reason) + "\"")
+         : "null";
+
       string sep = (count > 0) ? "," : "";
       out += StringFormat(
          "%s{\"ticket\":%llu,\"positionId\":%llu,\"symbol\":\"%s\","
@@ -142,7 +145,7 @@ string BuildHistoryJSON(datetime fromTime) {
          "\"profit\":%.2f,\"commission\":%.2f,\"swap\":%.2f,"
          "\"entry\":\"%s\",\"time\":%llu,\"comment\":\"%s\","
          "\"mae\":%.2f,\"mfe\":%.2f,\"sl\":%.5f,\"tp\":%.5f,"
-         "\"closeReason\":\"%s\"}",
+         "\"closeReason\":%s}",
          sep, ticket, posId, symbol,
          DealTypeStr(dealType),
          HistoryDealGetDouble(ticket, DEAL_VOLUME),
@@ -154,7 +157,7 @@ string BuildHistoryJSON(datetime fromTime) {
          (ulong)HistoryDealGetInteger(ticket, DEAL_TIME),
          EscapeJSON(HistoryDealGetString(ticket, DEAL_COMMENT)),
          mae, mfe, sl, tp,
-         DealReasonStr(reason, entryType)
+         crJson
       );
       count++;
    }
@@ -244,8 +247,7 @@ string DealTypeStr(ENUM_DEAL_TYPE t) {
 string DealEntryStr(ENUM_DEAL_ENTRY e) {
    switch (e) { case DEAL_ENTRY_IN: return "in"; case DEAL_ENTRY_OUT: return "out"; case DEAL_ENTRY_INOUT: return "inout"; default: return "out"; }
 }
-string DealReasonStr(int reason, ENUM_DEAL_ENTRY entry) {
-   if (entry != DEAL_ENTRY_OUT) return "null";
+string DealReasonStr(int reason) {
    switch (reason) {
       case DEAL_REASON_SL: return "sl";
       case DEAL_REASON_TP: return "tp";
