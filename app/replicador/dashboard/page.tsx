@@ -224,51 +224,89 @@ function AccountCard({
   );
 }
 
-function JournalTable({ entries }: { entries: JournalEntry[] }) {
-  if (entries.length === 0)
-    return <p className="text-sm text-white/30 py-4 text-center">Sin operaciones cerradas aún.</p>;
+function Journal({ entries }: { entries: JournalEntry[] }) {
+  const wins   = entries.filter(e => (e.profit ?? 0) > 0).length;
+  const losses = entries.filter(e => (e.profit ?? 0) < 0).length;
+  const total  = entries.reduce((s, e) => s + (e.profit ?? 0), 0);
+  const winRate = entries.length > 0 ? Math.round((wins / entries.length) * 100) : 0;
 
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-xs">
-        <thead>
-          <tr className="text-white/30 border-b border-white/[0.06]">
-            <th className="text-left py-2 pr-3 font-medium">Hora</th>
-            <th className="text-left py-2 pr-3 font-medium">Símbolo</th>
-            <th className="text-left py-2 pr-3 font-medium">Dir</th>
-            <th className="text-right py-2 pr-3 font-medium">Lotes</th>
-            <th className="text-right py-2 pr-3 font-medium">Cierre</th>
-            <th className="text-right py-2 font-medium">P&L</th>
-          </tr>
-        </thead>
-        <tbody>
+    <div className="flex flex-col gap-0">
+      {/* Journal summary header */}
+      {entries.length > 0 && (
+        <div className="flex items-center gap-4 px-4 py-3 border-b border-white/[0.06]">
+          <div className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-emerald-400" />
+            <span className="text-xs text-white/50">{wins} wins</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-red-400" />
+            <span className="text-xs text-white/50">{losses} losses</span>
+          </div>
+          <div className="text-xs text-white/30">
+            Win rate <span className="text-white/60 font-medium">{winRate}%</span>
+          </div>
+          <div className="ml-auto text-xs text-white/30">
+            Total acumulado{" "}
+            <span className={`font-semibold tabular-nums ${
+              total > 0 ? "text-emerald-400" : total < 0 ? "text-red-400" : "text-white/40"
+            }`}>
+              {total >= 0 ? "+" : ""}{total.toFixed(2)}
+            </span>
+          </div>
+        </div>
+      )}
+
+      {entries.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-12 gap-2">
+          <div className="w-8 h-8 rounded-full bg-white/[0.04] flex items-center justify-center text-white/20 text-base">
+            ↕
+          </div>
+          <p className="text-sm text-white/30">Sin operaciones cerradas aún</p>
+          <p className="text-xs text-white/20">Aparecerán aquí tras cerrar posiciones en el master</p>
+        </div>
+      ) : (
+        <div className="divide-y divide-white/[0.04]">
           {entries.map((e, i) => {
             const pnl = e.profit ?? 0;
+            const isWin = pnl > 0;
+            const isLoss = pnl < 0;
             return (
-              <tr key={i} className="border-b border-white/[0.04] hover:bg-white/[0.02]">
-                <td className="py-1.5 pr-3 text-white/40">{fmtTime(e.createdAt)}</td>
-                <td className="py-1.5 pr-3 text-white/80 font-medium">{e.symbol ?? "—"}</td>
-                <td className="py-1.5 pr-3">
-                  <span className={`px-1.5 py-0.5 rounded text-xs font-medium ${
-                    e.type === "buy"
-                      ? "bg-sky-500/10 text-sky-400"
-                      : "bg-orange-500/10 text-orange-400"
-                  }`}>
-                    {e.type ?? "—"}
-                  </span>
-                </td>
-                <td className="py-1.5 pr-3 text-right text-white/50">{e.lots?.toFixed(2) ?? "—"}</td>
-                <td className="py-1.5 pr-3 text-right text-white/50">{e.closePrice?.toFixed(5) ?? "—"}</td>
-                <td className={`py-1.5 text-right font-medium tabular-nums ${
-                  pnl > 0 ? "text-emerald-400" : pnl < 0 ? "text-red-400" : "text-white/30"
+              <div key={i} className="flex items-center gap-3 px-4 py-3 hover:bg-white/[0.02] transition-colors group">
+                {/* Win/loss indicator */}
+                <div className={`flex-none w-1 h-8 rounded-full ${
+                  isWin ? "bg-emerald-500/60" : isLoss ? "bg-red-500/60" : "bg-white/10"
+                }`} />
+
+                {/* Symbol + direction */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-semibold text-white/90">{e.symbol ?? "—"}</span>
+                    <span className={`text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded ${
+                      e.type === "buy"
+                        ? "bg-sky-500/15 text-sky-400"
+                        : "bg-orange-500/15 text-orange-400"
+                    }`}>
+                      {e.type ?? "—"}
+                    </span>
+                    <span className="text-xs text-white/30">{e.lots?.toFixed(2) ?? "—"} lotes</span>
+                  </div>
+                  <div className="text-xs text-white/25 mt-0.5">
+                    Cierre {e.closePrice?.toFixed(5) ?? "—"} · {fmtTime(e.createdAt)}
+                  </div>
+                </div>
+
+                {/* P&L */}
+                <div className={`text-right tabular-nums font-bold text-base ${
+                  isWin ? "text-emerald-400" : isLoss ? "text-red-400" : "text-white/30"
                 }`}>
                   {pnl >= 0 ? "+" : ""}{pnl.toFixed(2)}
-                </td>
-              </tr>
+                </div>
+              </div>
             );
           })}
-        </tbody>
-      </table>
+        </div>
+      )}
     </div>
   );
 }
@@ -627,21 +665,6 @@ function Dashboard({
           </div>
         </div>
 
-        {/* Stats row */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {[
-            { label: "Cuentas", value: accounts.length },
-            { label: "Conectadas", value: accounts.filter(a => isLive(a.lastSeenAt)).length },
-            { label: "Señales (24h)", value: signals.filter(s => Date.now() - new Date(s.createdAt).getTime() < 86_400_000).length },
-            { label: "Followers", value: followers.length + " / 10" },
-          ].map(kpi => (
-            <div key={kpi.label} className="rounded-xl bg-white/[0.03] border border-white/[0.06] px-4 py-3">
-              <p className="text-xs text-white/30 uppercase tracking-wide mb-1">{kpi.label}</p>
-              <p className="text-xl font-semibold text-white/90">{kpi.value}</p>
-            </div>
-          ))}
-        </div>
-
         {/* Accounts section */}
         <section>
           <div className="flex items-center justify-between mb-4">
@@ -735,8 +758,8 @@ function Dashboard({
           <h2 className="text-sm font-semibold text-white/60 uppercase tracking-wider mb-4">
             Journal
           </h2>
-          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
-            <JournalTable entries={journal} />
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] overflow-hidden">
+            <Journal entries={journal} />
           </div>
         </section>
 
