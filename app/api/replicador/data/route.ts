@@ -52,13 +52,14 @@ export async function GET(req: NextRequest) {
            AND date(createdAt) = date('now')`,
         [group.id]
       ),
-      // Journal: last 30 closed trades
+      // Journal: last 90 days of closed trades for calendar view
       query<any>(
         `SELECT symbol, type, lots, closePrice, profit, createdAt
          FROM ReplicadorSignal
          WHERE groupId = ? AND action = 'close'
+           AND createdAt > datetime('now', '-90 days')
          ORDER BY createdAt DESC
-         LIMIT 30`,
+         LIMIT 500`,
         [group.id]
       ),
     ]);

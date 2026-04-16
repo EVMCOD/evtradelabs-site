@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import Link from "next/link";
 
 /* ─── Types ──────────────────────────────────────────────── */
@@ -224,87 +224,182 @@ function AccountCard({
   );
 }
 
+const DOW = ["Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do"];
+
 function Journal({ entries }: { entries: JournalEntry[] }) {
-  const wins   = entries.filter(e => (e.profit ?? 0) > 0).length;
-  const losses = entries.filter(e => (e.profit ?? 0) < 0).length;
-  const total  = entries.reduce((s, e) => s + (e.profit ?? 0), 0);
-  const winRate = entries.length > 0 ? Math.round((wins / entries.length) * 100) : 0;
+  const [viewDate, setViewDate]     = useState(() => new Date());
+  const [selectedDay, setSelectedDay] = useState<string | null>(null);
+
+  const byDay = useMemo(() => {
+    const map: Record<string, { pnl: number; trades: JournalEntry[] }> = {};
+    for (const e of entries) {
+      const key = e.createdAt.slice(0, 10);
+      if (!map[key]) map[key] = { pnl: 0, trades: [] };
+      map[key].pnl += e.profit ?? 0;
+      map[key].trades.push(e);
+    }
+    return map;
+  }, [entries]);
+
+  const year  = viewDate.getFullYear();
+  const month = viewDate.getMonth();
+
+  const firstDow   = new Date(year, month, 1).getDay();
+  const startOffset = (firstDow + 6) % 7;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const cells: (number | null)[] = [
+    ...Array(startOffset).fill(null),
+    ...Array.from({ length: daysInMonth }, (_, i) => i + 1),
+  ];
+  while (cells.length % 7 !== 0) cells.push(null);
+
+  const monthPrefix = `${year}-${String(month + 1).padStart(2, "0")}`;
+  const monthEntries = entries.filter(e => e.createdAt.startsWith(monthPrefix));
+  const monthPnl  = monthEntries.reduce((s, e) => s + (e.profit ?? 0), 0);
+  const monthWins = monthEntries.filter(e => (e.profit ?? 0) > 0).length;
+  const today = new Date().toISOString().slice(0, 10);
+
+  const monthLabel = new Intl.DateTimeFormat("es-ES", { month: "long", year: "numeric" }).format(viewDate);
+
+  const selectedData = selectedDay ? byDay[selectedDay] : null;
 
   return (
-    <div className="flex flex-col gap-0">
-      {/* Journal summary header */}
-      {entries.length > 0 && (
-        <div className="flex items-center gap-4 px-4 py-3 border-b border-white/[0.06]">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" />
-            <span className="text-xs text-white/50">{wins} wins</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-red-400" />
-            <span className="text-xs text-white/50">{losses} losses</span>
-          </div>
-          <div className="text-xs text-white/30">
-            Win rate <span className="text-white/60 font-medium">{winRate}%</span>
-          </div>
-          <div className="ml-auto text-xs text-white/30">
-            Total acumulado{" "}
-            <span className={`font-semibold tabular-nums ${
-              total > 0 ? "text-emerald-400" : total < 0 ? "text-red-400" : "text-white/40"
-            }`}>
-              {total >= 0 ? "+" : ""}{total.toFixed(2)}
+    <div className="flex flex-col">
+      {/* Month header */}
+      <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06]">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => { setViewDate(d => new Date(d.getFullYear(), d.getMonth() - 1, 1)); setSelectedDay(null); }}
+            className="w-7 h-7 flex items-center justify-center rounded-lg text-white/30 hover:text-white/70 hover:bg-white/[0.06] transition-colors text-sm"
+          >‹</button>
+          <span className="text-sm font-medium text-white/70 capitalize w-36 text-center">{monthLabel}</span>
+          <button
+            onClick={() => { setViewDate(d => new Date(d.getFullYear(), d.getMonth() + 1, 1)); setSelectedDay(null); }}
+            className="w-7 h-7 flex items-center justify-center rounded-lg text-white/30 hover:text-white/70 hover:bg-white/[0.06] transition-colors text-sm"
+          >›</button>
+        </div>
+        {monthEntries.length > 0 && (
+          <div className="flex items-center gap-3 text-xs text-white/30">
+            <span>{monthWins}/{monthEntries.length} ops</span>
+            <span className={`font-semibold tabular-nums ${monthPnl > 0 ? "text-emerald-400" : monthPnl < 0 ? "text-red-400" : "text-white/30"}`}>
+              {monthPnl >= 0 ? "+" : ""}{monthPnl.toFixed(2)}
             </span>
           </div>
+        )}
+      </div>
+
+      {/* Day of week headers */}
+      <div className="grid grid-cols-7 border-b border-white/[0.04]">
+        {DOW.map(d => (
+          <div key={d} className="text-center text-[10px] text-white/20 py-2 font-medium tracking-wide">{d}</div>
+        ))}
+      </div>
+
+      {/* Calendar grid */}
+      <div className="grid grid-cols-7">
+        {cells.map((day, i) => {
+          if (!day) return (
+            <div key={i} className="h-14 border-r border-b border-white/[0.03] last:border-r-0" />
+          );
+          const key = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+          const data = byDay[key];
+          const isToday    = key === today;
+          const isSelected = key === selectedDay;
+          const hasTrades  = !!data;
+          const pnl = data?.pnl ?? 0;
+
+          return (
+            <button
+              key={i}
+              onClick={() => hasTrades && setSelectedDay(isSelected ? null : key)}
+              disabled={!hasTrades}
+              className={`
+                relative h-14 flex flex-col items-center justify-center gap-0.5 border-r border-b border-white/[0.03]
+                transition-colors outline-none
+                ${isSelected ? "bg-white/[0.07]" : hasTrades ? "hover:bg-white/[0.04] cursor-pointer" : "cursor-default"}
+              `}
+            >
+              <span className={`
+                flex items-center justify-center w-5 h-5 rounded-full text-xs font-medium
+                ${isToday ? "bg-white/15 text-white/90" : hasTrades ? "text-white/70" : "text-white/20"}
+              `}>
+                {day}
+              </span>
+              {hasTrades && (
+                <span className={`text-[10px] font-semibold tabular-nums leading-none ${
+                  pnl > 0 ? "text-emerald-400" : pnl < 0 ? "text-red-400" : "text-white/30"
+                }`}>
+                  {pnl >= 0 ? "+" : ""}{pnl.toFixed(2)}
+                </span>
+              )}
+              {isSelected && (
+                <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-white/50" />
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Empty state */}
+      {entries.length === 0 && (
+        <div className="flex flex-col items-center justify-center py-10 gap-2 border-t border-white/[0.04]">
+          <p className="text-sm text-white/25">Sin operaciones cerradas aún</p>
+          <p className="text-xs text-white/15">Aparecerán aquí al cerrar posiciones en el master</p>
         </div>
       )}
 
-      {entries.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-12 gap-2">
-          <div className="w-8 h-8 rounded-full bg-white/[0.04] flex items-center justify-center text-white/20 text-base">
-            ↕
+      {/* Expanded day panel */}
+      {selectedDay && selectedData && (
+        <div className="border-t border-white/[0.08]">
+          {/* Day header */}
+          <div className="flex items-center justify-between px-4 py-2.5 bg-white/[0.02]">
+            <span className="text-xs font-medium text-white/50 capitalize">
+              {new Date(selectedDay + "T12:00:00").toLocaleDateString("es-ES", {
+                weekday: "long", day: "numeric", month: "long",
+              })}
+            </span>
+            <div className="flex items-center gap-3 text-xs">
+              <span className="text-white/30">{selectedData.trades.length} op{selectedData.trades.length !== 1 ? "s" : ""}</span>
+              <span className={`font-bold tabular-nums ${
+                selectedData.pnl > 0 ? "text-emerald-400" : selectedData.pnl < 0 ? "text-red-400" : "text-white/30"
+              }`}>
+                {selectedData.pnl >= 0 ? "+" : ""}{selectedData.pnl.toFixed(2)}
+              </span>
+            </div>
           </div>
-          <p className="text-sm text-white/30">Sin operaciones cerradas aún</p>
-          <p className="text-xs text-white/20">Aparecerán aquí tras cerrar posiciones en el master</p>
-        </div>
-      ) : (
-        <div className="divide-y divide-white/[0.04]">
-          {entries.map((e, i) => {
-            const pnl = e.profit ?? 0;
-            const isWin = pnl > 0;
-            const isLoss = pnl < 0;
-            return (
-              <div key={i} className="flex items-center gap-3 px-4 py-3 hover:bg-white/[0.02] transition-colors group">
-                {/* Win/loss indicator */}
-                <div className={`flex-none w-1 h-8 rounded-full ${
-                  isWin ? "bg-emerald-500/60" : isLoss ? "bg-red-500/60" : "bg-white/10"
-                }`} />
-
-                {/* Symbol + direction */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold text-white/90">{e.symbol ?? "—"}</span>
-                    <span className={`text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded ${
-                      e.type === "buy"
-                        ? "bg-sky-500/15 text-sky-400"
-                        : "bg-orange-500/15 text-orange-400"
-                    }`}>
-                      {e.type ?? "—"}
-                    </span>
-                    <span className="text-xs text-white/30">{e.lots?.toFixed(2) ?? "—"} lotes</span>
+          {/* Trade list */}
+          <div className="divide-y divide-white/[0.04]">
+            {selectedData.trades.map((e, i) => {
+              const pnl = e.profit ?? 0;
+              return (
+                <div key={i} className="flex items-center gap-3 px-4 py-2.5 hover:bg-white/[0.02] transition-colors">
+                  <div className={`flex-none w-0.5 h-7 rounded-full ${
+                    pnl > 0 ? "bg-emerald-500/70" : pnl < 0 ? "bg-red-500/70" : "bg-white/10"
+                  }`} />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-semibold text-white/85">{e.symbol ?? "—"}</span>
+                      <span className={`text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded ${
+                        e.type === "buy" ? "bg-sky-500/15 text-sky-400" : "bg-orange-500/15 text-orange-400"
+                      }`}>
+                        {e.type ?? "—"}
+                      </span>
+                      <span className="text-xs text-white/30">{e.lots?.toFixed(2)} lotes</span>
+                    </div>
+                    <div className="text-[11px] text-white/25 mt-0.5">
+                      Cierre {e.closePrice?.toFixed(5) ?? "—"} ·{" "}
+                      {new Date(e.createdAt).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })}
+                    </div>
                   </div>
-                  <div className="text-xs text-white/25 mt-0.5">
-                    Cierre {e.closePrice?.toFixed(5) ?? "—"} · {fmtTime(e.createdAt)}
+                  <div className={`text-sm font-bold tabular-nums ${
+                    pnl > 0 ? "text-emerald-400" : pnl < 0 ? "text-red-400" : "text-white/30"
+                  }`}>
+                    {pnl >= 0 ? "+" : ""}{pnl.toFixed(2)}
                   </div>
                 </div>
-
-                {/* P&L */}
-                <div className={`text-right tabular-nums font-bold text-base ${
-                  isWin ? "text-emerald-400" : isLoss ? "text-red-400" : "text-white/30"
-                }`}>
-                  {pnl >= 0 ? "+" : ""}{pnl.toFixed(2)}
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
