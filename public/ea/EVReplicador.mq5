@@ -16,20 +16,24 @@
 //--- Enums
 enum ENUM_REP_ROLE  { ROLE_MASTER = 0, ROLE_FOLLOWER = 1 };
 enum ENUM_LOT_MODE  { LOT_PROPORTIONAL = 0, LOT_RATIO = 1, LOT_FIXED = 2 };
+// 3=Auto, 0=FOK, 1=IOC, 2=Return  (valores coinciden con ORDER_FILLING_*)
+enum ENUM_FILL_OVERRIDE { FILL_FOK = 0, FILL_IOC = 1, FILL_RETURN = 2, FILL_AUTO = 3 };
 
 //--- Inputs
-input ENUM_REP_ROLE  InpRole            = ROLE_MASTER;       // Rol: MASTER o FOLLOWER
-input string         InpServerURL       = "https://evtradelabs.com"; // URL servidor
-input string         InpAPIKey          = "";                // API Key del Replicador
-input int            InpHeartbeatSec    = 30;                // Heartbeat master (seg)
-input int            InpPollSec         = 2;                 // Intervalo polling follower (seg)
-input ENUM_LOT_MODE  InpLotMode         = LOT_PROPORTIONAL;  // [Follower] Modo de lotes
-input double         InpLotValue        = 1.0;               // [Follower] Multiplicador / lotes fijos
-input string         InpSymbolSuffix    = "";                // [Follower] Sufijo de símbolo (p.ej. ".ecn")
-input bool           InpCopyStopLoss    = true;              // [Follower] Copiar Stop Loss
-input bool           InpCopyTakeProfit  = true;              // [Follower] Copiar Take Profit
-input int            InpMaxSlippage     = 30;                // [Follower] Slippage máx (puntos)
-input bool           InpEnableTrading   = true;              // [Follower] Habilitar trading real
+input ENUM_REP_ROLE     InpRole            = ROLE_MASTER;       // Rol: MASTER o FOLLOWER
+input string            InpServerURL       = "https://evtradelabs.com"; // URL servidor
+input string            InpAPIKey          = "";                // API Key del Replicador
+input int               InpHeartbeatSec    = 30;                // Heartbeat master (seg)
+input int               InpPollSec         = 2;                 // Intervalo polling follower (seg)
+input ENUM_LOT_MODE     InpLotMode         = LOT_PROPORTIONAL;  // [Follower] Modo de lotes
+input double            InpLotValue        = 1.0;               // [Follower] Multiplicador / lotes fijos
+input string            InpMasterSymbolSuffix = "";             // [Follower] Sufijo a quitar del símbolo master (p.ej. "-STD")
+input string            InpSymbolSuffix    = "";                // [Follower] Sufijo a añadir al símbolo follower
+input bool              InpCopyStopLoss    = true;              // [Follower] Copiar Stop Loss
+input bool              InpCopyTakeProfit  = true;              // [Follower] Copiar Take Profit
+input int               InpMaxSlippage     = 30;                // [Follower] Slippage máx (puntos)
+input bool              InpEnableTrading   = true;              // [Follower] Habilitar trading real
+input ENUM_FILL_OVERRIDE InpFillingMode    = FILL_AUTO;         // [Follower] Filling (Auto/FOK/IOC/Return)
 
 //--- Globals
 CTrade  g_Trade;
@@ -235,10 +239,12 @@ void ProcessSignal(const string sig)
 
    if(StringLen(execId) == 0 || StringLen(action) == 0) return;
 
-   // Aplicar sufijo de símbolo
+   // Normalizar símbolo: quitar sufijo master, añadir sufijo follower
    string localSymbol = symbol;
+   if(StringLen(InpMasterSymbolSuffix) > 0)
+      StringReplace(localSymbol, InpMasterSymbolSuffix, "");
    if(StringLen(InpSymbolSuffix) > 0)
-      localSymbol = symbol + InpSymbolSuffix;
+      localSymbol = localSymbol + InpSymbolSuffix;
 
    if(action == "open")
    {
@@ -251,7 +257,7 @@ void ProcessSignal(const string sig)
       double lots = ComputeLots(masterLots, masterBal, localSymbol);
       if(lots <= 0)
       {
-         ConfirmExecution(execId, "failed", 0, "lots=0 tras normalización");
+         ConfirmExecution(execId, "failed", 0, "lots=0 tras normalizacion");
          return;
       }
 
@@ -259,10 +265,27 @@ void ProcessSignal(const string sig)
       double askBid = isBuy ? SymbolInfoDouble(localSymbol, SYMBOL_ASK)
                             : SymbolInfoDouble(localSymbol, SYMBOL_BID);
 
+      // Esperar tick si el símbolo acaba de ser añadido al Market Watch
+      for(int tw = 0; askBid <= 0 && tw < 10; tw++)
+      {
+         Sleep(100);
+         askBid = isBuy ? SymbolInfoDouble(localSymbol, SYMBOL_ASK)
+                        : SymbolInfoDouble(localSymbol, SYMBOL_BID);
+      }
+      if(askBid <= 0)
+      {
+         ConfirmExecution(execId, "failed", 0, "precio=0 sin tick tras 1s");
+         Print("EVReplicador FOLLOWER ERROR: sin tick para ", localSymbol, " tras 1s");
+         return;
+      }
+
       double useSL = InpCopyStopLoss  && sl > 0 ? sl : 0;
       double useTP = InpCopyTakeProfit && tp > 0 ? tp : 0;
 
-      g_Trade.SetTypeFilling(GetFilling(localSymbol));
+      ENUM_ORDER_TYPE_FILLING fill = GetFilling(localSymbol);
+      Print("EVReplicador DBG filling=", (int)fill, " ask/bid=", askBid,
+            " sl=", useSL, " tp=", useTP);
+      g_Trade.SetTypeFilling(fill);
 
       bool ok = isBuy
          ? g_Trade.Buy (lots, localSymbol, askBid, useSL, useTP, "EVR")
@@ -277,9 +300,9 @@ void ProcessSignal(const string sig)
       }
       else
       {
-         string err = IntegerToString(g_Trade.ResultRetcode()) + " " + g_Trade.ResultRetcodeDescription();
+         string err = "retcode:" + IntegerToString(g_Trade.ResultRetcode());
          ConfirmExecution(execId, "failed", 0, err);
-         Print("EVReplicador FOLLOWER ERROR open: ", err);
+         Print("EVReplicador FOLLOWER ERROR open: ", err, " ", g_Trade.ResultRetcodeDescription());
       }
    }
    else if(action == "close")
@@ -323,9 +346,9 @@ void ProcessSignal(const string sig)
       }
       else
       {
-         string err = IntegerToString(g_Trade.ResultRetcode()) + " " + g_Trade.ResultRetcodeDescription();
+         string err = "retcode:" + IntegerToString(g_Trade.ResultRetcode());
          ConfirmExecution(execId, "failed", followerTicket, err);
-         Print("EVReplicador FOLLOWER ERROR close: ", err);
+         Print("EVReplicador FOLLOWER ERROR close: ", err, " ", g_Trade.ResultRetcodeDescription());
       }
    }
    else
@@ -358,11 +381,18 @@ double ComputeLots(double masterLots, double masterBalance, const string symbol)
       lots = InpLotValue;
    }
 
-   // Normalizar al paso mínimo del símbolo
+   // Asegurar que el símbolo está en el Market Watch antes de consultar info
+   if(!SymbolSelect(symbol, true))
+   {
+      Print("EVReplicador ERROR: simbolo '", symbol, "' no existe en este broker. Revisa InpSymbolSuffix.");
+      return 0;
+   }
    double step = SymbolInfoDouble(symbol, SYMBOL_VOLUME_STEP);
    double minL = SymbolInfoDouble(symbol, SYMBOL_VOLUME_MIN);
    double maxL = SymbolInfoDouble(symbol, SYMBOL_VOLUME_MAX);
+   if(maxL <= 0) maxL = 100.0; // fallback si el símbolo no cargó aún
    if(step <= 0) step = 0.01;
+   if(minL <= 0) minL = 0.01;
 
    lots = MathFloor(lots / step) * step;
    lots = MathMax(minL, MathMin(maxL, lots));
@@ -387,6 +417,7 @@ void ConfirmExecution(const string execId, const string status,
       "{\"executionId\":\"%s\",\"status\":\"%s\"%s%s}",
       execId, status, ticketPart, errPart
    );
+   Print("EVReplicador DBG CONFIRM[", StringLen(body), "]: ", body);
    HttpPost(g_ConfirmURL, body);
 }
 
@@ -461,13 +492,11 @@ int HttpPost(const string url, const string body)
    string resHeaders;
    string reqHeaders = "Content-Type: application/json\r\nX-Api-Key: " + InpAPIKey;
 
-   // Encoding correcto: uchar→char, sin null terminator
-   uchar raw[];
-   int byteCount = StringToCharArray(body, raw, 0, WHOLE_ARRAY, CP_UTF8);
-   if(byteCount > 1) byteCount--; // quitar null terminator
-   else byteCount = 0;
-   ArrayResize(req, byteCount);
-   for(int k = 0; k < byteCount; k++) req[k] = (char)raw[k];
+   // Encoding char-a-char: seguro para JSON ASCII
+   int len = StringLen(body);
+   ArrayResize(req, len);
+   for(int k = 0; k < len; k++)
+      req[k] = (char)StringGetCharacter(body, k);
 
    int code = WebRequest("POST", url, reqHeaders, 5000, req, res, resHeaders);
    if(code == -1)
@@ -483,7 +512,7 @@ int HttpPost(const string url, const string body)
       Print("EVReplicador ERROR: API Key inválida (HTTP ", code, ")");
    else if(code >= 400)
    {
-      string resp = CharArrayToString(res, 0, WHOLE_ARRAY, CP_UTF8);
+      string resp = CharArrayToString(res, 0, ArraySize(res), CP_UTF8);
       Print("EVReplicador WARN: HTTP ", code, " → POST ", url);
       Print("EVReplicador WARN: body enviado: ", body);
       Print("EVReplicador WARN: respuesta: ", resp);
@@ -576,9 +605,11 @@ void SplitObjects(const string arr, string &out[])
 //+------------------------------------------------------------------+
 ENUM_ORDER_TYPE_FILLING GetFilling(const string symbol)
 {
+   if(InpFillingMode != FILL_AUTO)
+      return (ENUM_ORDER_TYPE_FILLING)InpFillingMode;
    int modes = (int)SymbolInfoInteger(symbol, SYMBOL_FILLING_MODE);
-   if((modes & SYMBOL_FILLING_IOC) != 0) return ORDER_FILLING_IOC;
    if((modes & SYMBOL_FILLING_FOK) != 0) return ORDER_FILLING_FOK;
+   if((modes & SYMBOL_FILLING_IOC) != 0) return ORDER_FILLING_IOC;
    return ORDER_FILLING_RETURN;
 }
 

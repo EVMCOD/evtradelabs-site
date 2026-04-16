@@ -36,6 +36,15 @@ interface RAccount {
   maxSlippage: number;
 }
 
+interface JournalEntry {
+  symbol: string | null;
+  type: string | null;
+  lots: number | null;
+  closePrice: number | null;
+  profit: number | null;
+  createdAt: string;
+}
+
 interface Signal {
   id: string;
   action: "open" | "close";
@@ -211,6 +220,55 @@ function AccountCard({
         {acc.connectedAt ? `Conectado ${fmtTime(acc.connectedAt)}` : "Sin conectar"}
         {acc.lastSeenAt && ` · Visto ${fmtTime(acc.lastSeenAt)}`}
       </p>
+    </div>
+  );
+}
+
+function JournalTable({ entries }: { entries: JournalEntry[] }) {
+  if (entries.length === 0)
+    return <p className="text-sm text-white/30 py-4 text-center">Sin operaciones cerradas aún.</p>;
+
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full text-xs">
+        <thead>
+          <tr className="text-white/30 border-b border-white/[0.06]">
+            <th className="text-left py-2 pr-3 font-medium">Hora</th>
+            <th className="text-left py-2 pr-3 font-medium">Símbolo</th>
+            <th className="text-left py-2 pr-3 font-medium">Dir</th>
+            <th className="text-right py-2 pr-3 font-medium">Lotes</th>
+            <th className="text-right py-2 pr-3 font-medium">Cierre</th>
+            <th className="text-right py-2 font-medium">P&L</th>
+          </tr>
+        </thead>
+        <tbody>
+          {entries.map((e, i) => {
+            const pnl = e.profit ?? 0;
+            return (
+              <tr key={i} className="border-b border-white/[0.04] hover:bg-white/[0.02]">
+                <td className="py-1.5 pr-3 text-white/40">{fmtTime(e.createdAt)}</td>
+                <td className="py-1.5 pr-3 text-white/80 font-medium">{e.symbol ?? "—"}</td>
+                <td className="py-1.5 pr-3">
+                  <span className={`px-1.5 py-0.5 rounded text-xs font-medium ${
+                    e.type === "buy"
+                      ? "bg-sky-500/10 text-sky-400"
+                      : "bg-orange-500/10 text-orange-400"
+                  }`}>
+                    {e.type ?? "—"}
+                  </span>
+                </td>
+                <td className="py-1.5 pr-3 text-right text-white/50">{e.lots?.toFixed(2) ?? "—"}</td>
+                <td className="py-1.5 pr-3 text-right text-white/50">{e.closePrice?.toFixed(5) ?? "—"}</td>
+                <td className={`py-1.5 text-right font-medium tabular-nums ${
+                  pnl > 0 ? "text-emerald-400" : pnl < 0 ? "text-red-400" : "text-white/30"
+                }`}>
+                  {pnl >= 0 ? "+" : ""}{pnl.toFixed(2)}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -459,11 +517,17 @@ function Dashboard({
   group,
   accounts,
   signals,
+  dailyPnl,
+  operationsToday,
+  journal,
   onRefresh,
 }: {
   group: RGroup;
   accounts: RAccount[];
   signals: Signal[];
+  dailyPnl: number;
+  operationsToday: number;
+  journal: JournalEntry[];
   onRefresh: () => void;
 }) {
   const [showAddFollower, setShowAddFollower] = useState(false);
@@ -472,6 +536,9 @@ function Dashboard({
 
   const master = accounts.find(a => a.role === "master");
   const followers = accounts.filter(a => a.role === "follower");
+
+  const totalBalance = accounts.reduce((s, a) => s + (a.balance ?? 0), 0);
+  const currency = accounts.find(a => a.currency)?.currency ?? "USD";
 
   const handleAddFollower = async (params: Record<string, unknown>) => {
     setErr(null);
@@ -529,6 +596,36 @@ function Dashboard({
             {err}
           </div>
         )}
+
+        {/* Financial KPIs */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] px-5 py-4">
+            <p className="text-xs text-white/30 uppercase tracking-wide mb-1">Balance Total</p>
+            <p className="text-2xl font-semibold text-white/90 tabular-nums">
+              {currency} {totalBalance.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </p>
+            <p className="text-xs text-white/25 mt-1">{accounts.filter(a => a.balance != null).length} cuenta{accounts.filter(a => a.balance != null).length !== 1 ? "s" : ""}</p>
+          </div>
+
+          <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] px-5 py-4">
+            <p className="text-xs text-white/30 uppercase tracking-wide mb-1">P&L Hoy</p>
+            <p className={`text-2xl font-semibold tabular-nums ${
+              dailyPnl > 0 ? "text-emerald-400" : dailyPnl < 0 ? "text-red-400" : "text-white/40"
+            }`}>
+              {dailyPnl >= 0 ? "+" : ""}{dailyPnl.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </p>
+            <p className="text-xs text-white/25 mt-1">{operationsToday} operación{operationsToday !== 1 ? "es" : ""} cerrada{operationsToday !== 1 ? "s" : ""}</p>
+          </div>
+
+          <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] px-5 py-4">
+            <p className="text-xs text-white/30 uppercase tracking-wide mb-1">Estado</p>
+            <p className="text-2xl font-semibold text-white/90">
+              {accounts.filter(a => isLive(a.lastSeenAt)).length}
+              <span className="text-base text-white/30 font-normal"> / {accounts.length}</span>
+            </p>
+            <p className="text-xs text-white/25 mt-1">cuentas en línea · {followers.length}/10 followers</p>
+          </div>
+        </div>
 
         {/* Stats row */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -633,6 +730,16 @@ function Dashboard({
           </section>
         )}
 
+        {/* Journal */}
+        <section>
+          <h2 className="text-sm font-semibold text-white/60 uppercase tracking-wider mb-4">
+            Journal
+          </h2>
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+            <JournalTable entries={journal} />
+          </div>
+        </section>
+
         {/* Signals table */}
         <section>
           <h2 className="text-sm font-semibold text-white/60 uppercase tracking-wider mb-4">
@@ -650,9 +757,12 @@ function Dashboard({
 /* ─── Page ───────────────────────────────────────────────── */
 export default function ReplicadorDashboardPage() {
   const [state, setState] = useState<PageState>("loading");
-  const [group, setGroup]       = useState<RGroup | null>(null);
-  const [accounts, setAccounts] = useState<RAccount[]>([]);
-  const [signals, setSignals]   = useState<Signal[]>([]);
+  const [group, setGroup]             = useState<RGroup | null>(null);
+  const [accounts, setAccounts]       = useState<RAccount[]>([]);
+  const [signals, setSignals]         = useState<Signal[]>([]);
+  const [dailyPnl, setDailyPnl]       = useState(0);
+  const [operationsToday, setOpsToday] = useState(0);
+  const [journal, setJournal]         = useState<JournalEntry[]>([]);
 
   const load = useCallback(async () => {
     try {
@@ -667,6 +777,9 @@ export default function ReplicadorDashboardPage() {
       setGroup(data.group);
       setAccounts(data.accounts);
       setSignals(data.recentSignals ?? []);
+      setDailyPnl(data.dailyPnl ?? 0);
+      setOpsToday(data.operationsToday ?? 0);
+      setJournal(data.journal ?? []);
       setState("ready");
     } catch {
       /* noop */
@@ -708,6 +821,9 @@ export default function ReplicadorDashboardPage() {
         group={group}
         accounts={accounts}
         signals={signals}
+        dailyPnl={dailyPnl}
+        operationsToday={operationsToday}
+        journal={journal}
         onRefresh={load}
       />
     );

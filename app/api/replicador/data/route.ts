@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
 
     const group = groups[0];
 
-    const [accountsRes, signalsRes] = await Promise.all([
+    const [accountsRes, signalsRes, pnlRes, journalRes] = await Promise.all([
       query<any>(
         `SELECT id, role, apiKey, accountLogin, accountName, broker, server,
                 currency, balance, equity, status, lastSeenAt, connectedAt,
@@ -43,12 +43,35 @@ export async function GET(req: NextRequest) {
          LIMIT 50`,
         [group.id]
       ),
+      // Daily P&L and ops count (UTC day)
+      query<any>(
+        `SELECT COALESCE(SUM(profit), 0) AS dailyPnl,
+                COUNT(*) AS operationsToday
+         FROM ReplicadorSignal
+         WHERE groupId = ? AND action = 'close'
+           AND date(createdAt) = date('now')`,
+        [group.id]
+      ),
+      // Journal: last 30 closed trades
+      query<any>(
+        `SELECT symbol, type, lots, closePrice, profit, createdAt
+         FROM ReplicadorSignal
+         WHERE groupId = ? AND action = 'close'
+         ORDER BY createdAt DESC
+         LIMIT 30`,
+        [group.id]
+      ),
     ]);
+
+    const pnl = pnlRes.results[0] ?? { dailyPnl: 0, operationsToday: 0 };
 
     return NextResponse.json({
       group,
-      accounts: accountsRes.results,
-      recentSignals: signalsRes.results,
+      accounts:       accountsRes.results,
+      recentSignals:  signalsRes.results,
+      dailyPnl:       Number(pnl.dailyPnl),
+      operationsToday: Number(pnl.operationsToday),
+      journal:        journalRes.results,
     });
   } catch (err) {
     console.error("replicador/data GET:", err);
